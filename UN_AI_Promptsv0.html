@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompts for UN Leaders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --un-blue: #009edb;
+            --un-dark: #1a3a5c;
+            --navy: #0d2137;
+            --gold: #d4a853;
+            --cream: #faf8f5;
+            --light-gray: #f4f4f4;
+            --text: #2c3e50;
+            --text-light: #5a6c7d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans 3', -apple-system, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--un-dark) 100%);
+            color: white;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0,158,219,0.15) 0%, transparent 70%);
+            transform: translate(30%, -30%);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: var(--un-blue);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .copilot-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            background: white;
+            color: var(--navy);
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .copilot-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-inner::-webkit-scrollbar { display: none; }
+
+        .nav-list {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+            padding: 0.75rem 0;
+            min-width: max-content;
+        }
+
+        .nav-list a {
+            display: block;
+            padding: 0.5rem 0.9rem;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-list a:hover { background: var(--light-gray); color: var(--navy); }
+        .nav-list a.active { background: var(--un-blue); color: white; }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .category {
+            margin-bottom: 3rem;
+            scroll-margin-top: 80px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--un-blue);
+        }
+
+        .category-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--un-blue), var(--un-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .category-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+        }
+
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1rem;
+        }
+
+        .prompt-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e8e8e8;
+            transition: all 0.2s;
+        }
+
+        .prompt-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .prompt-label {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .prompt-label.quick { background: #e8f5e9; color: #2e7d32; }
+        .prompt-label.analysis { background: #e3f2fd; color: #1565c0; }
+        .prompt-label.strategic { background: #fce4ec; color: #c2185b; }
+        .prompt-label.agent { background: #f3e5f5; color: #7b1fa2; }
+
+        .prompt-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .prompt-text {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 0.8rem;
+            line-height: 1.45;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            max-height: 140px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .prompt-text::-webkit-scrollbar { width: 4px; }
+        .prompt-text::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            width: 100%;
+            padding: 0.5rem;
+            background: var(--navy);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .copy-btn:hover { background: var(--un-blue); }
+        .copy-btn.copied { background: #2e7d32; }
+
+        .prompt-card.agent-card {
+            border: 2px solid var(--gold);
+            background: linear-gradient(to bottom right, white, #fffbf0);
+        }
+
+        .agent-instructions { background: #fffef5; border: 1px solid #f0e6c8; }
+
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        footer p { opacity: 0.8; font-size: 0.9rem; }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2e7d32;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            main { padding: 1rem; }
+            .prompts-grid { grid-template-columns: 1fr; }
+            .category-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <span class="header-badge">45-Minute Breakout Sessions</span>
+            <h1>AI Prompts for UN Leaders</h1>
+            <p>Copy prompts and paste into Microsoft 365 Copilot. Focused on UN80, budget negotiations, and organizational transformation.</p>
+            <a href="https://m365copilot.com/" target="_blank" class="copilot-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Open Microsoft 365 Copilot →
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-inner">
+            <ul class="nav-list">
+                <li><a href="#leadership">Leadership</a></li>
+                <li><a href="#productivity">Productivity</a></li>
+                <li><a href="#peacekeeping">Peacekeeping</a></li>
+                <li><a href="#humanitarian">Humanitarian</a></li>
+                <li><a href="#budget">Budget</a></li>
+                <li><a href="#donors">Donors</a></li>
+                <li><a href="#protection">Protection</a></li>
+                <li><a href="#workforce">Workforce</a></li>
+                <li><a href="#communications">Communications</a></li>
+                <li><a href="#security">Security</a></li>
+                <li><a href="#reform">Policy & Reform</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- CATEGORY 1: Leadership -->
+        <section class="category" id="leadership">
+            <div class="category-header">
+                <div class="category-icon">🎯</div>
+                <div>
+                    <h2 class="category-title">Organizational Leadership & Decision-Making</h2>
+                    <p class="category-desc">Strategic thinking, stakeholder navigation, institutional dynamics</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">UN80 Three Perspectives</h3>
+                    <div class="prompt-text">The UN80 Initiative proposes consolidating departments and abolishing ~2,500 posts. Analyze from: 1) A cost-conscious donor (US/EU), 2) A G77 member concerned about development, 3) A UN staff member in an affected unit. What accommodation satisfies all three?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Fifth Committee Objections</h3>
+                    <div class="prompt-text">I'm presenting UN80 budget proposals with 15-20% post reductions. Give me: 3 likely objections from G77, 2 concerns from major contributors, and talking points that acknowledge concerns while advancing reform.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Decision Framework</h3>
+                    <div class="prompt-text">Create a decision framework for a UN USG facing: "We need to merge two units, affecting staff in different duty stations, requiring Member State approval from groups with different priorities." Give me criteria to weigh, a scoring approach, and 3 questions to ask myself.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Blind Spot Check</h3>
+                    <div class="prompt-text">Here's my draft reform message: "This restructuring will improve efficiency, reduce duplication, and better serve Member States. Implementation begins Q1 2026." What blind spots might I have? Who feels threatened? What questions does this raise? Give me a revised version.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Strategic Red Team</h3>
+                    <div class="prompt-text">Play a skeptical Member State opposing UN80's peace operations consolidation. Give me your 5 strongest objections (political, operational, precedent). Then switch roles and help me prepare counter-arguments for each.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Stakeholder Map</h3>
+                    <div class="prompt-text">Create a stakeholder map for UN80 implementation showing: key decision-making bodies, typical positions on efficiency reforms, potential allies vs. skeptics, and recommended engagement sequence. Present as a strategic brief.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Regional Group Positions</h3>
+                    <div class="prompt-text">For the UN80 proposal to consolidate DPPA-DPO functions, predict positions from: African Group, WEOG, Eastern European, Asia-Pacific, GRULAC. What concerns each? Where might consensus emerge?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Liquidity Scenario Matrix</h3>
+                    <div class="prompt-text">Create a 2x2 scenario matrix for UN operations (18 months): Axis 1: Member State payments (on time vs delayed), Axis 2: UN80 implementation (accelerated vs stalled). For each quadrant: name it, leadership priorities, biggest risk, early warning indicator.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Reform Sequencing</h3>
+                    <div class="prompt-text">UN80 has 30+ work packages. How should a senior leader prioritize? Give me a framework considering: political feasibility, budget impact, quick wins vs. long-term, dependencies between reforms. Suggest top 5 to tackle first.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">What-If Analysis</h3>
+                    <div class="prompt-text">What if the Fifth Committee approves only 60% of proposed UN80 cuts? Help me think through: which reforms survive, what messaging to staff, how to maintain momentum, what to bring back next year.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Leadership Advisor</h3>
+                    <div class="prompt-text agent-instructions">You are a strategic advisor for UN senior leaders. When given a decision: 1) Ask about timeline, stakeholders, previous attempts, constraints 2) Provide 3+ options with risks 3) Consider UN mandate, Member State dynamics, staff morale, precedent 4) End with "What should I explore further?" Be direct and grounded in how the UN actually works.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 2: Productivity -->
+        <section class="category" id="productivity">
+            <div class="category-header">
+                <div class="category-icon">⚡</div>
+                <div>
+                    <h2 class="category-title">Personal & Organizational Productivity</h2>
+                    <p class="category-desc">Save time on routine tasks, work smarter</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Restructuring Email</h3>
+                    <div class="prompt-text">Draft a diplomatic email from a USG to Member State missions announcing restructuring that eliminates 20 posts but creates 12 new data/AI-focused ones. Transparent, forward-looking, clear next steps. Under 200 words.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Briefing Note Template</h3>
+                    <div class="prompt-text">Create a 1-page briefing note template on UN liquidity. Structure: SITUATION (2 sentences), BACKGROUND (3 sentences), IMPLICATIONS (3 bullets), OPTIONS (3 with pros/cons), RECOMMENDATION (1 action). Plain language.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Meeting Summary Format</h3>
+                    <div class="prompt-text">Create a template for inter-agency meeting summaries: 1) Executive summary (who, decisions, next steps), 2) Action items with owners/deadlines, 3) Unresolved tensions, 4) Follow-up agenda. Shareable in 10 minutes.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Fix Vague Language</h3>
+                    <div class="prompt-text">This is too vague: "The Department continued implementing the reform agenda while maintaining service delivery and engaging stakeholders." Rewrite with specific numbers [X%], concrete examples, honest challenges, forward-looking element. Max 4 sentences.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Weekly Digest Template</h3>
+                    <div class="prompt-text">Create a weekly digest template for an ASG: track 5 key priorities, flag emerging issues, note stakeholder sentiment changes, highlight upcoming decisions. Reviewable in 10 minutes every Monday.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Report Comparison</h3>
+                    <div class="prompt-text">How would you compare the UN's 2017 reforms to the UN80 Initiative? Give me: main objectives of each, what succeeded in 2017, what's different about UN80, lessons that should inform current implementation.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Talking Points Generator</h3>
+                    <div class="prompt-text">Generate talking points for a USG defending UN80 to staff who fear job losses. Include: acknowledgment of concerns, explanation of rationale, transition support available, examples of how this benefits frontline work. Honest but hopeful.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Org Comparison</h3>
+                    <div class="prompt-text">How have other international organizations restructured recently? Compare World Bank, IMF, or EU institutions: cost savings achieved, implementation timeline, common challenges. Present as benchmarks for UN80.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Inbox Triage System</h3>
+                    <div class="prompt-text">Design an email triage system for a busy UN ASG. Categories: immediate action, today, this week, delegate, FYI only. What criteria for each? Include sample rules and suggested time blocks.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">30-60-90 Onboarding</h3>
+                    <div class="prompt-text">Create a 30-60-90 day plan for a new UN senior official (D-1+). First 30: understand landscape. Days 31-60: build relationships. Days 61-90: early value. For each: key people, documents, quick wins, pitfalls.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Executive Assistant</h3>
+                    <div class="prompt-text agent-instructions">You are an executive assistant for a senior UN official. EMAIL: Categorize by urgency, suggest one-line responses. MEETING PREP: One-page brief with objective, participants' positions, 3 questions, 1 key message. DOCUMENTS: Main message, items needing input, edits. Ask: "Priority - speed, thoroughness, or diplomacy?" Keep outputs concise.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 3: Peacekeeping -->
+        <section class="category" id="peacekeeping">
+            <div class="category-header">
+                <div class="category-icon">☮️</div>
+                <div>
+                    <h2 class="category-title">Peacekeeping & Missions</h2>
+                    <p class="category-desc">Field operations, political dynamics, mission transitions</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">DPPA-DPO Integration</h3>
+                    <div class="prompt-text">UN80 proposes a unified Peacebuilding and Peace Support Office (consolidating DPPA/DPO functions, abolishing one ASG). Create a 2-minute briefing: What does this achieve? Implementation challenges? Security Council concerns?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Troop Contributors</h3>
+                    <div class="prompt-text">What are the current top 10 troop contributing countries to UN peacekeeping? Create talking points for a meeting with potential new contributors: who contributes, recent trends, what UN offers, capability gaps we're filling.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Mission Overview</h3>
+                    <div class="prompt-text">Give me a current status update on UNMISS (South Sudan): mandate priorities, troop strength, key challenges, recent developments, outlook for 2026. Format as a quick reference brief.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Mandate Tensions</h3>
+                    <div class="prompt-text">UN peacekeeping mandates often have tensions between protection of civilians, political process support, and resource constraints. Give me 3 examples of these tensions and how mission leadership typically navigates them.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Transition Checklist</h3>
+                    <div class="prompt-text">A peacekeeping mission is transitioning to a political mission. Create a checklist: security handover, protection gap mitigation, staff implications, political capacity, partner coordination. Include risks and mitigation for each.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Early Warning: Sudan</h3>
+                    <div class="prompt-text">Based on recent reporting, create an early warning brief for Sudan: 3 escalation drivers, 3 resilience factors, key actors with influence, potential trigger events, items to monitor this month. Be specific, use recent events.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Lessons from MINUSMA</h3>
+                    <div class="prompt-text">What lessons from MINUSMA's withdrawal in Mali should inform future mission planning? Cover: host country relations, transition planning, protection handover, regional implications.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Political Strategy Framework</h3>
+                    <div class="prompt-text">Create a political strategy framework for an SRSG: stakeholder analysis, sequencing (confidence-building vs. ceasefire vs. dialogue), leverage points, spoiler management, success metrics. Make it practical.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Cross-Mission Patterns</h3>
+                    <div class="prompt-text">Compare current UN peacekeeping missions in Africa on: mandate type, strength, budget, challenges, performance. What patterns emerge? What does this suggest about peacekeeping's future?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Mission Configuration Options</h3>
+                    <div class="prompt-text">Security Council is reviewing mission configuration. Present options: status quo, enhanced political mission, regional partnership model, phased withdrawal. For each: resource implications, risks, likelihood of member state support.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Mission Advisor</h3>
+                    <div class="prompt-text agent-instructions">You advise on UN peacekeeping and political missions. SITUATION: Identify conflict dynamics, actors, regional dimensions. OPTIONS: Present diplomatic to military spectrum, assess SC feasibility, estimate resources. MANDATES: Find contradictions, resource gaps, suggest prioritization. Draw on past missions. Tone: experienced, pragmatic, focused on achievable.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 4: Humanitarian -->
+        <section class="category" id="humanitarian">
+            <div class="category-header">
+                <div class="category-icon">🆘</div>
+                <div>
+                    <h2 class="category-title">Crisis & Humanitarian Response</h2>
+                    <p class="category-desc">Emergency coordination, resource mobilization, multi-agency operations</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Crisis Snapshot</h3>
+                    <div class="prompt-text">Create a crisis snapshot for Sudan: affected population, top 3 humanitarian priorities, access challenges, funding status (requested vs received), trend (improving/stable/deteriorating). Source information, note gaps.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">New Humanitarian Compact</h3>
+                    <div class="prompt-text">UN80 includes a "New Humanitarian Compact" to streamline response, integrate supply chains, establish a Humanitarian Data Collaborative. Summarize in 3 bullets what this means and one implementation challenge for each.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Flash Update Draft</h3>
+                    <div class="prompt-text">Draft a humanitarian flash update: "Magnitude 7.2 earthquake struck Country X, affecting 2 million people in a region with limited infrastructure." Include: situation, impact, government response, UN response, needs, coordination. One page, use [TBC] for unconfirmed data.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Donor Briefing Points</h3>
+                    <div class="prompt-text">Create talking points for an ERC briefing donors on a protracted crisis: Impact (why now), Response (accomplishments), Gaps (what we can't do without funding), Ask (specific amount and outcome), Accountability. 5 bullets per section max.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Response Prioritization</h3>
+                    <div class="prompt-text">Limited resources, competing needs: 50K need shelter, 100K lack water, 3 hospitals overwhelmed, roads blocked, cholera emerging. Create prioritization framework: what first and why, sequencing, trade-offs, how to explain to communities.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Cluster Coordination</h3>
+                    <div class="prompt-text">Explain the UN cluster system, then analyze coordination challenges when UNHCR, WFP, UNICEF, WHO, and OCHA all respond to the same crisis. Where do overlaps/gaps occur? What coordination mechanisms help?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Anticipatory Action</h3>
+                    <div class="prompt-text">Explain anticipatory action/forecast-based financing: what it is, one successful example, scaling challenges, AI/data role, how UN agencies should adapt. Accessible to a senior leader unfamiliar with the concept.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Worst Case Planning</h3>
+                    <div class="prompt-text">Scenario: "In 30 days, displacement doubles, borders close to humanitarian access, main UN hub becomes insecure." What pre-positioned decisions now? Alternative access routes? Maintaining operations with reduced presence? Local partnerships? Triggers?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Nexus Strategy</h3>
+                    <div class="prompt-text">Create a framework for a 3-year strategy in a protracted crisis linking humanitarian, development, and peace efforts. Cover: strategic objectives, nexus approach, localization, sustainability, exit criteria. Challenge "perpetual humanitarian response" assumptions.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Access Negotiation</h3>
+                    <div class="prompt-text">Humanitarian access is blocked by a non-state armed group. Create a negotiation approach: key principles to protect, potential leverage, confidence-building steps, red lines, escalation options if negotiation fails.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Humanitarian Advisor</h3>
+                    <div class="prompt-text agent-instructions">You support humanitarian coordinators. SITUATION: Estimate severity, evolution pathways, info gaps. OPTIONS: Trade-offs, access/security/resources, localization. COORDINATION: Cluster mandates, bottlenecks, improvements. COMMUNICATION: Humanitarian standards, balance urgency/accuracy. Ask: "What's the one decision you need to make right now?"</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 5: Budget -->
+        <section class="category" id="budget">
+            <div class="category-header">
+                <div class="category-icon">💰</div>
+                <div>
+                    <h2 class="category-title">Budget & Resource Planning</h2>
+                    <p class="category-desc">Budget justification, Fifth Committee, resource optimization</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Budget Process 101</h3>
+                    <div class="prompt-text">Explain UN regular budget process in plain language: What is the programme budget? Fifth Committee role? ACABQ role? Key documents? Main negotiation tensions? For someone who just arrived at the UN.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Efficiency Defense</h3>
+                    <div class="prompt-text">Talking points defending efficiency measures: department proposes cutting 20 posts while investing in technology. Address "cuts by another name" concerns, service levels, comparable reforms elsewhere, staff support, transparency.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Liquidity Snapshot</h3>
+                    <div class="prompt-text">Summarize UN's current liquidity situation: total regular budget, main spending categories, cash flow challenges, Member State payment status, what leadership is saying. 5 quick reference bullets.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Post Abolishment Explanation</h3>
+                    <div class="prompt-text">UN80 proposes abolishing ~2,500 posts with $181.8M in one-time termination costs. Create a brief explainer: why these costs, what staff receive, timeline, how this compares to savings achieved. For Member State questions.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Cost-Benefit Framework</h3>
+                    <div class="prompt-text">Create cost-benefit framework for: "Consolidate three regional service centers into one hub." Capture: one-time/recurring costs, direct/indirect savings, risks, non-financial benefits, timeline, key assumptions.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">DESA Cuts Analysis</h3>
+                    <div class="prompt-text">UN80 proposes cutting DESA by ~96 posts (15.4%). Analyze from G77 perspective: what concerns would they raise? What's at risk for development programming? How might the Secretariat address these concerns?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Spending Review Questions</h3>
+                    <div class="prompt-text">Generate questions a senior leader should ask when reviewing their department's budget: mandate alignment, vacancy rates, non-post resources, efficiency gains, high-impact investment areas, reduction risks. Probing but fair.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Fifth Committee Simulation</h3>
+                    <div class="prompt-text">Simulate Fifth Committee on: "Reduce DESA by 15%, increase OICT by 5%, net 10% savings." Give likely statements from EU, US, G77, Russia, China. Then suggest compromise language for consensus.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Multi-Year Strategy</h3>
+                    <div class="prompt-text">5-year financial strategy for a UN entity facing flat regular budget but increasing mandates. Options for: prioritization, efficiency, extrabudgetary growth, partnerships, transformative investments. Realistic about constraints, creative on solutions.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Budget-Mandate Gap</h3>
+                    <div class="prompt-text">36% of Secretariat mandates are cited by multiple entities (duplication). How should this inform budget discussions? Create talking points connecting mandate proliferation to resource efficiency for Fifth Committee.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Budget Advisor</h3>
+                    <div class="prompt-text agent-instructions">You advise on UN programme budget. PREPARATION: Mandate alignment, budget standards, anticipate ACABQ/Fifth Committee concerns. VARIANCE: Explain patterns, suggest corrections. NEGOTIATION: Member State positions, talking points, compromises. REFORM: Cost-benefit, risks, monitoring. Ground in "what will actually pass."</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 6: Donors -->
+        <section class="category" id="donors">
+            <div class="category-header">
+                <div class="category-icon">🤝</div>
+                <div>
+                    <h2 class="category-title">Donor Analysis & Relations</h2>
+                    <p class="category-desc">Voluntary contributions, donor engagement, resource mobilization</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Donor Profile</h3>
+                    <div class="prompt-text">Create a donor profile for Germany/Japan/UAE/Gates Foundation: priority areas, contribution modalities, decision-makers, recent statements on UN effectiveness, opportunities and friction points. Actionable for a meeting next week.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Funding Compact Reality</h3>
+                    <div class="prompt-text">UN Funding Compact targeted 30% pooled funding; reality is under 10%. Talking points: why pooled funding matters, why donors resist, what UN can offer to change behavior. 5 bullets max.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Thank You Letter</h3>
+                    <div class="prompt-text">Draft a thank you letter from a UN entity head to a major donor: acknowledge contribution, describe concrete impact, mention partnership history, commit to accountability, express continued partnership hope. Warm but professional, one page.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Top Donors Overview</h3>
+                    <div class="prompt-text">Current top 10 voluntary contributors to UN system: amounts, priority areas, trends. Which are increasing vs. decreasing contributions? What's driving changes? Quick reference for leadership.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Earmarking Strategy</h3>
+                    <div class="prompt-text">Strategy for engaging donors on reducing earmarking: the problem (effectiveness limits), evidence (inefficiency examples), donor perspective (legitimate concerns), alternatives (what UN offers), specific ask, incentives. Persuasive not preachy.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Pitch Improvement</h3>
+                    <div class="prompt-text">This is too generic: "We request $5 million to support programmes helping vulnerable communities and advancing sustainable development." Rewrite with: specific problem, theory of change, measurable outcomes, value proposition, past performance. 150 words.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Donor Report Template</h3>
+                    <div class="prompt-text">Create a quarterly donor report template: executive summary (3 bullets), context changes, results with data, challenges (honest), human interest story, financials, forward look. Include common mistakes to avoid.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Diversification Strategy</h3>
+                    <div class="prompt-text">Identify potential new donors for UN work: emerging economy countries increasing aid, foundations expanding internationally, private sector interested in SDG alignment. Top 5 prospects with: capacity, priorities, entry points, existing UN relationships.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Funding Gap Analysis</h3>
+                    <div class="prompt-text">For a major UN fund (UNHCR/WFP/UNICEF): total requirements vs. funding, most underfunded programmes, donors over/under fair share, trends vs. previous years. Who to approach with what pitch?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Small Grant Challenge</h3>
+                    <div class="prompt-text">60% of UN grant transactions are under $1M, creating high overhead. Create talking points for encouraging larger, more flexible contributions. What incentives can UN offer? How to frame the efficiency argument?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Resource Mobilization Advisor</h3>
+                    <div class="prompt-text agent-instructions">You advise on voluntary contributions. INTELLIGENCE: Donor patterns, decision-makers, engagement approach. PROPOSALS: Donor alignment, results frameworks, budget presentation. RELATIONSHIPS: Stakeholder mapping, engagement sequence, follow-ups. PORTFOLIO: Dependency risks, diversification, benchmarking. Ask: "What outcome do you need from this interaction?"</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 7: Protection -->
+        <section class="category" id="protection">
+            <div class="category-header">
+                <div class="category-icon">🛡️</div>
+                <div>
+                    <h2 class="category-title">Protection & Human Rights</h2>
+                    <p class="category-desc">Civilian protection, human rights monitoring, accountability</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">UPR Summary</h3>
+                    <div class="prompt-text">Find latest Universal Periodic Review for [country]: recommendations received, frequent themes, accepted vs. noted, clearly rejected issues, follow-up mechanisms. Quick brief for meeting with that country's officials.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Protection Risk Analysis</h3>
+                    <div class="prompt-text">Protection risk analysis for eastern DRC based on recent reporting: key threats, vulnerable groups, perpetrators, protection actors, trend assessment. Factual and sourced.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">HR Mechanism Explainer</h3>
+                    <div class="prompt-text">Explain UN human rights machinery: Human Rights Council, treaty bodies, special procedures, UPR, OHCHR role. Main criticisms and recent reform efforts. For someone unfamiliar with the system.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">OHCHR Relocation</h3>
+                    <div class="prompt-text">UN80 proposes relocating OHCHR posts from Geneva to lower-cost locations. Analyze: cost savings, proximity to HRC concerns, staff impact, efficiency gains, risks to human rights work. What balances these?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Protection Strategy</h3>
+                    <div class="prompt-text">Protection strategy outline for a mission with: armed conflict, high SGBV levels, 1M displaced, limited government capacity. Cover: immediate activities, environment improvements, armed actor engagement, survivor support, accountability, coordination.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Treaty Body Analysis</h3>
+                    <div class="prompt-text">Find a recent UN treaty body concluding observation. Analyze: concerns raised, recommendations made, state party obligations, follow-up mechanism, civil society use. What would meaningful implementation look like?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Sanctions Compliance</h3>
+                    <div class="prompt-text">Explain how UN sanctions work, then create compliance checklist for UN operations: asset freeze, travel ban, arms embargo, reporting, partner due diligence. Common failures and prevention.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Sensitive Dialogue Prep</h3>
+                    <div class="prompt-text">Briefing for senior UN official meeting government with problematic HR record but key partner on other issues. Develop: key HR messages, constructive framing, evidence, concrete asks, leverage, boundaries. Balance diplomacy with principle.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Civil Society Engagement</h3>
+                    <div class="prompt-text">Strategy for UN engagement with civil society on human rights: identifying partners, protecting activists, incorporating input, responding to shrinking space, maintaining government relations. Practical do's and don'ts.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Human Rights Integration</h3>
+                    <div class="prompt-text">How should a UN programme integrate human rights? Apply HRBA: identify rights-holders and duty-bearers, participation mechanisms, monitoring indicators, unintended impact assessment. Make it practical, not theoretical.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Human Rights Advisor</h3>
+                    <div class="prompt-text agent-instructions">You support human rights integration. LEGAL: Treaties, obligations, treaty body interpretations. MONITORING: Analytical frameworks, facts vs. allegations, patterns. INTEGRATION: HRBA, rights-holders/duty-bearers, indicators. ENGAGEMENT: Balance dialogue with principle, entry points, consistency. Note when legal expertise needed.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 8: Workforce -->
+        <section class="category" id="workforce">
+            <div class="category-header">
+                <div class="category-icon">👥</div>
+                <div>
+                    <h2 class="category-title">People & Workforce</h2>
+                    <p class="category-desc">Talent management, organizational culture, workforce transformation</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Post Abolishment Message</h3>
+                    <div class="prompt-text">Draft staff communication about UN80 post abolishments affecting their unit: acknowledge anxiety, explain rationale honestly, describe support (redeployment, separation), commit to consultation, emphasize continuity of mission. Compassionate, 250 words.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Job Description Fix</h3>
+                    <div class="prompt-text">This is vague: "Coordinate activities related to implementation of mandated programmes and ensure effective liaison with stakeholders while preparing reports as required." Rewrite: specific duties, success metrics, attractive to candidates, no jargon. 4-5 sentences.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Workforce Data</h3>
+                    <div class="prompt-text">UN Secretariat workforce: gender parity at different levels, geographic representation, age profile, retirement projections, 5-year trends, SG targets. One surprising finding and one persistent challenge.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Town Hall Q&A Prep</h3>
+                    <div class="prompt-text">Prepare Q&A for a town hall on restructuring. Anticipate 5 tough staff questions about: job security, relocation, timeline, fairness, leadership commitment. Provide honest, empathetic answers.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Change Management Plan</h3>
+                    <div class="prompt-text">Change management plan for UN80 restructuring: stakeholder analysis, communication strategy, resistance management, support structures, timeline, success metrics, leadership behaviors. Focus on maintaining morale.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Culture Assessment</h3>
+                    <div class="prompt-text">Questions for assessing organizational culture in a UN office: decision-making style, risk tolerance, collaboration, accountability, staff voice, recognition. Include quantitative scales and qualitative open-ended questions.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Retention Strategy</h3>
+                    <div class="prompt-text">Retention strategy for UN office with high P-3/P-4 turnover. Identify root causes, propose no-cost interventions, suggest investments needed, address hygiene factors and motivators, create measurement approach. Specific and actionable.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Future Skills</h3>
+                    <div class="prompt-text">UN needs AI-era skills but has slow hiring and current staff profiles. Options: upskilling existing staff, new hiring profiles, external partnerships, structural changes, timeline. Realistic about constraints, creative on solutions.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Succession Planning</h3>
+                    <div class="prompt-text">Succession planning framework for critical UN positions: identify critical roles, assess bench strength, development activities, knowledge transfer, timeline, UN-specific considerations (rotation, political appointments). Address planned and emergency succession.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Staff-Management Relations</h3>
+                    <div class="prompt-text">UN80 will strain staff-management relations. Create engagement strategy: staff union consultation, transparency mechanisms, feedback channels, dispute resolution, building trust during change. Prevent small issues becoming crises.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: HR Strategy Advisor</h3>
+                    <div class="prompt-text agent-instructions">You advise on workforce issues. PLANNING: Capabilities, gaps, redeployment, staff rules. DESIGN: Structural options, reporting, geography, grades. TALENT: Development needs, learning, succession. CHANGE: Engagement, communications, resistance, manager support. Consider: "What's possible within rules vs. what needs changes?"</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 9: Communications -->
+        <section class="category" id="communications">
+            <div class="category-header">
+                <div class="category-icon">📣</div>
+                <div>
+                    <h2 class="category-title">Communications & Engagement</h2>
+                    <p class="category-desc">Public information, media relations, stakeholder communications</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">UN80 Key Messages</h3>
+                    <div class="prompt-text">Create 3-message framework for UN80 for different audiences: Member States (value/efficiency), UN Staff (opportunity/support), Public (mission/impact). Each under 30 words, memorable.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Town Hall Speech</h3>
+                    <div class="prompt-text">5-minute ASG speech at staff town hall on UN80 changes: acknowledge anxiety, connect to mission not just efficiency, 2 concrete benefit examples, genuine call to action. Include [PAUSE] markers. Conversational.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Media Q&A</h3>
+                    <div class="prompt-text">Prepare Q&A for media briefing on UN reform: 5 tough questions journalists might ask, suggested responses that are honest but constructive, key messages to bridge to.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Social Media Series</h3>
+                    <div class="prompt-text">5 social media posts promoting UN transformation: hook that stops scrolling, compelling stat or story, clear call to action, works across platforms. Include hashtags and timing suggestions.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Crisis Comms Plan</h3>
+                    <div class="prompt-text">Crisis communication template for reputational challenge (misconduct, programme failure, security incident): severity assessment, response team, holding statements, internal/external sequence, media approach, recovery. Usable in actual crisis.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Stakeholder Comms Matrix</h3>
+                    <div class="prompt-text">Communication matrix for announcing major UN reform. For each audience (Member States, staff, media, partners, public): key message emphasis, preferred channel, timing, anticipated concerns, spokesperson. Include sequencing timeline.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Difficult Conversation</h3>
+                    <div class="prompt-text">Script for an ASG having a difficult conversation with a team leader whose unit is being eliminated. Include: opening, delivering the news, acknowledging reaction, explaining support, discussing timeline, closing with dignity intact.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Misinformation Response</h3>
+                    <div class="prompt-text">Framework for responding to UN misinformation: monitoring, response criteria (when to engage), approaches (correct, prebunk, ignore), platform tactics, avoiding amplification. Include 2 scenarios with recommended responses.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Change Narrative</h3>
+                    <div class="prompt-text">Develop narrative for UN80 that: acknowledges challenges honestly, frames change as opportunity, connects to founding mission, has memorable phrases. Create core narrative (300 words) and 5 key messages that cascade from it.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Internal Campaign</h3>
+                    <div class="prompt-text">Design internal communications campaign for 6-month UN80 implementation period: phases, channels, content types, feedback mechanisms, success metrics. Balance transparency with avoiding information overload.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Communications Advisor</h3>
+                    <div class="prompt-text agent-instructions">You advise on communications. MESSAGING: Identify audiences/concerns, core messages, framing, anticipate questions. MEDIA: Journalist angles, talking points, Q&A, pitfalls. CRISIS: Risk assessment, statements, stakeholder sequence. CONTENT: UN voice but accessible, adapt for channels, clarity review. Ask: "Who is the most important audience?"</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 10: Security -->
+        <section class="category" id="security">
+            <div class="category-header">
+                <div class="category-icon">🔒</div>
+                <div>
+                    <h2 class="category-title">Safety & Security</h2>
+                    <p class="category-desc">Staff security, operational continuity, risk management</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Travel Risk Template</h3>
+                    <div class="prompt-text">Security risk assessment template for UN travel to high-risk area: threat assessment, vulnerability, impact, risk rating, mitigation, residual risk, approval authority. Practical for field use.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Regional Threat Brief</h3>
+                    <div class="prompt-text">Threat landscape for UN operations in the Sahel: armed conflict, terrorism, crime (kidnapping, robbery), civil unrest, health/natural hazards. Include trend assessment for each.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Incident Report Template</h3>
+                    <div class="prompt-text">Incident report template for UN security incidents: basic info (who/what/when/where), chronology, response actions, injuries/damages, analysis, follow-up, lessons. Balance thoroughness with usability under stress.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Security Briefing</h3>
+                    <div class="prompt-text">Quick security update format: recent incidents affecting UN, elevated risk areas, emerging patterns, travel advisories, coordination mechanisms. Format as 5-minute leadership briefing.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Crisis Exercise Design</h3>
+                    <div class="prompt-text">Tabletop exercise for UN crisis management: "Major earthquake, damage to UN compound, potential staff casualties." Create: initial brief, 3 injects, decision points, learning objectives, debrief questions. Realistic and challenging.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Business Continuity</h3>
+                    <div class="prompt-text">Business continuity plan for UN office facing potential evacuation: trigger points, essential functions, staff accountability, data/systems access, communications, phase return, lessons learned. Include decision trees.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Protective Intelligence</h3>
+                    <div class="prompt-text">Explain protective intelligence for UN operations: information collection, threat analysis (credibility, capability, intent), warning dissemination, protective measures, feedback loop. Emphasize proactive vs. reactive.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Security-Operations Balance</h3>
+                    <div class="prompt-text">Security measures can impede programme delivery. Framework: when is acceptable risk acceptable, who decides, avoiding permanent barriers, duty of care without paralysis, handling security-programme disagreements. Include good/poor balance examples.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Remote Operations</h3>
+                    <div class="prompt-text">Framework for maintaining UN operations when direct access is impossible: remote management models, local partnerships, technology requirements, accountability mechanisms, risks and mitigation. When is remote not enough?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">After Action Review</h3>
+                    <div class="prompt-text">After Action Review template for security incident response: situation and initial information, actions and timeline, what worked and why, what could be different, systemic improvements. Usable in 90-minute session with leadership.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Security Advisor</h3>
+                    <div class="prompt-text agent-instructions">You support safety and security. THREAT: Analyze information, assess credibility/severity, recommend measures. RISK: Frameworks, mitigation, residual risk. CRISIS: Initial response, decisions under pressure, aftermath. PLANNING: Routes, venues, accommodation, procedures. Security enables operations. Caveat that real-time decisions need professional security staff.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CATEGORY 11: Reform -->
+        <section class="category" id="reform">
+            <div class="category-header">
+                <div class="category-icon">📋</div>
+                <div>
+                    <h2 class="category-title">Policy & Reform</h2>
+                    <p class="category-desc">Policy development, institutional reform, mandate implementation</p>
+                </div>
+            </div>
+            <div class="prompts-grid">
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Mandate Proliferation</h3>
+                    <div class="prompt-text">40,000+ UN mandates since 1946, 36% cited by multiple entities. Explain: What is mandate proliferation? Why does it happen? Consequences? Solutions proposed? What would change require? One example.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Reform History</h3>
+                    <div class="prompt-text">Compare: 1997 Annan reforms, 2017 Guterres reforms, 2025 UN80. For each: objectives, successes, failures, lessons. What patterns emerge about UN reform?</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">Intergovernmental Process</h3>
+                    <div class="prompt-text">Map the process for getting UN reform approved: where proposals originate, committee reviews, negotiations, required majorities, blocking points, typical timeline, post-adoption. Include obstacles at each stage.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label quick">Quick</span>
+                    <h3 class="prompt-title">UN80 Work Packages</h3>
+                    <div class="prompt-text">UN80 has 30+ work packages across workstreams. Give me a quick overview: main categories of reform, biggest structural changes proposed, timeline expectations, governance mechanisms.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Policy Options: Sunset</h3>
+                    <div class="prompt-text">Policy options on mandate sunset provisions: why now, current situation, Option A (status quo+), Option B (voluntary review), Option C (mandatory for new). Compare, recommend, implementation steps. Balanced, decision-oriented.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Implementation Gap</h3>
+                    <div class="prompt-text">Choose a UN policy commitment from past 5 years. Analyze: what was promised, what's implemented, what remains, why gaps exist (resources, will, capacity), what would accelerate. Evidence-based, not generic.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label analysis">Analysis</span>
+                    <h3 class="prompt-title">Cross-Pillar Coordination</h3>
+                    <div class="prompt-text">67% of UN spending goes to complex cross-pillar contexts. UN80 proposes Regional Integrated Platforms. Analyze: what problem this solves, implementation challenges, existing coordination it replaces, success criteria.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Coalition Building</h3>
+                    <div class="prompt-text">Building support for UN80 reform: core supporters, swing votes, opponents (and why), different messages for audiences, sequencing, possible concessions, milestones. Ground in UN politics.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Innovation Adoption</h3>
+                    <div class="prompt-text">Framework for introducing innovation in UN: pilot design, evidence needed, internal champions, failure handling, scale-up path, institutionalization. Use examples of UN innovations that succeeded or failed.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card">
+                    <span class="prompt-label strategic">Strategic</span>
+                    <h3 class="prompt-title">Reform Resistance</h3>
+                    <div class="prompt-text">What typically blocks UN reform? Analyze: Member State interests, staff concerns, institutional inertia, resource constraints. For each blocker, suggest mitigation strategies that have worked in the past.</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+
+                <div class="prompt-card agent-card">
+                    <span class="prompt-label agent">Agent</span>
+                    <h3 class="prompt-title">Build: Policy Advisor</h3>
+                    <div class="prompt-text agent-instructions">You advise on policy and reform. ANALYSIS: Frame problems, stakeholder interests, options, trade-offs. REFORM: Feasibility (political, technical, financial), enablers/blockers, sequencing. INTERGOVERNMENTAL: Map positions, compromises, tactics, draft language. IMPLEMENTATION: Roadmaps, quick wins, obstacles, monitoring. Ground in "what's actually possible."</div>
+                    <button class="copy-btn" onclick="copyToClipboard(this)">📋 Copy prompt</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>AI Leadership Session | UNSSC × Microsoft Elevate | 45-Minute Breakouts</p>
+    </footer>
+
+    <div class="toast" id="toast">✓ Copied to clipboard — paste in Copilot!</div>
+
+    <script>
+        // Simple, reliable copy function
+        function copyToClipboard(button) {
+            const card = button.closest('.prompt-card');
+            const promptText = card.querySelector('.prompt-text');
+            const text = promptText.innerText || promptText.textContent;
+            
+            // Create temporary textarea
+            const textarea = document.createElement('textarea');
+            textarea.value = text.trim();
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                
+                // Visual feedback
+                button.textContent = '✓ Copied!';
+                button.classList.add('copied');
+                
+                // Show toast
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    button.textContent = '📋 Copy prompt';
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                button.textContent = '⚠ Try again';
+                setTimeout(() => {
+                    button.textContent = '📋 Copy prompt';
+                }, 2000);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Highlight active nav on scroll
+        const sections = document.querySelectorAll('.category');
+        const navLinks = document.querySelectorAll('.nav-list a');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(function(section) {
+                const sectionTop = section.offsetTop - 100;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(function(link) {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

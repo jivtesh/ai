@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Leadership Clinics | UN Senior Leaders</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --un-blue: #009EDB;
+            --un-dark: #005a87;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--un-blue) 0%, var(--un-dark) 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        
+        .header h1 { font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .header .subtitle { font-size: 1.125rem; opacity: 0.9; }
+        .header .meta { margin-top: 1rem; font-size: 0.875rem; opacity: 0.8; }
+        
+        .copilot-bar {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copilot-bar p { margin-bottom: 0.75rem; font-size: 0.9rem; }
+        
+        .copilot-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 0.625rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+        
+        .copilot-link:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+        
+        .container { max-width: 56rem; margin: 0 auto; padding: 1.5rem; }
+        
+        .instructions {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--un-blue);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .instructions h3 { color: var(--un-dark); margin-bottom: 1rem; }
+        .instructions ol { margin-left: 1.25rem; }
+        .instructions li { margin-bottom: 0.5rem; }
+        .instructions a { color: var(--un-blue); }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.625rem;
+            margin-bottom: 2rem;
+        }
+        
+        .nav-btn {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 0.75rem;
+            padding: 0.875rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        
+        .nav-btn:hover { border-color: var(--un-blue); transform: translateY(-2px); }
+        .nav-btn span { margin-right: 0.5rem; }
+        
+        .category {
+            background: white;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        .cat-header {
+            background: linear-gradient(135deg, var(--un-blue) 0%, var(--un-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .cat-header h2 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+        .cat-header .for { font-size: 0.875rem; opacity: 0.9; }
+        
+        .cat-body { padding: 1.5rem; }
+        
+        .scenario {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .scenario strong { color: #b45309; }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .section-title.green { color: #16a34a; }
+        .section-title.orange { color: #ea580c; }
+        .section-title.red { color: #dc2626; }
+        
+        .badge {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 1rem;
+            font-weight: 600;
+        }
+        
+        .badge.green { background: #dcfce7; color: #16a34a; }
+        .badge.orange { background: #ffedd5; color: #ea580c; }
+        .badge.red { background: #fee2e2; color: #dc2626; }
+        
+        .prompt {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        
+        .prompt.green { border-left: 4px solid var(--success); }
+        .prompt.orange { border-left: 4px solid var(--warning); }
+        .prompt.red { border-left: 4px solid var(--danger); background: #fef2f2; }
+        
+        .prompt-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 0.625rem;
+            letter-spacing: 0.025em;
+        }
+        
+        .prompt-text {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            margin-bottom: 0.875rem;
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, var(--un-blue) 0%, var(--un-dark) 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,158,219,0.3); }
+        .copy-btn.copied { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); }
+        
+        .discussion {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .discussion strong { color: #1d4ed8; }
+        
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .footer .action {
+            background: rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 1.25rem 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer .credits { opacity: 0.6; font-size: 0.875rem; }
+        
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #16a34a;
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        
+        @media (max-width: 640px) {
+            .header h1 { font-size: 1.5rem; }
+            .nav-grid { grid-template-columns: 1fr 1fr; }
+            .cat-header h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast">✓ Copied! Paste in Copilot</div>
+
+    <div class="header">
+        <h1>🤖 AI Leadership Clinics</h1>
+        <p class="subtitle">Choose Your Own Adventure</p>
+        <p class="meta">45 minutes • Groups of 2-4 • Microsoft Garage</p>
+    </div>
+    
+    <div class="copilot-bar">
+        <p>Copy any prompt, then paste into Microsoft 365 Copilot:</p>
+        <a href="https://m365copilot.com/" target="_blank" rel="noopener" class="copilot-link">🚀 Open M365 Copilot</a>
+    </div>
+
+    <div class="container">
+        <div class="instructions">
+            <h3>📋 How to Use</h3>
+            <ol>
+                <li><strong>Pick 1-2 categories</strong> relevant to your work</li>
+                <li><strong>Click "Copy"</strong> on any prompt</li>
+                <li><strong>Open</strong> <a href="https://m365copilot.com/" target="_blank">m365copilot.com</a> and paste</li>
+                <li><strong>Replace [BRACKETS]</strong> with your specific context</li>
+                <li><strong>Iterate</strong> — push back, ask follow-ups</li>
+            </ol>
+        </div>
+
+        <div class="nav-grid">
+            <button class="nav-btn" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"><span>🎯</span>Leadership</button>
+            <button class="nav-btn" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"><span>⚡</span>Productivity</button>
+            <button class="nav-btn" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"><span>🕊️</span>Peacekeeping</button>
+            <button class="nav-btn" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"><span>🚨</span>Humanitarian</button>
+            <button class="nav-btn" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"><span>💰</span>Budget</button>
+            <button class="nav-btn" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"><span>🤝</span>Donors</button>
+            <button class="nav-btn" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})"><span>🛡️</span>Protection</button>
+            <button class="nav-btn" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})"><span>👥</span>Workforce</button>
+            <button class="nav-btn" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})"><span>📢</span>Communications</button>
+            <button class="nav-btn" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})"><span>🔒</span>Security</button>
+            <button class="nav-btn" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})"><span>📋</span>Policy</button>
+        </div>
+
+        <!-- SECTION 1: LEADERSHIP -->
+        <section class="category" id="s1">
+            <div class="cat-header">
+                <h2>🎯 1. AI for Organizational Leadership & Decision Making</h2>
+                <p class="for">Courtenay Rattray, Miguel de Agorreta, Catherine Pollard</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> You're preparing for a principals meeting on UN80. Multiple stakeholders have conflicting priorities. You need to anticipate objections before they derail the discussion.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Strategic Framing for Skeptical Audiences</div>
+                    <div class="prompt-text">I need to present the UN80 efficiency proposals to skeptical Member States next week. The G77 is concerned about cuts affecting development programmes, while major contributors want faster savings.
+
+Draft 3 different opening framings:
+1. One that leads with development protection
+2. One that leads with fiscal responsibility  
+3. One that leads with mandate delivery improvement
+
+For each, note which audience it resonates with and which it might alienate.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Blind Spot Identification</div>
+                    <div class="prompt-text">I'm about to recommend consolidating three UN coordination mechanisms into one. Before I proceed, act as a devil's advocate:
+
+What are 5 ways this could fail that I might not be considering? For each, rate the likelihood (high/medium/low) and suggest one question I should answer before proceeding.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Rapid Meeting Preparation</div>
+                    <div class="prompt-text">I have 30 minutes before a meeting with [COUNTRY]'s Permanent Representative about UN80.
+
+Search for their recent GA statements on UN reform, their position on assessed contributions, and any public concerns they've raised.
+
+Give me:
+- 3 talking points tailored to their likely priorities
+- 2 potential objections I should prepare for
+- 1 thing I should NOT say</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Stakeholder Mapping</div>
+                    <div class="prompt-text">Map the stakeholder landscape for UN80 Work Package #1 (Peace Operations restructuring).
+
+For each group, identify their likely position (support/oppose/conditional), core interest, and what concession might shift them:
+
+• Troop contributing countries (African Group)
+• P5 Security Council members
+• Host countries of current missions
+• UN staff unions
+• Major financial contributors
+
+Present as a table with a final column: who do we need on board FIRST?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Decision Stress-Test</div>
+                    <div class="prompt-text">I'm considering recommending we accelerate the UN80 timeline from 12 months to 8 months to maintain momentum. Stress-test this:
+
+1. What assumptions am I making that might be wrong?
+2. What second-order effects might this trigger?
+3. What's the worst realistic outcome?
+4. What early warning signs should I watch for?
+5. What's my exit strategy if it's not working?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Historical Pattern Analysis</div>
+                    <div class="prompt-text">Search for outcomes of major UN reform initiatives: Kofi Annan's 1997 reforms, 2005 World Summit, Ban Ki-moon's 2015 peace ops review, 2019 management reform.
+
+For each: What was promised vs. delivered? Where did implementation stall and why? Which elements survived leadership transitions?
+
+Based on these patterns, which UN80 work packages are at highest risk of the same fate?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Red Team Challenger</div>
+                    <div class="prompt-text">You are my "Red Team Challenger" — a constructive critic who pressure-tests proposals before I take them to principals.
+
+When I describe a proposal, you will:
+
+1. STEEL-MAN THE OPPOSITION: Give me the 3 strongest arguments AGAINST, stated as compellingly as a skilled diplomat would
+
+2. IDENTIFY ASSUMPTIONS: List 3 hidden assumptions I'm making that could be wrong
+
+3. FIND THE LOSERS: Who loses from this? What's their likely counter-move?
+
+4. SUGGEST MODIFICATIONS: How could I adjust to neutralize the strongest objection?
+
+Be direct — I need honest pushback, not reassurance.
+
+Let's start. Ask me what proposal I'm working on.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What decision in the past year would have benefited from structured challenge? How might you build "red team" thinking into your workflow?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PRODUCTIVITY -->
+        <section class="category" id="s2">
+            <div class="cat-header">
+                <h2>⚡ 2. AI for Personal & Organizational Productivity</h2>
+                <p class="for">All participants — universal application</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> 200+ emails daily, back-to-back meetings, reports needing review. You need to work smarter.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Difficult Message Drafting</div>
+                    <div class="prompt-text">Draft a diplomatic but clear email to a senior colleague who has missed two deadlines on a joint deliverable.
+
+I need to: (1) acknowledge their workload, (2) restate urgency without aggression, (3) propose specific recovery plan, (4) offer support while making clear this needs resolution.
+
+Under 150 words. Firm but respectful.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Meeting Triage</div>
+                    <div class="prompt-text">Help me triage these meetings using the Eisenhower matrix.
+
+For each, tell me:
+1. Does this need ME or could I delegate?
+2. What's the ONE decision/outcome needed?
+3. Can it be shortened to 30 minutes?
+
+My meetings:
+[PASTE YOUR MEETING LIST]</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Report Speed-Reading</div>
+                    <div class="prompt-text">I have 20 minutes to review this 50-page report before a meeting.
+
+Tell me:
+1. The 3 most important findings I must know
+2. Numbers I'll likely be asked about
+3. The 2-3 pages to read carefully
+4. What's controversial or will generate discussion
+
+[PASTE REPORT OR KEY SECTIONS]</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Briefing Note Transformation</div>
+                    <div class="prompt-text">Transform this briefing into three versions:
+
+1. 2-PARAGRAPH for the SG: assumes high context, focus on decision needed and risk
+
+2. 1-PAGE for an Ambassador: why they should care, what we're asking, what happens if no action
+
+3. 3-BULLET talking points: for elevator conversation
+
+[PASTE YOUR BRIEFING NOTE]</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Difficult Conversation Prep</div>
+                    <div class="prompt-text">I need to have a difficult conversation with [PERSON/ROLE] about [ISSUE].
+
+Help me prepare:
+1. What's the real issue beneath the surface?
+2. What might they be feeling/fearing?
+3. Draft a 30-second opening that acknowledges their perspective first
+4. What's my BATNA if this doesn't go well?
+5. What's "good enough" vs. ideal outcome?
+6. One powerful question to shift dynamics</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Chief of Staff AI</div>
+                    <div class="prompt-text">You are my AI Chief of Staff. Help me think strategically about time and priorities.
+
+When I share my day/week, you will:
+
+1. CHALLENGE MY CALENDAR: Question each commitment — "Why you? Why now? Why this format?"
+
+2. IDENTIFY GAPS: What's NOT on my calendar that should be?
+
+3. SPOT CONFLICTS: Where will I be underprepared?
+
+4. SUGGEST LEVERAGE: One thing to delegate, decline, or shorten
+
+5. ENERGY MANAGEMENT: Where do I need recovery time?
+
+Be respectfully challenging. Help me protect time for what matters.
+
+Ask me what's on my calendar today.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What task consumes your time but doesn't need your unique judgment? Could AI handle the routine 80%?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PEACEKEEPING -->
+        <section class="category" id="s3">
+            <div class="cat-header">
+                <h2>🕊️ 3. AI for Peacekeeping & Missions</h2>
+                <p class="for">Jean-Pierre Lacroix, Alexandre Zouev, Rosemary DiCarlo</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Mission mandate renewal in 3 months. Security Council divided, host government uncooperative, new armed group mobilizing. You need to shape the discussion before positions harden.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">P5 Position Mapping</div>
+                    <div class="prompt-text">Search for P5 members' recent statements on [MISSION NAME] in Security Council sessions and national press.
+
+For each P5: summarize current position in one sentence, identify core interest, note recent shifts.
+
+Where is potential convergence? What's the most likely point of contention?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Transition Lessons</div>
+                    <div class="prompt-text">Search for lessons from recent UN peacekeeping transitions: MINUSMA withdrawal, MONUSCO reconfiguration, UNMISS protection site transitions.
+
+For each: What went well? What went badly? What would they do differently? Impact on civilians?
+
+Present as a table of "what not to repeat."</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Mandate Renewal Scenarios</div>
+                    <div class="prompt-text">Think through 4 scenarios for [MISSION] renewal in [MONTH]:
+
+A: Status quo (same mandate, resources)
+B: Enhanced (expanded POC, new capabilities)
+C: Reduced (drawdown, transition)
+D: Non-renewal / rapid exit
+
+For each: What SC configuration produces this? What triggers it in next 90 days? What do we prepare NOW? Protection implications?
+
+Which should I work to achieve vs. prevent?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Host Government Relations</div>
+                    <div class="prompt-text">Host government of [COUNTRY] is increasingly hostile — restricting movement, delaying visas, questioning neutrality.
+
+1. Search for their recent statements — what's the narrative?
+2. What's driving this: domestic politics, genuine grievance, or external influence?
+3. What leverage do we have? What leverage do they have?
+4. Find examples where other missions navigated similar friction
+5. Draft 3 engagement approaches (accommodating to assertive) with trade-offs</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Mission Strategic Advisor</div>
+                    <div class="prompt-text">You are a "Mission Strategic Advisor" helping me think through peacekeeping situations before Security Council recommendations.
+
+When I describe a situation:
+
+1. ASSESS DYNAMICS: What's actually driving this beyond reports? Who benefits from status quo?
+
+2. DECISION POINTS: What choices in next 30/60/90 days? Cost of delay?
+
+3. MAP LEVERAGE: What can we influence vs. what's beyond control?
+
+4. STRESS-TEST OPTIONS: For each option, what goes wrong? Recovery plan?
+
+5. PROTECTION LENS: How do civilians fare under each scenario?
+
+Be politically realistic. I need advice that works in the Security Council.
+
+Ask me which mission situation to analyze.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How could structured analysis help with Security Council dynamics? What information would you need AI to access?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: HUMANITARIAN -->
+        <section class="category" id="s4">
+            <div class="cat-header">
+                <h2>🚨 4. AI for Crisis & Humanitarian Response</h2>
+                <p class="for">Joyce Msuya, Rabab Fatima, Navid Hanif</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> New crisis unfolding, fragmented information, donors want to know where money has most impact. You need to synthesize rapidly and make the case for anticipatory action.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Tailored Donor Briefing</div>
+                    <div class="prompt-text">I'm briefing [DONOR COUNTRY] on funding anticipatory action for [CRISIS/REGION].
+
+Search for: (1) evidence of anticipatory action cost-effectiveness, (2) this donor's stated priorities, (3) their commitments on early action/climate adaptation.
+
+Give me 3 compelling data points tailored to what THIS donor cares about — not generic messaging.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Rapid Situation Synthesis</div>
+                    <div class="prompt-text">Search for latest on [DEVELOPING CRISIS] from past 72 hours — news, UN statements, NGO alerts.
+
+Synthesize: (1) What's happening (verified vs unverified), (2) Affected population and trajectory, (3) Response underway, (4) Gaps emerging, (5) What could escalate this, (6) One surprising finding.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Anticipatory Action Evidence Case</div>
+                    <div class="prompt-text">Build the evidence case for scaling anticipatory humanitarian action:
+
+1. 3 strongest examples where early warning + early action saved lives/money (with specific numbers)
+2. What barriers prevent scale-up? (Funding, political will, capacity, incentives)
+3. How does UN80 "New Humanitarian Compact" address these?
+4. What are critics' legitimate concerns?
+
+Synthesize into 2-minute pitch for a skeptical finance ministry.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Crisis Cascade Analysis</div>
+                    <div class="prompt-text">[REGION] faces converging pressures: [LIST — drought, conflict, economic shock, disease, instability].
+
+1. Most likely sequence over 6 months? Map the causal chain.
+2. Early warning indicators for each stage?
+3. Intervention points where action NOW prevents escalation?
+4. Non-traditional actors we should coordinate with?
+5. ONE ask to Member States with most preventive impact?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Crisis Anticipation Partner</div>
+                    <div class="prompt-text">You are my "Crisis Anticipation Partner" — help me think ahead about humanitarian situations before they become emergencies.
+
+When I describe a situation:
+
+1. HORIZON SCAN: 3 most likely triggers for deterioration in 3-6 months?
+
+2. EARLY WARNINGS: What signals to monitor? Where would I see them first?
+
+3. DECISION TIMELINE: When must we decide on scale-up? Last responsible moment?
+
+4. PREVENTIVE OPTIONS: What NOW would reduce severity if crisis materializes?
+
+5. STAKEHOLDERS: Who has influence? Who should be engaged in prevention?
+
+Be direct about uncertainty — tell me what we can't know.
+
+Ask me which situation to analyze.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What information did you wish you had earlier in past crises? How could AI help with signal vs. noise?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: BUDGET -->
+        <section class="category" id="s5">
+            <div class="cat-header">
+                <h2>💰 5. AI for Budget & Resource Planning</h2>
+                <p class="for">Chandramouli Ramanathan, Catherine Pollard</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Implementing 15% budget reduction while Member States expect unchanged mandate delivery. You need to identify real efficiencies vs. hidden cuts.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Efficiency vs. Cut Analysis</div>
+                    <div class="prompt-text">Categorize each proposed reduction as:
+A) TRUE EFFICIENCY — same output, fewer inputs
+B) SERVICE REDUCTION — less output
+C) COST SHIFT — cost moved elsewhere
+D) RISK TRANSFER — savings now, costs later
+
+Proposed reductions:
+[PASTE LIST]</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">International Org Benchmarking</div>
+                    <div class="prompt-text">Search for how World Bank, IMF, EU institutions managed similar budget pressures in past 5 years.
+
+What approaches did they use? What worked? What backfired? Unintended consequences? Lessons for UN context?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Workforce Transition Analysis</div>
+                    <div class="prompt-text">2,230 posts proposed for abolishment. Analyze workforce impact:
+
+1. Distribution by grade, duty station, department
+2. Functions being reduced vs. reorganized vs. eliminated
+3. Natural turnover vs. involuntary separation (given ~5% attrition)
+4. Institutional knowledge loss risk
+5. Research: typical productivity dip during transitions, recovery time?
+
+Give honest implementation risk assessment.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Budget-Mandate Connector</div>
+                    <div class="prompt-text">For [DEPARTMENT], connect budget to mandate delivery:
+
+1. Key mandates (GA/SC resolutions)
+2. Proposed budget/post change
+3. How staffing maps to mandates
+4. Activities affected by reductions
+5. What would Member States NOTICE if cuts implemented?
+
+Present as: MANDATE → ACTIVITY → POSTS → BUDGET → VISIBLE IMPACT</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Budget Strategy Advisor</div>
+                    <div class="prompt-text">You are my "Budget Strategy Advisor" — help me think through budget decisions balancing fiscal discipline and mandate delivery.
+
+When I describe a challenge:
+
+1. TRADE-OFF ANALYSIS: What are we actually trading off? Make implicit choices explicit.
+
+2. STAKEHOLDER LENS: How will ACABQ, major contributors, G77, staff each view this?
+
+3. FRAMING OPTIONS: 3 ways to present, from "fiscal responsibility" to "mandate protection"
+
+4. RISK REGISTER: What could go wrong? Our exposure?
+
+5. ALTERNATIVES: What haven't I considered?
+
+Help me find the least-bad option.
+
+What budget challenge are you working through?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How could AI help communicate budget-mandate connections to Member States? Risk of making trade-offs too visible?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: DONORS -->
+        <section class="category" id="s6">
+            <div class="cat-header">
+                <h2>🤝 6. AI for Donor Analysis & Engagement</h2>
+                <p class="for">Joy Ojiambo, Navid Hanif, Rabab Fatima</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Preparing for pledging conference. Need to understand donor motivations, tailor asks, identify new contributors.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Rapid Donor Profile</div>
+                    <div class="prompt-text">Meeting with [COUNTRY]'s development minister in 2 hours.
+
+Quick briefing: (1) ODA trend, (2) stated priorities, (3) recent multilateralism shifts, (4) 2 things they want to hear, (5) 1 thing NOT to say, (6) "gift" I can offer that costs nothing.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Corporate Prospect ID</div>
+                    <div class="prompt-text">Identify 5 companies for UN Global Compact engagement in [SECTOR/REGION].
+
+Search for companies with: public sustainability commitments, supply chain ESG exposure, NOT current participants, recent ESG criticism (creates motivation).
+
+For each: company, motivation to join, what we offer, red flags.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Donor Motivation Mapping</div>
+                    <div class="prompt-text">What's REALLY driving donor decisions for [FUND/INITIATIVE]?
+
+For traditional DAC, Gulf states, emerging donors, private foundations:
+- Stated vs. underlying motivation
+- Outcomes they actually track
+- What would increase their contribution
+- Tolerance for earmarking vs. flexibility
+
+Help me tailor asks, not one-size-fits-all.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Pledging Strategy</div>
+                    <div class="prompt-text">Pledging conference for [FUND/APPEAL]. Develop strategy:
+
+1. 10 most likely significant contributors — probable pledge range?
+2. 5 stretch prospects to court beforehand
+3. Momentum-building announcements?
+4. Downside protection if disappointing outcome?
+5. Lessons from successful recent conferences
+
+Give me 2-week pre-conference action plan.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Donor Intelligence Analyst</div>
+                    <div class="prompt-text">You are my "Donor Intelligence Analyst" — understand motivations and craft engagement strategies.
+
+When I name a donor (country, foundation, corporation):
+
+1. PROFILE: Giving history, priorities, decision process
+
+2. MOTIVATION: What's really driving them? (Geopolitical, commercial, values, domestic politics)
+
+3. OPPORTUNITY: Where's alignment? Where's the gap?
+
+4. TAILORED ASK: What specific ask resonates NOW?
+
+5. RELATIONSHIP STATUS: Trending positive or negative?
+
+6. RISK FLAGS: Reasons for caution?
+
+Be realistic — donors aren't purely altruistic. Help me meet them where they are.
+
+Which donor to analyze?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How do we respond to donor motivations without compromising UN independence?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: PROTECTION -->
+        <section class="category" id="s7">
+            <div class="cat-header">
+                <h2>🛡️ 7. AI for Protection & Human Rights</h2>
+                <p class="for">Vanessa Frazier, Ilze Brands Kehris, Najla Nassif Palma</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Reports of potential violations, fragmented info, varying source credibility. Need to determine what rises to Security Council attention.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Violation Pattern Analysis</div>
+                    <div class="prompt-text">Search SG annual reports on children and armed conflict for [COUNTRY/REGION] over 3 years.
+
+Which parties listed for which violations? Most prevalent types? Improving or worsening? SC action taken? Gap between documented violations and accountability?
+
+Present as trend table with "so what" conclusion.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Advocacy Reframing</div>
+                    <div class="prompt-text">I need to raise protection concerns about [SITUATION] with [MEMBER STATE].
+
+They'll push back: "internal matter" / "you're political" / "unverified."
+
+Draft 3 responses: (1) reframe around their legal obligations, (2) emphasize prevention not punishment, (3) appeal to their stated values.
+
+Help me be firm without preachy.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Listing/Delisting Decision</div>
+                    <div class="prompt-text">Party in [CONFLICT] wants delisting from SG's CAAC annexes. Think through:
+
+1. Evidentiary standard for delisting — met?
+2. Their commitments and compliance record
+3. Precedents — what happened with past delistings?
+4. Message to OTHER listed parties if we delist now?
+5. Safeguards for conditional delisting?
+6. Risk if we delist and violations resume?
+
+Recommendation with defensible reasoning.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Victim-Centered Gap Analysis</div>
+                    <div class="prompt-text">Assess UN's victim-centered approach to SEA in practice:
+
+1. What does "victim-centered" mean in policy vs implementation?
+2. Data: how many victims received support? What kind? How quickly?
+3. What do victims' advocates say about gaps?
+4. How does UN compare to other organizations?
+5. What would truly victim-centered look like? What's blocking it?
+
+Honest assessment of implementation gaps.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Protection Analysis Partner</div>
+                    <div class="prompt-text">You are my "Protection Analysis Partner" — help with complex situations where info is incomplete and stakes are high.
+
+When I describe a protection situation:
+
+1. INFORMATION: What's known vs unverified vs gaps?
+
+2. PATTERNS: Fits patterns seen elsewhere? What might that predict?
+
+3. ESCALATION: What signals indicate worsening?
+
+4. LEVERAGE: Who has influence over perpetrators? Pressure points?
+
+5. OPTIONS: Quiet diplomacy to public action — trade-offs?
+
+6. PROTECTION IMPACT: What happens to affected population under each response?
+
+Rigorous on evidence while acknowledging we often must act under uncertainty.
+
+Describe the situation.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How balance need for evidence with urgency when waiting costs lives?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: WORKFORCE -->
+        <section class="category" id="s8">
+            <div class="cat-header">
+                <h2>👥 8. AI for People & Workforce</h2>
+                <p class="for">Martha Helena López, Shireen Dodson, Catherine Pollard</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> 2,000+ posts abolished. Balance organizational efficiency with staff welfare. Maintain morale during uncertainty.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Town Hall Talking Points</div>
+                    <div class="prompt-text">Draft 2-minute town hall talking points on workforce changes.
+
+Must: (1) be honest about scope without panic, (2) explain rationale staff can accept, (3) outline specific support, (4) acknowledge human impact without patronizing, (5) end forward-looking but not empty.
+
+Avoid: jargon, passive voice, "Member States made us."</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Restructuring Research</div>
+                    <div class="prompt-text">Search for research/cases on large organizational restructurings.
+
+What predicts success vs failure? Typical productivity recovery timeline? Support mechanisms that make biggest difference? Common mistakes? Leadership priorities in first 90 days?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Transition Pathway Mapping</div>
+                    <div class="prompt-text">For staff affected by restructuring, map pathways by category (P2-5, GS, FS, D1+):
+
+1. Realistic options: redeployment, lateral move, retraining, separation, early retirement
+2. Support exists vs gaps
+3. Likely timeline each pathway
+4. How make more humane within budget
+5. How maintain productivity from staff with abolished posts?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Knowledge Preservation</div>
+                    <div class="prompt-text">2,200+ posts abolished = institutional knowledge loss risk.
+
+1. Types most at risk: technical, relational, process, historical?
+2. How identify staff with critical knowledge?
+3. What transfer mechanisms actually work vs just paperwork?
+4. How have others handled this?
+5. Realistic 90-day plan given constraints?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Workforce Transition Advisor</div>
+                    <div class="prompt-text">You are my "Workforce Transition Advisor" — navigate complex people decisions during change.
+
+When I describe a situation:
+
+1. IMPACT: Who's affected and how? Human dimension, not just numbers.
+
+2. FAIRNESS: Consistent criteria? What could seem arbitrary?
+
+3. LEGAL/POLICY: Staff rules, tribunal precedents, union agreements?
+
+4. RIPPLE EFFECTS: How does this affect those NOT directly impacted?
+
+5. COMMUNICATION: What do people need to hear, from whom, when?
+
+6. HUMANE OPTIONS: Way to achieve goal with less human cost?
+
+Sometimes right organizational decision is painful. Help me navigate ethically.
+
+What workforce situation?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How maintain trust when we can't promise security? What does ethical transition look like?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: COMMUNICATIONS -->
+        <section class="category" id="s9">
+            <div class="cat-header">
+                <h2>📢 9. AI for Communications & Engagement</h2>
+                <p class="for">Melissa Fleming, Felipe Paullier, Joy Ojiambo</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Fighting for attention in crowded, polarized info environment. Misinformation spreads faster than facts. Skeptical audiences have tuned out.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Message Testing for Skeptics</div>
+                    <div class="prompt-text">Communicate [MESSAGE] to skeptics who think UN is bloated/ineffective/political.
+
+Give 3 framings:
+1. RESULTS-LED: concrete impact, numbers
+2. STORY-LED: human story demonstrating value
+3. HONESTY-LED: acknowledge valid criticism first
+
+For each: who resonates, who alienates, call to action.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Misinfo Monitoring</div>
+                    <div class="prompt-text">Search current misinformation about UN or [ISSUE] on social media, alt-news.
+
+For each narrative: (1) false claim, (2) where spreading, (3) who amplifying, (4) kernel of truth/legitimate concern being exploited, (5) rebuttal that addresses underlying concern, not just "that's false."</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Counter-Narrative Strategy</div>
+                    <div class="prompt-text">Develop counter-strategy for [MISINFORMATION NARRATIVE]:
+
+1. Underlying truth/concern it exploits?
+2. Who believes it? What would change their mind?
+3. Credible messengers for THAT audience?
+4. What facts matter vs just defensive?
+5. Examples of successfully countered similar narratives
+6. Response that doesn't amplify original (Streisand effect)</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Youth Engagement Audit</div>
+                    <div class="prompt-text">Assess how effectively UN actually incorporates youth voices:
+
+1. Youth consultations — who participates? How representative?
+2. Examples where youth input actually CHANGED policy?
+3. What do youth advocates say about UN engagement?
+4. Gap between rhetoric and reality?
+5. What would meaningful participation look like?
+
+Honest assessment.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Communications Strategist</div>
+                    <div class="prompt-text">You are my "Communications Strategist" — communicate effectively in skeptical, fragmented environment.
+
+When I describe a challenge:
+
+1. AUDIENCE: Who are we reaching? What do they believe? What moves them?
+
+2. MESSAGE TEST: 3 framings — who each works for, who alienates
+
+3. CHANNEL: Where does audience get info? What format works?
+
+4. AUTHENTICITY CHECK: Sound like a person or jargon? How would skeptic react?
+
+5. RISK: What could backfire? What misinfo might this feed?
+
+6. MEASUREMENT: How know if it worked?
+
+Challenge me when too institutional. Help find authentic voice.
+
+What communication challenge?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How maintain institutional credibility while adapting to platforms that reward personality?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: SECURITY -->
+        <section class="category" id="s10">
+            <div class="cat-header">
+                <h2>🔒 10. AI for Safety & Security</h2>
+                <p class="for">Gilles Michaud, Unaisi Vuniwaqa</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Threats evolve faster than procedures. Balance safety with continuity. Decide with incomplete info under time pressure.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Threat Synthesis</div>
+                    <div class="prompt-text">Search security incidents affecting IOs in [REGION] past 6 months — UN, NGOs, diplomatic, business.
+
+Types of incidents? Against whom? Patterns in timing/location/targeting? What does this suggest about threat evolution? What should we monitor?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Emerging Threat Brief</div>
+                    <div class="prompt-text">Brief me on [THREAT — drones, deepfakes, AI social engineering, ransomware] for international organizations:
+
+Incidents involving IO/diplomatic personnel? Tactics used? Countermeasures developing? What should UN security think about? 12-month trajectory?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Security Posture Review</div>
+                    <div class="prompt-text">Security posture review for [LOCATION]:
+
+1. What changed in threat environment this year?
+2. Are measures calibrated to actual vs perceived risks?
+   - Over-investing (high cost, low reduction)?
+   - Under-investing (low cost, high reduction)?
+3. Operational constraints justified?
+4. How have peers adjusted in similar context?
+5. "Goldilocks" posture — protect without limiting operations?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Evacuation Framework</div>
+                    <div class="prompt-text">Decision framework for potential evacuation of [LOCATION]:
+
+1. Key indicators to monitor
+2. Thresholds for each level: enhanced monitoring → authorized departure → ordered departure → full evacuation
+3. Current capacity and timeline
+4. Trade-offs: early (safe but operational cost) vs delayed (continuity but risk)
+5. Lessons from recent evacuations
+6. Who decides, timeline each scenario
+
+Pre-think so we're not deciding under pressure.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Security Scenario Planner</div>
+                    <div class="prompt-text">You are my "Security Scenario Planner" — think through situations before they become crises.
+
+When I describe a context:
+
+1. THREATS: 3 most LIKELY and 3 most SEVERE scenarios (may differ)
+
+2. EARLY WARNING: Signals each is developing? How early would we see?
+
+3. RESPONSE: Options for each? Resources/authorities needed?
+
+4. DECISION: When must we decide? Cost of delay?
+
+5. SECOND-ORDER: How might response affect ops, relationships, other locations?
+
+6. WORST-CASE: Worst realistic outcome? Would we survive organizationally?
+
+Help distinguish real risks from security theater.
+
+What context to scenario plan?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How maintain appropriate security without becoming so risk-averse we can't operate where most needed?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: POLICY -->
+        <section class="category" id="s11">
+            <div class="cat-header">
+                <h2>📋 11. AI for Policy & Reform</h2>
+                <p class="for">Courtenay Rattray, Elinor Hammarskjöld, Izumi Nakamitsu</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Advancing policy reform through multiple bodies with different politics. Need to know where there's space and where you'll hit walls.
+                </div>
+
+                <div class="section-title green">🟢 Quick Wins <span class="badge green">2 min</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Position Mapping</div>
+                    <div class="prompt-text">Search Member State positions on [POLICY ISSUE] in GA statements, committee debates, documents past year.
+
+Group by: strong support, conditional, neutral, opposed, strongly opposed.
+
+For opposed: principled, interest-based, or procedural? This determines strategy.</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-label">Procedural Pathway</div>
+                    <div class="prompt-text">Legal/procedural pathway to implement [REFORM]:
+
+Which bodies act? Sequence? SG authority vs Member State decision? Voting thresholds? Precedents — how long did similar take? Procedural traps that could delay/derail?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title orange">🟡 Go Deeper <span class="badge orange">5 min</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">UN80 Implementation Strategy</div>
+                    <div class="prompt-text">Implementation strategy for UN80 Work Package [#]:
+
+1. What does it require? Actions, deliverables, leads?
+2. Who approves at each stage?
+3. Realistic timeline given current dynamics?
+4. Champions needed? Blockers to manage?
+5. Success in 12 months? Failure?
+6. Early wins for momentum?
+7. Scope creep risks?
+
+Probability of full implementation: High/Medium/Low — why?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-label">Cross-Pillar Coherence</div>
+                    <div class="prompt-text">Policy coherence across UN pillars for [ISSUE — climate-security, tech governance, migration]:
+
+1. Different entities working on this — what are they saying?
+2. Gaps, overlaps, contradictions in UN positions?
+3. What's blocking coherence: silos, turf, resources, genuine disagreement?
+4. How have other issues achieved coherence (or failed)?
+5. Entry point for better coordination? Who convenes?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="section-title red">🔴 Agent Mode <span class="badge red">Create AI Partner</span></div>
+
+                <div class="prompt red">
+                    <div class="prompt-label">Create Your Policy Navigator</div>
+                    <div class="prompt-text">You are my "Policy Navigator" — advance positions through complex multilateral environments.
+
+When I describe an objective:
+
+1. LANDSCAPE: Key actors? Positions, interests, red lines?
+
+2. COALITIONS: Who's with us, against, moveable? What moves them?
+
+3. PATHWAY: Bodies to act, sequence? Bottlenecks?
+
+4. TIMING: Key decision points? Windows of opportunity?
+
+5. TRADE-OFFS: What give up to get key elements? Non-negotiable?
+
+6. RISK: What could derail? Plan B?
+
+Be realistic about constraints while finding pathways I might not see.
+
+What policy objective?</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How can AI help understand Member State positions and find unexpected agreement? What are limits?
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div class="footer">
+        <div class="action">
+            <strong>Your Action:</strong> Pick ONE prompt to use in your real work this week.
+        </div>
+        <p class="credits">AI Leadership Clinics | Microsoft Garage | January 2026</p>
+    </div>
+
+    <script>
+    function copyText(button) {
+        var promptText = button.previousElementSibling.innerText;
+        
+        var textarea = document.createElement('textarea');
+        textarea.value = promptText;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        
+        try {
+            document.execCommand('copy');
+            button.innerText = '✓ Copied!';
+            button.classList.add('copied');
+            
+            var toast = document.getElementById('toast');
+            toast.classList.add('show');
+            
+            setTimeout(function() {
+                button.innerText = '📋 Copy';
+                button.classList.remove('copied');
+                toast.classList.remove('show');
+            }, 2000);
+        } catch (e) {
+            alert('Please select and copy manually');
+        }
+        
+        document.body.removeChild(textarea);
+    }
+    </script>
+</body>
+</html>
