@@ -1,0 +1,2188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Nonprofit Leaders | Microsoft Elevate Days London</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4338ca;
+            --success: #16a34a;
+            --warning: #ea580c;
+            --danger: #dc2626;
+            --purple: #7c3aed;
+            --teal: #0d9488;
+            --gray: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .header .subtitle { font-size: 1.125rem; opacity: 0.9; }
+        .header .meta { margin-top: 1rem; font-size: 0.875rem; opacity: 0.8; }
+        .copilot-bar {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .copilot-bar p { margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .copilot-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 0.625rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+        }
+        .copilot-link:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+        .container { max-width: 60rem; margin: 0 auto; padding: 1.5rem; }
+        .instructions {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .instructions h3 { color: var(--primary-dark); margin-bottom: 1rem; }
+        .instructions ol { margin-left: 1.25rem; }
+        .instructions li { margin-bottom: 0.5rem; }
+        .legend {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .legend-item { display: flex; align-items: center; gap: 0.375rem; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+        .nav-section { margin-bottom: 1.5rem; }
+        .nav-section h4 { font-size: 0.75rem; color: var(--gray); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin-bottom: 0.75rem; }
+        .nav-grid-secondary { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; }
+        .nav-btn {
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 0.75rem;
+            padding: 0.75rem 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .nav-btn:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .nav-btn.primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; }
+        .nav-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+        .nav-btn span { display: block; font-size: 1.25rem; margin-bottom: 0.25rem; }
+        .nav-btn-secondary {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .nav-btn-secondary:hover { background: #e2e8f0; }
+        .category {
+            background: white;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        .cat-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+        .cat-header h2 { font-size: 1.25rem; margin-bottom: 0.25rem; }
+        .cat-header .for { font-size: 0.875rem; opacity: 0.9; }
+        .cat-body { padding: 1.5rem; }
+        .scenario {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .scenario strong { color: #b45309; }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .section-title.green { color: var(--success); }
+        .section-title.orange { color: var(--warning); }
+        .section-title.purple { color: var(--purple); }
+        .section-title.blue { color: #2563eb; }
+        .section-title.teal { color: var(--teal); }
+        .section-title.red { color: var(--danger); }
+        .section-title.gray { color: var(--gray); }
+        .badge {
+            font-size: 0.6rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 600;
+        }
+        .badge.green { background: #dcfce7; color: var(--success); }
+        .badge.orange { background: #ffedd5; color: var(--warning); }
+        .badge.purple { background: #f3e8ff; color: var(--purple); }
+        .badge.blue { background: #dbeafe; color: #2563eb; }
+        .badge.teal { background: #ccfbf1; color: var(--teal); }
+        .badge.red { background: #fee2e2; color: var(--danger); }
+        .badge.gray { background: #f1f5f9; color: var(--gray); }
+        .tip {
+            background: #eff6ff;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: #1d4ed8;
+            margin-bottom: 1rem;
+        }
+        .tip strong { color: #1e40af; }
+        .prompt {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .prompt.green { border-left: 4px solid var(--success); }
+        .prompt.orange { border-left: 4px solid var(--warning); }
+        .prompt.purple { border-left: 4px solid var(--purple); background: #faf5ff; }
+        .prompt.blue { border-left: 4px solid #2563eb; background: #eff6ff; }
+        .prompt.teal { border-left: 4px solid var(--teal); background: #f0fdfa; }
+        .prompt.red { border-left: 4px solid var(--danger); background: #fef2f2; }
+        .prompt.gray { border-left: 4px solid var(--gray); }
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .prompt-label { font-size: 0.85rem; font-weight: 700; color: #1e293b; }
+        .prompt-tags { display: flex; gap: 0.375rem; flex-wrap: wrap; }
+        .tag {
+            font-size: 0.6rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .tag.chart { background: #dbeafe; color: #1d4ed8; }
+        .tag.iterate { background: #f3e8ff; color: #7c3aed; }
+        .tag.create { background: #dcfce7; color: #166534; }
+        .tag.reason { background: #ffedd5; color: #c2410c; }
+        .tag.extract { background: #e0e7ff; color: #4338ca; }
+        .tag.verify { background: #fee2e2; color: #991b1b; }
+        .tag.meta { background: #fce7f3; color: #be185d; }
+        .tag.optional { background: #f1f5f9; color: #475569; }
+        .prompt-text {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            margin-bottom: 0.75rem;
+        }
+        .prompt-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .follow-on { font-size: 0.75rem; color: var(--purple); font-style: italic; flex: 1; }
+        .copy-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+        .copy-btn.copied { background: linear-gradient(135deg, var(--success) 0%, #15803d 100%); }
+        .scaffold-container {
+            background: #fffbeb;
+            border: 2px dashed #f59e0b;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .scaffold-header { font-size: 0.85rem; font-weight: 700; color: #92400e; margin-bottom: 1rem; }
+        .scaffold-steps { display: flex; flex-direction: column; gap: 1rem; }
+        .scaffold-step { background: white; border-radius: 0.5rem; padding: 1rem; border-left: 3px solid #f59e0b; }
+        .scaffold-step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .scaffold-step-num { font-size: 0.7rem; font-weight: 700; color: #d97706; text-transform: uppercase; }
+        .scaffold-step-text { font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; }
+        .scaffold-step .copy-btn { padding: 0.375rem 0.75rem; font-size: 0.7rem; }
+        .agent-instructions {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        .agent-instructions h4 { color: var(--danger); margin-bottom: 0.5rem; font-size: 0.85rem; }
+        .agent-instructions ol { margin-left: 1.25rem; }
+        .agent-instructions li { margin-bottom: 0.25rem; }
+        .agent-instructions a { color: var(--danger); }
+        .discussion {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        .discussion strong { color: #1d4ed8; }
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 2rem;
+        }
+        .footer .action {
+            background: rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 1.25rem 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .footer .credits { opacity: 0.6; font-size: 0.875rem; }
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--success);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.5rem; }
+            .nav-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-grid-secondary { grid-template-columns: repeat(3, 1fr); }
+            .cat-header h2 { font-size: 1.1rem; }
+            .prompt-header { flex-direction: column; }
+            .prompt-footer { flex-direction: column; align-items: flex-start; }
+            .follow-on { margin-bottom: 0.5rem; }
+        }
+        @media print {
+            .copilot-bar, .toast, .copy-btn { display: none; }
+            .category { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast">✓ Copied! Paste in Copilot</div>
+
+    <header class="header">
+        <h1>🤖 AI for Nonprofit Leaders</h1>
+        <p class="subtitle">Choose Your Own Adventure — Microsoft Elevate Days</p>
+        <p class="meta">45 minutes • Groups of 2-4 • London</p>
+    </header>
+    
+    <div class="copilot-bar">
+        <p>Copy any prompt, then paste into Microsoft 365 Copilot:</p>
+        <a href="https://m365copilot.com/" target="_blank" rel="noopener" class="copilot-link">🚀 Open M365 Copilot</a>
+    </div>
+
+    <div class="container">
+        <div class="instructions">
+            <h3>📋 How to Use This Guide</h3>
+            <ol>
+                <li><strong>Pick a category</strong> relevant to your work</li>
+                <li><strong>Start with scaffolded prompts</strong> (yellow boxes) — they build skills step by step</li>
+                <li><strong>Try the visualisation prompt</strong> early for an "aha" moment</li>
+                <li><strong>Start new chats</strong> when switching topics for better results</li>
+                <li><strong>Use follow-up prompts</strong> to iterate and go deeper</li>
+            </ol>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background: var(--success);"></div> Simple (2 min)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--warning);"></div> Structured (5 min)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--purple);"></div> Reasoning</div>
+            <div class="legend-item"><div class="legend-dot" style="background: #2563eb;"></div> Visualisation</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--teal);"></div> Document Creation</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--danger);"></div> Agent Mode</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--gray);"></div> Verification/Meta</div>
+        </div>
+
+        <nav class="nav-section">
+            <h4>Priority Sections</h4>
+            <div class="nav-grid">
+                <button class="nav-btn primary" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
+                    <span>🎯</span>Strategy
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">
+                    <span>💰</span>Fundraising
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">
+                    <span>📊</span>Impact
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">
+                    <span>💷</span>Finance
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">
+                    <span>📢</span>Comms
+                </button>
+            </div>
+            <h4>Additional Sections</h4>
+            <div class="nav-grid-secondary">
+                <button class="nav-btn-secondary" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">🙋 Volunteers</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">🤝 Partnerships</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})">👥 People</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">🎯 Programmes</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})">📋 Governance</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})">📣 Advocacy</button>
+            </div>
+        </nav>
+
+        <!-- SECTION 1: LEADERSHIP & STRATEGY -->
+        <section class="category" id="s1">
+            <div class="cat-header">
+                <h2>🎯 1. Leadership & Strategy</h2>
+                <p class="for">CEOs, Directors, Senior Leadership Teams, Trustees</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Your board wants a refreshed strategy. Funders are asking about sustainability. Staff morale needs attention. You need to make decisions with incomplete information while keeping everyone aligned.
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Strategic Analysis</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the main external factors affecting UK charities right now? One line each.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the main external factors affecting UK charities right now? One line each.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'PESTLE analysis for a UK homelessness charity. Table format:\n| Factor | Trend | Impact on Us | Opportunity or Threat? |')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">PESTLE analysis for a UK homelessness charity. Table format:
+| Factor | Trend | Impact on Us | Opportunity or Threat? |</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis (with web search)</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Search the web for latest trends affecting UK charities - funding landscape, regulation changes, sector challenges.\n\nStrategic environment scan for a mid-sized charity working on [youth mental health]:\n\nTable format:\n| Factor | Current State | 2-Year Outlook | Strategic Implication | Priority to Address |\n\nOne-line summary: What is the single biggest strategic question we should be asking?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Search the web for latest trends affecting UK charities - funding landscape, regulation changes, sector challenges.
+
+Strategic environment scan for a mid-sized charity working on [youth mental health]:
+
+Table format:
+| Factor | Current State | 2-Year Outlook | Strategic Implication | Priority to Address |
+
+One-line summary: What is the single biggest strategic question we should be asking?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualisation <span class="badge blue">See the landscape</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Visualise Strategic Position</span>
+                        <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                    </div>
+                    <div class="prompt-text">Based on the analysis above, visualise our strategic position. Show me where we are strong, where we are vulnerable, and where the opportunities are.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Create a 2x2 matrix: X-axis = Our capability, Y-axis = Market opportunity. Plot our main programme areas."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Based on the analysis above, visualise our strategic position. Show me where we are strong, where we are vulnerable, and where the opportunities are.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+                
+                <div class="tip">💡 <strong>Tip:</strong> Start a new chat for each standalone prompt for better results.</div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Board Paper Quick Brief</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">I have 15 minutes before the board meeting to review the papers on [proposed merger with smaller charity].
+
+Brief me:
+- Headline decision required (1 sentence)
+- 3 key numbers trustees will ask about
+- The risk no one is talking about (1 sentence)
+- 2 smart questions to ask</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'I have 15 minutes before the board meeting to review the papers on [proposed merger with smaller charity].\n\nBrief me:\n- Headline decision required (1 sentence)\n- 3 key numbers trustees will ask about\n- The risk no one is talking about (1 sentence)\n- 2 smart questions to ask')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Stakeholder Position Map</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">We are considering [closing our retail shops to focus on digital fundraising].
+
+Map stakeholder positions. Table format:
+| Stakeholder | Likely Position | Underlying Concern | How to Bring Them Along |
+
+Include: Staff, volunteers, trustees, major donors, beneficiaries, local community.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We are considering [closing our retail shops to focus on digital fundraising].\n\nMap stakeholder positions. Table format:\n| Stakeholder | Likely Position | Underlying Concern | How to Bring Them Along |\n\nInclude: Staff, volunteers, trustees, major donors, beneficiaries, local community.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Mission Drift Check</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">A funder offers £500k for a [digital skills training programme]. Our mission is [supporting people with learning disabilities into employment].
+
+Quick assessment:
+- Mission alignment: Strong / Partial / Stretch
+- What is the strategic risk of accepting?
+- What is the risk of declining?
+- Recommendation: Accept / Negotiate scope / Decline</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'A funder offers £500k for a [digital skills training programme]. Our mission is [supporting people with learning disabilities into employment].\n\nQuick assessment:\n- Mission alignment: Strong / Partial / Stretch\n- What is the strategic risk of accepting?\n- What is the risk of declining?\n- Recommendation: Accept / Negotiate scope / Decline')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Competitor Scan</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">Who else works in our space? We are a [£2m charity supporting care leavers in London].
+
+Landscape scan:
+| Organisation | Their Niche | Their Strength | Gap They Do Not Fill |
+
+One-line summary: Where is our distinctive positioning?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Who else works in our space? We are a [£2m charity supporting care leavers in London].\n\nLandscape scan:\n| Organisation | Their Niche | Their Strength | Gap They Do Not Fill |\n\nOne-line summary: Where is our distinctive positioning?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Strategic Options Assessment</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">We need to respond to [declining legacy income]. Options:
+A) Invest heavily in legacy marketing
+B) Diversify to corporate partnerships
+C) Reduce costs to match income
+D) Merge with larger organisation
+
+Decision matrix - table format:
+| Criteria (weight) | Option A | Option B | Option C | Option D |
+| Financial impact (30%) | | | | |
+| Mission alignment (25%) | | | | |
+| Staff/culture impact (20%) | | | | |
+| Reversibility (15%) | | | | |
+| Speed to results (10%) | | | | |
+
+Recommendation in one sentence.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What assumptions drove your scoring? Challenge the weakest one."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'We need to respond to [declining legacy income]. Options:\nA) Invest heavily in legacy marketing\nB) Diversify to corporate partnerships\nC) Reduce costs to match income\nD) Merge with larger organisation\n\nDecision matrix - table format:\n| Criteria (weight) | Option A | Option B | Option C | Option D |\n| Financial impact (30%) | | | | |\n| Mission alignment (25%) | | | | |\n| Staff/culture impact (20%) | | | | |\n| Reversibility (15%) | | | | |\n| Speed to results (10%) | | | | |\n\nRecommendation in one sentence.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">6. Theory of Change Stress Test</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Our theory of change: "If we [provide mentoring to young people leaving care], they will [gain confidence and life skills], leading to [better employment and housing outcomes]."
+
+Stress test this:
+| Assumption | Evidence Strength | What Would Disprove It? |
+
+Weakest link in the chain?
+What are we not measuring that we should be?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Our theory of change: \"If we [provide mentoring to young people leaving care], they will [gain confidence and life skills], leading to [better employment and housing outcomes].\"\n\nStress test this:\n| Assumption | Evidence Strength | What Would Disprove It? |\n\nWeakest link in the chain?\nWhat are we not measuring that we should be?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning & Deep Analysis <span class="badge purple">Strategic thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">7. Pre-Mortem Analysis</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span><span class="tag optional">Optional</span></div>
+                    </div>
+                    <div class="prompt-text">It is 2027. Our [new community hub project] has failed.
+
+Bullet points only:
+- What went wrong? (5 bullets)
+- Early warning signs we should have spotted? (3 bullets)
+- What should I ask my team THIS MONTH to prevent this?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">💡 Start a new chat. Adapt to your specific project.</span>
+                        <button class="copy-btn" onclick="copyText(this, 'It is 2027. Our [new community hub project] has failed.\n\nBullet points only:\n- What went wrong? (5 bullets)\n- Early warning signs we should have spotted? (3 bullets)\n- What should I ask my team THIS MONTH to prevent this?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">8. Board Paper Structure</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Structure for board paper on [proposed new service in Manchester]:
+
+Sections:
+- Executive Summary (3 sentences max)
+- Strategic Fit (why this, why now)
+- Options Considered (table with pros/cons)
+- Financial Implications (table)
+- Risks and Mitigations (table)
+- Recommendation
+- Decision Required (specific wording)
+
+Keep to 2 pages. Decision-ready, not discussion-only.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to Word format."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Structure for board paper on [proposed new service in Manchester]:\n\nSections:\n- Executive Summary (3 sentences max)\n- Strategic Fit (why this, why now)\n- Options Considered (table with pros/cons)\n- Financial Implications (table)\n- Risks and Mitigations (table)\n- Recommendation\n- Decision Required (specific wording)\n\nKeep to 2 pages. Decision-ready, not discussion-only.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title gray">🔒 Verification & Meta <span class="badge gray">Quality check</span></div>
+
+                <div class="prompt gray">
+                    <div class="prompt-header">
+                        <span class="prompt-label">AI Strategy Limitations</span>
+                        <div class="prompt-tags"><span class="tag meta">Meta</span></div>
+                    </div>
+                    <div class="prompt-text">I have been using AI for strategic analysis and board preparation.
+
+Three bullets each:
+- Where does AI add most value for nonprofit leadership?
+- What should I never outsource to AI?
+- Where might AI give me false confidence?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'I have been using AI for strategic analysis and board preparation.\n\nThree bullets each:\n- Where does AI add most value for nonprofit leadership?\n- What should I never outsource to AI?\n- Where might AI give me false confidence?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title red">🤖 Agent Mode <span class="badge red">Optional</span></div>
+
+                <div class="agent-instructions">
+                    <h4>How to Create an Agent</h4>
+                    <ol>
+                        <li>Open the Microsoft 365 Copilot app or go to <a href="https://m365copilot.com/" target="_blank">https://m365copilot.com/</a></li>
+                        <li>Under <strong>Agents</strong>, select <strong>New Agent</strong></li>
+                        <li>Paste the prompt below, click Send, follow prompts</li>
+                    </ol>
+                </div>
+
+                <div class="prompt red">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Strategic Challenge Partner Agent</span>
+                    </div>
+                    <div class="prompt-text">You are my Strategic Challenge Partner - a constructive critic who stress-tests my thinking before I take proposals to the board.
+
+When I describe a strategic decision:
+1. DEVIL'S ADVOCATE: 3 strongest arguments against (one line each)
+2. HIDDEN ASSUMPTIONS: What am I taking for granted that might not be true?
+3. STAKEHOLDER BLIND SPOTS: Whose perspective have I not considered?
+4. BETTER ALTERNATIVE: Is there an option I have not explored?
+5. GO/NO-GO: Based on what you know, what is your honest recommendation?
+
+Be direct. I need challenge, not validation.
+
+What strategic decision are you wrestling with?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'You are my Strategic Challenge Partner - a constructive critic who stress-tests my thinking before I take proposals to the board.\n\nWhen I describe a strategic decision:\n1. DEVIL\'S ADVOCATE: 3 strongest arguments against (one line each)\n2. HIDDEN ASSUMPTIONS: What am I taking for granted that might not be true?\n3. STAKEHOLDER BLIND SPOTS: Whose perspective have I not considered?\n4. BETTER ALTERNATIVE: Is there an option I have not explored?\n5. GO/NO-GO: Based on what you know, what is your honest recommendation?\n\nBe direct. I need challenge, not validation.\n\nWhat strategic decision are you wrestling with?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What is a strategic decision you are facing where you would benefit from structured challenge? How do you currently stress-test your thinking?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: FUNDRAISING -->
+        <section class="category" id="s2">
+            <div class="cat-header">
+                <h2>💰 2. Fundraising & Donor Engagement</h2>
+                <p class="for">Fundraising Directors, Major Gifts Officers, Trust Fundraisers, CEOs</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Income targets are stretching. Trust and foundation funding is more competitive. Major donors want deeper engagement. You need to work smarter across multiple fundraising channels.
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Funder Research</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What do trust and foundation funders typically look for in a grant application? Bullet list.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What do trust and foundation funders typically look for in a grant application? Bullet list.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Funder assessment framework. Table format:\n| Criteria | What Funders Want | How We Evidence It | Common Mistakes |')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Funder assessment framework. Table format:
+| Criteria | What Funders Want | How We Evidence It | Common Mistakes |</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis (with web search)</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Search the web for information about [The Lloyds Bank Foundation / Esmée Fairbairn / specific funder] - their priorities, recent grants, and funding approach.\n\nFunder intelligence brief:\n\nTable format:\n| Aspect | What We Know | Implication for Our Approach |\n\nInclude: Funding priorities, typical grant size, what they have funded recently, decision timeline, relationship style.\n\nOne-line summary: What is the hook for our application?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Search the web for information about [The Lloyds Bank Foundation / Esmée Fairbairn / specific funder] - their priorities, recent grants, and funding approach.
+
+Funder intelligence brief:
+
+Table format:
+| Aspect | What We Know | Implication for Our Approach |
+
+Include: Funding priorities, typical grant size, what they have funded recently, decision timeline, relationship style.
+
+One-line summary: What is the hook for our application?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualisation <span class="badge blue">See the portfolio</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Visualise Income Mix</span>
+                        <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                    </div>
+                    <div class="prompt-text">Based on this income breakdown, visualise our fundraising portfolio health:
+- Trusts & Foundations: 45%
+- Individual giving: 20%
+- Corporate: 15%
+- Contracts: 15%
+- Events: 5%
+
+Show me concentration risk and diversification opportunities.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Create a chart showing ideal vs actual income mix. Flag where we are over-reliant on single sources."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Based on this income breakdown, visualise our fundraising portfolio health:\n- Trusts & Foundations: 45%\n- Individual giving: 20%\n- Corporate: 15%\n- Contracts: 15%\n- Events: 5%\n\nShow me concentration risk and diversification opportunities.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+                
+                <div class="tip">💡 <strong>Tip:</strong> Start a new chat for each standalone prompt for better results.</div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Application Quick Review</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">Review this draft grant application before I submit:
+
+[Paste application summary or key sections]
+
+Assessment:
+- Does the need come across clearly? (Yes/Needs work)
+- Is our solution specific and credible? (Yes/Needs work)
+- Would a funder trust our budget? (Yes/Needs work)
+- What is the weakest paragraph?
+- One change that would strengthen it most</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Review this draft grant application before I submit:\n\n[Paste application summary or key sections]\n\nAssessment:\n- Does the need come across clearly? (Yes/Needs work)\n- Is our solution specific and credible? (Yes/Needs work)\n- Would a funder trust our budget? (Yes/Needs work)\n- What is the weakest paragraph?\n- One change that would strengthen it most')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Donor Meeting Prep</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">Meeting tomorrow with [major donor who gave £10k last year]. They are a [retired business executive interested in youth employability].
+
+Brief me:
+- Their likely motivations (2 bullets)
+- What to ask them (2 good questions)
+- What NOT to do (1 line)
+- Cultivation next step to propose</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Meeting tomorrow with [major donor who gave £10k last year]. They are a [retired business executive interested in youth employability].\n\nBrief me:\n- Their likely motivations (2 bullets)\n- What to ask them (2 good questions)\n- What NOT to do (1 line)\n- Cultivation next step to propose')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Rejection Response</span>
+                        <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+                    </div>
+                    <div class="prompt-text">We were rejected by [funder]. Their feedback: "[Application was strong but they prioritised organisations with longer track record in the region]."
+
+Help me respond:
+- Read between the lines - what are they really saying?
+- Is there a relationship to maintain here?
+- Draft a brief, gracious response (3 sentences max)
+- Should we reapply? When?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We were rejected by [funder]. Their feedback: \"[Application was strong but they prioritised organisations with longer track record in the region].\"\n\nHelp me respond:\n- Read between the lines - what are they really saying?\n- Is there a relationship to maintain here?\n- Draft a brief, gracious response (3 sentences max)\n- Should we reapply? When?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Case for Support - Headline Test</span>
+                        <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+                    </div>
+                    <div class="prompt-text">Rate these three headlines for our appeal:
+
+A) "Help us support vulnerable young people"
+B) "Last year, 200 young people left care with nowhere to go"
+C) "From care leaver to confident graduate: Maya's story"
+
+Table format:
+| Headline | Strengths | Weaknesses | Score /10 |
+
+Which wins and why? Suggest a better alternative.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Rate these three headlines for our appeal:\n\nA) \"Help us support vulnerable young people\"\nB) \"Last year, 200 young people left care with nowhere to go\"\nC) \"From care leaver to confident graduate: Maya story\"\n\nTable format:\n| Headline | Strengths | Weaknesses | Score /10 |\n\nWhich wins and why? Suggest a better alternative.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Pipeline Health Check</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Our trust fundraising pipeline:
+
+| Stage | Number | Total Value |
+| Researching | 25 | £400k |
+| Approaching | 10 | £150k |
+| Applied | 8 | £180k |
+| Awaiting decision | 5 | £120k |
+
+Target: £300k this year
+
+Assessment:
+- Is our pipeline healthy enough to hit target?
+- Where is the bottleneck?
+- What conversion rates are we assuming?
+- Top priority action?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Our trust fundraising pipeline:\n\n| Stage | Number | Total Value |\n| Researching | 25 | £400k |\n| Approaching | 10 | £150k |\n| Applied | 8 | £180k |\n| Awaiting decision | 5 | £120k |\n\nTarget: £300k this year\n\nAssessment:\n- Is our pipeline healthy enough to hit target?\n- Where is the bottleneck?\n- What conversion rates are we assuming?\n- Top priority action?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">6. Corporate Partnership Fit</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">A [major retailer] approaches us about charity of the year partnership.
+
+Due diligence assessment:
+| Factor | Assessment | Red Flag? |
+| Values alignment | | |
+| Reputational risk | | |
+| Resource demand on us | | |
+| Employee engagement potential | | |
+| Long-term relationship potential | | |
+
+Verdict: Pursue / Explore cautiously / Decline
+What questions should we ask them?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'A [major retailer] approaches us about charity of the year partnership.\n\nDue diligence assessment:\n| Factor | Assessment | Red Flag? |\n| Values alignment | | |\n| Reputational risk | | |\n| Resource demand on us | | |\n| Employee engagement potential | | |\n| Long-term relationship potential | | |\n\nVerdict: Pursue / Explore cautiously / Decline\nWhat questions should we ask them?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">7. Grant Application Structure</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Structure a £75k grant application to [National Lottery Community Fund] for our [peer mentoring programme for young carers]:
+
+Sections (with word count guidance):
+- Organisation background (150 words)
+- The need (200 words - local evidence)
+- Our approach (250 words - what, how, why it works)
+- Outcomes and evaluation (150 words)
+- Budget narrative (100 words)
+
+Include specific questions to answer in each section.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to Word format with placeholder prompts."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Structure a £75k grant application to [National Lottery Community Fund] for our [peer mentoring programme for young carers]:\n\nSections (with word count guidance):\n- Organisation background (150 words)\n- The need (200 words - local evidence)\n- Our approach (250 words - what, how, why it works)\n- Outcomes and evaluation (150 words)\n- Budget narrative (100 words)\n\nInclude specific questions to answer in each section.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title red">🤖 Agent Mode <span class="badge red">Optional</span></div>
+
+                <div class="agent-instructions">
+                    <h4>How to Create an Agent</h4>
+                    <ol>
+                        <li>Open the Microsoft 365 Copilot app or go to <a href="https://m365copilot.com/" target="_blank">https://m365copilot.com/</a></li>
+                        <li>Under <strong>Agents</strong>, select <strong>New Agent</strong></li>
+                        <li>Paste the prompt below, click Send, follow prompts</li>
+                    </ol>
+                </div>
+
+                <div class="prompt red">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Grant Application Coach Agent</span>
+                    </div>
+                    <div class="prompt-text">You are my Grant Application Coach - helping me write compelling, fundable applications.
+
+When I share a draft or describe a funding opportunity:
+1. FIT CHECK: Does this funder match our work? (Strong fit / Partial / Stretch)
+2. STRENGTHS: What is working in my draft? (Be specific)
+3. GAPS: What is missing that funders look for?
+4. LANGUAGE: Is it clear and jargon-free?
+5. EVIDENCE: Where do I need stronger proof?
+6. KILLER LINE: Suggest one sentence that could make them remember us
+
+Be honest - better to improve now than get rejected later.
+
+What application are you working on?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'You are my Grant Application Coach - helping me write compelling, fundable applications.\n\nWhen I share a draft or describe a funding opportunity:\n1. FIT CHECK: Does this funder match our work? (Strong fit / Partial / Stretch)\n2. STRENGTHS: What is working in my draft? (Be specific)\n3. GAPS: What is missing that funders look for?\n4. LANGUAGE: Is it clear and jargon-free?\n5. EVIDENCE: Where do I need stronger proof?\n6. KILLER LINE: Suggest one sentence that could make them remember us\n\nBe honest - better to improve now than get rejected later.\n\nWhat application are you working on?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Where is the line between using AI to enhance fundraising and losing the authentic human connection that donors value?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: IMPACT -->
+        <section class="category" id="s3">
+            <div class="cat-header">
+                <h2>📊 3. Impact & Reporting</h2>
+                <p class="for">Impact Managers, Programme Directors, M&E Staff, CEOs</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Funders want evidence. Trustees want dashboards. You want to actually learn from your data. But you are drowning in reporting requirements and not sure you are measuring what matters.
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Outcome Measurement</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What is the difference between outputs, outcomes, and impact? One sentence each, with an example.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What is the difference between outputs, outcomes, and impact? One sentence each, with an example.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'For a [youth employment programme], show the logic model. Table format:\n| Inputs | Activities | Outputs | Outcomes | Impact |')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">For a [youth employment programme], show the logic model. Table format:
+| Inputs | Activities | Outputs | Outcomes | Impact |</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis (with web search)</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Search the web for best practices in measuring outcomes for [youth employment / mental health / education] programmes.\n\nMeasurement framework for our programme:\n\nTable format:\n| Outcome | Indicator | Data Source | Collection Frequency | Benchmark |\n\nInclude: Short-term (6 months), medium-term (1-2 years), and longer-term outcomes.\n\nOne-line summary: What is the one metric that best captures our impact?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Search the web for best practices in measuring outcomes for [youth employment / mental health / education] programmes.
+
+Measurement framework for our programme:
+
+Table format:
+| Outcome | Indicator | Data Source | Collection Frequency | Benchmark |
+
+Include: Short-term (6 months), medium-term (1-2 years), and longer-term outcomes.
+
+One-line summary: What is the one metric that best captures our impact?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Data Interpretation Help</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">Help me interpret this data:
+
+Programme completers: 85% (last year: 78%)
+Employment outcomes: 62% (target: 70%)
+Satisfaction scores: Dropped from 4.5 to 4.2
+
+Brief me:
+- Good news headline
+- Concerning trend
+- What questions should we be asking?
+- Is this success or failure overall?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Help me interpret this data:\n\nProgramme completers: 85% (last year: 78%)\nEmployment outcomes: 62% (target: 70%)\nSatisfaction scores: Dropped from 4.5 to 4.2\n\nBrief me:\n- Good news headline\n- Concerning trend\n- What questions should we be asking?\n- Is this success or failure overall?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Anecdote to Evidence</span>
+                        <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+                    </div>
+                    <div class="prompt-text">Turn this anecdote into a compelling case study:
+
+"Sarah came to us homeless after leaving care. She did our programme. Now she has a job and flat."
+
+Make it:
+- Specific (what did we actually do?)
+- Evidenced (what changed, measurably?)
+- Balanced (acknowledge challenges)
+- Compelling (make the reader care)
+
+150 words max.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Turn this anecdote into a compelling case study:\n\n\"Sarah came to us homeless after leaving care. She did our programme. Now she has a job and flat.\"\n\nMake it:\n- Specific (what did we actually do?)\n- Evidenced (what changed, measurably?)\n- Balanced (acknowledge challenges)\n- Compelling (make the reader care)\n\n150 words max.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Theory of Change Review</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Our theory of change:
+
+IF we [provide 12-week employment skills programme]
+AND [offer ongoing mentor support]
+THEN young people will [gain confidence and practical skills]
+LEADING TO [sustainable employment]
+
+Challenge this:
+| Assumption | Evidence We Have | Evidence We Need | Risk if Wrong |
+
+What is the weakest link?
+What external factors could derail this?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Our theory of change:\n\nIF we [provide 12-week employment skills programme]\nAND [offer ongoing mentor support]\nTHEN young people will [gain confidence and practical skills]\nLEADING TO [sustainable employment]\n\nChallenge this:\n| Assumption | Evidence We Have | Evidence We Need | Risk if Wrong |\n\nWhat is the weakest link?\nWhat external factors could derail this?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Outcome Indicator Design</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Design outcome indicators for our [befriending service for isolated older people].
+
+Table format:
+| Outcome | Indicator | SMART? | Data Collection Method | Limitations |
+
+Include:
+- Something we can measure short-term
+- Something that captures real change
+- Something that is meaningful to funders
+
+Avoid vanity metrics. What would actually prove we are making a difference?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Design outcome indicators for our [befriending service for isolated older people].\n\nTable format:\n| Outcome | Indicator | SMART? | Data Collection Method | Limitations |\n\nInclude:\n- Something we can measure short-term\n- Something that captures real change\n- Something that is meaningful to funders\n\nAvoid vanity metrics. What would actually prove we are making a difference?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Impact Report Structure</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Structure for our annual impact report:
+
+Sections:
+- At a glance (one page, visual summary)
+- Year in numbers (infographic-ready data)
+- Stories of change (2-3 case studies)
+- What we learned (honest reflection)
+- Looking ahead
+- Thank you to supporters
+
+10 pages max. Design for digital and print.
+Make it something people actually want to read.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Create a Word template with placeholder content."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Structure for our annual impact report:\n\nSections:\n- At a glance (one page, visual summary)\n- Year in numbers (infographic-ready data)\n- Stories of change (2-3 case studies)\n- What we learned (honest reflection)\n- Looking ahead\n- Thank you to supporters\n\n10 pages max. Design for digital and print.\nMake it something people actually want to read.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What is the difference between demonstrating impact and proving impact? What level of evidence is "good enough"?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: FINANCE -->
+        <section class="category" id="s4">
+            <div class="cat-header">
+                <h2>💷 4. Finance & Sustainability</h2>
+                <p class="for">Finance Directors, CEOs, Trustees, Budget Holders</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Reserves are tight. Restricted funding creates complexity. Costs are rising faster than income. You need to balance financial prudence with mission delivery.
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Financial Health</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the key indicators of financial health for a UK charity? Bullet list.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the key indicators of financial health for a UK charity? Bullet list.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Financial health dashboard for a charity. Table format:\n| Metric | What It Tells You | Healthy Range | Warning Signs |')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Financial health dashboard for a charity. Table format:
+| Metric | What It Tells You | Healthy Range | Warning Signs |</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis (with web search)</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Search the web for charity sector financial benchmarks and reserves guidance from Charity Commission and NCVO.\n\nFinancial health assessment for a charity with:\n- Income: £1.5m\n- Reserves: £200k (3 months)\n- Restricted: 60% of income\n- Deficit last year: £50k\n\nTable format:\n| Metric | Our Position | Sector Benchmark | Assessment | Priority Action |\n\nOne-line verdict: How worried should the board be?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Search the web for charity sector financial benchmarks and reserves guidance from Charity Commission and NCVO.
+
+Financial health assessment for a charity with:
+- Income: £1.5m
+- Reserves: £200k (3 months)
+- Restricted: 60% of income
+- Deficit last year: £50k
+
+Table format:
+| Metric | Our Position | Sector Benchmark | Assessment | Priority Action |
+
+One-line verdict: How worried should the board be?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Budget Variance Explanation</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">Help me explain this budget variance to trustees:
+
+Staff costs: £20k over budget (maternity cover)
+Programme costs: £15k under budget (delayed project start)
+Fundraising income: £30k under target
+Grant income: £25k over target
+
+Brief summary for non-finance trustees:
+- One-line headline
+- What is concerning?
+- What is OK?
+- What action are we taking?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Help me explain this budget variance to trustees:\n\nStaff costs: £20k over budget (maternity cover)\nProgramme costs: £15k under budget (delayed project start)\nFundraising income: £30k under target\nGrant income: £25k over target\n\nBrief summary for non-finance trustees:\n- One-line headline\n- What is concerning?\n- What is OK?\n- What action are we taking?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Cost Recovery Rate</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">A funder offers 10% overhead contribution. Our full cost recovery rate is 18%.
+
+Options:
+A) Accept 10%, absorb the rest
+B) Negotiate for higher
+C) Decline and find a different funder
+D) Accept but reduce programme scope
+
+Table format:
+| Option | Pros | Cons | Recommendation |
+
+What is the right call?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'A funder offers 10% overhead contribution. Our full cost recovery rate is 18%.\n\nOptions:\nA) Accept 10%, absorb the rest\nB) Negotiate for higher\nC) Decline and find a different funder\nD) Accept but reduce programme scope\n\nTable format:\n| Option | Pros | Cons | Recommendation |\n\nWhat is the right call?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Scenario Planning - Income Drop</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Model three scenarios for next year:
+
+| Scenario | Assumption | Impact | Response Plan |
+| Baseline | Income flat | | |
+| Optimistic | Income +10% | | |
+| Pessimistic | Income -20% | | |
+
+For the pessimistic scenario:
+- What would we cut first?
+- What is absolutely protected?
+- At what point do we have a serious problem?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Model three scenarios for next year:\n\n| Scenario | Assumption | Impact | Response Plan |\n| Baseline | Income flat | | |\n| Optimistic | Income +10% | | |\n| Pessimistic | Income -20% | | |\n\nFor the pessimistic scenario:\n- What would we cut first?\n- What is absolutely protected?\n- At what point do we have a serious problem?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Business Model Assessment</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Assess our income model sustainability:
+
+Current:
+- Grants: 60%
+- Contracts: 25%
+- Donations: 10%
+- Trading: 5%
+
+Table format:
+| Income Stream | Predictability | Growth Potential | Risk | Effort Required |
+
+What is the right balance?
+One change to improve sustainability?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Assess our income model sustainability:\n\nCurrent:\n- Grants: 60%\n- Contracts: 25%\n- Donations: 10%\n- Trading: 5%\n\nTable format:\n| Income Stream | Predictability | Growth Potential | Risk | Effort Required |\n\nWhat is the right balance?\nOne change to improve sustainability?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Finance Report for Trustees</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Structure for quarterly finance report to trustees:
+
+Sections:
+- Headlines (traffic light summary)
+- Income vs budget (table)
+- Expenditure vs budget (table)
+- Cash flow position
+- Reserves update
+- Key risks and mitigations
+- Decisions required
+
+Keep to 2 pages. Make it scannable for trustees who are not finance experts.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to Word format with sample RAG ratings."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Structure for quarterly finance report to trustees:\n\nSections:\n- Headlines (traffic light summary)\n- Income vs budget (table)\n- Expenditure vs budget (table)\n- Cash flow position\n- Reserves update\n- Key risks and mitigations\n- Decisions required\n\nKeep to 2 pages. Make it scannable for trustees who are not finance experts.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What financial reality are you avoiding confronting? What would it take to have that honest conversation with your board?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: COMMUNICATIONS -->
+        <section class="category" id="s5">
+            <div class="cat-header">
+                <h2>📢 5. Communications & Storytelling</h2>
+                <p class="for">Communications Managers, Marketing, CEOs, Fundraisers</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> You need to cut through the noise with limited budget. Your cause deserves attention but you are competing with slicker brands. How do you tell authentic stories that move people to action?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Message Development</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What makes a charity message memorable? One sentence each for 5 principles.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What makes a charity message memorable? One sentence each for 5 principles.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Message framework for a charity. Table format:\n| Element | Purpose | Example | Common Mistakes |')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Message framework for a charity. Table format:
+| Element | Purpose | Example | Common Mistakes |</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis (with web search)</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Search the web for examples of effective charity campaigns and storytelling best practices.\n\nDevelop messaging framework for our charity: [youth mental health charity working in schools].\n\nTable format:\n| Audience | Core Message | Emotional Hook | Proof Point | Call to Action |\n\nInclude: General public, potential donors, corporate partners, schools.\n\nOne-line summary: What is our single most powerful message?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Search the web for examples of effective charity campaigns and storytelling best practices.
+
+Develop messaging framework for our charity: [youth mental health charity working in schools].
+
+Table format:
+| Audience | Core Message | Emotional Hook | Proof Point | Call to Action |
+
+Include: General public, potential donors, corporate partners, schools.
+
+One-line summary: What is our single most powerful message?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Jargon Buster</span>
+                        <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+                    </div>
+                    <div class="prompt-text">Rewrite this for a general audience:
+
+"Our holistic, person-centred approach enables service users to develop coping strategies and build resilience through evidence-based interventions."
+
+Rules:
+- No sector jargon
+- 15 words max
+- Make someone care</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Rewrite this for a general audience:\n\n\"Our holistic, person-centred approach enables service users to develop coping strategies and build resilience through evidence-based interventions.\"\n\nRules:\n- No sector jargon\n- 15 words max\n- Make someone care')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Social Media Hook</span>
+                        <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+                    </div>
+                    <div class="prompt-text">We want to share this stat: "We supported 500 young people last year."
+
+Give me 5 more engaging ways to say this for social media. Each should:
+- Stop the scroll
+- Be under 20 words
+- Avoid "we supported" or "we helped"</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We want to share this stat: \"We supported 500 young people last year.\"\n\nGive me 5 more engaging ways to say this for social media. Each should:\n- Stop the scroll\n- Be under 20 words\n- Avoid \"we supported\" or \"we helped\"')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Story Ethical Check</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">We want to share this beneficiary story in our appeal. Quick ethical check:
+
+Story: [Young person overcame trauma, now thriving thanks to our support]
+
+Assessment:
+- Dignity: Does this respect them?
+- Consent: What consent do we need?
+- Accuracy: Are we oversimplifying?
+- Power: Who controls this narrative?
+- Alternatives: Could we tell this differently?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We want to share this beneficiary story in our appeal. Quick ethical check:\n\nStory: [Young person overcame trauma, now thriving thanks to our support]\n\nAssessment:\n- Dignity: Does this respect them?\n- Consent: What consent do we need?\n- Accuracy: Are we oversimplifying?\n- Power: Who controls this narrative?\n- Alternatives: Could we tell this differently?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Crisis Communications Prep</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Prepare for potential reputational risk: [Staff member accused of misconduct / Safeguarding incident / Financial mismanagement allegation].
+
+Communications plan:
+| Scenario | First Response (1 hour) | Holding Statement | Full Response | Spokesperson |
+
+Include: Internal comms, external statement, social media approach.
+
+What do we NOT say?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Prepare for potential reputational risk: [Staff member accused of misconduct / Safeguarding incident / Financial mismanagement allegation].\n\nCommunications plan:\n| Scenario | First Response (1 hour) | Holding Statement | Full Response | Spokesperson |\n\nInclude: Internal comms, external statement, social media approach.\n\nWhat do we NOT say?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Case for Support Structure</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Structure for our case for support document:
+
+Sections:
+- The problem (with local data)
+- Our approach (what makes us effective)
+- Our impact (evidence and stories)
+- The opportunity (what more we could do)
+- The ask (clear funding priorities)
+
+4 pages max. Balance emotion and evidence.
+Include placeholder prompts for each section.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to Word format with design suggestions."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Structure for our case for support document:\n\nSections:\n- The problem (with local data)\n- Our approach (what makes us effective)\n- Our impact (evidence and stories)\n- The opportunity (what more we could do)\n- The ask (clear funding priorities)\n\n4 pages max. Balance emotion and evidence.\nInclude placeholder prompts for each section.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How do you tell authentic stories without exploiting the people you serve? Where is the ethical line?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: VOLUNTEERS -->
+        <section class="category" id="s6">
+            <div class="cat-header">
+                <h2>🙋 6. Volunteer Management</h2>
+                <p class="for">Volunteer Coordinators, Operations Managers</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Volunteers are essential but require investment. How do you recruit, support, and retain them while respecting their time?
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Volunteer Role Design</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Design a volunteer role for [befriending older people / admin support / event stewarding].
+
+Include:
+- Role title (appealing, not bureaucratic)
+- Time commitment (honest)
+- What they will do (specific tasks)
+- What they will gain
+- Support provided
+- Who it is suited for
+
+Make it sound rewarding, not onerous.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Design a volunteer role for [befriending older people / admin support / event stewarding].\n\nInclude:\n- Role title (appealing, not bureaucratic)\n- Time commitment (honest)\n- What they will do (specific tasks)\n- What they will gain\n- Support provided\n- Who it is suited for\n\nMake it sound rewarding, not onerous.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Volunteer Recognition Ideas</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">Our volunteers give [4 hours per week]. Budget for recognition: minimal.
+
+Give me 10 meaningful, low-cost ways to recognise volunteers:
+| Idea | Cost | Impact | When to Use |
+
+Focus on what makes people feel genuinely valued, not token gestures.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Our volunteers give [4 hours per week]. Budget for recognition: minimal.\n\nGive me 10 meaningful, low-cost ways to recognise volunteers:\n| Idea | Cost | Impact | When to Use |\n\nFocus on what makes people feel genuinely valued, not token gestures.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Volunteer Retention Analysis</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Volunteers are leaving after [3-6 months].
+
+Diagnosis:
+| Stage | What Happens | Possible Issues | Improvement |
+| Recruitment | | | |
+| Onboarding | | | |
+| First 3 months | | | |
+| Ongoing support | | | |
+| Recognition | | | |
+
+What is the most likely cause? What should we change first?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Volunteers are leaving after [3-6 months].\n\nDiagnosis:\n| Stage | What Happens | Possible Issues | Improvement |\n| Recruitment | | | |\n| Onboarding | | | |\n| First 3 months | | | |\n| Ongoing support | | | |\n| Recognition | | | |\n\nWhat is the most likely cause? What should we change first?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Difficult Volunteer Conversation</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">A long-standing volunteer [is not following procedures / has poor boundaries / is unreliable].
+
+Help me prepare:
+- The specific issue (facts)
+- Their likely perspective
+- How to open the conversation
+- What outcome am I seeking?
+- If they do not change, what then?
+
+They give their time freely - how do I balance gratitude with standards?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'A long-standing volunteer [is not following procedures / has poor boundaries / is unreliable].\n\nHelp me prepare:\n- The specific issue (facts)\n- Their likely perspective\n- How to open the conversation\n- What outcome am I seeking?\n- If they do not change, what then?\n\nThey give their time freely - how do I balance gratitude with standards?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Volunteer Handbook</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Create an outline for our volunteer handbook:
+
+Sections needed:
+- Welcome and our mission
+- Your role
+- Practical information
+- Support available
+- Key policies (safeguarding, H&S, data)
+- FAQs
+
+Keep it friendly, not legalistic. 10 pages max.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to Word format."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create an outline for our volunteer handbook:\n\nSections needed:\n- Welcome and our mission\n- Your role\n- Practical information\n- Support available\n- Key policies (safeguarding, H&S, data)\n- FAQs\n\nKeep it friendly, not legalistic. 10 pages max.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What do volunteers really want from volunteering? How do you know if you are giving it to them?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: PARTNERSHIPS -->
+        <section class="category" id="s7">
+            <div class="cat-header">
+                <h2>🤝 7. Partnerships & Collaboration</h2>
+                <p class="for">CEOs, Partnership Managers, Business Development</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Funders want collaboration. But partnerships take time and do not always add value. How do you find the right partners and make collaboration actually work?
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Partnership Fit Assessment</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">We are considering partnership with [organisation] on [project].
+
+Quick compatibility check:
+| Factor | Our Position | Their Position | Fit |
+| Mission | | | |
+| Values | | | |
+| Working style | | | |
+| Risk appetite | | | |
+| Resources | | | |
+
+Red flags? Go/No-go recommendation?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We are considering partnership with [organisation] on [project].\n\nQuick compatibility check:\n| Factor | Our Position | Their Position | Fit |\n| Mission | | | |\n| Values | | | |\n| Working style | | | |\n| Risk appetite | | | |\n| Resources | | | |\n\nRed flags? Go/No-go recommendation?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Corporate Partnership Pitch</span>
+                        <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+                    </div>
+                    <div class="prompt-text">Help me pitch to [local business] for charity partnership.
+
+Focus on what THEY get:
+| Their Priority | What We Offer | Proof Point |
+
+Include: Employee engagement, brand, CSR reporting, team building.
+
+Draft a 2-minute pitch opening.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Help me pitch to [local business] for charity partnership.\n\nFocus on what THEY get:\n| Their Priority | What We Offer | Proof Point |\n\nInclude: Employee engagement, brand, CSR reporting, team building.\n\nDraft a 2-minute pitch opening.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Merger Consideration</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">We are exploring merger with a similar organisation.
+
+Due diligence:
+| Area | Questions | Red Flags | Deal Breakers |
+| Culture | | | |
+| Finance | | | |
+| Governance | | | |
+| Staff | | | |
+| Funders | | | |
+
+Is this strengthening or desperation?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We are exploring merger with a similar organisation.\n\nDue diligence:\n| Area | Questions | Red Flags | Deal Breakers |\n| Culture | | | |\n| Finance | | | |\n| Governance | | | |\n| Staff | | | |\n| Funders | | | |\n\nIs this strengthening or desperation?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Consortium Bid Decision</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Invited to join a consortium bid. Lead is [larger organisation].
+
+Assessment:
+- Our role? (Partner or decoration?)
+- Financial terms fair?
+- What do we risk?
+- What do we gain beyond money?
+- Can we exit if it goes wrong?
+
+Recommendation: Join / Negotiate / Decline</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Invited to join a consortium bid. Lead is [larger organisation].\n\nAssessment:\n- Our role? (Partner or decoration?)\n- Financial terms fair?\n- What do we risk?\n- What do we gain beyond money?\n- Can we exit if it goes wrong?\n\nRecommendation: Join / Negotiate / Decline')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Partnership Agreement</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Create a simple partnership framework (MOU style):
+
+Sections:
+- Purpose
+- What each party contributes
+- Decision-making
+- Communication
+- Review and exit
+
+Practical and relationship-focused, not legalistic.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to Word format."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a simple partnership framework (MOU style):\n\nSections:\n- Purpose\n- What each party contributes\n- Decision-making\n- Communication\n- Review and exit\n\nPractical and relationship-focused, not legalistic.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> When is collaboration genuinely valuable vs. just something funders want to see?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: PEOPLE -->
+        <section class="category" id="s8">
+            <div class="cat-header">
+                <h2>👥 8. People & Culture</h2>
+                <p class="for">CEOs, HR Managers, Line Managers</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> You cannot match private sector salaries. Staff are stretched. How do you build a culture where people want to stay?
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Job Advert Review</span>
+                        <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+                    </div>
+                    <div class="prompt-text">Review this job advert for [role]:
+
+[Paste or describe]
+
+Assessment:
+- Would a great candidate apply?
+- Is salary competitive? (search)
+- What is missing?
+- What would put people off?
+- Rewrite the opening paragraph.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Review this job advert for [role]:\n\n[Paste or describe]\n\nAssessment:\n- Would a great candidate apply?\n- Is salary competitive? (search)\n- What is missing?\n- What would put people off?\n- Rewrite the opening paragraph.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Difficult Conversation Prep</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">I need to address [performance / behaviour / workload] with a team member.
+
+Help me prepare:
+- Specific issue (facts, not feelings)
+- Their likely perspective
+- Opening line (direct but kind)
+- Outcome I am seeking
+- If they become defensive?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'I need to address [performance / behaviour / workload] with a team member.\n\nHelp me prepare:\n- Specific issue (facts, not feelings)\n- Their likely perspective\n- Opening line (direct but kind)\n- Outcome I am seeking\n- If they become defensive?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Staff Wellbeing Check</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Signs: [sick leave up, quiet quitting, turnover].
+
+Diagnosis:
+| Symptom | Possible Causes | Questions to Ask | Interventions |
+
+What should I investigate?
+What quick wins might help?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Signs: [sick leave up, quiet quitting, turnover].\n\nDiagnosis:\n| Symptom | Possible Causes | Questions to Ask | Interventions |\n\nWhat should I investigate?\nWhat quick wins might help?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Restructure Communication</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">We need to restructure due to [funding / strategy change].
+
+Communication plan:
+| Audience | Message | When | How | From Whom |
+
+Include: Affected staff, wider team, trustees, funders.
+
+What to say when we cannot answer all questions yet?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We need to restructure due to [funding / strategy change].\n\nCommunication plan:\n| Audience | Message | When | How | From Whom |\n\nInclude: Affected staff, wider team, trustees, funders.\n\nWhat to say when we cannot answer all questions yet?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Team Meeting Format</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Design a better team meeting. Current: [too long, update-heavy, disengaged].
+
+New format:
+| Section | Time | Purpose | Who Leads |
+
+Include: Connection, updates (brief), discussion, decisions.
+
+60 minutes max. Make people want to come.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Create a Word template."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Design a better team meeting. Current: [too long, update-heavy, disengaged].\n\nNew format:\n| Section | Time | Purpose | Who Leads |\n\nInclude: Connection, updates (brief), discussion, decisions.\n\n60 minutes max. Make people want to come.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How do you create a culture where people stay when you cannot compete on salary?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: PROGRAMMES -->
+        <section class="category" id="s9">
+            <div class="cat-header">
+                <h2>🎯 9. Programmes & Services</h2>
+                <p class="for">Programme Managers, Service Leads</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Demand exceeds capacity. You want to innovate but delivery is overwhelming. How do you improve while keeping things running?
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Waiting List Decision</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Waiting list is [3 months / 50 people]. We cannot serve everyone.
+
+Decision framework:
+- How do we prioritise fairly?
+- What do we say to those we cannot help?
+- Cap the list or keep it open?
+- What is the ethical approach?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Waiting list is [3 months / 50 people]. We cannot serve everyone.\n\nDecision framework:\n- How do we prioritise fairly?\n- What do we say to those we cannot help?\n- Cap the list or keep it open?\n- What is the ethical approach?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Service Design Questions</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Designing new [peer support programme].
+
+Key questions:
+| Question | Options | Considerations |
+
+Include: Who is it for, format, duration, who delivers, how we measure success.
+
+What would beneficiaries want us to consider?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Designing new [peer support programme].\n\nKey questions:\n| Question | Options | Considerations |\n\nInclude: Who is it for, format, duration, who delivers, how we measure success.\n\nWhat would beneficiaries want us to consider?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Service Review</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Honest review of [main programme]:
+
+| Aspect | Working Well | Not Working | Evidence |
+| Reaching right people | | | |
+| Quality | | | |
+| Outcomes | | | |
+| Cost effectiveness | | | |
+| Staff experience | | | |
+
+One change for biggest difference?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Honest review of [main programme]:\n\n| Aspect | Working Well | Not Working | Evidence |\n| Reaching right people | | | |\n| Quality | | | |\n| Outcomes | | | |\n| Cost effectiveness | | | |\n| Staff experience | | | |\n\nOne change for biggest difference?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Beneficiary Feedback Response</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Feedback: "[sessions too short / hard to access / staff turnover]."
+
+Response plan:
+| Feedback | Valid? | Can Change | Cannot Change | How to Communicate Back |
+
+How do we close the feedback loop?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Feedback: \"[sessions too short / hard to access / staff turnover].\"\n\nResponse plan:\n| Feedback | Valid? | Can Change | Cannot Change | How to Communicate Back |\n\nHow do we close the feedback loop?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Service Description</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Write service description for [referrers / website]:
+
+Include:
+- Who it is for (criteria)
+- What we offer (specific)
+- How to access
+- What to expect
+- Outcomes
+
+250 words max. Clear enough for self-referral.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Create versions for different audiences."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Write service description for [referrers / website]:\n\nInclude:\n- Who it is for (criteria)\n- What we offer (specific)\n- How to access\n- What to expect\n- Outcomes\n\n250 words max. Clear enough for self-referral.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How do you involve beneficiaries in designing services? What stops us doing this better?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: GOVERNANCE -->
+        <section class="category" id="s10">
+            <div class="cat-header">
+                <h2>📋 10. Governance & Compliance</h2>
+                <p class="for">Chairs, CEOs, Trustees</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Good governance enables good work, but can feel like bureaucracy. How do you get the board engaged and maintain compliance?
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Trustee Recruitment</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">We need new trustees. Board is [mostly finance/legal, lacking diversity].
+
+Create recruitment brief:
+- Skills gaps to fill
+- Diversity sought
+- Time commitment (honest)
+- What is rewarding
+- What we are NOT looking for</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We need new trustees. Board is [mostly finance/legal, lacking diversity].\n\nCreate recruitment brief:\n- Skills gaps to fill\n- Diversity sought\n- Time commitment (honest)\n- What is rewarding\n- What we are NOT looking for')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Charity Commission Query</span>
+                        <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+                    </div>
+                    <div class="prompt-text">Search web for Charity Commission guidance on [conflict of interest / serious incidents / trustee expenses].
+
+Brief me:
+- What does guidance say?
+- Key requirements
+- What would be a breach?
+- Cite specific guidance document.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Search web for Charity Commission guidance on [conflict of interest / serious incidents / trustee expenses].\n\nBrief me:\n- What does guidance say?\n- Key requirements\n- What would be a breach?\n- Cite specific guidance document.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Board Effectiveness</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Honest board assessment:
+
+| Aspect | Working Well | Could Improve | Priority |
+| Strategic focus | | | |
+| Financial oversight | | | |
+| CEO support/challenge | | | |
+| Diversity | | | |
+| Meeting effectiveness | | | |
+
+One change for most improvement?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Honest board assessment:\n\n| Aspect | Working Well | Could Improve | Priority |\n| Strategic focus | | | |\n| Financial oversight | | | |\n| CEO support/challenge | | | |\n| Diversity | | | |\n| Meeting effectiveness | | | |\n\nOne change for most improvement?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Risk Register Review</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Current risks: [financial, safeguarding, reputational, operational].
+
+Assessment:
+- What risks are we NOT talking about?
+- Are mitigations realistic?
+- Is board engaging or rubber-stamping?
+- How to make risk discussion useful?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Current risks: [financial, safeguarding, reputational, operational].\n\nAssessment:\n- What risks are we NOT talking about?\n- Are mitigations realistic?\n- Is board engaging or rubber-stamping?\n- How to make risk discussion useful?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Board Agenda Template</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Design better board meeting. Current: [too long, too operational].
+
+New format:
+| Item | Time | Purpose | Paper? | Decision/Discussion/Info |
+
+Include: Strategy time, generative discussion, consent agenda.
+
+2 hours max. Make trustees want to come.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Create a Word template."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Design better board meeting. Current: [too long, too operational].\n\nNew format:\n| Item | Time | Purpose | Paper? | Decision/Discussion/Info |\n\nInclude: Strategy time, generative discussion, consent agenda.\n\n2 hours max. Make trustees want to come.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What is the difference between a board that governs and one that manages?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: ADVOCACY -->
+        <section class="category" id="s11">
+            <div class="cat-header">
+                <h2>📣 11. Advocacy & Influence</h2>
+                <p class="for">Policy Officers, CEOs, Campaign Managers</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> You see systemic issues behind the problems you address. How do you move from service delivery to changing conditions that create need?
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Policy Position</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">We want to influence [housing for care leavers / mental health funding].
+
+Help develop our position:
+- Change we want (specific)
+- Evidence
+- Who decides this?
+- Who else advocates for this?
+- Our unique contribution?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'We want to influence [housing for care leavers / mental health funding].\n\nHelp develop our position:\n- Change we want (specific)\n- Evidence\n- Who decides this?\n- Who else advocates for this?\n- Our unique contribution?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. MP Meeting Prep</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+                    </div>
+                    <div class="prompt-text">Meeting with [local MP] about [our issue].
+
+Brief me:
+- Their positions on this (search)
+- Their likely interest
+- Our ask (specific, achievable)
+- What we offer them
+- Leave-behind points</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Meeting with [local MP] about [our issue].\n\nBrief me:\n- Their positions on this (search)\n- Their likely interest\n- Our ask (specific, achievable)\n- What we offer them\n- Leave-behind points')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. Campaign Strategy</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Campaign for [policy change]:
+
+Strategy framework:
+| Element | Our Approach |
+| Goal (SMART) | |
+| Target decision-maker | |
+| Theory of change | |
+| Key messages | |
+| Tactics | |
+| Allies | |
+| Risks | |
+
+Realistic chance of success?</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Campaign for [policy change]:\n\nStrategy framework:\n| Element | Our Approach |\n| Goal (SMART) | |\n| Target decision-maker | |\n| Theory of change | |\n| Key messages | |\n| Tactics | |\n| Allies | |\n| Risks | |\n\nRealistic chance of success?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Consultation Response</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Government consultation on [topic].
+
+Structure our response:
+- Key points (3-5)
+- Evidence from our work
+- What we support
+- What concerns us
+- Specific recommendations
+
+Evidence-based, not just opinion.</div>
+                    <div class="prompt-footer">
+                        <button class="copy-btn" onclick="copyText(this, 'Government consultation on [topic].\n\nStructure our response:\n- Key points (3-5)\n- Evidence from our work\n- What we support\n- What concerns us\n- Specific recommendations\n\nEvidence-based, not just opinion.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Policy Brief</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">One-page policy brief on [our key issue]:
+
+Structure:
+- Headline recommendation
+- The problem (with data)
+- The solution (specific)
+- The evidence
+- The ask
+
+Scannable for busy policymaker. One page max.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to Word format."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'One-page policy brief on [our key issue]:\n\nStructure:\n- Headline recommendation\n- The problem (with data)\n- The solution (specific)\n- The evidence\n- The ask\n\nScannable for busy policymaker. One page max.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Should charities do more advocacy? What stops us speaking out?
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="action">
+            <strong>Your Action:</strong> Pick ONE prompt to use in your real work this week.
+        </div>
+        <p class="credits">AI for Nonprofit Leaders | Microsoft Elevate Days | London</p>
+    </footer>
+
+    <script>
+    function copyText(button, text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        
+        try {
+            document.execCommand('copy');
+            button.innerText = '✓ Copied!';
+            button.classList.add('copied');
+            
+            var toast = document.getElementById('toast');
+            toast.classList.add('show');
+            
+            setTimeout(function() {
+                button.innerText = '📋 Copy';
+                button.classList.remove('copied');
+                toast.classList.remove('show');
+            }, 2000);
+        } catch (e) {
+            alert('Please select and copy manually');
+        }
+        
+        document.body.removeChild(textarea);
+    }
+    </script>
+</body>
+</html>
