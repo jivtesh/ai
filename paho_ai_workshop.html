@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for PAHO Leaders | Strategic AI Executive Session</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #009edb;
+            --primary-dark: #0077a8;
+            --success: #16a34a;
+            --warning: #ea580c;
+            --danger: #dc2626;
+            --purple: #7c3aed;
+            --teal: #0d9488;
+            --gray: #64748b;
+            --rose: #e11d48;
+            --blue: #2563eb;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+        
+        .header h1 { font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .header .subtitle { font-size: 1.125rem; opacity: 0.9; }
+        .header .meta { margin-top: 1rem; font-size: 0.875rem; opacity: 0.8; }
+        .header .theme { 
+            margin-top: 1rem; 
+            font-style: italic; 
+            opacity: 0.95;
+            font-size: 1rem;
+        }
+        
+        .copilot-bar {
+            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .copilot-bar p { margin-bottom: 0.75rem; font-size: 0.9rem; }
+        
+        .copilot-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .copilot-link:hover { background: rgba(255,255,255,0.3); transform: translateY(-1px); }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+        
+        .instructions {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .instructions h3 { color: var(--primary); margin-bottom: 1rem; font-size: 1.1rem; }
+        .instructions ol { margin-left: 1.25rem; }
+        .instructions li { margin-bottom: 0.5rem; font-size: 0.9rem; }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            background: white;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .legend-item { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        
+        .nav-section {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .nav-section h4 { font-size: 0.85rem; color: var(--gray); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-grid-secondary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-grid-capability {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.75rem 0.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn.primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; }
+        .nav-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,158,219,0.3); }
+        
+        .nav-btn span { font-size: 1.25rem; }
+        
+        .nav-btn-secondary {
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn-secondary:hover { background: #e2e8f0; }
+        
+        .nav-btn-capability {
+            padding: 0.5rem;
+            border: 1px solid #dbeafe;
+            background: #eff6ff;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: var(--blue);
+            transition: all 0.2s;
+        }
+        
+        .nav-btn-capability:hover { background: #dbeafe; }
+        
+        .category {
+            background: white;
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .cat-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1.25rem 1.5rem;
+        }
+        
+        .cat-header h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .cat-header .for { font-size: 0.8rem; opacity: 0.9; }
+        
+        .cat-body { padding: 1.5rem; }
+        
+        .scenario {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .scenario strong { color: #92400e; }
+        
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-title.green { color: var(--success); }
+        .section-title.orange { color: var(--warning); }
+        .section-title.purple { color: var(--purple); }
+        .section-title.blue { color: var(--blue); }
+        .section-title.teal { color: var(--teal); }
+        .section-title.red { color: var(--danger); }
+        .section-title.gray { color: var(--gray); }
+        
+        .badge {
+            font-size: 0.6rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            font-weight: 600;
+        }
+        
+        .badge.green { background: #dcfce7; color: var(--success); }
+        .badge.orange { background: #ffedd5; color: var(--warning); }
+        .badge.purple { background: #f3e8ff; color: var(--purple); }
+        .badge.blue { background: #dbeafe; color: var(--blue); }
+        .badge.teal { background: #ccfbf1; color: var(--teal); }
+        .badge.red { background: #fee2e2; color: var(--danger); }
+        .badge.gray { background: #f1f5f9; color: var(--gray); }
+        
+        .tip {
+            background: #eff6ff;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.8rem;
+            color: #1d4ed8;
+            margin-bottom: 1rem;
+        }
+        
+        .tip strong { color: #1e40af; }
+        
+        .prompt {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .prompt.green { border-left: 4px solid var(--success); }
+        .prompt.orange { border-left: 4px solid var(--warning); }
+        .prompt.purple { border-left: 4px solid var(--purple); background: #faf5ff; }
+        .prompt.blue { border-left: 4px solid var(--blue); background: #eff6ff; }
+        .prompt.teal { border-left: 4px solid var(--teal); background: #f0fdfa; }
+        .prompt.red { border-left: 4px solid var(--danger); background: #fef2f2; }
+        .prompt.gray { border-left: 4px solid var(--gray); }
+        
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .prompt-label { font-size: 0.85rem; font-weight: 700; color: #1e293b; }
+        .prompt-tags { display: flex; gap: 0.375rem; flex-wrap: wrap; }
+        
+        .tag {
+            font-size: 0.6rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .tag.simple { background: #dcfce7; color: #166534; }
+        .tag.structured { background: #ffedd5; color: #c2410c; }
+        .tag.reason { background: #f3e8ff; color: #7c3aed; }
+        .tag.chart { background: #dbeafe; color: #1d4ed8; }
+        .tag.create { background: #ccfbf1; color: #0d9488; }
+        .tag.agent { background: #fee2e2; color: #991b1b; }
+        .tag.verify { background: #f1f5f9; color: #475569; }
+        .tag.meta { background: #fce7f3; color: #be185d; }
+        
+        .prompt-text {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            margin-bottom: 0.75rem;
+        }
+        
+        .prompt-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .follow-on { font-size: 0.75rem; color: var(--purple); font-style: italic; flex: 1; }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,158,219,0.3); }
+        .copy-btn.copied { background: linear-gradient(135deg, var(--success) 0%, #15803d 100%); }
+        
+        .scaffold-container {
+            background: #fffbeb;
+            border: 2px dashed #f59e0b;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .scaffold-header { font-size: 0.85rem; font-weight: 700; color: #92400e; margin-bottom: 1rem; }
+        .scaffold-steps { display: flex; flex-direction: column; gap: 1rem; }
+        
+        .scaffold-step {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border-left: 3px solid #f59e0b;
+        }
+        
+        .scaffold-step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .scaffold-step-num { font-size: 0.7rem; font-weight: 700; color: #d97706; text-transform: uppercase; }
+        .scaffold-step-text { font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; }
+        .scaffold-step .copy-btn { padding: 0.375rem 0.75rem; font-size: 0.7rem; }
+        
+        .agent-instructions {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .agent-instructions h4 { color: var(--danger); margin-bottom: 0.5rem; font-size: 0.85rem; }
+        .agent-instructions ol { margin-left: 1.25rem; }
+        .agent-instructions li { margin-bottom: 0.25rem; }
+        .agent-instructions a { color: var(--danger); }
+        
+        .discussion {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .discussion strong { color: #1d4ed8; }
+        
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .footer .action {
+            background: rgba(255,255,255,0.1);
+            display: inline-block;
+            padding: 1.25rem 2rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer .credits { opacity: 0.6; font-size: 0.875rem; }
+        
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--success);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.5rem; }
+            .nav-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-grid-secondary { grid-template-columns: repeat(2, 1fr); }
+            .nav-grid-capability { grid-template-columns: repeat(2, 1fr); }
+            .cat-header h2 { font-size: 1.1rem; }
+            .prompt-header { flex-direction: column; }
+            .prompt-footer { flex-direction: column; align-items: flex-start; }
+            .follow-on { margin-bottom: 0.5rem; }
+        }
+        
+        @media print {
+            .copilot-bar, .toast, .copy-btn { display: none; }
+            .category { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast">✓ Copied to clipboard</div>
+
+    <header class="header">
+        <h1>🌎 AI for PAHO Leaders</h1>
+        <p class="subtitle">Strategic AI — From Simple Queries to Decision Partners</p>
+        <p class="theme">"Accelerating Together toward a Healthier Americas with Equity and Resilience"</p>
+        <p class="meta">2 hours • Executive Session • PAHO/Microsoft Partnership</p>
+    </header>
+    
+    <div class="copilot-bar">
+        <p>Copy any prompt, then paste into Microsoft 365 Copilot:</p>
+        <a href="https://m365copilot.com/" target="_blank" rel="noopener" class="copilot-link">🚀 Open M365 Copilot</a>
+    </div>
+
+    <div class="container">
+        <div class="instructions">
+            <h3>📋 How to Use This Guide</h3>
+            <ol>
+                <li><strong>Pick a category</strong> relevant to your strategic priorities</li>
+                <li><strong>Start with scaffolded prompts</strong> (yellow boxes) — they build skills step by step</li>
+                <li><strong>Try the visualization prompt</strong> early for an "aha" moment</li>
+                <li><strong>Start new chats</strong> when switching topics for better results</li>
+                <li><strong>Use follow-up prompts</strong> to iterate and go deeper</li>
+                <li><strong>Always verify</strong> AI outputs against PAHO documentation and expert judgment</li>
+            </ol>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background: var(--success);"></div> Simple (2 min)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--warning);"></div> Structured (5 min)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--purple);"></div> Reasoning</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--blue);"></div> Visualization</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--teal);"></div> Document Creation</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--danger);"></div> Agent Mode</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--gray);"></div> Verification/Meta</div>
+        </div>
+
+        <nav class="nav-section">
+            <h4>Priority Sections — PAHO Strategic Themes</h4>
+            <div class="nav-grid">
+                <button class="nav-btn primary" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
+                    <span>🌎</span>Member States
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">
+                    <span>🚨</span>Emergencies
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">
+                    <span>🏥</span>Primary Care
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">
+                    <span>💰</span>Resources
+                </button>
+                <button class="nav-btn primary" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">
+                    <span>👥</span>Workforce
+                </button>
+            </div>
+            <h4>Secondary Sections</h4>
+            <div class="nav-grid-secondary">
+                <button class="nav-btn-secondary" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">🤝 Partnerships</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">⚖️ Governance</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})">🌡️ Climate & Equity</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">💻 Digital Health</button>
+            </div>
+            <h4>Copilot Capabilities</h4>
+            <div class="nav-grid-capability">
+                <button class="nav-btn-capability" onclick="document.getElementById('c1').scrollIntoView({behavior:'smooth'})">💼 M365 Apps</button>
+                <button class="nav-btn-capability" onclick="document.getElementById('c2').scrollIntoView({behavior:'smooth'})">📄 Documents</button>
+                <button class="nav-btn-capability" onclick="document.getElementById('c3').scrollIntoView({behavior:'smooth'})">🔬 Research</button>
+                <button class="nav-btn-capability" onclick="document.getElementById('c4').scrollIntoView({behavior:'smooth'})">🤖 Agents</button>
+                <button class="nav-btn-capability" onclick="document.getElementById('c5').scrollIntoView({behavior:'smooth'})">🔒 Verification</button>
+            </div>
+        </nav>
+
+        <!-- ============================================ -->
+        <!-- PRIORITY SECTION 1: MEMBER STATE RELATIONS -->
+        <!-- ============================================ -->
+        <section class="category" id="s1">
+            <div class="cat-header">
+                <h2>🌎 1. Member State Relations & Country Cooperation</h2>
+                <p class="for">Directors, Country Representatives, Technical Officers, Executive Management</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> PAHO serves 35 diverse Member States with vastly different health capacities, political contexts, and resource levels. The Strategic Plan 2026-2031 emphasizes "country-focused technical cooperation" — but how do you tailor support effectively while maintaining regional coherence?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Country Cooperation Strategy</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the key principles of effective technical cooperation in international health? Bullet list.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the key principles of effective technical cooperation in international health? Bullet list.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Country cooperation assessment framework. Table format:\n\n| Dimension | Questions to Ask | Indicators of Readiness | PAHO Support Options |\n\nDimensions: Political commitment, Health system capacity, Data availability, Workforce, Financing')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Country cooperation assessment framework. Table format:
+
+| Dimension | Questions to Ask | Indicators of Readiness | PAHO Support Options |
+
+Dimensions: Political commitment, Health system capacity, Data availability, Workforce, Financing</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'I am a PAHO Country Representative developing a Country Cooperation Strategy for a middle-income Caribbean country with:\n- Strong political commitment but recent government change\n- Significant out-migration of health workers\n- Good data systems but limited analytical capacity\n- High burden of NCDs and climate vulnerability\n\nUsing PAHO Strategic Plan 2026-2031 priorities, recommend:\n1. Top 3 strategic objectives to prioritize (with rationale)\n2. Quick wins (first 6 months)\n3. Medium-term capacity building (2 years)\n4. How to align with regional initiatives\n5. Potential risks and mitigation strategies')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">I am a PAHO Country Representative developing a Country Cooperation Strategy for a middle-income Caribbean country with:
+- Strong political commitment but recent government change
+- Significant out-migration of health workers
+- Good data systems but limited analytical capacity
+- High burden of NCDs and climate vulnerability
+
+Using PAHO Strategic Plan 2026-2031 priorities, recommend:
+1. Top 3 strategic objectives to prioritize (with rationale)
+2. Quick wins (first 6 months)
+3. Medium-term capacity building (2 years)
+4. How to align with regional initiatives
+5. Potential risks and mitigation strategies</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Member State Diversity Map</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual framework showing the diversity of PAHO Member States across these dimensions:
+- Health system maturity (emerging → advanced)
+- Resource availability (constrained → well-resourced)
+- Epidemiological profile (infectious disease burden → NCD transition → double burden)
+- Geographic context (small island → large federal)
+
+Show how PAHO's technical cooperation approach should differ for each quadrant. Include examples of countries in each category (without naming specific countries — use archetypes).</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Now add climate vulnerability as a third dimension."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual framework showing the diversity of PAHO Member States across these dimensions:\n- Health system maturity (emerging → advanced)\n- Resource availability (constrained → well-resourced)\n- Epidemiological profile (infectious disease burden → NCD transition → double burden)\n- Geographic context (small island → large federal)\n\nShow how PAHO\'s technical cooperation approach should differ for each quadrant. Include examples of countries in each category (without naming specific countries — use archetypes).')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Difficult Conversation Prep</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">I'm preparing for a sensitive conversation with a Member State health minister whose country is significantly off-track on 4 of the 12 Strategic Plan outcomes.
+
+Context:
+- The minister is new (6 months in role)
+- Previous administration made commitments they couldn't keep
+- Country is facing fiscal constraints
+- There's domestic political pressure to show health improvements
+
+Help me prepare:
+1. Opening frame (supportive, not accusatory)
+2. Key questions to understand their constraints
+3. How to acknowledge difficulties while maintaining accountability
+4. Concrete offers of PAHO support
+5. Agreed next steps that are realistic</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Role-play as the minister and push back on my talking points."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'I\'m preparing for a sensitive conversation with a Member State health minister whose country is significantly off-track on 4 of the 12 Strategic Plan outcomes.\n\nContext:\n- The minister is new (6 months in role)\n- Previous administration made commitments they couldn\'t keep\n- Country is facing fiscal constraints\n- There\'s domestic political pressure to show health improvements\n\nHelp me prepare:\n1. Opening frame (supportive, not accusatory)\n2. Key questions to understand their constraints\n3. How to acknowledge difficulties while maintaining accountability\n4. Concrete offers of PAHO support\n5. Agreed next steps that are realistic')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Differentiated Support Approach</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">The Strategic Plan 2026-2031 emphasizes "country-focused technical cooperation." Three Member States have requested PAHO support for the same priority area (strengthening primary health care) but have very different contexts:
+
+Country A: Small island developing state, limited workforce, strong community health tradition
+Country B: Large federal system, significant regional inequities, decentralized health governance
+Country C: Post-crisis recovery, rebuilding health infrastructure, donor-dependent
+
+For each country, recommend:
+| Country | Key Constraints | PAHO Value-Add | Delivery Approach | Success Metrics |
+
+How do we ensure regional learning while respecting country-specific approaches?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What are the risks if we apply a one-size-fits-all approach?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'The Strategic Plan 2026-2031 emphasizes \"country-focused technical cooperation.\" Three Member States have requested PAHO support for the same priority area (strengthening primary health care) but have very different contexts:\n\nCountry A: Small island developing state, limited workforce, strong community health tradition\nCountry B: Large federal system, significant regional inequities, decentralized health governance\nCountry C: Post-crisis recovery, rebuilding health infrastructure, donor-dependent\n\nFor each country, recommend:\n| Country | Key Constraints | PAHO Value-Add | Delivery Approach | Success Metrics |\n\nHow do we ensure regional learning while respecting country-specific approaches?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Accountability vs. Support Tension</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">PAHO faces an inherent tension: we need to hold Member States accountable for health commitments while also being their supportive technical partner.
+
+Analyze this tension:
+1. When does accountability strengthen the relationship?
+2. When does it damage trust and reduce cooperation?
+3. How do other international organizations balance this?
+4. What mechanisms work best for multilateral health governance?
+5. How should PAHO's approach differ based on country context?
+
+Provide a decision framework for when to emphasize accountability vs. support.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Give me a specific example of when being too supportive backfired."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'PAHO faces an inherent tension: we need to hold Member States accountable for health commitments while also being their supportive technical partner.\n\nAnalyze this tension:\n1. When does accountability strengthen the relationship?\n2. When does it damage trust and reduce cooperation?\n3. How do other international organizations balance this?\n4. What mechanisms work best for multilateral health governance?\n5. How should PAHO\'s approach differ based on country context?\n\nProvide a decision framework for when to emphasize accountability vs. support.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Regional vs. Bilateral Trade-offs</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">As a PAHO leader, I often face trade-offs between:
+- Investing in regional public goods (guidelines, standards, procurement) vs. country-specific support
+- Responding to the loudest voices vs. greatest needs
+- Supporting flagship countries vs. struggling ones
+- Short-term crisis response vs. long-term capacity building
+
+Help me think through:
+1. What principles should guide resource allocation?
+2. How do we measure "regional value" vs. "country value"?
+3. When is it appropriate to say "no" to a Member State request?
+4. How do we communicate these trade-offs to governing bodies?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What would PAHO's critics say about our current balance?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'As a PAHO leader, I often face trade-offs between:\n- Investing in regional public goods (guidelines, standards, procurement) vs. country-specific support\n- Responding to the loudest voices vs. greatest needs\n- Supporting flagship countries vs. struggling ones\n- Short-term crisis response vs. long-term capacity building\n\nHelp me think through:\n1. What principles should guide resource allocation?\n2. How do we measure \"regional value\" vs. \"country value\"?\n3. When is it appropriate to say \"no\" to a Member State request?\n4. How do we communicate these trade-offs to governing bodies?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How do we maintain the spirit of "Pan-Americanism" when Member States have such different capacities and priorities? What does solidarity look like in practice?
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- PRIORITY SECTION 2: HEALTH EMERGENCIES -->
+        <!-- ============================================ -->
+        <section class="category" id="s2">
+            <div class="cat-header">
+                <h2>🚨 2. Health Emergencies & Crisis Preparedness</h2>
+                <p class="for">Emergency Response Directors, IHR Focal Points, Health Security Leads, Executive Management</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> The Americas recorded 13 million dengue cases in 2024 — unprecedented. COVID-19 reversed 20 years of health progress. Climate change is expanding vector-borne disease ranges. The region is the second most disaster-prone in the world. How do you balance acute response with sustainable preparedness?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Emergency Response Assessment</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the IHR core capacities that countries need for health emergency preparedness? One sentence each.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the IHR core capacities that countries need for health emergency preparedness? One sentence each.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Emergency response readiness checklist for a dengue outbreak. Table format:\n\n| Phase | Key Actions | Responsible | Resources Needed | Timeline |\n\nPhases: Detection, Assessment, Response mobilization, Sustained response, Recovery')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Emergency response readiness checklist for a dengue outbreak. Table format:
+
+| Phase | Key Actions | Responsible | Resources Needed | Timeline |
+
+Phases: Detection, Assessment, Response mobilization, Sustained response, Recovery</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'I need to brief the Director on whether PAHO\'s current dengue response across the Americas is adequate or if we need to escalate.\n\nContext:\n- 13 million cases in 2024 (record high)\n- Multiple countries reporting healthcare system strain\n- Vector control resources stretched thin\n- Climate conditions suggest continued transmission\n\nProvide:\n1. Key questions I should be asking\n2. Data points that would change our assessment\n3. Criteria for declaring regional escalation\n4. Resource reallocation options\n5. Communication strategy for Member States\n6. Risks of escalating vs. not escalating')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">I need to brief the Director on whether PAHO's current dengue response across the Americas is adequate or if we need to escalate.
+
+Context:
+- 13 million cases in 2024 (record high)
+- Multiple countries reporting healthcare system strain
+- Vector control resources stretched thin
+- Climate conditions suggest continued transmission
+
+Provide:
+1. Key questions I should be asking
+2. Data points that would change our assessment
+3. Criteria for declaring regional escalation
+4. Resource reallocation options
+5. Communication strategy for Member States
+6. Risks of escalating vs. not escalating</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Preparedness vs. Response Trade-off</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual diagram showing the tension between:
+- INVESTING IN PREPAREDNESS (systems, training, stockpiles, surveillance)
+- RESPONDING TO CURRENT CRISES (outbreak response, emergency operations, surge capacity)
+
+Show:
+- How resources flow between these during crisis vs. calm periods
+- The "preparedness paradox" (success is invisible)
+- Political incentives that favor response over preparedness
+- The long-term cost of underinvesting in preparedness
+
+Include a decision framework for balancing these competing demands.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add a timeline showing how the balance shifted during COVID-19."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual diagram showing the tension between:\n- INVESTING IN PREPAREDNESS (systems, training, stockpiles, surveillance)\n- RESPONDING TO CURRENT CRISES (outbreak response, emergency operations, surge capacity)\n\nShow:\n- How resources flow between these during crisis vs. calm periods\n- The \"preparedness paradox\" (success is invisible)\n- Political incentives that favor response over preparedness\n- The long-term cost of underinvesting in preparedness\n\nInclude a decision framework for balancing these competing demands.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Post-COVID Pandemic Plan Update</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">A Member State wants to update their national pandemic preparedness plan based on COVID-19 lessons. They've asked PAHO for technical guidance.
+
+Help me structure recommendations:
+
+| Pandemic Phase | What Worked | What Failed | Key Changes Needed |
+|----------------|-------------|-------------|-------------------|
+| Detection & alert | | | |
+| Risk assessment | | | |
+| Containment measures | | | |
+| Healthcare surge | | | |
+| Medical countermeasures | | | |
+| Risk communication | | | |
+| Recovery & learning | | | |
+
+For each phase, note:
+- Evidence from the Americas specifically
+- Resource implications
+- Political feasibility considerations</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What if the next pandemic is respiratory but more severe than COVID-19?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'A Member State wants to update their national pandemic preparedness plan based on COVID-19 lessons. They\'ve asked PAHO for technical guidance.\n\nHelp me structure recommendations:\n\n| Pandemic Phase | What Worked | What Failed | Key Changes Needed |\n|----------------|-------------|-------------|-------------------|\n| Detection & alert | | | |\n| Risk assessment | | | |\n| Containment measures | | | |\n| Healthcare surge | | | |\n| Medical countermeasures | | | |\n| Risk communication | | | |\n| Recovery & learning | | | |\n\nFor each phase, note:\n- Evidence from the Americas specifically\n- Resource implications\n- Political feasibility considerations')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Climate-Health Emergency Nexus</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Climate change is creating a new category of health emergencies in the Americas:
+- Expanding range of dengue, Zika, chikungunya
+- More frequent extreme weather events
+- Heat-related illness increases
+- Water and food security impacts
+- Climate migration and displacement
+
+Create a framework for PAHO's climate-health emergency response:
+
+| Climate Event Type | Health Impacts | Early Warning Indicators | Response Requirements | Prevention Opportunities |
+
+How should this integrate with traditional emergency response structures?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which PAHO Member States are most vulnerable to each type?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Climate change is creating a new category of health emergencies in the Americas:\n- Expanding range of dengue, Zika, chikungunya\n- More frequent extreme weather events\n- Heat-related illness increases\n- Water and food security impacts\n- Climate migration and displacement\n\nCreate a framework for PAHO\'s climate-health emergency response:\n\n| Climate Event Type | Health Impacts | Early Warning Indicators | Response Requirements | Prevention Opportunities |\n\nHow should this integrate with traditional emergency response structures?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Making the Case for Preparedness</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">Our pandemic preparedness investments compete with urgent disease control needs. Finance ministries want to see ROI. Health ministers face immediate pressures.
+
+Help me build the case to Member States that investing in "future threats" is as important as today's crises:
+
+1. Economic arguments (cost of unpreparedness vs. investment)
+2. Political arguments (leadership legacy, regional reputation)
+3. Moral arguments (duty to protect populations)
+4. Practical arguments (dual-use investments that help now)
+5. Counter-arguments to anticipate and address
+
+What evidence is most persuasive for different audiences (finance ministers, health ministers, heads of state)?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Draft a 2-minute elevator pitch for a finance minister."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Our pandemic preparedness investments compete with urgent disease control needs. Finance ministries want to see ROI. Health ministers face immediate pressures.\n\nHelp me build the case to Member States that investing in \"future threats\" is as important as today\'s crises:\n\n1. Economic arguments (cost of unpreparedness vs. investment)\n2. Political arguments (leadership legacy, regional reputation)\n3. Moral arguments (duty to protect populations)\n4. Practical arguments (dual-use investments that help now)\n5. Counter-arguments to anticipate and address\n\nWhat evidence is most persuasive for different audiences (finance ministers, health ministers, heads of state)?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Risk Communication Dilemma</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">I need to communicate about a potential health threat to the public and Member States. But I face a dilemma:
+
+- If I warn too strongly and the threat doesn't materialize, I lose credibility
+- If I understate the risk and it becomes severe, I failed to protect people
+- Different countries have different risk tolerances and communication cultures
+- Media amplification can distort messages
+- Misinformation spreads faster than accurate information
+
+For a scenario like rising dengue transmission:
+1. How do I calibrate the right level of alarm?
+2. What language works across diverse populations?
+3. How do I maintain trust when uncertainty is high?
+4. When should PAHO lead communication vs. support Member States?
+5. How do I correct course if initial messaging was wrong?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Give me example phrases that convey urgency without causing panic."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'I need to communicate about a potential health threat to the public and Member States. But I face a dilemma:\n\n- If I warn too strongly and the threat doesn\'t materialize, I lose credibility\n- If I understate the risk and it becomes severe, I failed to protect people\n- Different countries have different risk tolerances and communication cultures\n- Media amplification can distort messages\n- Misinformation spreads faster than accurate information\n\nFor a scenario like rising dengue transmission:\n1. How do I calibrate the right level of alarm?\n2. What language works across diverse populations?\n3. How do I maintain trust when uncertainty is high?\n4. When should PAHO lead communication vs. support Member States?\n5. How do I correct course if initial messaging was wrong?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> COVID-19 taught us many lessons — but will they be implemented before the next pandemic? What's preventing us from acting on what we learned?
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- PRIORITY SECTION 3: PRIMARY HEALTH CARE -->
+        <!-- ============================================ -->
+        <section class="category" id="s3">
+            <div class="cat-header">
+                <h2>🏥 3. Primary Health Care Transformation</h2>
+                <p class="for">PHC Directors, Health Systems Advisors, Service Delivery Leads, Country Representatives</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Primary health care is the foundation of PAHO's Strategic Plan 2026-2031 and the path to universal health. The Alliance for Primary Health Care has 40+ partners. Yet progress remains slow — why does PHC transformation stall? How do we move from policy commitments to real change at the point of care?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: PHC Transformation Barriers</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the core components of primary health care according to the Astana Declaration? Bullet list.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the core components of primary health care according to the Astana Declaration? Bullet list.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'PHC transformation barrier analysis. Table format:\n\n| Barrier Type | Specific Examples | Who Benefits from Status Quo | Leverage Points for Change |\n\nBarrier types: Political, Financial, Workforce, Organizational, Cultural')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">PHC transformation barrier analysis. Table format:
+
+| Barrier Type | Specific Examples | Who Benefits from Status Quo | Leverage Points for Change |
+
+Barrier types: Political, Financial, Workforce, Organizational, Cultural</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Every PAHO Strategic Plan emphasizes primary health care, yet progress remains slow in most countries.\n\nAnalyze why PHC transformation stalls:\n1. Technical barriers (what we don\'t know how to do)\n2. Political economy barriers (who wins and loses from change)\n3. Implementation barriers (the gap between policy and practice)\n4. Measurement barriers (what gets counted and what doesn\'t)\n5. Path dependencies (why systems resist change)\n\nFor each barrier:\n- Evidence from the Americas\n- What has worked to overcome it\n- PAHO\'s specific role\n- Realistic timeline for change')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Every PAHO Strategic Plan emphasizes primary health care, yet progress remains slow in most countries.
+
+Analyze why PHC transformation stalls:
+1. Technical barriers (what we don't know how to do)
+2. Political economy barriers (who wins and loses from change)
+3. Implementation barriers (the gap between policy and practice)
+4. Measurement barriers (what gets counted and what doesn't)
+5. Path dependencies (why systems resist change)
+
+For each barrier:
+- Evidence from the Americas
+- What has worked to overcome it
+- PAHO's specific role
+- Realistic timeline for change</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">PHC as Foundation — Systems Map</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual systems map showing how Primary Health Care connects to all five Strategic Objectives of PAHO's Strategic Plan 2026-2031:
+
+Strategic Objectives:
+1. Health equity, social determinants, risk factors, climate change
+2. Resilient health systems based on PHC (the central pillar)
+3. Disease prevention, control, and elimination
+4. Health emergencies
+5. PAHO's leadership, governance, and performance
+
+Show:
+- How PHC is the delivery platform for the other objectives
+- Feedback loops (e.g., how strong PHC improves emergency response)
+- What happens when PHC is weak (cascade effects)
+- Investment flows and resource allocation</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add specific indicators from the Strategic Plan to each connection."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual systems map showing how Primary Health Care connects to all five Strategic Objectives of PAHO\'s Strategic Plan 2026-2031:\n\nStrategic Objectives:\n1. Health equity, social determinants, risk factors, climate change\n2. Resilient health systems based on PHC (the central pillar)\n3. Disease prevention, control, and elimination\n4. Health emergencies\n5. PAHO\'s leadership, governance, and performance\n\nShow:\n- How PHC is the delivery platform for the other objectives\n- Feedback loops (e.g., how strong PHC improves emergency response)\n- What happens when PHC is weak (cascade effects)\n- Investment flows and resource allocation')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Alliance Effectiveness Assessment</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">The Alliance for Primary Health Care has 40+ partners committed to PHC transformation in the Americas.
+
+Help me assess whether this alliance is actually accelerating progress or just creating coordination overhead:
+
+| Effectiveness Dimension | Indicators of Success | Indicators of Concern | Data We'd Need |
+|------------------------|----------------------|----------------------|----------------|
+| Collective action | | | |
+| Resource mobilization | | | |
+| Knowledge sharing | | | |
+| Country-level impact | | | |
+| Political influence | | | |
+
+What should we be measuring beyond input metrics (meetings held, documents produced)?
+How do we know if the Alliance is more than the sum of its parts?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What would it take to wind down the Alliance — what's the exit criteria?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'The Alliance for Primary Health Care has 40+ partners committed to PHC transformation in the Americas.\n\nHelp me assess whether this alliance is actually accelerating progress or just creating coordination overhead:\n\n| Effectiveness Dimension | Indicators of Success | Indicators of Concern | Data We\'d Need |\n|------------------------|----------------------|----------------------|----------------|\n| Collective action | | | |\n| Resource mobilization | | | |\n| Knowledge sharing | | | |\n| Country-level impact | | | |\n| Political influence | | | |\n\nWhat should we be measuring beyond input metrics (meetings held, documents produced)?\nHow do we know if the Alliance is more than the sum of its parts?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Comparative Country Analysis</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Search for how different countries in the Americas have approached primary health care transformation since 2020.
+
+Compare approaches in:
+- Costa Rica (long PHC tradition, EBAIS model)
+- Brazil (Family Health Strategy, recent changes)
+- Chile (PHC network reforms)
+- Dominican Republic (recent PHC strengthening)
+
+For each country:
+| Country | PHC Model | Key Reforms | Enablers of Success | Challenges | Transferable Lessons |
+
+What can other countries in the Americas learn from these experiences?
+What contextual factors limit transferability?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which lessons would apply to a small Caribbean island state?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Search for how different countries in the Americas have approached primary health care transformation since 2020.\n\nCompare approaches in:\n- Costa Rica (long PHC tradition, EBAIS model)\n- Brazil (Family Health Strategy, recent changes)\n- Chile (PHC network reforms)\n- Dominican Republic (recent PHC strengthening)\n\nFor each country:\n| Country | PHC Model | Key Reforms | Enablers of Success | Challenges | Transferable Lessons |\n\nWhat can other countries in the Americas learn from these experiences?\nWhat contextual factors limit transferability?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Hospital vs. PHC Investment Dilemma</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">A health minister faces a classic dilemma: Should they invest in a new tertiary hospital (highly visible, specialist care, urban) or strengthen primary health care networks (diffuse, preventive, rural and urban)?
+
+Arguments for the hospital:
+- Political visibility and legacy
+- Addresses specialist care gaps
+- Attracts health professionals
+- Donor interest in infrastructure
+
+Arguments for PHC:
+- Greater population health impact
+- More equitable access
+- Cost-effective in long run
+- Aligned with PAHO guidance
+
+Help me:
+1. Steelman both positions fairly
+2. Identify the hidden assumptions in each
+3. Propose a framework for making this decision
+4. Suggest how PAHO should advise when asked
+5. Consider what evidence would change your recommendation</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What if the minister's political survival depends on the hospital?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'A health minister faces a classic dilemma: Should they invest in a new tertiary hospital (highly visible, specialist care, urban) or strengthen primary health care networks (diffuse, preventive, rural and urban)?\n\nArguments for the hospital:\n- Political visibility and legacy\n- Addresses specialist care gaps\n- Attracts health professionals\n- Donor interest in infrastructure\n\nArguments for PHC:\n- Greater population health impact\n- More equitable access\n- Cost-effective in long run\n- Aligned with PAHO guidance\n\nHelp me:\n1. Steelman both positions fairly\n2. Identify the hidden assumptions in each\n3. Propose a framework for making this decision\n4. Suggest how PAHO should advise when asked\n5. Consider what evidence would change your recommendation')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> We've been advocating for PHC for 45 years since Alma-Ata. What would it take to finally achieve breakthrough transformation in the Americas?
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- PRIORITY SECTION 4: RESOURCE MOBILIZATION -->
+        <!-- ============================================ -->
+        <section class="category" id="s4">
+            <div class="cat-header">
+                <h2>💰 4. Resource Mobilization & Health Financing</h2>
+                <p class="for">Finance Directors, Resource Mobilization Officers, Planning Directors, Executive Management</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> PAHO's assessed contributions have been flat for years while demands increase. Member States spend less than 6% of GDP on health — well below commitments. Out-of-pocket spending pushes millions into poverty. Public health expenditure fell to 3.7% of GDP post-pandemic. How do we finance the health agenda in an era of fiscal constraints?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Health Financing Analysis</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the main sources of health financing in a typical health system? Bullet list with one sentence each.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the main sources of health financing in a typical health system? Bullet list with one sentence each.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Health financing assessment framework. Table format:\n\n| Financing Dimension | Key Questions | Warning Signs | PAHO Guidance |\n\nDimensions: Revenue generation, Pooling, Purchasing, Financial protection')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Health financing assessment framework. Table format:
+
+| Financing Dimension | Key Questions | Warning Signs | PAHO Guidance |
+
+Dimensions: Revenue generation, Pooling, Purchasing, Financial protection</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'A Member State has asked PAHO for advice on health financing reform. Current situation:\n- Public health expenditure: 3.5% of GDP (below 6% regional commitment)\n- Out-of-pocket spending: 35% of total health expenditure (above 20% threshold)\n- Fragmented risk pooling (multiple insurance schemes)\n- High catastrophic spending among poorest quintile\n- Fiscal space constrained by debt obligations\n\nProvide a reform roadmap:\n1. Quick wins (6-12 months)\n2. Medium-term reforms (2-3 years)\n3. Long-term structural changes (5+ years)\n4. Political economy considerations\n5. How to sequence reforms\n6. Evidence from similar countries in the Americas')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">A Member State has asked PAHO for advice on health financing reform. Current situation:
+- Public health expenditure: 3.5% of GDP (below 6% regional commitment)
+- Out-of-pocket spending: 35% of total health expenditure (above 20% threshold)
+- Fragmented risk pooling (multiple insurance schemes)
+- High catastrophic spending among poorest quintile
+- Fiscal space constrained by debt obligations
+
+Provide a reform roadmap:
+1. Quick wins (6-12 months)
+2. Medium-term reforms (2-3 years)
+3. Long-term structural changes (5+ years)
+4. Political economy considerations
+5. How to sequence reforms
+6. Evidence from similar countries in the Americas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Health Financing Flow Diagram</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual diagram showing how health financing flows in the Americas:
+
+Sources:
+- Tax revenue (general + earmarked)
+- Social insurance contributions
+- Private insurance premiums
+- Out-of-pocket payments
+- External funding
+
+Through:
+- Ministries of health
+- Social security institutes
+- Private insurers
+- Direct payment
+
+To:
+- Public providers
+- Private providers
+- Pharmacies
+- Community health
+
+Show:
+- Where money leaks out of the system
+- Where the poorest lose out
+- How fragmentation creates inefficiency
+- Where PAHO recommends intervention</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Highlight the equity implications at each flow point."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual diagram showing how health financing flows in the Americas:\n\nSources:\n- Tax revenue (general + earmarked)\n- Social insurance contributions\n- Private insurance premiums\n- Out-of-pocket payments\n- External funding\n\nThrough:\n- Ministries of health\n- Social security institutes\n- Private insurers\n- Direct payment\n\nTo:\n- Public providers\n- Private providers\n- Pharmacies\n- Community health\n\nShow:\n- Where money leaks out of the system\n- Where the poorest lose out\n- How fragmentation creates inefficiency\n- Where PAHO recommends intervention')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">PAHO Funding Diversification</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">PAHO's assessed contributions from Member States have been flat for years while demands increase. I need to explore funding diversification options.
+
+Search for creative approaches other UN agencies and WHO regional offices have used to diversify funding without compromising independence.
+
+For each approach, analyze:
+| Funding Source | Potential Amount | Risks to Independence | Administrative Burden | Strategic Fit for PAHO |
+
+Consider:
+- Voluntary contributions from Member States
+- Philanthropic foundations
+- Development bank partnerships
+- Private sector (with appropriate safeguards)
+- Innovative financing mechanisms
+
+What are the red lines PAHO should not cross?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "How do we maintain equity focus if donors have earmarked priorities?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'PAHO\'s assessed contributions from Member States have been flat for years while demands increase. I need to explore funding diversification options.\n\nSearch for creative approaches other UN agencies and WHO regional offices have used to diversify funding without compromising independence.\n\nFor each approach, analyze:\n| Funding Source | Potential Amount | Risks to Independence | Administrative Burden | Strategic Fit for PAHO |\n\nConsider:\n- Voluntary contributions from Member States\n- Philanthropic foundations\n- Development bank partnerships\n- Private sector (with appropriate safeguards)\n- Innovative financing mechanisms\n\nWhat are the red lines PAHO should not cross?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Making the Investment Case</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">I need to prepare talking points for finance ministers (not health ministers) on why health investment is economic policy.
+
+Create a compelling investment case:
+
+| Argument | Evidence | Counter-Argument | Rebuttal |
+|----------|----------|------------------|----------|
+| Health drives productivity | | | |
+| Health reduces poverty | | | |
+| Health enables education | | | |
+| Health attracts investment | | | |
+| Health is fiscal sustainability | | | |
+
+Include:
+- Data from the Americas specifically
+- Return on investment figures
+- Comparison with other public investments
+- Framing that resonates with economic decision-makers</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Now give me a 90-second version for a ministerial meeting."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'I need to prepare talking points for finance ministers (not health ministers) on why health investment is economic policy.\n\nCreate a compelling investment case:\n\n| Argument | Evidence | Counter-Argument | Rebuttal |\n|----------|----------|------------------|----------|\n| Health drives productivity | | | |\n| Health reduces poverty | | | |\n| Health enables education | | | |\n| Health attracts investment | | | |\n| Health is fiscal sustainability | | | |\n\nInclude:\n- Data from the Americas specifically\n- Return on investment figures\n- Comparison with other public investments\n- Framing that resonates with economic decision-makers')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Fiscal Space Constraints</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">Many Member States say they cannot increase health spending due to fiscal constraints. But is this true, or is it a matter of political will?
+
+Analyze the fiscal space question:
+1. What does "no fiscal space" actually mean?
+2. When is it a real constraint vs. a political choice?
+3. How have other countries created fiscal space for health?
+4. What's the role of efficiency gains?
+5. When should PAHO push back on this argument?
+
+Provide a framework for assessing whether a country truly has fiscal constraints or is making a policy choice to deprioritize health.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What's the diplomatic way to challenge a finance minister on this?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Many Member States say they cannot increase health spending due to fiscal constraints. But is this true, or is it a matter of political will?\n\nAnalyze the fiscal space question:\n1. What does \"no fiscal space\" actually mean?\n2. When is it a real constraint vs. a political choice?\n3. How have other countries created fiscal space for health?\n4. What\'s the role of efficiency gains?\n5. When should PAHO push back on this argument?\n\nProvide a framework for assessing whether a country truly has fiscal constraints or is making a policy choice to deprioritize health.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> "No one should have to choose between their health and their basic needs." How do we make this vision real when governments face competing demands?
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- PRIORITY SECTION 5: HEALTH WORKFORCE -->
+        <!-- ============================================ -->
+        <section class="category" id="s5">
+            <div class="cat-header">
+                <h2>👥 5. Health Workforce & Human Resources</h2>
+                <p class="for">HR Directors, Workforce Planning Officers, Education Advisors, Country Representatives</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> The Americas faces a health workforce gap of 600,000 to 2 million workers by 2030. Trained professionals migrate within the region and to Europe/North America. The Strategic Plan sets a target of 44.5 health workers per 10,000 population — but some countries are below 25. How do you train, deploy, and retain the workforce needed for universal health?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Workforce Analysis</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the main causes of health workforce shortages? Bullet list.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the main causes of health workforce shortages? Bullet list.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Health workforce planning framework. Table format:\n\n| Challenge | Root Causes | Policy Options | Evidence of Effectiveness |\n\nChallenges: Production, Distribution, Retention, Performance, Migration')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Health workforce planning framework. Table format:
+
+| Challenge | Root Causes | Policy Options | Evidence of Effectiveness |
+
+Challenges: Production, Distribution, Retention, Performance, Migration</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'A Caribbean Member State is losing 20% of its nursing graduates each year to migration to Canada and the UK. They\'ve asked PAHO for technical assistance.\n\nCurrent context:\n- Training 500 nurses/year at public expense\n- Starting salary: $15,000/year (vs. $50,000+ in destination countries)\n- Poor working conditions, limited career progression\n- Brain drain affects rural areas most severely\n- Bilateral agreements with destination countries are weak\n\nDevelop a comprehensive retention strategy:\n1. Immediate measures (6 months)\n2. Medium-term reforms (2 years)\n3. Long-term structural changes (5+ years)\n4. Role of destination countries (ethical recruitment)\n5. How to measure success\n6. Political feasibility assessment')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">A Caribbean Member State is losing 20% of its nursing graduates each year to migration to Canada and the UK. They've asked PAHO for technical assistance.
+
+Current context:
+- Training 500 nurses/year at public expense
+- Starting salary: $15,000/year (vs. $50,000+ in destination countries)
+- Poor working conditions, limited career progression
+- Brain drain affects rural areas most severely
+- Bilateral agreements with destination countries are weak
+
+Develop a comprehensive retention strategy:
+1. Immediate measures (6 months)
+2. Medium-term reforms (2 years)
+3. Long-term structural changes (5+ years)
+4. Role of destination countries (ethical recruitment)
+5. How to measure success
+6. Political feasibility assessment</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Workforce Migration Flow Map</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual diagram showing health workforce migration patterns in the Americas:
+
+Show:
+- Major sending countries (Caribbean, Central America, parts of South America)
+- Major receiving countries (USA, Canada, within-region to larger economies)
+- Volume of flows (use arrow thickness)
+- Types of health workers moving (doctors, nurses, specialists)
+- Push factors in sending countries
+- Pull factors in receiving countries
+
+Include:
+- How this affects health system capacity in sending countries
+- Economic value transferred through training
+- Policy interventions at each point</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add COVID-19's impact on these migration patterns."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual diagram showing health workforce migration patterns in the Americas:\n\nShow:\n- Major sending countries (Caribbean, Central America, parts of South America)\n- Major receiving countries (USA, Canada, within-region to larger economies)\n- Volume of flows (use arrow thickness)\n- Types of health workers moving (doctors, nurses, specialists)\n- Push factors in sending countries\n- Pull factors in receiving countries\n\nInclude:\n- How this affects health system capacity in sending countries\n- Economic value transferred through training\n- Policy interventions at each point')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Target Feasibility Assessment</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">The Strategic Plan 2026-2031 sets a target of 44.5 health workers per 10,000 population. But some Caribbean and Central American countries are below 25.
+
+Help me assess target feasibility:
+
+| Country Archetype | Current Density | Gap to 44.5 | Annual Growth Needed | Training Capacity | Fiscal Feasibility | Realistic by 2031? |
+|-------------------|-----------------|-------------|---------------------|-------------------|-------------------|-------------------|
+| Caribbean SIDS | | | | | | |
+| Central American | | | | | | |
+| Andean | | | | | | |
+| Southern Cone | | | | | | |
+
+Is the target realistic? What would it actually take?
+Should we differentiate targets by country context?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What should we tell countries that can't possibly reach this target?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'The Strategic Plan 2026-2031 sets a target of 44.5 health workers per 10,000 population. But some Caribbean and Central American countries are below 25.\n\nHelp me assess target feasibility:\n\n| Country Archetype | Current Density | Gap to 44.5 | Annual Growth Needed | Training Capacity | Fiscal Feasibility | Realistic by 2031? |\n|-------------------|-----------------|-------------|---------------------|-------------------|-------------------|-------------------|\n| Caribbean SIDS | | | | | | |\n| Central American | | | | | | |\n| Andean | | | | | | |\n| Southern Cone | | | | | | |\n\nIs the target realistic? What would it actually take?\nShould we differentiate targets by country context?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Rural Retention Evidence Review</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Search for the most effective strategies for retaining health workers in rural and underserved areas in low- and middle-income countries.
+
+Provide a structured evidence review:
+
+| Intervention | Evidence Quality | Effect Size | Cost | Sustainability | Applicability to Americas |
+|--------------|-----------------|-------------|------|---------------|--------------------------|
+| Financial incentives | | | | | |
+| Educational pathways | | | | | |
+| Working conditions | | | | | |
+| Career development | | | | | |
+| Community integration | | | | | |
+| Task shifting | | | | | |
+
+What combinations of interventions work best?
+What has failed despite good intentions?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Give me 3 case studies from the Americas specifically."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Search for the most effective strategies for retaining health workers in rural and underserved areas in low- and middle-income countries.\n\nProvide a structured evidence review:\n\n| Intervention | Evidence Quality | Effect Size | Cost | Sustainability | Applicability to Americas |\n|--------------|-----------------|-------------|------|---------------|---------------------------|\n| Financial incentives | | | | | |\n| Educational pathways | | | | | |\n| Working conditions | | | | | |\n| Career development | | | | | |\n| Community integration | | | | | |\n| Task shifting | | | | | |\n\nWhat combinations of interventions work best?\nWhat has failed despite good intentions?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Ethical Migration Dilemma</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">Health worker migration presents an ethical dilemma:
+
+On one hand:
+- Workers have a right to seek better opportunities
+- Destination countries need workers too
+- Remittances benefit families and economies
+- Skills can eventually return
+
+On the other hand:
+- Sending countries invested in training
+- Health systems in poor countries collapse
+- Migration is often from poor to rich
+- WHO Code on International Recruitment exists but is weak
+
+Help me think through:
+1. What ethical framework should guide policy?
+2. What obligations do destination countries have?
+3. Is restricting movement ever justified?
+4. What would a fair compensation mechanism look like?
+5. How should PAHO position itself on this issue?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Draft a statement that balances these tensions."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Health worker migration presents an ethical dilemma:\n\nOn one hand:\n- Workers have a right to seek better opportunities\n- Destination countries need workers too\n- Remittances benefit families and economies\n- Skills can eventually return\n\nOn the other hand:\n- Sending countries invested in training\n- Health systems in poor countries collapse\n- Migration is often from poor to rich\n- WHO Code on International Recruitment exists but is weak\n\nHelp me think through:\n1. What ethical framework should guide policy?\n2. What obligations do destination countries have?\n3. Is restricting movement ever justified?\n4. What would a fair compensation mechanism look like?\n5. How should PAHO position itself on this issue?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Health workers are trained at public expense, then leave for better opportunities abroad. Is this brain drain or brain circulation? What's the fair solution?
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- SECONDARY SECTIONS (Streamlined) -->
+        <!-- ============================================ -->
+        
+        <!-- SECTION 6: PARTNERSHIPS -->
+        <section class="category" id="s6">
+            <div class="cat-header">
+                <h2>🤝 6. Partnerships & External Relations</h2>
+                <p class="for">Partnership Directors, External Relations Officers, Technical Leads</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> PAHO works with WHO, the World Bank, IDB, bilateral donors, philanthropies, and increasingly the private sector. The World Bank-PAHO Lancet Commission "No Time to Wait" warns of dire consequences if countries don't act. How do you translate partnerships into country-level impact?
+                </div>
+
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Partnership Assessment</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What makes a health partnership effective vs. just symbolic? 5 key criteria.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What makes a health partnership effective vs. just symbolic? 5 key criteria.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Partnership value assessment matrix:\n\n| Partner | What They Bring | What We Bring | Alignment Score | Risk Level | Strategic Priority |\n\nPartner types: Multilateral, Bilateral, Foundation, Private sector')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Partnership value assessment matrix:
+
+| Partner | What They Bring | What We Bring | Alignment Score | Risk Level | Strategic Priority |
+
+Partner types: Multilateral, Bilateral, Foundation, Private sector</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'A major pharmaceutical company wants to partner with PAHO on expanding access to a high-cost medication in the Americas.\n\nConduct due diligence:\n1. What questions should I ask about their motivations?\n2. What are the reputational risks for PAHO?\n3. What safeguards are essential (non-negotiable)?\n4. What governance structure would protect independence?\n5. How do we ensure equity (not just profitable markets)?\n6. What would make us walk away?\n\nProvide a decision framework.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">A major pharmaceutical company wants to partner with PAHO on expanding access to a high-cost medication in the Americas.
+
+Conduct due diligence:
+1. What questions should I ask about their motivations?
+2. What are the reputational risks for PAHO?
+3. What safeguards are essential (non-negotiable)?
+4. What governance structure would protect independence?
+5. How do we ensure equity (not just profitable markets)?
+6. What would make us walk away?
+
+Provide a decision framework.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Lancet Commission → Action</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">The World Bank-PAHO Lancet Commission "No Time to Wait" report warns of dire consequences if countries don't act on health.
+
+Help me translate this high-level partnership into concrete country-level action:
+1. What specifically should countries do differently after this report?
+2. How does PAHO follow up to ensure action, not just awareness?
+3. What's the World Bank's role vs. PAHO's role at country level?
+4. How do we avoid "report fatigue" among Member States?
+5. What would success look like in 3 years?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Give me talking points for a joint event with the World Bank."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'The World Bank-PAHO Lancet Commission \"No Time to Wait\" report warns of dire consequences if countries don\'t act on health.\n\nHelp me translate this high-level partnership into concrete country-level action:\n1. What specifically should countries do differently after this report?\n2. How does PAHO follow up to ensure action, not just awareness?\n3. What\'s the World Bank\'s role vs. PAHO\'s role at country level?\n4. How do we avoid \"report fatigue\" among Member States?\n5. What would success look like in 3 years?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> When does a partnership add real value vs. just create coordination costs? How do we know when to say no?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: GOVERNANCE -->
+        <section class="category" id="s7">
+            <div class="cat-header">
+                <h2>⚖️ 7. Governance & Directing Council</h2>
+                <p class="for">Governing Bodies Secretariat, Legal Officers, Policy Advisors, Executive Management</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> PAHO's governance relies on consensus among 35 diverse Member States. The new Strategic Plan has 82 indicators — Member States worry about reporting burden. How do you build consensus, pass meaningful resolutions, and maintain accountability without overwhelming countries?
+                </div>
+
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Resolution Strategy</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What makes a resolution effective in a multilateral health organization? Key success factors.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What makes a resolution effective in a multilateral health organization? Key success factors.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Resolution development checklist:\n\n| Phase | Key Actions | Stakeholders to Consult | Common Pitfalls |\n\nPhases: Concept, Drafting, Consultation, Negotiation, Adoption, Implementation')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Resolution development checklist:
+
+| Phase | Key Actions | Stakeholders to Consult | Common Pitfalls |
+
+Phases: Concept, Drafting, Consultation, Negotiation, Adoption, Implementation</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'I need to present a resolution to the Executive Committee that I know will face resistance from at least 3 influential Member States.\n\nHelp me develop a consensus-building strategy:\n1. How do I identify the specific concerns of resistant countries?\n2. What pre-negotiation approaches work in multilateral health governance?\n3. How do I build a coalition of supportive countries?\n4. What compromises might be acceptable without gutting the resolution?\n5. When should I consider withdrawing vs. pushing forward?\n6. How do I maintain relationships regardless of outcome?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">I need to present a resolution to the Executive Committee that I know will face resistance from at least 3 influential Member States.
+
+Help me develop a consensus-building strategy:
+1. How do I identify the specific concerns of resistant countries?
+2. What pre-negotiation approaches work in multilateral health governance?
+3. How do I build a coalition of supportive countries?
+4. What compromises might be acceptable without gutting the resolution?
+5. When should I consider withdrawing vs. pushing forward?
+6. How do I maintain relationships regardless of outcome?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Indicator Burden Trade-off</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">The new Strategic Plan has 82 indicators. Member States are concerned about reporting burden. But accountability requires measurement.
+
+Help me think through this tension:
+1. What's the minimum viable monitoring framework?
+2. How do we differentiate between countries with strong vs. weak data systems?
+3. When is an indicator useful vs. just box-ticking?
+4. How do other international organizations balance this?
+5. What would a tiered approach look like?
+
+Propose a framework that maintains accountability while reducing burden.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which 20 indicators would you prioritize if we could only track 20?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'The new Strategic Plan has 82 indicators. Member States are concerned about reporting burden. But accountability requires measurement.\n\nHelp me think through this tension:\n1. What\'s the minimum viable monitoring framework?\n2. How do we differentiate between countries with strong vs. weak data systems?\n3. When is an indicator useful vs. just box-ticking?\n4. How do other international organizations balance this?\n5. What would a tiered approach look like?\n\nPropose a framework that maintains accountability while reducing burden.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Consensus governance can produce watered-down outcomes. When is a strong resolution that divides better than a weak one everyone supports?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: CLIMATE & EQUITY -->
+        <section class="category" id="s8">
+            <div class="cat-header">
+                <h2>🌡️ 8. Climate, Equity & Social Determinants</h2>
+                <p class="for">Health Equity Advisors, Environmental Health Officers, Social Determinants Leads</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> Climate change is expanding disease ranges, increasing disasters, and threatening health infrastructure. Equity is central to every Strategic Objective — but operationalizing it is hard. These cross-cutting issues require action beyond health ministries. How do you lead intersectoral action?
+                </div>
+
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Equity Assessment</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the main social determinants of health? One sentence explanation of each.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the main social determinants of health? One sentence explanation of each.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Equity impact assessment framework for a health policy:\n\n| Population Group | Current Health Status | How Policy Helps | How Policy Might Harm | Mitigation Measures |\n\nGroups: Indigenous, Afro-descendant, Rural poor, Urban informal, Women, Elderly, LGBTQ+, Migrants')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Equity impact assessment framework for a health policy:
+
+| Population Group | Current Health Status | How Policy Helps | How Policy Might Harm | Mitigation Measures |
+
+Groups: Indigenous, Afro-descendant, Rural poor, Urban informal, Women, Elderly, LGBTQ+, Migrants</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Climate change is expanding the range of dengue, Zika, and other vector-borne diseases into new areas. Health ministries say this isn\'t their mandate — it\'s environment and infrastructure.\n\nHelp me make the case that health must lead on climate adaptation:\n1. Why is this a health issue, not just environment?\n2. What unique value does the health sector bring?\n3. How do we engage other sectors without losing leadership?\n4. What\'s the economic argument?\n5. Examples of successful health-led climate action\n6. How do we frame this for a health minister vs. environment minister?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Climate change is expanding the range of dengue, Zika, and other vector-borne diseases into new areas. Health ministries say this isn't their mandate — it's environment and infrastructure.
+
+Help me make the case that health must lead on climate adaptation:
+1. Why is this a health issue, not just environment?
+2. What unique value does the health sector bring?
+3. How do we engage other sectors without losing leadership?
+4. What's the economic argument?
+5. Examples of successful health-led climate action
+6. How do we frame this for a health minister vs. environment minister?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Operationalizing Equity</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">The Strategic Plan makes "equity" central to every objective. But how do we actually operationalize this?
+
+When resources are limited, how should PAHO advise countries to prioritize:
+- Improving average population outcomes vs. closing gaps between groups?
+- Geographic equity vs. socioeconomic equity?
+- Vertical equity (more to those who need more) vs. horizontal equity (equal treatment)?
+
+Provide a framework for making equity-informed resource allocation decisions.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Give me criteria for when to prioritize closing gaps vs. raising averages."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'The Strategic Plan makes \"equity\" central to every objective. But how do we actually operationalize this?\n\nWhen resources are limited, how should PAHO advise countries to prioritize:\n- Improving average population outcomes vs. closing gaps between groups?\n- Geographic equity vs. socioeconomic equity?\n- Vertical equity (more to those who need more) vs. horizontal equity (equal treatment)?\n\nProvide a framework for making equity-informed resource allocation decisions.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Equity requires addressing power imbalances, not just health gaps. How far should PAHO go in challenging political and economic systems?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9: DIGITAL HEALTH -->
+        <section class="category" id="s9">
+            <div class="cat-header">
+                <h2>💻 9. Digital Health & Innovation</h2>
+                <p class="for">Digital Health Advisors, IS4H Officers, Innovation Leads, IT Directors</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> PAHO's Information Systems for Health (IS4H) framework aims to strengthen health information systems, but many countries struggle with basic data quality. AI is transforming health in high-income countries but risks widening the digital divide. How do you sequence digital investments appropriately?
+                </div>
+
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Digital Readiness</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the building blocks of a health information system? Bullet list.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the building blocks of a health information system? Bullet list.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Digital health maturity assessment:\n\n| Domain | Level 1 (Basic) | Level 2 (Developing) | Level 3 (Advanced) | Level 4 (Optimized) |\n\nDomains: Infrastructure, Data quality, Interoperability, Analytics, Governance, Workforce')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Digital health maturity assessment:
+
+| Domain | Level 1 (Basic) | Level 2 (Developing) | Level 3 (Advanced) | Level 4 (Optimized) |
+
+Domains: Infrastructure, Data quality, Interoperability, Analytics, Governance, Workforce</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'A Member State wants to invest in AI for health (diagnostic support, outbreak prediction, resource optimization). But they still struggle with basic data quality and interoperability.\n\nHelp me advise them:\n1. What are the prerequisites for effective AI in health?\n2. How should they sequence investments?\n3. What can AI do NOW despite data limitations?\n4. What are the risks of premature AI adoption?\n5. How do we avoid widening the digital divide?\n6. What governance frameworks are needed?')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">A Member State wants to invest in AI for health (diagnostic support, outbreak prediction, resource optimization). But they still struggle with basic data quality and interoperability.
+
+Help me advise them:
+1. What are the prerequisites for effective AI in health?
+2. How should they sequence investments?
+3. What can AI do NOW despite data limitations?
+4. What are the risks of premature AI adoption?
+5. How do we avoid widening the digital divide?
+6. What governance frameworks are needed?</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">PAHO's AI Role</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">AI is transforming health in high-income countries but risks widening the gap with lower-resource settings.
+
+What should PAHO's role be in ensuring AI benefits all countries in the Americas equitably?
+
+Consider:
+1. Technical guidance (standards, frameworks)
+2. Capacity building (training, tools)
+3. Regional public goods (shared models, datasets)
+4. Regulatory support (governance, ethics)
+5. Advocacy (ensuring equity in global AI governance)
+
+What guardrails are needed? What are the red lines?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Draft a position paper outline on AI in health for the Americas."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'AI is transforming health in high-income countries but risks widening the gap with lower-resource settings.\n\nWhat should PAHO\'s role be in ensuring AI benefits all countries in the Americas equitably?\n\nConsider:\n1. Technical guidance (standards, frameworks)\n2. Capacity building (training, tools)\n3. Regional public goods (shared models, datasets)\n4. Regulatory support (governance, ethics)\n5. Advocacy (ensuring equity in global AI governance)\n\nWhat guardrails are needed? What are the red lines?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Should PAHO be using AI tools internally? What would responsible adoption look like for a health organization?
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- COPILOT CAPABILITY SECTIONS -->
+        <!-- ============================================ -->
+
+        <!-- CAPABILITY 1: M365 APPS -->
+        <section class="category" id="c1">
+            <div class="cat-header" style="background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);">
+                <h2>💼 M365 Copilot Apps</h2>
+                <p class="for">Outlook • Excel • PowerPoint • Word • Teams</p>
+            </div>
+            <div class="cat-body">
+                <div class="tip">
+                    <strong>💡 Tip:</strong> These prompts work directly in the M365 apps. Open Copilot within each application to use them.
+                </div>
+
+                <div class="section-title" style="color: #0078d4;">📧 Outlook <span class="badge" style="background: #e1f0ff; color: #0078d4;">Communication</span></div>
+
+                <div class="prompt" style="border-left: 4px solid #0078d4;">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Country Representative Message</span>
+                        <div class="prompt-tags"><span class="tag create">Outlook</span></div>
+                    </div>
+                    <div class="prompt-text">Draft a message to all PAHO Country Representatives acknowledging the difficulty of implementing the new Strategic Plan 2026-2031 amid budget constraints, while emphasizing the importance of country-focused technical cooperation.
+
+Tone: Supportive but action-oriented
+Length: Under 200 words
+Include: Recognition of challenges, key priorities, offer of support, clear next step</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Make it more concise — under 100 words."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Draft a message to all PAHO Country Representatives acknowledging the difficulty of implementing the new Strategic Plan 2026-2031 amid budget constraints, while emphasizing the importance of country-focused technical cooperation.\n\nTone: Supportive but action-oriented\nLength: Under 200 words\nInclude: Recognition of challenges, key priorities, offer of support, clear next step')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt" style="border-left: 4px solid #0078d4;">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Diplomatic Follow-up</span>
+                        <div class="prompt-tags"><span class="tag create">Outlook</span></div>
+                    </div>
+                    <div class="prompt-text">Draft a follow-up email to a Member State health ministry that expressed concerns about their capacity to meet Strategic Plan outcome targets.
+
+Context: They feel overwhelmed by reporting requirements and resource constraints
+Goal: Acknowledge their challenges while offering PAHO technical cooperation support
+Tone: Diplomatic, constructive, solution-focused
+Include: Specific offers of assistance, flexibility options, relationship-building language</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add a paragraph about differentiated monitoring approaches."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Draft a follow-up email to a Member State health ministry that expressed concerns about their capacity to meet Strategic Plan outcome targets.\n\nContext: They feel overwhelmed by reporting requirements and resource constraints\nGoal: Acknowledge their challenges while offering PAHO technical cooperation support\nTone: Diplomatic, constructive, solution-focused\nInclude: Specific offers of assistance, flexibility options, relationship-building language')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title" style="color: #217346;">📊 Excel <span class="badge" style="background: #e2f0e9; color: #217346;">Analysis</span></div>
+
+                <div class="prompt" style="border-left: 4px solid #217346;">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Strategic Outcome Priority Matrix</span>
+                        <div class="prompt-tags"><span class="tag create">Excel</span></div>
+                    </div>
+                    <div class="prompt-text">Create a priority matrix for PAHO's 12 Strategic Plan outcomes with these columns:
+
+| Outcome | Current Progress (1-5) | Resource Intensity (1-5) | Political Visibility (1-5) | Risk if Neglected (1-5) | Priority Score |
+
+Add a formula for Priority Score that weights: Risk (40%), Progress gap (30%), Visibility (20%), Resources (10%)
+
+Include conditional formatting to highlight top priorities in green and concerns in red.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add a column for recommended actions for each priority level."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a priority matrix for PAHO\'s 12 Strategic Plan outcomes with these columns:\n\n| Outcome | Current Progress (1-5) | Resource Intensity (1-5) | Political Visibility (1-5) | Risk if Neglected (1-5) | Priority Score |\n\nAdd a formula for Priority Score that weights: Risk (40%), Progress gap (30%), Visibility (20%), Resources (10%)\n\nInclude conditional formatting to highlight top priorities in green and concerns in red.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt" style="border-left: 4px solid #217346;">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Budget Scenario Analysis</span>
+                        <div class="prompt-tags"><span class="tag create">Excel</span></div>
+                    </div>
+                    <div class="prompt-text">Create a budget scenario analysis with three scenarios:
+
+Scenario A: Base budget (0% change)
+Scenario B: 5% increase
+Scenario C: 10% cut
+
+Columns:
+| Program Area | Current Budget | Scenario A | Scenario B | Scenario C | Impact Notes |
+
+Program areas: PHC strengthening, Emergency response, NCD prevention, Health workforce, Digital health, Governance
+
+Add a summary row showing total and a chart comparing scenarios.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What would you recommend cutting first in Scenario C?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a budget scenario analysis with three scenarios:\n\nScenario A: Base budget (0% change)\nScenario B: 5% increase\nScenario C: 10% cut\n\nColumns:\n| Program Area | Current Budget | Scenario A | Scenario B | Scenario C | Impact Notes |\n\nProgram areas: PHC strengthening, Emergency response, NCD prevention, Health workforce, Digital health, Governance\n\nAdd a summary row showing total and a chart comparing scenarios.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title" style="color: #b7472a;">📽️ PowerPoint <span class="badge" style="background: #fce8e4; color: #b7472a;">Presentations</span></div>
+
+                <div class="prompt" style="border-left: 4px solid #b7472a;">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Strategic Plan Executive Briefing</span>
+                        <div class="prompt-tags"><span class="tag create">PowerPoint</span></div>
+                    </div>
+                    <div class="prompt-text">Create a 10-slide executive briefing on the PAHO Strategic Plan 2026-2031 for the Directing Council:
+
+Slide 1: Title — "Accelerating Together toward a Healthier Americas"
+Slide 2: Why a new plan? (COVID impact, changing context)
+Slide 3: Vision and theme explanation
+Slide 4: Five Strategic Objectives overview
+Slide 5: What's new vs. 2020-2025 (streamlined framework)
+Slide 6: Results framework (impact → outcomes → outputs)
+Slide 7: Implementation approach (country-focused)
+Slide 8: Accountability model (Member States + PASB roles)
+Slide 9: Resource requirements
+Slide 10: Call to action
+
+Design: Professional, minimal text, maximum visual impact, PAHO blue color scheme</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add speaker notes for each slide."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a 10-slide executive briefing on the PAHO Strategic Plan 2026-2031 for the Directing Council:\n\nSlide 1: Title — \"Accelerating Together toward a Healthier Americas\"\nSlide 2: Why a new plan? (COVID impact, changing context)\nSlide 3: Vision and theme explanation\nSlide 4: Five Strategic Objectives overview\nSlide 5: What\'s new vs. 2020-2025 (streamlined framework)\nSlide 6: Results framework (impact → outcomes → outputs)\nSlide 7: Implementation approach (country-focused)\nSlide 8: Accountability model (Member States + PASB roles)\nSlide 9: Resource requirements\nSlide 10: Call to action\n\nDesign: Professional, minimal text, maximum visual impact, PAHO blue color scheme')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title" style="color: #2b579a;">📝 Word <span class="badge" style="background: #e3eaf4; color: #2b579a;">Documents</span></div>
+
+                <div class="prompt" style="border-left: 4px solid #2b579a;">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Policy Brief: PHC Transformation</span>
+                        <div class="prompt-tags"><span class="tag create">Word</span></div>
+                    </div>
+                    <div class="prompt-text">Create a 2-page policy brief titled "Primary Health Care Transformation in the Americas" for health ministers.
+
+Structure:
+1. Executive Summary (3 sentences)
+2. Current Situation (challenges and opportunities)
+3. Strategic Plan 2026-2031 Approach
+4. What Member States Should Do (3-5 concrete actions)
+5. How PAHO Will Support
+
+Tone: Authoritative but accessible
+Include: Key statistics, clear recommendations, PAHO contact for follow-up</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add a sidebar with success story from Costa Rica."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a 2-page policy brief titled \"Primary Health Care Transformation in the Americas\" for health ministers.\n\nStructure:\n1. Executive Summary (3 sentences)\n2. Current Situation (challenges and opportunities)\n3. Strategic Plan 2026-2031 Approach\n4. What Member States Should Do (3-5 concrete actions)\n5. How PAHO Will Support\n\nTone: Authoritative but accessible\nInclude: Key statistics, clear recommendations, PAHO contact for follow-up')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Note:</strong> Each M365 app has Copilot built in. Try these prompts directly in the applications for best results.
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPABILITY 2: DOCUMENT ANALYSIS -->
+        <section class="category" id="c2">
+            <div class="cat-header" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);">
+                <h2>📄 Document Comparison & Analysis</h2>
+                <p class="for">Works with uploaded documents in Copilot</p>
+            </div>
+            <div class="cat-body">
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Upload both Strategic Plan documents (2020-2025 and 2026-2031) to Copilot before using these prompts.
+                </div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Strategic Plan Evolution</span>
+                        <div class="prompt-tags"><span class="tag create">Document</span></div>
+                    </div>
+                    <div class="prompt-text">Compare the Strategic Plan 2020-2025 and Strategic Plan 2026-2031 documents.
+
+Create a table showing what changed:
+| Area | 2020-2025 Approach | 2026-2031 Approach | What Changed | Why It Matters |
+
+Focus on:
+- Strategic objectives (structure and priorities)
+- Results framework (outcomes reduced from 28 to 12)
+- Indicators (reduced from 99 to 82)
+- Implementation approach
+- Accountability model
+
+Highlight the most significant shifts.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which changes will be hardest for Member States to implement?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Compare the Strategic Plan 2020-2025 and Strategic Plan 2026-2031 documents.\n\nCreate a table showing what changed:\n| Area | 2020-2025 Approach | 2026-2031 Approach | What Changed | Why It Matters |\n\nFocus on:\n- Strategic objectives (structure and priorities)\n- Results framework (outcomes reduced from 28 to 12)\n- Indicators (reduced from 99 to 82)\n- Implementation approach\n- Accountability model\n\nHighlight the most significant shifts.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">COVID-19 Lessons Integration</span>
+                        <div class="prompt-tags"><span class="tag create">Document</span></div>
+                    </div>
+                    <div class="prompt-text">Based on the Strategic Plan 2026-2031 document, what lessons from the COVID-19 pandemic have been explicitly incorporated into the new strategy?
+
+For each lesson found:
+1. Quote the specific passage (with page reference)
+2. Explain how it reflects pandemic learning
+3. Identify the practical implication for implementation
+
+Organize by theme: Health system resilience, Emergency preparedness, Equity, Partnerships, PAHO internal operations</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What pandemic lessons are NOT reflected that should be?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Based on the Strategic Plan 2026-2031 document, what lessons from the COVID-19 pandemic have been explicitly incorporated into the new strategy?\n\nFor each lesson found:\n1. Quote the specific passage (with page reference)\n2. Explain how it reflects pandemic learning\n3. Identify the practical implication for implementation\n\nOrganize by theme: Health system resilience, Emergency preparedness, Equity, Partnerships, PAHO internal operations')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Indicator Evidence Check</span>
+                        <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+                    </div>
+                    <div class="prompt-text">From the Strategic Plan 2026-2031 document, extract the impact and outcome indicators.
+
+For each indicator, assess:
+| Indicator | Target | Data Source | Baseline Available? | Measurable by 2031? | Concerns |
+
+Flag any indicators that:
+- Lack clear measurement methodology
+- Have no obvious data source
+- May be unrealistic given timelines
+- Depend on external factors beyond PAHO/Member State control</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which indicators should we prioritize for mid-term review?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'From the Strategic Plan 2026-2031 document, extract the impact and outcome indicators.\n\nFor each indicator, assess:\n| Indicator | Target | Data Source | Baseline Available? | Measurable by 2031? | Concerns |\n\nFlag any indicators that:\n- Lack clear measurement methodology\n- Have no obvious data source\n- May be unrealistic given timelines\n- Depend on external factors beyond PAHO/Member State control')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Note:</strong> Document analysis works best when you upload the actual files. Copilot can compare, extract, and synthesize across multiple documents.
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPABILITY 3: DEEP RESEARCH -->
+        <section class="category" id="c3">
+            <div class="cat-header" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                <h2>🔬 Deep Research</h2>
+                <p class="for">Evidence synthesis with citations from multiple sources</p>
+            </div>
+            <div class="cat-body">
+                <div class="tip">
+                    <strong>💡 Tip:</strong> Use Copilot's web search capability for these prompts. Results include citations you can verify.
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Rural Health Worker Retention</span>
+                        <div class="prompt-tags"><span class="tag reason">Research</span></div>
+                    </div>
+                    <div class="prompt-text">Research comprehensively: What are the most effective strategies for retaining health workers in rural and underserved areas in low- and middle-income countries?
+
+Search academic literature and WHO/PAHO publications.
+
+Provide:
+1. Evidence summary (what works, with citations)
+2. Implementation challenges (why good ideas fail)
+3. Cost-effectiveness data (where available)
+4. Applicability to the Americas context
+5. Recommendations for PAHO Member States
+6. Gaps in the evidence base
+
+Format as a structured literature review with clear citations.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Focus specifically on Caribbean small island states."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Research comprehensively: What are the most effective strategies for retaining health workers in rural and underserved areas in low- and middle-income countries?\n\nSearch academic literature and WHO/PAHO publications.\n\nProvide:\n1. Evidence summary (what works, with citations)\n2. Implementation challenges (why good ideas fail)\n3. Cost-effectiveness data (where available)\n4. Applicability to the Americas context\n5. Recommendations for PAHO Member States\n6. Gaps in the evidence base\n\nFormat as a structured literature review with clear citations.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Climate-Health Interventions</span>
+                        <div class="prompt-tags"><span class="tag reason">Research</span></div>
+                    </div>
+                    <div class="prompt-text">Research: What health system interventions are most effective for adapting to climate change impacts in the Americas?
+
+Focus areas:
+- Vector-borne disease expansion (dengue, Zika, chikungunya)
+- Extreme heat impacts
+- Climate-related disasters
+- Water and food security
+
+For each intervention:
+| Intervention | Evidence Quality | Cost | Scalability | Implementation Examples |
+
+Include citations from peer-reviewed literature and WHO/PAHO guidance.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What's the evidence on early warning systems for climate-sensitive diseases?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Research: What health system interventions are most effective for adapting to climate change impacts in the Americas?\n\nFocus areas:\n- Vector-borne disease expansion (dengue, Zika, chikungunya)\n- Extreme heat impacts\n- Climate-related disasters\n- Water and food security\n\nFor each intervention:\n| Intervention | Evidence Quality | Cost | Scalability | Implementation Examples |\n\nInclude citations from peer-reviewed literature and WHO/PAHO guidance.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">PHC Transformation Case Studies</span>
+                        <div class="prompt-tags"><span class="tag reason">Research</span></div>
+                    </div>
+                    <div class="prompt-text">Research: How have different countries in the Americas approached primary health care transformation since 2015?
+
+Compare in depth:
+- Costa Rica (EBAIS model, long PHC tradition)
+- Brazil (Family Health Strategy, recent policy changes)
+- Chile (PHC network reforms)
+- Cuba (polyclinic model, community focus)
+
+For each country:
+| Aspect | Costa Rica | Brazil | Chile | Cuba |
+|--------|------------|--------|-------|------|
+| PHC model | | | | |
+| Financing | | | | |
+| Workforce | | | | |
+| Key reforms | | | | |
+| Outcomes | | | | |
+| Transferable lessons | | | | |
+
+What can other countries learn? What limits transferability?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which model would work best for a small Caribbean island?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Research: How have different countries in the Americas approached primary health care transformation since 2015?\n\nCompare in depth:\n- Costa Rica (EBAIS model, long PHC tradition)\n- Brazil (Family Health Strategy, recent policy changes)\n- Chile (PHC network reforms)\n- Cuba (polyclinic model, community focus)\n\nFor each country:\n| Aspect | Costa Rica | Brazil | Chile | Cuba |\n|--------|------------|--------|-------|------|\n| PHC model | | | | |\n| Financing | | | | |\n| Workforce | | | | |\n| Key reforms | | | | |\n| Outcomes | | | | |\n| Transferable lessons | | | | |\n\nWhat can other countries learn? What limits transferability?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Note:</strong> Always verify AI research outputs against primary sources. Copilot provides citations — follow them.
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPABILITY 4: BUILD AGENTS -->
+        <section class="category" id="c4">
+            <div class="cat-header" style="background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);">
+                <h2>🤖 Build Custom Agents</h2>
+                <p class="for">Persistent AI assistants for ongoing strategic support</p>
+            </div>
+            <div class="cat-body">
+                <div class="agent-instructions">
+                    <h4>How to Create an Agent in M365 Copilot</h4>
+                    <ol>
+                        <li>Open <a href="https://m365copilot.com/" target="_blank">M365 Copilot</a></li>
+                        <li>Click the <strong>Agents</strong> icon in the right sidebar</li>
+                        <li>Select <strong>"Create an agent"</strong></li>
+                        <li>Give your agent a name and description</li>
+                        <li>Paste the instructions below into the <strong>"Instructions"</strong> field</li>
+                        <li>Optionally upload knowledge documents</li>
+                        <li>Save and start using your agent</li>
+                    </ol>
+                </div>
+
+                <div class="prompt red">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Agent 1: PAHO Strategic Plan Navigator</span>
+                        <div class="prompt-tags"><span class="tag agent">Agent</span></div>
+                    </div>
+                    <div class="prompt-text">You are the PAHO Strategic Plan Navigator — an expert assistant helping PAHO staff and Member State representatives understand and implement the PAHO Strategic Plan 2026-2031.
+
+Your knowledge includes:
+- The 5 Strategic Objectives and their scope
+- The 12 Outcomes and 82 indicators
+- The Results-based Management framework
+- The accountability model (Member States responsible for outcomes, PASB for outputs)
+- Implementation approaches and country-focused cooperation
+- Links to relevant PAHO policies and guidance
+
+When responding:
+1. Always cite specific Strategic Objective or Outcome numbers (e.g., "SO2, Outcome 2.1")
+2. Use official PAHO terminology from the Strategic Plan
+3. Acknowledge when implementation may be complex
+4. Suggest related resources and contacts when appropriate
+5. Be honest about limitations — refer to technical units for specialized guidance
+
+Sample questions you can answer:
+- "Which Strategic Objective addresses climate change?"
+- "What indicators are new in 2026-2031 vs. 2020-2025?"
+- "How should a Country Representative use the Strategic Plan to develop their Country Cooperation Strategy?"
+- "Explain the difference between outcome indicators and output indicators"</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Knowledge docs: Upload the Strategic Plan 2026-2031 PDF</span>
+                        <button class="copy-btn" onclick="copyText(this, 'You are the PAHO Strategic Plan Navigator — an expert assistant helping PAHO staff and Member State representatives understand and implement the PAHO Strategic Plan 2026-2031.\n\nYour knowledge includes:\n- The 5 Strategic Objectives and their scope\n- The 12 Outcomes and 82 indicators\n- The Results-based Management framework\n- The accountability model (Member States responsible for outcomes, PASB for outputs)\n- Implementation approaches and country-focused cooperation\n- Links to relevant PAHO policies and guidance\n\nWhen responding:\n1. Always cite specific Strategic Objective or Outcome numbers (e.g., \"SO2, Outcome 2.1\")\n2. Use official PAHO terminology from the Strategic Plan\n3. Acknowledge when implementation may be complex\n4. Suggest related resources and contacts when appropriate\n5. Be honest about limitations — refer to technical units for specialized guidance\n\nSample questions you can answer:\n- \"Which Strategic Objective addresses climate change?\"\n- \"What indicators are new in 2026-2031 vs. 2020-2025?\"\n- \"How should a Country Representative use the Strategic Plan to develop their Country Cooperation Strategy?\"\n- \"Explain the difference between outcome indicators and output indicators\"')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt red">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Agent 2: Health Emergency Advisor</span>
+                        <div class="prompt-tags"><span class="tag agent">Agent</span></div>
+                    </div>
+                    <div class="prompt-text">You are the PAHO Health Emergency Advisor — providing guidance on emergency preparedness and response for the Americas.
+
+Your expertise includes:
+- IHR core capacities and compliance
+- Pandemic preparedness and response planning
+- Dengue and arboviral disease response
+- Climate-related health emergencies
+- Risk communication during crises
+- Coordination with WHO and regional partners
+
+Context you understand:
+- The Americas is the second most disaster-prone region globally
+- 13 million dengue cases in 2024 (record high)
+- COVID-19 reversed 20 years of health progress
+- Climate change is expanding vector-borne disease ranges
+- Many countries face resource constraints
+
+When responding:
+1. Prioritize evidence-based interventions
+2. Consider resource constraints and feasibility
+3. Emphasize equity — emergencies hit vulnerable populations hardest
+4. Recommend One Health approaches where relevant
+5. Flag when situations require escalation or external support
+
+Sample questions:
+- "How should we update our pandemic plan after COVID-19?"
+- "What are the IHR core capacity priorities for a small island state?"
+- "How do I communicate about rising dengue cases without causing panic?"
+- "What triggers should prompt us to declare a regional emergency?"</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Knowledge docs: Upload IHR guidance, PAHO emergency response protocols</span>
+                        <button class="copy-btn" onclick="copyText(this, 'You are the PAHO Health Emergency Advisor — providing guidance on emergency preparedness and response for the Americas.\n\nYour expertise includes:\n- IHR core capacities and compliance\n- Pandemic preparedness and response planning\n- Dengue and arboviral disease response\n- Climate-related health emergencies\n- Risk communication during crises\n- Coordination with WHO and regional partners\n\nContext you understand:\n- The Americas is the second most disaster-prone region globally\n- 13 million dengue cases in 2024 (record high)\n- COVID-19 reversed 20 years of health progress\n- Climate change is expanding vector-borne disease ranges\n- Many countries face resource constraints\n\nWhen responding:\n1. Prioritize evidence-based interventions\n2. Consider resource constraints and feasibility\n3. Emphasize equity — emergencies hit vulnerable populations hardest\n4. Recommend One Health approaches where relevant\n5. Flag when situations require escalation or external support\n\nSample questions:\n- \"How should we update our pandemic plan after COVID-19?\"\n- \"What are the IHR core capacity priorities for a small island state?\"\n- \"How do I communicate about rising dengue cases without causing panic?\"\n- \"What triggers should prompt us to declare a regional emergency?\"')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt red">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Agent 3: Strategic Decision Challenge Partner</span>
+                        <div class="prompt-tags"><span class="tag agent">Agent</span></div>
+                    </div>
+                    <div class="prompt-text">You are a Strategic Decision Challenge Partner — a constructive critic who helps PAHO leaders stress-test strategic decisions before they go to the Directing Council or Executive Committee.
+
+Your role is to:
+1. Play devil's advocate (give me 3 strong arguments AGAINST this proposal)
+2. Identify hidden assumptions (what are we taking for granted?)
+3. Spot stakeholder blind spots (whose perspective are we missing?)
+4. Check for equity implications (who benefits and who might be harmed?)
+5. Explore unintended consequences (what could go wrong?)
+6. Suggest better alternatives (is there another approach?)
+7. Give a go/no-go assessment (should we proceed, modify, or reconsider?)
+
+Important principles:
+- Be direct but respectful — challenge ideas, not people
+- Focus on making decisions better, not blocking them
+- Consider PAHO's unique governance context (35 Member States, consensus culture)
+- Acknowledge political realities while pushing for improvement
+- If the decision is sound, say so — don't manufacture objections
+
+When I present a decision, respond with a structured challenge using all 7 elements above.
+
+Sample decisions to challenge:
+- "We want to shift 20% of our budget from disease-specific programs to health systems strengthening"
+- "We're proposing a new indicator framework that requires all Member States to report on 15 additional metrics"
+- "We plan to partner with a pharmaceutical company on an access initiative"</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">This agent works best with specific, concrete decisions to analyze.</span>
+                        <button class="copy-btn" onclick="copyText(this, 'You are a Strategic Decision Challenge Partner — a constructive critic who helps PAHO leaders stress-test strategic decisions before they go to the Directing Council or Executive Committee.\n\nYour role is to:\n1. Play devil\'s advocate (give me 3 strong arguments AGAINST this proposal)\n2. Identify hidden assumptions (what are we taking for granted?)\n3. Spot stakeholder blind spots (whose perspective are we missing?)\n4. Check for equity implications (who benefits and who might be harmed?)\n5. Explore unintended consequences (what could go wrong?)\n6. Suggest better alternatives (is there another approach?)\n7. Give a go/no-go assessment (should we proceed, modify, or reconsider?)\n\nImportant principles:\n- Be direct but respectful — challenge ideas, not people\n- Focus on making decisions better, not blocking them\n- Consider PAHO\'s unique governance context (35 Member States, consensus culture)\n- Acknowledge political realities while pushing for improvement\n- If the decision is sound, say so — don\'t manufacture objections\n\nWhen I present a decision, respond with a structured challenge using all 7 elements above.\n\nSample decisions to challenge:\n- \"We want to shift 20% of our budget from disease-specific programs to health systems strengthening\"\n- \"We\'re proposing a new indicator framework that requires all Member States to report on 15 additional metrics\"\n- \"We plan to partner with a pharmaceutical company on an access initiative\"')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> What other agents would be valuable for PAHO's work? Think about recurring tasks that require consistent expertise.
+                </div>
+            </div>
+        </section>
+
+        <!-- CAPABILITY 5: VERIFICATION & META -->
+        <section class="category" id="c5">
+            <div class="cat-header" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">
+                <h2>🔒 Verification & AI Limitations</h2>
+                <p class="for">Critical for building appropriate trust in AI outputs</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your responsibility:</strong> AI is a powerful tool, but it has limitations. These prompts help you understand what AI can and cannot do reliably, and how to verify outputs before acting on them.
+                </div>
+
+                <div class="prompt gray">
+                    <div class="prompt-header">
+                        <span class="prompt-label">AI Limitations Check</span>
+                        <div class="prompt-tags"><span class="tag meta">Meta</span></div>
+                    </div>
+                    <div class="prompt-text">I've been using AI to inform strategic decisions at PAHO.
+
+Help me understand:
+1. What types of decisions should I NEVER outsource to AI?
+2. Where might AI give me false confidence?
+3. What biases might AI have that affect health policy analysis?
+4. How do I verify AI outputs about the Americas specifically?
+5. What questions should I always ask before acting on AI recommendations?
+
+Be direct — I want to use AI wisely, not blindly.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What are the biggest risks of AI in multilateral health organizations?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'I\'ve been using AI to inform strategic decisions at PAHO.\n\nHelp me understand:\n1. What types of decisions should I NEVER outsource to AI?\n2. Where might AI give me false confidence?\n3. What biases might AI have that affect health policy analysis?\n4. How do I verify AI outputs about the Americas specifically?\n5. What questions should I always ask before acting on AI recommendations?\n\nBe direct — I want to use AI wisely, not blindly.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt gray">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Source Verification Request</span>
+                        <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+                    </div>
+                    <div class="prompt-text">IMPORTANT: For this response, only cite:
+- PAHO official publications
+- WHO guidance documents
+- Peer-reviewed literature (with DOI if possible)
+- Member State government sources
+
+Question: What's the evidence base for the Strategic Plan's health workforce density target of 44.5 per 10,000 population?
+
+For each claim:
+1. State the finding
+2. Cite the specific source
+3. Note the evidence quality (strong/moderate/weak)
+4. Flag anything that needs verification with technical experts</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which of these sources should I verify directly before citing in a policy document?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'IMPORTANT: For this response, only cite:\n- PAHO official publications\n- WHO guidance documents\n- Peer-reviewed literature (with DOI if possible)\n- Member State government sources\n\nQuestion: What\'s the evidence base for the Strategic Plan\'s health workforce density target of 44.5 per 10,000 population?\n\nFor each claim:\n1. State the finding\n2. Cite the specific source\n3. Note the evidence quality (strong/moderate/weak)\n4. Flag anything that needs verification with technical experts')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt gray">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Uncertainty Acknowledgment</span>
+                        <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+                    </div>
+                    <div class="prompt-text">For the analysis you just provided, please now:
+
+1. Rate your confidence in each major claim (High/Medium/Low)
+2. Identify where you might be wrong
+3. Note what information would change your conclusions
+4. Highlight anything that's based on general patterns rather than specific evidence about the Americas
+5. Suggest who at PAHO I should consult to verify key points
+
+I value intellectual honesty over false confidence.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Use this after any AI analysis to understand its limitations.</span>
+                        <button class="copy-btn" onclick="copyText(this, 'For the analysis you just provided, please now:\n\n1. Rate your confidence in each major claim (High/Medium/Low)\n2. Identify where you might be wrong\n3. Note what information would change your conclusions\n4. Highlight anything that\'s based on general patterns rather than specific evidence about the Americas\n5. Suggest who at PAHO I should consult to verify key points\n\nI value intellectual honesty over false confidence.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt gray">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Appropriate AI Use Framework</span>
+                        <div class="prompt-tags"><span class="tag meta">Meta</span></div>
+                    </div>
+                    <div class="prompt-text">Create a decision framework for when to use AI vs. human expertise at PAHO:
+
+| Task Type | AI Suitable? | Why/Why Not | Human Verification Needed? |
+|-----------|--------------|-------------|---------------------------|
+| Drafting communications | | | |
+| Data analysis | | | |
+| Policy recommendations | | | |
+| Stakeholder analysis | | | |
+| Evidence synthesis | | | |
+| Sensitive negotiations | | | |
+| Technical guidance | | | |
+| Budget decisions | | | |
+
+What guardrails should PAHO put in place for responsible AI use?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Draft an AI use policy for PAHO staff."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a decision framework for when to use AI vs. human expertise at PAHO:\n\n| Task Type | AI Suitable? | Why/Why Not | Human Verification Needed? |\n|-----------|--------------|-------------|---------------------------|\n| Drafting communications | | | |\n| Data analysis | | | |\n| Policy recommendations | | | |\n| Stakeholder analysis | | | |\n| Evidence synthesis | | | |\n| Sensitive negotiations | | | |\n| Technical guidance | | | |\n| Budget decisions | | | |\n\nWhat guardrails should PAHO put in place for responsible AI use?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Key Message:</strong> AI is a thinking partner, not a decision-maker. The value is in better questions, not final answers. Always verify, especially for regional specifics.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="action">
+            <strong>Your Next Step:</strong> Pick ONE prompt to try in your real work this week.
+        </div>
+        <p class="credits">AI for PAHO Leaders | Strategic AI Executive Session | PAHO/Microsoft Partnership</p>
+        <p class="credits" style="margin-top: 0.5rem; font-size: 0.75rem;">
+            "Accelerating Together toward a Healthier Americas with Equity and Resilience"
+        </p>
+    </footer>
+
+    <script>
+    function copyText(button, text) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        
+        try {
+            document.execCommand('copy');
+            button.innerText = '✓ Copied!';
+            button.classList.add('copied');
+            
+            var toast = document.getElementById('toast');
+            toast.classList.add('show');
+            
+            setTimeout(function() {
+                button.innerText = '📋 Copy';
+                button.classList.remove('copied');
+                toast.classList.remove('show');
+            }, 2000);
+        } catch (e) {
+            alert('Please select and copy manually');
+        }
+        
+        document.body.removeChild(textarea);
+    }
+    </script>
+</body>
+</html>
