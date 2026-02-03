@@ -195,12 +195,16 @@
             margin-bottom: 1rem;
             cursor: pointer;
             transition: all 0.2s;
+            tabindex: 0;
         }
         
-        .prompt-card:hover {
+        .prompt-card:hover,
+        .prompt-card:focus {
             background: #f1f5f9;
             border-color: var(--un-blue);
             transform: translateX(4px);
+            outline: 2px solid var(--un-blue);
+            outline-offset: 2px;
         }
         
         .prompt-card h4 {
@@ -245,7 +249,7 @@
 
     <div class="copilot-bar">
         <p>✨ <strong>Get Started:</strong> Use GitHub Copilot to explore AI-powered collaboration scenarios below</p>
-        <a href="https://github.com/features/copilot" class="copilot-link" target="_blank">Learn More About GitHub Copilot</a>
+        <a href="https://github.com/features/copilot" class="copilot-link" target="_blank" rel="noopener noreferrer">Learn More About GitHub Copilot</a>
     </div>
 
     <div class="container">
@@ -282,19 +286,19 @@
         <div class="nav-section">
             <h4>Quick Navigation</h4>
             <div class="nav-grid">
-                <button class="nav-btn primary" onclick="scrollToSection('un-section')">
+                <button class="nav-btn primary" onclick="scrollToSection('un-section')" aria-label="Navigate to UN Agencies section">
                     <span>🇺🇳</span>
                     UN Agencies
                 </button>
-                <button class="nav-btn" onclick="scrollToSection('worldbank-section')">
+                <button class="nav-btn" onclick="scrollToSection('worldbank-section')" aria-label="Navigate to Development Banks section">
                     <span>🏦</span>
                     Development Banks
                 </button>
-                <button class="nav-btn" onclick="scrollToSection('redcross-section')">
+                <button class="nav-btn" onclick="scrollToSection('redcross-section')" aria-label="Navigate to Red Cross section">
                     <span>🏥</span>
                     Red Cross
                 </button>
-                <button class="nav-btn" onclick="scrollToSection('ifi-section')">
+                <button class="nav-btn" onclick="scrollToSection('ifi-section')" aria-label="Navigate to IFIs and International Development section">
                     <span>🌍</span>
                     IFIs & Development
                 </button>
@@ -581,13 +585,21 @@
         }
 
         function copyPrompt(element) {
-            const title = element.querySelector('h4').textContent;
-            const description = element.querySelector('p').textContent;
+            const titleElement = element.querySelector('h4');
+            const descriptionElement = element.querySelector('p');
+            
+            // Null checks for DOM elements
+            if (!titleElement || !descriptionElement) {
+                console.error('Required elements not found in prompt card');
+                return;
+            }
+            
+            const title = titleElement.textContent;
+            const description = descriptionElement.textContent;
             const promptText = `${title}\n\n${description}`;
             
             navigator.clipboard.writeText(promptText).then(() => {
                 // Visual feedback
-                const originalBg = element.style.background;
                 element.style.background = '#dcfce7';
                 element.style.borderColor = '#16a34a';
                 
@@ -597,9 +609,10 @@
                 checkmark.style.color = '#16a34a';
                 checkmark.style.fontWeight = 'bold';
                 checkmark.style.marginLeft = '0.5rem';
-                element.querySelector('h4').appendChild(checkmark);
+                titleElement.appendChild(checkmark);
                 
                 setTimeout(() => {
+                    // Restore original styles by removing inline styles
                     element.style.background = '';
                     element.style.borderColor = '';
                     checkmark.remove();
@@ -609,6 +622,25 @@
                 alert('Failed to copy to clipboard. Please try selecting and copying manually.');
             });
         }
+
+        // Add keyboard navigation for prompt cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const promptCards = document.querySelectorAll('.prompt-card');
+            promptCards.forEach(card => {
+                // Make cards keyboard accessible
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+                card.setAttribute('aria-label', `Copy prompt: ${card.querySelector('h4')?.textContent || 'prompt'}`);
+                
+                // Add keyboard support
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        copyPrompt(card);
+                    }
+                });
+            });
+        });
 
         // Add keyboard navigation
         document.addEventListener('keydown', (e) => {
