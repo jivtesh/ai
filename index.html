@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Resources Hub | Find Your Workspace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0078d4;
+            --primary-dark: #005a9e;
+            --un-blue: #009EDB;
+            --success: #16a34a;
+            --purple: #6366f1;
+            --orange: #ea580c;
+            --teal: #0d9488;
+        }
+        
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1e293b;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero .description {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            max-width: 50rem;
+            margin: 0 auto 2rem;
+        }
+        
+        .copilot-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .container {
+            max-width: 75rem;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card-header {
+            padding: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            pointer-events: none;
+        }
+        
+        .card-header.un {
+            background: linear-gradient(135deg, var(--un-blue) 0%, #005a87 100%);
+        }
+        
+        .card-header.nonprofit {
+            background: linear-gradient(135deg, var(--purple) 0%, #4338ca 100%);
+        }
+        
+        .card-header.health {
+            background: linear-gradient(135deg, var(--teal) 0%, #0a6960 100%);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-audience {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-description {
+            color: #475569;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .card-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-features li {
+            padding: 0.5rem 0;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.125rem;
+        }
+        
+        .card-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .card:hover .card-cta {
+            transform: scale(1.05);
+        }
+        
+        .info-section {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+        }
+        
+        .info-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-section ol {
+            margin-left: 1.5rem;
+        }
+        
+        .info-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.875rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero .tagline { font-size: 1.25rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🚀 AI Prompt Resources Hub</h1>
+        <p class="tagline">Find Your Customized AI Workshop & Prompts</p>
+        <p class="description">
+            Explore curated AI prompt collections designed for different professional communities. 
+            Each workspace includes practical prompts, scenarios, and guidance for using AI tools like GitHub Copilot and Microsoft 365 Copilot.
+        </p>
+        <div class="copilot-badge">
+            ✨ Powered by GitHub Copilot & Microsoft 365 Copilot
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Choose Your Workspace</h2>
+        <p class="section-subtitle">Select the resource collection that matches your role and organization</p>
+        
+        <div class="cards-grid">
+            <!-- UN Leadership Card -->
+            <a href="UN_AI_Leadership_Clinics_Expanded_v2.html" class="card">
+                <div class="card-header un">
+                    <span class="card-icon">🇺🇳</span>
+                    <h3 class="card-title">UN Senior Leaders</h3>
+                    <p class="card-audience">AI Leadership Clinics</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Comprehensive AI prompts and scenarios designed for United Nations senior leadership. 
+                        Explore strategic applications across humanitarian, development, and peacekeeping operations.
+                    </p>
+                    <ul class="card-features">
+                        <li>Multi-agency coordination scenarios</li>
+                        <li>Strategic planning & decision-making</li>
+                        <li>Data analysis & reporting tools</li>
+                        <li>Crisis management prompts</li>
+                    </ul>
+                    <div class="card-cta">Explore UN Leadership Clinics →</div>
+                </div>
+            </a>
+
+            <!-- Nonprofit Leaders Card -->
+            <a href="nonprofit_ai_workshop.html" class="card">
+                <div class="card-header nonprofit">
+                    <span class="card-icon">💜</span>
+                    <h3 class="card-title">Nonprofit Leaders</h3>
+                    <p class="card-audience">Microsoft Elevate Days London</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        AI workshop materials tailored for nonprofit organizations and social impact leaders. 
+                        Learn to leverage AI for fundraising, program management, and mission delivery.
+                    </p>
+                    <ul class="card-features">
+                        <li>Fundraising & donor engagement</li>
+                        <li>Program impact measurement</li>
+                        <li>Volunteer management</li>
+                        <li>Grant writing assistance</li>
+                    </ul>
+                    <div class="card-cta">Explore Nonprofit Workshop →</div>
+                </div>
+            </a>
+
+            <!-- PAHO Healthcare Card -->
+            <a href="paho_ai_workshop.html" class="card">
+                <div class="card-header health">
+                    <span class="card-icon">🏥</span>
+                    <h3 class="card-title">Healthcare Leaders</h3>
+                    <p class="card-audience">PAHO Strategic AI Executive Session</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-description">
+                        Specialized AI resources for Pan American Health Organization (PAHO) leaders and healthcare executives. 
+                        Focus on public health, epidemiology, and health system strengthening.
+                    </p>
+                    <ul class="card-features">
+                        <li>Public health emergency response</li>
+                        <li>Epidemiological data analysis</li>
+                        <li>Health policy development</li>
+                        <li>Regional health coordination</li>
+                    </ul>
+                    <div class="card-cta">Explore Healthcare Workshop →</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="info-section">
+            <h3>📚 How to Use These Resources</h3>
+            <ol>
+                <li><strong>Choose your workspace</strong> based on your role and organization type</li>
+                <li><strong>Browse the prompts</strong> organized by categories and use cases</li>
+                <li><strong>Copy any prompt</strong> by clicking on the prompt cards within each workspace</li>
+                <li><strong>Paste into your AI tool</strong> such as GitHub Copilot, Microsoft 365 Copilot, or ChatGPT</li>
+                <li><strong>Customize and iterate</strong> based on your specific needs and context</li>
+                <li><strong>Share learnings</strong> with your team and colleagues</li>
+            </ol>
+        </div>
+
+        <div class="info-section">
+            <h3>💡 About These Workspaces</h3>
+            <p style="margin-bottom: 1rem;">
+                Each workspace contains carefully curated AI prompts developed in collaboration with domain experts 
+                from their respective fields. The prompts are designed to be practical, actionable, and immediately useful 
+                for real-world challenges faced by leaders in these sectors.
+            </p>
+            <p>
+                <strong>New to AI tools?</strong> Each workspace includes guidance on how to get started with GitHub Copilot 
+                and other AI assistants, along with best practices for prompt engineering.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🤖 AI Prompt Resources Hub | Empowering Leaders with AI Tools</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">
+            Built for global organizations making a difference
+        </p>
+    </div>
+</body>
+</html>
