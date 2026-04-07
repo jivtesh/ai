@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yes, And... AI — Your Next Steps | NetHope Webinar</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#faf6ee;
+  --cream-deep:#f3ecdc;
+  --pink:#e8b4b8;
+  --pink-deep:#d99499;
+  --mustard:#e6c068;
+  --mustard-deep:#c9a14a;
+  --sage:#a8c4a2;
+  --sage-deep:#7fa379;
+  --sky:#b8d0d6;
+  --ink:#3d3935;
+  --ink-soft:#6b6660;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Nunito',-apple-system,sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.65;
+  background-image:radial-gradient(circle at 20% 10%,rgba(232,180,184,.15) 0,transparent 40%),radial-gradient(circle at 80% 60%,rgba(168,196,162,.15) 0,transparent 40%);
+  min-height:100vh;
+}
+.hand{font-family:'Caveat',cursive}
+.header{padding:3.5rem 1.5rem 2rem;text-align:center;position:relative}
+.header svg.doodle{display:block;margin:0 auto 1rem}
+.header h1{font-family:'Caveat',cursive;font-size:4rem;font-weight:700;line-height:1;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.01em}
+.header h1 .amp{color:var(--pink-deep)}
+.header .subtitle{font-size:1.1rem;color:var(--ink-soft);font-weight:600;margin-bottom:.4rem}
+.header .meta{font-size:.85rem;color:var(--ink-soft);font-style:italic}
+.sticky{background:var(--mustard);color:var(--ink);padding:.85rem 1.5rem;text-align:center;position:sticky;top:0;z-index:100;border-top:2px dashed var(--mustard-deep);border-bottom:2px dashed var(--mustard-deep)}
+.sticky p{font-size:.9rem;font-weight:600;display:inline-block;margin-right:.75rem}
+.sticky a{display:inline-block;background:var(--ink);color:var(--cream);text-decoration:none;padding:.45rem 1.15rem;border-radius:2rem;font-weight:700;font-size:.85rem;transition:transform .2s}
+.sticky a:hover{transform:translateY(-2px) rotate(-1deg)}
+.container{max-width:58rem;margin:0 auto;padding:1.5rem}
+.opener{background:var(--cream-deep);border-radius:1.25rem;padding:1.75rem 2rem;margin-bottom:2rem;font-size:1.05rem;color:var(--ink);position:relative;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--pink)}
+.opener .big{font-family:'Caveat',cursive;font-size:2rem;line-height:1.1;color:var(--pink-deep);display:block;margin-bottom:.5rem}
+.labs-hero{background:var(--sage);border:2px solid var(--ink);border-radius:1.25rem;padding:2rem;margin-bottom:2.5rem;box-shadow:6px 6px 0 var(--mustard)}
+.labs-hero h2{font-family:'Caveat',cursive;font-size:2.4rem;line-height:1;margin-bottom:.35rem;color:var(--ink)}
+.labs-hero .sub{font-size:.95rem;color:var(--ink);margin-bottom:1.25rem;opacity:.85}
+.labs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.lab-card{background:var(--cream);border:2px solid var(--ink);border-radius:1rem;padding:1.1rem;text-decoration:none;color:var(--ink);transition:all .15s;display:block;box-shadow:3px 3px 0 var(--ink)}
+.lab-card:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.lab-card.featured{background:var(--pink)}
+.lab-card .badge{display:inline-block;font-size:.65rem;background:var(--ink);color:var(--cream);padding:.2rem .55rem;border-radius:1rem;margin-bottom:.5rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.lab-card h3{font-family:'Caveat',cursive;font-size:1.4rem;line-height:1.1;margin-bottom:.3rem}
+.lab-card p{font-size:.78rem;color:var(--ink-soft);margin:0;line-height:1.4}
+.section-title{font-family:'Caveat',cursive;font-size:2.2rem;color:var(--ink);margin:2.5rem 0 1.25rem;text-align:center;line-height:1}
+.section-title .squiggle{display:block;margin:.4rem auto 0}
+.level{background:var(--cream);border:2px solid var(--ink);border-radius:1.25rem;margin-bottom:1.25rem;padding:1.5rem 1.75rem;box-shadow:5px 5px 0 var(--ink);position:relative}
+.level.l1{background:#fbf0e8}
+.level.l2{background:#eaf2f4}
+.level.l3{background:#f1e8f3}
+.level.l4{background:#fbeee0}
+.level.l5{background:#f5e3e4}
+.level-head{display:flex;align-items:baseline;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+.level-num{font-family:'Caveat',cursive;font-size:1.6rem;font-weight:700;background:var(--ink);color:var(--cream);padding:.15rem .85rem;border-radius:1rem;line-height:1.2}
+.level-title{font-family:'Caveat',cursive;font-size:2rem;font-weight:700;line-height:1;color:var(--ink)}
+.level-desc{font-size:.95rem;color:var(--ink);margin-bottom:1rem;opacity:.9}
+.level-links{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.lvl-link{font-size:.78rem;font-weight:700;text-decoration:none;padding:.5rem 1rem;border-radius:2rem;border:2px solid var(--ink);color:var(--ink);transition:all .15s;background:var(--cream)}
+.lvl-link:hover{transform:translateY(-2px)}
+.lvl-link.tool{background:var(--ink);color:var(--cream)}
+.prompt{background:var(--cream);border:2px dashed var(--ink);border-radius:1rem;padding:1.1rem 1.25rem;margin-top:.75rem}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.7rem;gap:.5rem;flex-wrap:wrap}
+.prompt-label{font-family:'Caveat',cursive;font-size:1.4rem;font-weight:700;line-height:1;color:var(--ink)}
+.prompt-text{background:var(--cream-deep);border:1px solid var(--ink);border-radius:.6rem;padding:.95rem 1.1rem;font-size:.82rem;line-height:1.65;white-space:pre-wrap;color:var(--ink);font-family:'Nunito',sans-serif}
+.copy-btn{background:var(--ink);color:var(--cream);border:2px solid var(--ink);padding:.4rem 1rem;border-radius:2rem;font-size:.75rem;font-weight:700;cursor:pointer;transition:all .15s;font-family:'Nunito',sans-serif}
+.copy-btn:hover{transform:translateY(-2px);background:var(--pink-deep);border-color:var(--pink-deep)}
+.copy-btn.copied{background:var(--sage-deep);border-color:var(--sage-deep)}
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1rem}
+.card{background:var(--cream);border:2px solid var(--ink);border-radius:1.25rem;padding:1.5rem;box-shadow:5px 5px 0 var(--sky)}
+.card.alt{box-shadow:5px 5px 0 var(--sage)}
+.card h3{font-family:'Caveat',cursive;font-size:1.7rem;line-height:1;margin-bottom:.85rem;color:var(--ink)}
+.card a{display:block;font-size:.85rem;color:var(--ink);text-decoration:none;padding:.45rem 0;border-bottom:1px dashed var(--ink-soft);font-weight:600}
+.card a:last-child{border-bottom:none}
+.card a:hover{color:var(--pink-deep);padding-left:.3rem}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
+.person{background:var(--cream);border:2px solid var(--ink);border-radius:1.25rem;padding:1.5rem;text-align:center;box-shadow:5px 5px 0 var(--mustard)}
+.person.alt{box-shadow:5px 5px 0 var(--pink)}
+.person svg.figure{display:block;margin:0 auto .5rem}
+.person .role{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:.3rem;font-weight:700}
+.person .name{font-family:'Caveat',cursive;font-size:1.8rem;line-height:1;margin-bottom:.4rem;color:var(--ink)}
+.person .title{font-size:.78rem;color:var(--ink-soft);margin-bottom:.85rem;font-style:italic}
+.person a{display:inline-block;background:var(--ink);color:var(--cream);text-decoration:none;padding:.5rem 1.15rem;border-radius:2rem;font-size:.78rem;font-weight:700;border:2px solid var(--ink)}
+.person a:hover{background:var(--pink-deep);border-color:var(--pink-deep)}
+.footer-callback{background:var(--pink);border:2px solid var(--ink);border-radius:1.25rem;padding:2.5rem 1.5rem;text-align:center;margin-bottom:1.5rem;box-shadow:6px 6px 0 var(--ink)}
+.footer-callback p{font-family:'Caveat',cursive;font-size:2.6rem;font-weight:700;line-height:1.05;color:var(--ink)}
+.footer-callback .small{font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:600;color:var(--ink);opacity:.8;margin-top:.75rem;display:block}
+.foot{text-align:center;font-size:.78rem;color:var(--ink-soft);padding:1rem 0 2rem;font-style:italic}
+@media (max-width:720px){
+  .labs-grid,.cards2,.people{grid-template-columns:1fr}
+  .header h1{font-size:2.8rem}
+  .footer-callback p{font-size:1.8rem}
+  .container{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <svg class="doodle" width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="35" cy="25" r="11" fill="#faf6ee" stroke="#3d3935" stroke-width="2"/>
+    <circle cx="32" cy="24" r="1.4" fill="#3d3935"/>
+    <circle cx="38" cy="24" r="1.4" fill="#3d3935"/>
+    <path d="M28 36 Q35 42 30 55" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M42 36 Q48 42 50 55" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <circle cx="85" cy="25" r="11" fill="#e8b4b8" stroke="#3d3935" stroke-width="2"/>
+    <circle cx="82" cy="24" r="1.4" fill="#3d3935"/>
+    <circle cx="88" cy="24" r="1.4" fill="#3d3935"/>
+    <path d="M78 36 Q82 42 78 55" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M92 36 Q96 42 100 55" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M50 22 Q60 12 70 22" stroke="#3d3935" stroke-width="1.5" stroke-linecap="round" fill="none" stroke-dasharray="2 3"/>
+  </svg>
+  <h1>Yes, And<span class="amp">...</span> AI</h1>
+  <div class="subtitle">Your next steps from today's NetHope session</div>
+  <div class="meta">April 7, 2026 · with Jivtesh Singh (Microsoft) &amp; Laura Rubio (UNAIDS)</div>
+</div>
+
+<div class="sticky">
+  <p>New here? Start the easy way.</p>
+  <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">Open Microsoft 365 Copilot →</a>
+</div>
+
+<div class="container">
+
+  <div class="opener">
+    <span class="big">You're not behind.</span>
+    Really. Pick one level. Try one prompt. Start this week. The whole point of today was to make this feel possible — not perfect.
+  </div>
+
+  <div class="labs-hero">
+    <h2>Start here: hands-on labs</h2>
+    <div class="sub">Self-paced, free, made by Microsoft. The no-code path is the right starting lane for most teams.</div>
+    <div class="labs-grid">
+      <a class="lab-card featured" href="https://microsoft.github.io/copilot-camp/pages/make/" target="_blank" rel="noopener">
+        <span class="badge">Start here</span>
+        <h3>Copilot Camp — No-code</h3>
+        <p>Build agents in Copilot Studio without writing code.</p>
+      </a>
+      <a class="lab-card" href="https://microsoft.github.io/copilot-camp/" target="_blank" rel="noopener">
+        <span class="badge">All paths</span>
+        <h3>Copilot Camp</h3>
+        <p>Maker, developer, and admin tracks.</p>
+      </a>
+      <a class="lab-card" href="https://microsoft.github.io/agent-academy/" target="_blank" rel="noopener">
+        <span class="badge">Go deeper</span>
+        <h3>Agent Academy</h3>
+        <p>Reasoning, orchestration, multi-agent patterns.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="section-title">The five levels</div>
+
+  <div class="level l1">
+    <div class="level-head"><span class="level-num">Level 1</span><div class="level-title">Knowledge agents</div></div>
+    <div class="level-desc">Answer questions from your policies, guidance, and programme docs. Build one directly inside Microsoft 365 Copilot — like Laura's Handover Agent.</div>
+    <div class="level-links">
+      <a class="lvl-link tool" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Open M365 Copilot</a>
+      <a class="lvl-link" href="https://microsoft.github.io/copilot-camp/pages/make/" target="_blank" rel="noopener">No-code lab</a>
+    </div>
+    <div class="prompt">
+      <div class="prompt-head"><div class="prompt-label">Try this · Policy &amp; Guidance Agent</div><button class="copy-btn" data-copy="p1">Copy</button></div>
+      <div class="prompt-text" id="p1">You are our Policy and Guidance Agent for field staff.
+
+When a colleague asks a question, do these things in order:
+
+Step 1. Search only the documents I have grounded you in: safeguarding, procurement, duty of care, and code of conduct.
+Step 2. Answer in plain language a new joiner can understand.
+Step 3. Always cite the document name and section.
+Step 4. If the policies do not cover the question, say so clearly. Do not guess.
+Step 5. End your reply by suggesting the right focal point to contact for more help, if you know one.
+
+Start by asking me: what policy question can I help you with today?</div>
+    </div>
+  </div>
+
+  <div class="level l2">
+    <div class="level-head"><span class="level-num">Level 2</span><div class="level-title">Workflow agents</div></div>
+    <div class="level-desc">Extract, flag, and route information — like the Partner Report Intake Agent we built today. Built in Copilot Studio.</div>
+    <div class="level-links">
+      <a class="lvl-link tool" href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Open Copilot Studio</a>
+      <a class="lvl-link" href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-get-started" target="_blank" rel="noopener">Quickstart</a>
+    </div>
+    <div class="prompt">
+      <div class="prompt-head"><div class="prompt-label">Try this · Partner Report Intake Agent</div><button class="copy-btn" data-copy="p2">Copy</button></div>
+      <div class="prompt-text" id="p2">You are our Partner Report Intake Agent.
+
+When I share a partner narrative report, do these five things in order:
+
+Step 1. Pull out the key facts: reporting period, geography, beneficiaries reached (disaggregated if available), activities delivered, and budget spent versus planned.
+Step 2. Flag any of the following issues: missing safeguarding section, beneficiary numbers that look inconsistent with prior reports, unspent budget greater than 20 percent, or vague and copy-pasted activity descriptions.
+Step 3. Suggest three follow-up questions for the programme officer to ask the partner.
+Step 4. Rate the overall report quality from 1 to 5 with one sentence explaining the rating.
+Step 5. Present everything as a short structured summary with clear headings. Do not write a long essay.
+
+Start by asking me to paste or attach the report.</div>
+    </div>
+  </div>
+
+  <div class="level l3">
+    <div class="level-head"><span class="level-num">Level 3</span><div class="level-title">Specialised AI</div></div>
+    <div class="level-desc">Ground agents in your own data with retrieval. The RAG lab walks you through it step by step.</div>
+    <div class="level-links">
+      <a class="lvl-link tool" href="https://microsoft.github.io/copilot-camp/pages/make/copilot-studio/08-rag/" target="_blank" rel="noopener">RAG lab</a>
+      <a class="lvl-link" href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Build in Copilot Studio</a>
+    </div>
+    <div class="prompt">
+      <div class="prompt-head"><div class="prompt-label">Try this · Programme Knowledge Agent</div><button class="copy-btn" data-copy="p3">Copy</button></div>
+      <div class="prompt-text" id="p3">You are our Programme Knowledge Agent. You are grounded in our country strategies, evaluation reports, and lessons-learned documents from the past 5 years.
+
+When I ask a question, follow these steps:
+
+Step 1. Retrieve the most relevant passages from the grounded sources only.
+Step 2. Answer with what we have actually learned from our own evidence, not generic best practice.
+Step 3. Always cite the source document, year, and country.
+Step 4. If two sources disagree, show both and tell me which one is more recent.
+Step 5. End with one honest suggestion of what we still do not know and where the evidence is thin.
+
+Start by asking me: what would you like to learn from our own evidence?</div>
+    </div>
+  </div>
+
+  <div class="level l4">
+    <div class="level-head"><span class="level-num">Level 4</span><div class="level-title">Agentic reasoning</div></div>
+    <div class="level-desc">Multi-step problem solving with you in the loop. Try Microsoft Copilot Cowork — the Frontier preview we demoed today.</div>
+    <div class="level-links">
+      <a class="lvl-link tool" href="https://aka.ms/cowork" target="_blank" rel="noopener">Try Copilot Cowork</a>
+    </div>
+    <div class="prompt">
+      <div class="prompt-head"><div class="prompt-label">Try this in Cowork · Flash Appeal Gap Finder</div><button class="copy-btn" data-copy="p4">Copy</button></div>
+      <div class="prompt-text" id="p4">I need you to review the attached Flash Appeal draft and help me strengthen it before submission.
+
+Work through the following steps in order. Pause after each step so I can confirm before you continue.
+
+Step 1. Read the appeal and summarise the response strategy in 5 short bullets.
+Step 2. Identify gaps. Look for sectors with weak needs analysis, missing protection or safeguarding considerations, unrealistic timelines, and budget lines without clear justification.
+Step 3. Cross-check the beneficiary numbers across sectors for internal consistency and flag anything that does not add up.
+Step 4. Draft 3 questions a donor reviewer is likely to ask when they see this draft.
+Step 5. Suggest where I can pull stronger evidence from our existing assessments and previous reports.
+Step 6. Give me one final recommendation: is this appeal ready to submit, ready with edits, or needs significant rework?
+
+Start with Step 1 and wait for my confirmation before moving on.</div>
+    </div>
+  </div>
+
+  <div class="level l5">
+    <div class="level-head"><span class="level-num">Level 5</span><div class="level-title">Agent teams</div></div>
+    <div class="level-desc">Multiple agents working together across logistics, finance, needs assessment, and reporting. The connected agents lab is the on-ramp.</div>
+    <div class="level-links">
+      <a class="lvl-link tool" href="https://microsoft.github.io/copilot-camp/pages/make/copilot-studio/09-connected-agents/" target="_blank" rel="noopener">Connected agents lab</a>
+    </div>
+    <div class="prompt">
+      <div class="prompt-head"><div class="prompt-label">Try this · Earthquake Response Orchestrator</div><button class="copy-btn" data-copy="p5">Copy</button></div>
+      <div class="prompt-text" id="p5">You are the Response Orchestrator. You coordinate four connected agents:
+
+- Needs Assessment Agent: pulls the latest situation reports.
+- Logistics Agent: checks pre-positioned stocks and transport routes.
+- Finance Agent: checks available emergency funds and donor restrictions.
+- Reporting Agent: drafts the 24-hour situation report.
+
+When I give you a new incident, follow these steps in order:
+
+Step 1. Tell each of the four agents exactly what to look into for this incident.
+Step 2. Wait for their findings and collect the results.
+Step 3. Synthesise everything into one decision brief with four sections: what we know, what we do not know, recommended actions for the first 48 hours, and the top 3 risks.
+Step 4. Clearly flag anything that needs human approval before any action is taken.
+Step 5. End by listing the open questions that the human team needs to answer next.
+
+The incident is:</div>
+    </div>
+  </div>
+
+  <div class="section-title">Learn more</div>
+  <div class="cards2">
+    <div class="card">
+      <h3>Docs &amp; quickstarts</h3>
+      <a href="https://learn.microsoft.com/microsoft-copilot-studio/" target="_blank" rel="noopener">Copilot Studio documentation →</a>
+      <a href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-get-started" target="_blank" rel="noopener">Agent building quickstart →</a>
+      <a href="https://www.microsoft.com/ai/responsible-ai" target="_blank" rel="noopener">Responsible AI at Microsoft →</a>
+    </div>
+    <div class="card alt">
+      <h3>NetHope &amp; the sector</h3>
+      <a href="https://nethope.org/ai-readiness/" target="_blank" rel="noopener">NetHope AI Readiness Framework →</a>
+      <a href="https://nethope.org/" target="_blank" rel="noopener">NetHope Center for the Digital Nonprofit →</a>
+    </div>
+  </div>
+
+  <div class="section-title">Stay in touch</div>
+  <div class="people">
+    <div class="person">
+      <svg class="figure" width="60" height="70" viewBox="0 0 60 70" fill="none">
+        <circle cx="30" cy="20" r="14" fill="#e8b4b8" stroke="#3d3935" stroke-width="2"/>
+        <circle cx="26" cy="19" r="1.6" fill="#3d3935"/>
+        <circle cx="34" cy="19" r="1.6" fill="#3d3935"/>
+        <path d="M18 36 Q14 55 18 68" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M42 36 Q46 55 42 68" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M18 36 Q30 32 42 36" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="role">Co-host</div>
+      <div class="name">Laura Rubio</div>
+      <div class="title">HR &amp; organizational development, UNAIDS</div>
+      <a href="https://www.linkedin.com/in/laura-rubio-pro/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+    <div class="person alt">
+      <svg class="figure" width="60" height="70" viewBox="0 0 60 70" fill="none">
+        <circle cx="30" cy="20" r="14" fill="#a8c4a2" stroke="#3d3935" stroke-width="2"/>
+        <circle cx="26" cy="19" r="1.6" fill="#3d3935"/>
+        <circle cx="34" cy="19" r="1.6" fill="#3d3935"/>
+        <path d="M18 36 Q14 55 18 68" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M42 36 Q46 55 42 68" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M18 36 Q30 32 42 36" stroke="#3d3935" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+      <div class="role">Co-host</div>
+      <div class="name">Jivtesh Singh</div>
+      <div class="title">Microsoft AI Global Black Belt · Geneva</div>
+      <a href="https://www.linkedin.com/in/jivtesh/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="footer-callback">
+    <p>You're not behind.<br>Pick one level.<br>Start this week.</p>
+    <span class="small">That's it. That's the whole pep talk.</span>
+  </div>
+
+  <div class="foot">Yes, And... AI · NetHope Webinar · April 7, 2026</div>
+</div>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=btn.getAttribute('data-copy');
+    const txt=document.getElementById(id).innerText;
+    navigator.clipboard.writeText(txt).then(()=>{
+      const orig=btn.textContent;
+      btn.textContent='Copied!';
+      btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied');},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>
