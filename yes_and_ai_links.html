@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yes, And... AI — Your Next Steps | NetHope Webinar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#6366f1; --primary-dark:#4338ca;
+  --l1:#16a34a; --l2:#2563eb; --l3:#7c3aed; --l4:#ea580c; --l5:#dc2626;
+  --gray:#64748b; --ink:#1e293b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(180deg,#f8fafc 0%,#e2e8f0 100%);color:var(--ink);line-height:1.6}
+.header{background:linear-gradient(135deg,#4338ca 0%,#6366f1 50%,#0d9488 100%);color:#fff;padding:3rem 1.5rem;text-align:center}
+.header h1{font-size:2.4rem;font-weight:700;margin-bottom:.5rem;letter-spacing:-.01em}
+.header .subtitle{font-size:1.125rem;opacity:.95}
+.header .meta{margin-top:1rem;font-size:.875rem;opacity:.85}
+.copilot-bar{background:linear-gradient(135deg,#0078d4 0%,#106ebe 100%);color:#fff;padding:1rem 1.5rem;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.copilot-bar p{margin-bottom:.75rem;font-size:.9rem}
+.copilot-link{display:inline-block;background:rgba(255,255,255,.2);color:#fff;text-decoration:none;padding:.625rem 1.5rem;border-radius:2rem;font-weight:600;border:2px solid rgba(255,255,255,.3);transition:all .2s}
+.copilot-link:hover{background:rgba(255,255,255,.3);transform:translateY(-2px)}
+.container{max-width:62rem;margin:0 auto;padding:1.5rem}
+.opener{background:#fff;border-radius:1rem;padding:1.5rem 2rem;margin-bottom:1.5rem;border-left:4px solid var(--primary);box-shadow:0 1px 3px rgba(0,0,0,.1);font-size:1.05rem}
+.opener strong{color:var(--primary-dark)}
+.labs-hero{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);color:#fff;border-radius:1rem;padding:2rem;margin-bottom:2rem;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.labs-hero h2{font-size:1.5rem;margin-bottom:.5rem}
+.labs-hero p{opacity:.85;margin-bottom:1.25rem;font-size:.95rem}
+.labs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.lab-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:.75rem;padding:1.25rem;text-decoration:none;color:#fff;transition:all .2s;display:block}
+.lab-card:hover{background:rgba(255,255,255,.15);transform:translateY(-3px);border-color:rgba(255,255,255,.35)}
+.lab-card.featured{background:linear-gradient(135deg,#7c3aed 0%,#6366f1 100%);border-color:rgba(255,255,255,.3)}
+.lab-card .badge{display:inline-block;font-size:.65rem;background:rgba(255,255,255,.25);padding:.2rem .55rem;border-radius:1rem;margin-bottom:.5rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.lab-card h3{font-size:1rem;margin-bottom:.35rem}
+.lab-card p{font-size:.8rem;opacity:.85;margin:0}
+.section-title{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);margin:2rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid #e2e8f0}
+.level{background:#fff;border-radius:1rem;margin-bottom:1rem;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.07);display:grid;grid-template-columns:auto 1fr;align-items:stretch}
+.level-stripe{width:8px}
+.level-body{padding:1.25rem 1.5rem}
+.level-head{display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+.level-num{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.25rem .6rem;border-radius:1rem;color:#fff}
+.level-title{font-size:1.15rem;font-weight:700;color:var(--ink)}
+.level-desc{font-size:.9rem;color:#475569;margin-bottom:.85rem}
+.level-links{display:flex;flex-wrap:wrap;gap:.5rem}
+.lvl-link{font-size:.8rem;font-weight:600;text-decoration:none;padding:.45rem .85rem;border-radius:.5rem;border:1.5px solid #e2e8f0;color:var(--ink);transition:all .15s;background:#f8fafc}
+.lvl-link:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.lvl-link.tool{background:var(--ink);color:#fff;border-color:var(--ink)}
+.lvl-link.tool:hover{background:#0f172a}
+.prompt{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.75rem;padding:1rem 1.1rem;margin-top:1rem;border-left:4px solid #cbd5e1}
+.prompt-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;gap:.5rem;flex-wrap:wrap}
+.prompt-label{font-size:.8rem;font-weight:700;color:var(--ink)}
+.prompt-text{background:#fff;border:1px solid #e2e8f0;border-radius:.5rem;padding:.85rem 1rem;font-size:.82rem;line-height:1.6;white-space:pre-wrap;color:#334155;font-family:'Inter',sans-serif}
+.copy-btn{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);color:#fff;border:none;padding:.45rem 1rem;border-radius:.5rem;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:'Inter',sans-serif}
+.copy-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(99,102,241,.3)}
+.copy-btn.copied{background:linear-gradient(135deg,#16a34a 0%,#15803d 100%)}
+.l1 .prompt{border-left-color:var(--l1)}
+.l2 .prompt{border-left-color:var(--l2)}
+.l3 .prompt{border-left-color:var(--l3)}
+.l4 .prompt{border-left-color:var(--l4)}
+.l5 .prompt{border-left-color:var(--l5)}
+.l1 .level-stripe{background:var(--l1)} .l1 .level-num{background:var(--l1)}
+.l2 .level-stripe{background:var(--l2)} .l2 .level-num{background:var(--l2)}
+.l3 .level-stripe{background:var(--l3)} .l3 .level-num{background:var(--l3)}
+.l4 .level-stripe{background:var(--l4)} .l4 .level-num{background:var(--l4)}
+.l5 .level-stripe{background:var(--l5)} .l5 .level-num{background:var(--l5)}
+.cards2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.card{background:#fff;border-radius:1rem;padding:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,.07)}
+.card h3{font-size:1rem;margin-bottom:.85rem;color:var(--primary-dark)}
+.card a{display:block;font-size:.85rem;color:#2563eb;text-decoration:none;padding:.4rem 0;border-bottom:1px solid #f1f5f9}
+.card a:last-child{border-bottom:none}
+.card a:hover{color:var(--primary-dark);padding-left:.25rem}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.person{background:#fff;border-radius:1rem;padding:1.5rem;box-shadow:0 4px 6px rgba(0,0,0,.07);text-align:center}
+.person .role{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-bottom:.35rem}
+.person .name{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:var(--ink)}
+.person a{display:inline-block;background:#0a66c2;color:#fff;text-decoration:none;padding:.5rem 1.1rem;border-radius:2rem;font-size:.8rem;font-weight:600}
+.person a:hover{background:#084d92}
+.footer-callback{background:linear-gradient(135deg,#4338ca 0%,#0d9488 100%);color:#fff;border-radius:1rem;padding:2.25rem 1.5rem;text-align:center;margin-bottom:1.5rem}
+.footer-callback p{font-size:1.5rem;font-weight:700;line-height:1.4;letter-spacing:-.01em}
+.foot{text-align:center;font-size:.75rem;color:var(--gray);padding:1rem 0 2rem}
+@media (max-width:720px){
+  .labs-grid,.cards2,.people{grid-template-columns:1fr}
+  .header h1{font-size:1.8rem}
+  .footer-callback p{font-size:1.15rem}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Yes, And... AI</h1>
+  <div class="subtitle">Your next steps from today's NetHope session</div>
+  <div class="meta">April 7, 2026 · with Jivtesh Singh (Microsoft) &amp; Laura Rubio (UNAIDS)</div>
+</div>
+
+<div class="copilot-bar">
+  <p>New here? The fastest way in is Microsoft 365 Copilot.</p>
+  <a class="copilot-link" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Open Microsoft 365 Copilot →</a>
+</div>
+
+<div class="container">
+
+  <div class="opener">
+    Thanks for joining us today. <strong>You're not behind.</strong> Pick one level, try one lab, and start this week. Everything we showed and everywhere we pointed is below.
+  </div>
+
+  <div class="labs-hero">
+    <h2>Start here: hands-on labs</h2>
+    <p>Self-paced, free, and built by Microsoft. The no-code path is the right starting lane for most nonprofit teams.</p>
+    <div class="labs-grid">
+      <a class="lab-card featured" href="https://microsoft.github.io/copilot-camp/pages/make/" target="_blank" rel="noopener">
+        <span class="badge">Recommended</span>
+        <h3>Copilot Camp — No-code path</h3>
+        <p>Build agents in Copilot Studio without writing code. Start here.</p>
+      </a>
+      <a class="lab-card" href="https://microsoft.github.io/copilot-camp/" target="_blank" rel="noopener">
+        <span class="badge">All paths</span>
+        <h3>Copilot Camp</h3>
+        <p>Full curriculum: maker, developer, and admin tracks.</p>
+      </a>
+      <a class="lab-card" href="https://microsoft.github.io/agent-academy/" target="_blank" rel="noopener">
+        <span class="badge">Go deeper</span>
+        <h3>Agent Academy</h3>
+        <p>Advanced patterns: reasoning, orchestration, multi-agent.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="section-title">The five levels — tool + lab for each</div>
+
+  <div class="level l1">
+    <div class="level-stripe"></div>
+    <div class="level-body">
+      <div class="level-head"><span class="level-num">Level 1</span><div class="level-title">Knowledge agents</div></div>
+      <div class="level-desc">Answer questions from your policies, guidance, and programme docs. Create an agent directly inside Microsoft 365 Copilot — like Laura's Handover Agent.</div>
+      <div class="level-links">
+        <a class="lvl-link tool" href="https://copilot.microsoft.com" target="_blank" rel="noopener">Open M365 Copilot</a>
+        <a class="lvl-link" href="https://microsoft.github.io/copilot-camp/pages/make/" target="_blank" rel="noopener">No-code lab path</a>
+      </div>
+      <div class="prompt">
+        <div class="prompt-head"><div class="prompt-label">Try this: Policy &amp; Guidance Agent</div><button class="copy-btn" data-copy="p1">Copy</button></div>
+        <div class="prompt-text" id="p1">You are our Policy &amp; Guidance Agent for field staff.
+
+When a colleague asks a question:
+1. Search only the documents I've grounded you in (safeguarding, procurement, duty of care, code of conduct).
+2. Answer in plain language a new joiner can understand.
+3. Always cite the document name and section.
+4. If the policies don't cover the question, say so clearly. Do not guess.
+5. End with: "Who should I contact if I need more help?" and suggest the right focal point if known.
+
+What policy question can I help you with?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level l2">
+    <div class="level-stripe"></div>
+    <div class="level-body">
+      <div class="level-head"><span class="level-num">Level 2</span><div class="level-title">Workflow agents</div></div>
+      <div class="level-desc">Extract, flag, and route information — like the Partner Report Intake Agent we built today. Built in Copilot Studio.</div>
+      <div class="level-links">
+        <a class="lvl-link tool" href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Open Copilot Studio</a>
+        <a class="lvl-link" href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-get-started" target="_blank" rel="noopener">Quickstart guide</a>
+      </div>
+      <div class="prompt">
+        <div class="prompt-head"><div class="prompt-label">Try this: Partner Report Intake Agent</div><button class="copy-btn" data-copy="p2">Copy</button></div>
+        <div class="prompt-text" id="p2">You are our Partner Report Intake Agent.
+
+When I share a partner narrative report:
+1. Pull out: reporting period, geography, beneficiaries reached (disaggregated if available), activities delivered, budget spent vs planned.
+2. Flag any of: missing safeguarding section, beneficiary numbers that look inconsistent with prior reports, unspent budget &gt; 20%, vague or copy-pasted activity descriptions.
+3. Suggest 3 follow-up questions for the programme officer.
+4. Output everything as a short structured summary, not a long essay.
+
+Ready when you are. Paste or attach the report.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level l3">
+    <div class="level-stripe"></div>
+    <div class="level-body">
+      <div class="level-head"><span class="level-num">Level 3</span><div class="level-title">Specialised AI</div></div>
+      <div class="level-desc">Ground agents in your own data with retrieval. The RAG lab walks you through it step by step.</div>
+      <div class="level-links">
+        <a class="lvl-link tool" href="https://microsoft.github.io/copilot-camp/pages/make/copilot-studio/08-rag/" target="_blank" rel="noopener">RAG lab</a>
+        <a class="lvl-link" href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">Build it in Copilot Studio</a>
+      </div>
+      <div class="prompt">
+        <div class="prompt-head"><div class="prompt-label">Try this: Programme Knowledge Agent (RAG)</div><button class="copy-btn" data-copy="p3">Copy</button></div>
+        <div class="prompt-text" id="p3">You are our Programme Knowledge Agent, grounded in our country strategy, evaluation reports, and lessons-learned documents from the past 5 years.
+
+When I ask a question:
+1. Retrieve the most relevant passages from the grounded sources.
+2. Answer with what we have actually learned, not generic best practice.
+3. Always cite source document, year, and country.
+4. If two sources disagree, show both and tell me which is more recent.
+5. End with one suggestion for what we still don't know.
+
+What would you like to learn from our own evidence?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level l4">
+    <div class="level-stripe"></div>
+    <div class="level-body">
+      <div class="level-head"><span class="level-num">Level 4</span><div class="level-title">Agentic reasoning</div></div>
+      <div class="level-desc">Multi-step problem solving with you in the loop. Try Microsoft Copilot Cowork — the Frontier preview we demoed.</div>
+      <div class="level-links">
+        <a class="lvl-link tool" href="https://aka.ms/cowork" target="_blank" rel="noopener">Try Copilot Cowork</a>
+      </div>
+      <div class="prompt">
+        <div class="prompt-head"><div class="prompt-label">Try this in Cowork: Flash Appeal Gap Finder</div><button class="copy-btn" data-copy="p4">Copy</button></div>
+        <div class="prompt-text" id="p4">I need you to review the attached Flash Appeal draft and help me strengthen it before submission.
+
+Work through this in steps and check in with me before each one:
+1. Read the appeal and summarise the response strategy in 5 bullets.
+2. Identify gaps: sectors with weak needs analysis, missing protection or safeguarding considerations, unrealistic timelines, budget lines without justification.
+3. Cross-check the beneficiary numbers across sectors for internal consistency.
+4. Draft 3 questions a donor reviewer is likely to ask.
+5. Suggest where I can pull stronger evidence from our existing assessments.
+
+Pause after each step so I can confirm before you continue.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level l5">
+    <div class="level-stripe"></div>
+    <div class="level-body">
+      <div class="level-head"><span class="level-num">Level 5</span><div class="level-title">Agent teams</div></div>
+      <div class="level-desc">Multiple agents working together across logistics, finance, needs assessment, and reporting. The connected agents lab is the on-ramp.</div>
+      <div class="level-links">
+        <a class="lvl-link tool" href="https://microsoft.github.io/copilot-camp/pages/make/copilot-studio/09-connected-agents/" target="_blank" rel="noopener">Connected agents lab</a>
+      </div>
+      <div class="prompt">
+        <div class="prompt-head"><div class="prompt-label">Try this: Earthquake Response Orchestrator</div><button class="copy-btn" data-copy="p5">Copy</button></div>
+        <div class="prompt-text" id="p5">You are the Response Orchestrator. You coordinate four connected agents:
+- Needs Assessment Agent (pulls latest situation reports)
+- Logistics Agent (checks pre-positioned stocks and transport routes)
+- Finance Agent (checks available emergency funds and donor restrictions)
+- Reporting Agent (drafts the 24-hour sitrep)
+
+When I give you a new incident:
+1. Tell each agent what to look into.
+2. Wait for their findings.
+3. Synthesise into one decision brief: what we know, what we don't, recommended first 48 hours, top 3 risks.
+4. Flag anything that needs human approval before action.
+
+Incident:</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Learn more</div>
+  <div class="cards2">
+    <div class="card">
+      <h3>Docs &amp; quickstarts</h3>
+      <a href="https://learn.microsoft.com/microsoft-copilot-studio/" target="_blank" rel="noopener">Copilot Studio documentation →</a>
+      <a href="https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-get-started" target="_blank" rel="noopener">Agent building quickstart →</a>
+      <a href="https://www.microsoft.com/ai/responsible-ai" target="_blank" rel="noopener">Responsible AI at Microsoft →</a>
+    </div>
+    <div class="card">
+      <h3>NetHope &amp; the sector</h3>
+      <a href="https://nethope.org/ai-readiness/" target="_blank" rel="noopener">NetHope AI Readiness Framework →</a>
+      <a href="https://nethope.org/" target="_blank" rel="noopener">NetHope Center for the Digital Nonprofit →</a>
+    </div>
+  </div>
+
+  <div class="section-title">Stay in touch</div>
+  <div class="people">
+    <div class="person">
+      <div class="role">Co-host</div>
+      <div class="name">Laura Rubio</div>
+      <div style="font-size:.8rem;color:var(--gray);margin-bottom:.85rem">UNAIDS · HR &amp; organizational transformation</div>
+      <a href="https://www.linkedin.com/in/laura-rubio-pro/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+    <div class="person">
+      <div class="role">Co-host</div>
+      <div class="name">Jivtesh Singh</div>
+      <div style="font-size:.8rem;color:var(--gray);margin-bottom:.85rem">Microsoft AI Global Black Belt · Geneva</div>
+      <a href="https://www.linkedin.com/in/jivtesh/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="footer-callback">
+    <p>You're not behind.<br>Pick one level. Start this week.</p>
+  </div>
+
+  <div class="foot">Yes, And... AI · NetHope Webinar · April 7, 2026</div>
+</div>
+<script>
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=btn.getAttribute('data-copy');
+    const txt=document.getElementById(id).innerText;
+    navigator.clipboard.writeText(txt).then(()=>{
+      const orig=btn.textContent;
+      btn.textContent='Copied!';
+      btn.classList.add('copied');
+      setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied');},1600);
+    });
+  });
+});
+</script>
+</body>
+</html>
