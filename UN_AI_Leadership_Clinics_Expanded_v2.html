@@ -4,96 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Leadership Clinics | UN Senior Leaders</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --un-blue: #009EDB;
             --un-dark: #005a87;
+            --warm-accent: #c4704a;
+            --warm-accent-light: #e8b5a0;
+            --warm-gold: #b8860b;
             --success: #16a34a;
             --warning: #ea580c;
             --danger: #dc2626;
             --purple: #7c3aed;
             --teal: #0d9488;
             --gray: #64748b;
+            --bg-primary: #f5f3f0;
+            --bg-secondary: #fffaf6;
+            --text-dark: #2c2c2c;
+            --text-muted: #666;
+            --border-warm: #e8ddd5;
+            --border-subtle: #f0ebe5;
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-            color: #1e293b;
-            line-height: 1.6;
+            font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
         }
         
         .header {
-            background: linear-gradient(135deg, var(--un-blue) 0%, var(--un-dark) 100%);
+            background: #1a2a3a;
             color: white;
-            padding: 3rem 1.5rem;
+            padding: 2.5rem 1.5rem 3rem;
             text-align: center;
+            border-bottom: 4px solid var(--warm-accent);
         }
         
-        .header h1 { font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .header .subtitle { font-size: 1.125rem; opacity: 0.9; }
-        .header .meta { margin-top: 1rem; font-size: 0.875rem; opacity: 0.8; }
+        .header h1 { font-family: 'Lora', Georgia, serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+        .header .subtitle { font-size: 1.125rem; opacity: 0.85; font-weight: 300; }
+        .header .meta { margin-top: 1rem; font-size: 0.875rem; opacity: 0.6; }
+        
+        .header .breadcrumb { margin-bottom: 1.5rem; font-size: 0.85rem; opacity: 0.7; }
+        .header .breadcrumb a { color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); transition: border-color 0.4s; }
+        .header .breadcrumb a:hover { border-bottom-color: white; }
         
         .copilot-bar {
-            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            background: #1a2a3a;
             color: white;
-            padding: 1rem 1.5rem;
+            padding: 0.875rem 1.5rem;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-bottom: 1px solid var(--border-warm);
         }
         
-        .copilot-bar p { margin-bottom: 0.75rem; font-size: 0.9rem; }
+        .copilot-bar p { margin-bottom: 0.5rem; font-size: 0.85rem; opacity: 0.9; }
         
         .copilot-link {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
+            background: var(--un-blue);
             color: white;
             text-decoration: none;
-            padding: 0.625rem 1.5rem;
-            border-radius: 2rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.25rem;
             font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.3);
-            transition: all 0.2s;
+            border: none;
+            transition: all 0.4s;
         }
         
-        .copilot-link:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+        .copilot-link:hover { background: var(--un-dark); }
         
-        .container { max-width: 60rem; margin: 0 auto; padding: 1.5rem; }
+        .container { max-width: 60rem; margin: 0 auto; padding: 2rem 1.5rem; }
         
         /* Account for sidebar on desktop */
         @media (min-width: 901px) {
-            .container { margin-left: 4rem; }
+            .container { margin-left: 12.5rem; }
         }
         
         .instructions {
-            background: white;
-            border-radius: 1rem;
-            padding: 1.5rem 2rem;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--un-blue);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: var(--bg-secondary);
+            border-radius: 0.25rem;
+            padding: 2rem 2.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--warm-accent);
         }
         
-        .instructions h3 { color: var(--un-dark); margin-bottom: 1rem; }
+        .instructions h3 { font-family: 'Lora', Georgia, serif; color: var(--un-dark); margin-bottom: 1rem; }
         .instructions ol { margin-left: 1.25rem; }
         .instructions li { margin-bottom: 0.5rem; }
         
         .legend {
-            background: white;
-            border-radius: 0.75rem;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 0.25rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
             font-size: 0.75rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-warm);
         }
         
         .legend-item {
@@ -108,8 +131,8 @@
             border-radius: 3px;
         }
         
-        .nav-section { margin-bottom: 1.5rem; }
-        .nav-section h4 { font-size: 0.75rem; color: var(--gray); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .nav-section { margin-bottom: 2rem; }
+        .nav-section h4 { font-family: 'Lora', Georgia, serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
         
         .nav-grid {
             display: grid;
@@ -125,77 +148,78 @@
         }
         
         .nav-btn {
-            background: white;
-            border: 2px solid transparent;
-            border-radius: 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-warm);
+            border-top: 3px solid var(--border-warm);
+            border-radius: 0.25rem;
             padding: 0.75rem 0.5rem;
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: all 0.4s;
         }
         
-        .nav-btn:hover { border-color: var(--un-blue); transform: translateY(-2px); }
-        .nav-btn.primary { background: linear-gradient(135deg, var(--un-blue) 0%, var(--un-dark) 100%); color: white; }
-        .nav-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,158,219,0.3); }
+        .nav-btn:hover { border-top-color: var(--un-blue); }
+        .nav-btn.primary { background: var(--un-blue); color: white; border-color: var(--un-blue); border-top-color: var(--warm-accent); }
+        .nav-btn.primary:hover { background: var(--un-dark); }
         .nav-btn span { display: block; font-size: 1.25rem; margin-bottom: 0.25rem; }
         
         .nav-btn-secondary {
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-warm);
+            border-radius: 0.25rem;
             padding: 0.5rem;
             font-size: 0.7rem;
             font-weight: 500;
             cursor: pointer;
             text-align: center;
-            transition: all 0.2s;
+            transition: all 0.4s;
         }
         
-        .nav-btn-secondary:hover { background: #e2e8f0; }
+        .nav-btn-secondary:hover { background: var(--border-subtle); border-color: var(--un-blue); }
         
         .category {
             background: white;
-            border-radius: 1rem;
-            margin-bottom: 2rem;
+            border-radius: 0.25rem;
+            margin-bottom: 4rem;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            border-top: 4px solid var(--warm-accent);
         }
         
         .cat-header {
-            background: linear-gradient(135deg, var(--un-blue) 0%, var(--un-dark) 100%);
+            background: #1a2a3a;
             color: white;
-            padding: 1.5rem;
+            padding: 2rem 2.5rem;
         }
         
-        .cat-header h2 { font-size: 1.25rem; margin-bottom: 0.25rem; }
-        .cat-header .for { font-size: 0.875rem; opacity: 0.9; }
+        .cat-header h2 { font-family: 'Lora', Georgia, serif; font-size: 1.375rem; margin-bottom: 0.25rem; letter-spacing: -0.3px; }
+        .cat-header .for { font-size: 0.875rem; opacity: 0.7; font-weight: 300; }
         
-        .cat-body { padding: 1.5rem; }
+        .cat-body { padding: 2.5rem; }
         
         .scenario {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 1rem 1.25rem;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
+            background: #fef9f3;
+            border-left: 4px solid var(--warm-gold);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0.25rem;
+            margin-bottom: 2rem;
         }
         
-        .scenario strong { color: #b45309; }
+        .scenario strong { color: #92400e; }
         
         .section-title {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.85rem;
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin: 2rem 0 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
+            letter-spacing: 0.08em;
+            margin: 2.5rem 0 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-warm);
         }
         
         .section-title.green { color: var(--success); }
@@ -222,22 +246,23 @@
         .badge.gray { background: #f1f5f9; color: var(--gray); }
         
         .tip {
-            background: #eff6ff;
-            border-radius: 0.5rem;
-            padding: 0.75rem 1rem;
+            background: #f0f4f8;
+            border-radius: 0.25rem;
+            padding: 0.875rem 1.25rem;
             font-size: 0.8rem;
             color: #1d4ed8;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--un-blue);
         }
         
         .tip strong { color: #1e40af; }
         
         .prompt {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-warm);
+            border-radius: 0.25rem;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
             position: relative;
         }
         
@@ -290,43 +315,73 @@
         .tag.image { background: #fef3c7; color: #92400e; }
         .tag.m365 { background: #dbeafe; color: #1e40af; }
         
-        /* Sticky Section Indicator - Desktop Sidebar */
+        /* Sticky Section Indicator - Desktop Sidebar (Table of Contents) */
         .section-sidebar {
             position: fixed;
-            left: 0.5rem;
+            left: 0;
             top: 50%;
             transform: translateY(-50%);
             background: white;
-            border-radius: 0.75rem;
-            padding: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 0 0.25rem 0.25rem 0;
+            padding: 0.75rem 0;
+            border: 1px solid var(--border-warm);
+            border-left: none;
             z-index: 90;
             display: flex;
             flex-direction: column;
-            gap: 0.25rem;
+            gap: 0;
+            width: 11.5rem;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .section-sidebar .toc-title {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            padding: 0.25rem 1rem 0.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 0.25rem;
         }
         
         .section-sidebar a {
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 0.5rem;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.2s;
-            opacity: 0.6;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .section-sidebar a .toc-num {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--gray);
+            min-width: 1.25rem;
         }
         
         .section-sidebar a:hover {
-            background: #f1f5f9;
-            opacity: 1;
+            background: var(--border-subtle);
+            color: var(--text-dark);
+            border-left-color: var(--border-warm);
         }
         
         .section-sidebar a.active {
-            background: var(--un-blue);
-            opacity: 1;
+            background: #e8f4fa;
+            color: var(--un-dark);
+            font-weight: 700;
+            border-left-color: var(--un-blue);
+        }
+
+        .section-sidebar a.active .toc-num {
+            color: var(--un-blue);
         }
         
         /* Mobile Section Indicator */
@@ -338,8 +393,8 @@
             transform: translateX(-50%);
             background: white;
             padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-radius: 0.25rem;
+            border: 1px solid var(--border-warm);
             z-index: 90;
             font-size: 0.8rem;
             font-weight: 600;
@@ -349,15 +404,111 @@
         .section-indicator-mobile span {
             margin-right: 0.5rem;
         }
-        
+
+        /* Sticky Top Navigation Bar (appears on scroll) */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1a2a3a;
+            color: white;
+            padding: 0 1.5rem;
+            z-index: 110;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 3rem;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+            border-bottom: 2px solid var(--warm-accent);
+        }
+
+        .sticky-nav.visible {
+            transform: translateY(0);
+        }
+
+        .sticky-nav .sticky-nav-title {
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .sticky-nav .sticky-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sticky-nav .sticky-nav-current {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .jump-to-section {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 0.25rem;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.75rem;
+            font-family: 'Source Sans 3', sans-serif;
+            cursor: pointer;
+        }
+
+        .jump-to-section:focus {
+            outline: 2px solid var(--un-blue);
+            outline-offset: 1px;
+        }
+
+        .jump-to-section option {
+            background: #1a2a3a;
+            color: white;
+        }
+
+        .sticky-nav .copilot-link-mini {
+            background: var(--un-blue);
+            color: white;
+            text-decoration: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .sticky-nav .copilot-link-mini:hover {
+            background: var(--un-dark);
+        }
+
+        /* Section dividers between categories */
+        .section-divider {
+            border: none;
+            border-top: 3px solid var(--border-warm);
+            margin: 0;
+            position: relative;
+        }
+
+        .section-divider::after {
+            content: '';
+            display: block;
+            width: 3rem;
+            height: 3px;
+            background: var(--warm-accent);
+            position: absolute;
+            top: -3px;
+            left: 0;
+        }
+
         /* M365 specific styling */
         .cat-header.m365 {
-            background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+            background: #0a3d5f;
         }
         
-        .prompt.m365 { border-left: 4px solid #0078d4; background: #f0f9ff; }
+        .prompt.m365 { border-left: 4px solid #0078d4; background: #f5f9fc; }
         .section-title.m365 { color: #0078d4; }
-        .nav-btn.m365 { background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%); color: white; }
+        .nav-btn.m365 { background: #0078d4; color: white; border-color: #0078d4; border-top-color: var(--warm-accent); }
         
         /* Quick Reference Table Styling */
         .quick-ref-table {
@@ -368,38 +519,42 @@
         }
         
         .quick-ref-table th {
-            background: #f1f5f9;
-            padding: 0.75rem;
+            background: var(--bg-primary);
+            padding: 0.875rem;
             text-align: left;
             font-weight: 600;
-            border-bottom: 2px solid #e2e8f0;
+            font-family: 'Lora', Georgia, serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border-warm);
         }
         
         .quick-ref-table td {
-            padding: 0.75rem;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 0.875rem;
+            border-bottom: 1px solid var(--border-subtle);
             vertical-align: top;
         }
         
         .quick-ref-table code {
-            background: #e0f2fe;
+            background: #e8f1f8;
             padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
+            border-radius: 0.15rem;
             font-family: 'Courier New', monospace;
             font-size: 0.8rem;
             color: #0369a1;
         }
         
         .quick-ref-table tr:hover {
-            background: #f8fafc;
+            background: var(--border-subtle);
         }
         
         .golden-rule {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border: 2px solid #f59e0b;
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            margin-bottom: 1.5rem;
+            background: #fef9f3;
+            border: 2px solid var(--warm-gold);
+            border-radius: 0.25rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
             text-align: center;
         }
         
@@ -415,13 +570,13 @@
         
         .prompt-text {
             background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            font-size: 0.875rem;
-            line-height: 1.7;
+            border: 1px solid var(--border-warm);
+            border-radius: 0.25rem;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            line-height: 1.75;
             white-space: pre-wrap;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
         
         .prompt-footer {
@@ -440,27 +595,27 @@
         }
         
         .copy-btn {
-            background: linear-gradient(135deg, var(--un-blue) 0%, var(--un-dark) 100%);
+            background: var(--un-blue);
             color: white;
             border: none;
             padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
+            border-radius: 0.25rem;
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.4s;
             white-space: nowrap;
         }
         
-        .copy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,158,219,0.3); }
-        .copy-btn.copied { background: linear-gradient(135deg, var(--success) 0%, #15803d 100%); }
+        .copy-btn:hover { background: var(--un-dark); }
+        .copy-btn.copied { background: var(--success); }
         
         .scaffold-container {
-            background: #fffbeb;
-            border: 2px dashed #f59e0b;
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            margin-bottom: 1.5rem;
+            background: #fef9f3;
+            border: 2px dashed var(--warm-gold);
+            border-radius: 0.25rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
         }
         
         .scaffold-header {
@@ -478,9 +633,9 @@
         
         .scaffold-step {
             background: white;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            border-left: 3px solid #f59e0b;
+            border-radius: 0.25rem;
+            padding: 1.25rem;
+            border-left: 3px solid var(--warm-gold);
         }
         
         .scaffold-step-header {
@@ -509,11 +664,11 @@
         }
         
         .agent-instructions {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 1rem;
+            background: #fef5f3;
+            border: 1px solid #f5cdc7;
+            border-radius: 0.25rem;
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
             font-size: 0.85rem;
         }
         
@@ -523,38 +678,40 @@
         .agent-instructions a { color: var(--danger); }
         
         .discussion {
-            background: #eff6ff;
-            border-left: 4px solid #3b82f6;
-            padding: 1rem 1.25rem;
-            border-radius: 0.5rem;
-            margin-top: 2rem;
+            background: #f0f4f8;
+            border-left: 4px solid var(--un-blue);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0.25rem;
+            margin-top: 2.5rem;
         }
         
         .discussion strong { color: #1d4ed8; }
         
         .secondary-note {
-            background: #f1f5f9;
-            border-radius: 0.5rem;
-            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 0.25rem;
+            padding: 1.25rem;
             text-align: center;
-            color: var(--gray);
+            color: var(--text-muted);
             font-size: 0.875rem;
         }
         
         .footer {
-            background: #1e293b;
+            background: #1a2a3a;
             color: white;
             text-align: center;
-            padding: 3rem 1.5rem;
-            margin-top: 2rem;
+            padding: 4rem 1.5rem;
+            margin-top: 3rem;
+            border-top: 4px solid var(--warm-accent);
         }
         
         .footer .action {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
             display: inline-block;
             padding: 1.25rem 2rem;
-            border-radius: 0.75rem;
-            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .footer .credits { opacity: 0.6; font-size: 0.875rem; }
@@ -567,18 +724,18 @@
             background: var(--success);
             color: white;
             padding: 0.875rem 1.5rem;
-            border-radius: 0.5rem;
+            border-radius: 0.25rem;
             font-weight: 500;
-            z-index: 1000;
+            z-index: 10000;
             opacity: 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.4s ease;
         }
         
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
         
         @media (max-width: 900px) {
             .section-sidebar { display: none; }
+            .sticky-nav { display: none; }
             .section-indicator-mobile { display: block; }
         }
         
@@ -586,37 +743,165 @@
             .header h1 { font-size: 1.5rem; }
             .nav-grid { grid-template-columns: repeat(3, 1fr); }
             .nav-grid-secondary { grid-template-columns: repeat(3, 1fr); }
+            .cat-header { padding: 1.5rem; }
             .cat-header h2 { font-size: 1.1rem; }
+            .cat-body { padding: 1.5rem; }
+            .prompt { padding: 1.25rem; }
             .prompt-header { flex-direction: column; }
             .prompt-footer { flex-direction: column; align-items: flex-start; }
             .follow-on { margin-bottom: 0.5rem; }
-            .quick-ref-table { font-size: 0.75rem; }
+            .quick-ref-table { font-size: 0.75rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
             .quick-ref-table code { font-size: 0.7rem; }
+            .m365-subnav { gap: 0.25rem; }
+            .m365-subnav-btn { font-size: 0.65rem; padding: 0.3rem 0.5rem; }
         }
         
         @media print {
-            .copilot-bar, .toast, .copy-btn { display: none; }
+            .copilot-bar, .toast, .copy-btn, .section-sidebar, .section-indicator-mobile, .back-to-top, .sticky-nav, .section-divider { display: none; }
             .category { break-inside: avoid; }
+            body::after { display: none; }
+        }
+        
+        /* M365 Sub-navigation */
+        .m365-subnav {
+            display: flex;
+            gap: 0.375rem;
+            flex-wrap: wrap;
+            padding: 1.25rem 0 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-warm);
+        }
+        
+        .m365-subnav-btn {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-warm);
+            border-radius: 0.25rem;
+            padding: 0.4rem 0.875rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            color: var(--text-dark);
+        }
+        
+        .m365-subnav-btn:hover {
+            background: var(--un-blue);
+            color: white;
+            border-color: var(--un-blue);
+        }
+        
+        /* M365 sub-section divider */
+        .m365-subsection {
+            scroll-margin-top: 4rem;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: white;
+            border: 1px solid var(--border-warm);
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s;
+            z-index: 90;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .back-to-top:hover {
+            background: var(--un-blue);
+            color: white;
+            border-color: var(--un-blue);
+        }
+        
+        /* Footer links */
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s;
+        }
+        
+        .footer a:hover {
+            color: white;
+            border-bottom-color: white;
+        }
+        
+        .footer .hub-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: var(--un-blue);
+            color: white;
+            border-radius: 0.25rem;
+            border: none;
+            font-weight: 600;
+            transition: background 0.4s;
+        }
+        
+        .footer .hub-link:hover {
+            background: var(--un-dark);
+            border-bottom: none;
         }
     </style>
 </head>
 <body>
     <div class="toast" id="toast">✓ Copied! Paste in Copilot</div>
+
+    <!-- Sticky Top Navigation Bar -->
+    <div class="sticky-nav" id="stickyNav">
+        <span class="sticky-nav-title">AI Leadership Clinics</span>
+        <div class="sticky-nav-right">
+            <span class="sticky-nav-current" id="stickyNavCurrent">Leadership</span>
+            <select class="jump-to-section" id="jumpToSection" onchange="if(this.value){document.getElementById(this.value).scrollIntoView({behavior:'smooth'}); this.value='';}">
+                <option value="">Jump to section…</option>
+                <option value="s1">01. Leadership</option>
+                <option value="s2">02. Productivity</option>
+                <option value="s3">03. Budget</option>
+                <option value="s4">04. Donors</option>
+                <option value="s5">05. Workforce</option>
+                <option value="s6">06. Peacekeeping</option>
+                <option value="s7">07. Humanitarian</option>
+                <option value="s8">08. Protection</option>
+                <option value="s9">09. Communications</option>
+                <option value="s10">10. Security</option>
+                <option value="s11">11. Policy</option>
+                <option value="s12">12. Program Mgmt</option>
+                <option value="s13">13. M365 Reference</option>
+            </select>
+            <a href="https://m365copilot.com/" target="_blank" rel="noopener" class="copilot-link-mini">Open Copilot</a>
+        </div>
+    </div>
     
     <!-- Sticky Section Sidebar (Desktop) -->
     <nav class="section-sidebar" id="sectionSidebar">
-        <a href="#s1" title="Leadership" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'}); return false;">🎯</a>
-        <a href="#s2" title="Productivity" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'}); return false;">⚡</a>
-        <a href="#s3" title="Budget" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'}); return false;">💰</a>
-        <a href="#s4" title="Donors" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'}); return false;">🤝</a>
-        <a href="#s5" title="Workforce" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'}); return false;">👥</a>
-        <a href="#s6" title="Peacekeeping" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'}); return false;">🕊️</a>
-        <a href="#s7" title="Humanitarian" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'}); return false;">🚨</a>
-        <a href="#s8" title="Protection" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'}); return false;">🛡️</a>
-        <a href="#s9" title="Communications" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'}); return false;">📢</a>
-        <a href="#s10" title="Security" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'}); return false;">🔒</a>
-        <a href="#s11" title="Policy" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'}); return false;">📋</a>
-        <a href="#s12" title="M365 Quick" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'}); return false;">📱</a>
+        <div class="toc-title">Contents</div>
+        <a href="#s1" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">01</span> Leadership</a>
+        <a href="#s2" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">02</span> Productivity</a>
+        <a href="#s3" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">03</span> Budget</a>
+        <a href="#s4" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">04</span> Donors</a>
+        <a href="#s5" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">05</span> Workforce</a>
+        <a href="#s6" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">06</span> Peacekeeping</a>
+        <a href="#s7" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">07</span> Humanitarian</a>
+        <a href="#s8" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">08</span> Protection</a>
+        <a href="#s9" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">09</span> Communications</a>
+        <a href="#s10" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">10</span> Security</a>
+        <a href="#s11" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">11</span> Policy</a>
+        <a href="#s12" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">12</span> Program Mgmt</a>
+        <a href="#s13" onclick="document.getElementById('s13').scrollIntoView({behavior:'smooth'}); return false;"><span class="toc-num">13</span> M365 Reference</a>
     </nav>
     
     <!-- Mobile Section Indicator -->
@@ -626,9 +911,10 @@
     </div>
 
     <header class="header">
-        <h1>🤖 AI Leadership Clinics</h1>
+        <p class="breadcrumb"><a href="https://jivtesh.github.io/ai/">&larr; AI Resources</a></p>
+        <h1>AI Leadership Clinics</h1>
         <p class="subtitle">Choose Your Own Adventure — Expanded Edition</p>
-        <p class="meta">45 minutes • Groups of 2-4 • Microsoft Garage</p>
+        <p class="meta">45 minutes &bull; Groups of 2–4 &bull; Microsoft Garage</p>
     </header>
     
     <div class="copilot-bar">
@@ -659,36 +945,22 @@
             <div class="legend-item"><div class="legend-dot" style="background: #d1fae5;"></div> 📱 Mobile-Friendly</div>
         </div>
 
-        <nav class="nav-section">
-            <h4>Priority Sections</h4>
-            <div class="nav-grid" style="grid-template-columns: repeat(6, 1fr);">
-                <button class="nav-btn primary" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
-                    <span>🎯</span>Leadership
-                </button>
-                <button class="nav-btn primary" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">
-                    <span>⚡</span>Productivity
-                </button>
-                <button class="nav-btn primary" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">
-                    <span>💰</span>Budget
-                </button>
-                <button class="nav-btn primary" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">
-                    <span>🤝</span>Donors
-                </button>
-                <button class="nav-btn primary" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">
-                    <span>👥</span>Workforce
-                </button>
-                <button class="nav-btn m365" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'})">
-                    <span>📱</span>M365 Quick
-                </button>
-            </div>
-            <h4>Additional Sections</h4>
-            <div class="nav-grid-secondary">
-                <button class="nav-btn-secondary" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">🕊️ Peacekeeping</button>
-                <button class="nav-btn-secondary" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">🚨 Humanitarian</button>
-                <button class="nav-btn-secondary" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})">🛡️ Protection</button>
-                <button class="nav-btn-secondary" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">📢 Communications</button>
-                <button class="nav-btn-secondary" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})">🔒 Security</button>
-                <button class="nav-btn-secondary" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})">📋 Policy</button>
+        <nav class="nav-section" id="navSection">
+            <h4>Table of Contents</h4>
+            <div class="nav-grid" style="grid-template-columns: repeat(5, 1fr);">
+                <button class="nav-btn" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">01. Leadership</button>
+                <button class="nav-btn" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">02. Productivity</button>
+                <button class="nav-btn" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})">03. Budget</button>
+                <button class="nav-btn" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})">04. Donors</button>
+                <button class="nav-btn" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">05. Workforce</button>
+                <button class="nav-btn" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">06. Peacekeeping</button>
+                <button class="nav-btn" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">07. Humanitarian</button>
+                <button class="nav-btn" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})">08. Protection</button>
+                <button class="nav-btn" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">09. Communications</button>
+                <button class="nav-btn" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})">10. Security</button>
+                <button class="nav-btn" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})">11. Policy</button>
+                <button class="nav-btn" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'})">12. Program Mgmt</button>
+                <button class="nav-btn primary" onclick="document.getElementById('s13').scrollIntoView({behavior:'smooth'})">13. M365 Reference</button>
             </div>
         </nav>
 
@@ -1038,6 +1310,8 @@ Ask me what proposal I'm considering.</div>
                 </div>
             </div>
         </section>
+
+        <hr class="section-divider">
 
         <!-- ============================================ -->
         <!-- SECTION 2: PRODUCTIVITY -->
@@ -1411,6 +1685,8 @@ Ask me what's on my calendar this week.</div>
             </div>
         </section>
 
+        <hr class="section-divider">
+
         <!-- ============================================ -->
         <!-- SECTION 3: BUDGET -->
         <!-- ============================================ -->
@@ -1760,6 +2036,8 @@ What budget challenge are you working on?</div>
                 </div>
             </div>
         </section>
+
+        <hr class="section-divider">
 
         <!-- ============================================ -->
         <!-- SECTION 4: DONORS -->
@@ -2116,6 +2394,8 @@ Which donor should I analyze?</div>
             </div>
         </section>
 
+        <hr class="section-divider">
+
         <!-- ============================================ -->
         <!-- SECTION 5: WORKFORCE -->
         <!-- ============================================ -->
@@ -2464,6 +2744,8 @@ What workforce situation are you dealing with?</div>
             </div>
         </section>
 
+        <hr class="section-divider">
+
         <!-- ============================================ -->
         <!-- SECONDARY SECTIONS (Abbreviated) -->
         <!-- ============================================ -->
@@ -2619,6 +2901,8 @@ Tone: Candid but not alarmist. What do Council members need to hear vs. want to 
             </div>
         </section>
 
+        <hr class="section-divider">
+
         <section class="category" id="s7">
             <div class="cat-header">
                 <h2>🚨 7. Humanitarian Response</h2>
@@ -2772,6 +3056,8 @@ Balance: Urgency without fatigue. What makes this different?</div>
             </div>
         </section>
 
+        <hr class="section-divider">
+
         <section class="category" id="s8">
             <div class="cat-header">
                 <h2>🛡️ 8. Protection & Human Rights</h2>
@@ -2920,6 +3206,8 @@ Balance: Factual and documented, not inflammatory. What compels action?</div>
                 </div>
             </div>
         </section>
+
+        <hr class="section-divider">
 
         <section class="category" id="s9">
             <div class="cat-header">
@@ -3074,6 +3362,8 @@ Tone: Factual, not defensive.</div>
             </div>
         </section>
 
+        <hr class="section-divider">
+
         <section class="category" id="s10">
             <div class="cat-header">
                 <h2>🔒 10. Security</h2>
@@ -3226,6 +3516,8 @@ Tone: Informative, empowering, not panic-inducing.</div>
                 </div>
             </div>
         </section>
+
+        <hr class="section-divider">
 
         <section class="category" id="s11">
             <div class="cat-header">
@@ -3384,14 +3676,365 @@ Length: 2 pages max. Decision-ready.</div>
             </div>
         </section>
 
-    </div>
+        <hr class="section-divider">
 
         <!-- ============================================ -->
-        <!-- SECTION 12: M365 COPILOT QUICK REFERENCE -->
+        <!-- SECTION 12: PROGRAM MANAGEMENT -->
         <!-- ============================================ -->
         <section class="category" id="s12">
+            <div class="cat-header">
+                <h2>📊 12. Program Management</h2>
+                <p class="for">Programme Managers, Project Officers, Results-Based Management Leads, M&amp;E Teams</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> You're managing a multi-year programme with several workstreams, upcoming donor reporting deadlines, and a programme board review next month. You need to synthesize status across streams, flag risks early, and prepare governance-ready outputs.
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Programme Status Reporting</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'List the key components of a good programme status report. One line each.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">List the key components of a good programme status report. One line each.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Programme status report template. Table format:\n| Workstream | Status (Green/Amber/Red) | Key Achievement | Top Risk | Next Milestone |\n\nFill in for 5 sample workstreams of a typical UN programme.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Programme status report template. Table format:
+| Workstream | Status (Green/Amber/Red) | Key Achievement | Top Risk | Next Milestone |
+
+Fill in for 5 sample workstreams of a typical UN programme.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Report</span>
+                                <button class="copy-btn" onclick="copyText(this, 'You are a senior programme management advisor. Generate a comprehensive programme status report.\n\nProgramme: [Name/description]\nReporting period: [Q1 2026]\nWorkstreams: [List your workstreams]\n\nFor each workstream, provide:\n| Workstream | RAG Status | Progress vs Plan | Budget Utilization | Key Achievement | Top Risk | Mitigation | Next 30-Day Milestone |\n\nThen add:\n- Executive summary (3 sentences max)\n- Cross-cutting risks that affect multiple workstreams\n- Decisions required from programme board\n- Recommendations for next quarter\n\nTone: Direct, evidence-based, decision-ready.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">You are a senior programme management advisor. Generate a comprehensive programme status report.
+
+Programme: [Name/description]
+Reporting period: [Q1 2026]
+Workstreams: [List your workstreams]
+
+For each workstream, provide:
+| Workstream | RAG Status | Progress vs Plan | Budget Utilization | Key Achievement | Top Risk | Mitigation | Next 30-Day Milestone |
+
+Then add:
+- Executive summary (3 sentences max)
+- Cross-cutting risks that affect multiple workstreams
+- Decisions required from programme board
+- Recommendations for next quarter
+
+Tone: Direct, evidence-based, decision-ready.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See programme health at a glance</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Visualize Programme Health Dashboard</span>
+                        <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                    </div>
+                    <div class="prompt-text">Based on the programme status above, create visual charts:
+
+1. RAG status overview (how many workstreams are Green/Amber/Red)
+2. Budget utilization vs. time elapsed (are we on track?)
+3. Risk heat map: Likelihood vs. Impact for top 10 risks
+4. Milestone timeline showing completed, upcoming, and delayed items
+
+Make it dashboard-ready for a programme board presentation.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Create a one-page executive dashboard I can paste into PowerPoint."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Based on the programme status above, create visual charts:\n\n1. RAG status overview (how many workstreams are Green/Amber/Red)\n2. Budget utilization vs. time elapsed (are we on track?)\n3. Risk heat map: Likelihood vs. Impact for top 10 risks\n4. Milestone timeline showing completed, upcoming, and delayed items\n\nMake it dashboard-ready for a programme board presentation.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+
+                <div class="tip">💡 <strong>Tip:</strong> Replace bracketed text with your actual programme details for best results.</div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">1. Quick Risk Flag</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span><span class="tag mobile">📱 Mobile</span></div>
+                    </div>
+                    <div class="prompt-text">My programme has these workstreams: [list them].
+
+Which 3 risks should keep me up at night? One line each with likelihood (High/Medium/Low).</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on"></span>
+                        <button class="copy-btn" onclick="copyText(this, 'My programme has these workstreams: [list them].\n\nWhich 3 risks should keep me up at night? One line each with likelihood (High/Medium/Low).')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">2. Milestone Reality Check</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span><span class="tag mobile">📱 Mobile</span></div>
+                    </div>
+                    <div class="prompt-text">We planned to complete [milestone] by [date]. We're currently at [status].
+
+Is this recoverable? What would need to happen? One paragraph max.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on"></span>
+                        <button class="copy-btn" onclick="copyText(this, 'We planned to complete [milestone] by [date]. We\\'re currently at [status].\n\nIs this recoverable? What would need to happen? One paragraph max.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">3. UMOJA/ERP Data Interpreter</span>
+                        <div class="prompt-tags"><span class="tag extract">Extract</span><span class="tag mobile">📱 Mobile</span></div>
+                    </div>
+                    <div class="prompt-text">[Paste screenshot or table of UMOJA budget data]
+
+Explain what this data tells me in plain language. Flag any items that look unusual or need attention.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What questions should I ask my finance officer about these numbers?"</span>
+                        <button class="copy-btn" onclick="copyText(this, '[Paste screenshot or table of UMOJA budget data]\n\nExplain what this data tells me in plain language. Flag any items that look unusual or need attention.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt green">
+                    <div class="prompt-header">
+                        <span class="prompt-label">4. Weekly Team Brief Generator</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Generate a weekly team brief email for my programme team.
+
+Include:
+- Top 3 priorities this week
+- Key deadlines in next 5 working days
+- One risk to watch
+- One win to celebrate
+
+Context: [paste any notes, meeting outcomes, or status updates]
+
+Tone: Motivating but direct. Under 200 words.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on"></span>
+                        <button class="copy-btn" onclick="copyText(this, 'Generate a weekly team brief email for my programme team.\n\nInclude:\n- Top 3 priorities this week\n- Key deadlines in next 5 working days\n- One risk to watch\n- One win to celebrate\n\nContext: [paste any notes, meeting outcomes, or status updates]\n\nTone: Motivating but direct. Under 200 words.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">5. Results Framework Review</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Review this results framework / logframe for a UN programme:
+
+[Paste your results framework or describe outputs/outcomes/indicators]
+
+Assessment in table format:
+| Level | Element | Strength | Weakness | Suggestion |
+| Impact | | | | |
+| Outcome | | | | |
+| Output | | | | |
+
+Also flag:
+- Are indicators SMART?
+- Missing baselines or targets?
+- Logic gaps between outputs and outcomes?
+- Recommendations for strengthening</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Suggest 3 alternative indicators for the weakest outcome."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Review this results framework / logframe for a UN programme:\n\n[Paste your results framework or describe outputs/outcomes/indicators]\n\nAssessment in table format:\n| Level | Element | Strength | Weakness | Suggestion |\n| Impact | | | | |\n| Outcome | | | | |\n| Output | | | | |\n\nAlso flag:\n- Are indicators SMART?\n- Missing baselines or targets?\n- Logic gaps between outputs and outcomes?\n- Recommendations for strengthening')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">6. Resource Allocation Optimizer</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">My programme has these workstreams and current resource allocation:
+
+[List workstreams with % of budget and staff allocated]
+
+Delivery status: [brief status per workstream]
+
+Analyze:
+- Which workstreams are under/over-resourced relative to delivery?
+- Where should I reallocate next quarter?
+- Table: | Workstream | Current % | Recommended % | Rationale |
+- What trade-offs am I making with each reallocation?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Model a scenario where [workstream] budget is cut by 20%."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'My programme has these workstreams and current resource allocation:\n\n[List workstreams with % of budget and staff allocated]\n\nDelivery status: [brief status per workstream]\n\nAnalyze:\n- Which workstreams are under/over-resourced relative to delivery?\n- Where should I reallocate next quarter?\n- Table: | Workstream | Current % | Recommended % | Rationale |\n- What trade-offs am I making with each reallocation?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">7. Dependency & Critical Path Analysis</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">Programme workstreams and their dependencies:
+
+[List workstreams and what each depends on]
+
+Identify:
+1. The critical path (which sequence of tasks determines the earliest completion?)
+2. Single points of failure
+3. Parallel tracks that could accelerate delivery
+4. Table: | Task | Depends On | Duration | On Critical Path? | Risk if Delayed |
+
+What should I prioritize unblocking THIS WEEK?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What happens if [specific dependency] slips by 4 weeks?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Programme workstreams and their dependencies:\n\n[List workstreams and what each depends on]\n\nIdentify:\n1. The critical path (which sequence of tasks determines the earliest completion?)\n2. Single points of failure\n3. Parallel tracks that could accelerate delivery\n4. Table: | Task | Depends On | Duration | On Critical Path? | Risk if Delayed |\n\nWhat should I prioritize unblocking THIS WEEK?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning & Deep Analysis <span class="badge purple">Strategic thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">8. Programme Risk Pre-Mortem</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+                    </div>
+                    <div class="prompt-text">It's December 2027. My programme [name/description] has failed to deliver its intended outcomes.
+
+Think backward from failure:
+- What went wrong? (5 bullets — be specific to UN operational realities)
+- Early warning signs we should have caught (3 bullets)
+- Which risks did we underestimate? (table: | Risk | Why We Missed It | What Would Have Helped |)
+- What should I put in place THIS MONTH to prevent this scenario?
+
+Be honest, not diplomatic.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Now do the same exercise but for partial success — we delivered outputs but not outcomes."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'It\\'s December 2027. My programme [name/description] has failed to deliver its intended outcomes.\n\nThink backward from failure:\n- What went wrong? (5 bullets — be specific to UN operational realities)\n- Early warning signs we should have caught (3 bullets)\n- Which risks did we underestimate? (table: | Risk | Why We Missed It | What Would Have Helped |)\n- What should I put in place THIS MONTH to prevent this scenario?\n\nBe honest, not diplomatic.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">9. Lessons Learned Synthesizer</span>
+                        <div class="prompt-tags"><span class="tag reason">Reason</span><span class="tag optional">Optional</span></div>
+                    </div>
+                    <div class="prompt-text">Here are raw notes/observations from our programme's mid-term review:
+
+[Paste notes, interview summaries, or survey results]
+
+Synthesize into a structured lessons learned report:
+| Category | Lesson | Evidence | Recommendation | Priority |
+
+Group by: Programme Design, Implementation, Partnerships, M&E, Sustainability
+
+End with: Top 3 actions that would have the highest impact if implemented immediately.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">💡 Start a new chat for this prompt.</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Here are raw notes/observations from our programme\\'s mid-term review:\n\n[Paste notes, interview summaries, or survey results]\n\nSynthesize into a structured lessons learned report:\n| Category | Lesson | Evidence | Recommendation | Priority |\n\nGroup by: Programme Design, Implementation, Partnerships, M&E, Sustainability\n\nEnd with: Top 3 actions that would have the highest impact if implemented immediately.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">10. Programme Board Report</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Create a programme board report for [programme name].
+
+Reporting period: [dates]
+Key data: [paste status, budget figures, milestones]
+
+Structure:
+- Executive Summary (3 sentences)
+- Progress Against Results Framework (table with RAG ratings)
+- Financial Summary (budget vs. expenditure by workstream)
+- Risk Register Update (top 5 risks with status changes)
+- Issues Requiring Board Decision (numbered list with options)
+- Next Quarter Priorities
+
+Length: 3 pages max. Decision-oriented, not descriptive.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Convert to PowerPoint — one slide per section, max 5 bullets per slide."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a programme board report for [programme name].\n\nReporting period: [dates]\nKey data: [paste status, budget figures, milestones]\n\nStructure:\n- Executive Summary (3 sentences)\n- Progress Against Results Framework (table with RAG ratings)\n- Financial Summary (budget vs. expenditure by workstream)\n- Risk Register Update (top 5 risks with status changes)\n- Issues Requiring Board Decision (numbered list with options)\n- Next Quarter Priorities\n\nLength: 3 pages max. Decision-oriented, not descriptive.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt teal">
+                    <div class="prompt-header">
+                        <span class="prompt-label">11. Donor Progress Report</span>
+                        <div class="prompt-tags"><span class="tag create">Create</span></div>
+                    </div>
+                    <div class="prompt-text">Draft a donor progress report for [donor name] on [programme name].
+
+Donor requirements: [annual narrative report / specific template / results-focused]
+Key results data: [paste achievements, outputs, indicators]
+Budget: [paste financial summary]
+
+Include:
+- Narrative aligned to donor's strategic priorities
+- Results table mapping to original proposal commitments
+- Human interest element (one brief story of impact)
+- Challenges faced with mitigations taken
+- Financial utilization summary
+- Forward look and sustainability
+
+Tone: Professional, evidence-based, appreciative without being effusive.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Make the executive summary punchy enough for a Minister's briefing pack."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Draft a donor progress report for [donor name] on [programme name].\n\nDonor requirements: [annual narrative report / specific template / results-focused]\nKey results data: [paste achievements, outputs, indicators]\nBudget: [paste financial summary]\n\nInclude:\n- Narrative aligned to donor\\'s strategic priorities\n- Results table mapping to original proposal commitments\n- Human interest element (one brief story of impact)\n- Challenges faced with mitigations taken\n- Financial utilization summary\n- Forward look and sustainability\n\nTone: Professional, evidence-based, appreciative without being effusive.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title gray">🔒 Verification & Meta <span class="badge gray">Quality check</span></div>
+
+                <div class="prompt gray">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Programme Document Quality Check</span>
+                        <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+                    </div>
+                    <div class="prompt-text">Review this programme document for quality and completeness:
+
+[Paste document or section]
+
+Check against UN programme management standards:
+- Results-Based Management alignment
+- SMART indicators present?
+- Theory of change logic holds?
+- Risk management adequate?
+- Gender and human rights integration?
+- Sustainability considerations?
+
+Table: | Standard | Met? | Gap | Fix |</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on"></span>
+                        <button class="copy-btn" onclick="copyText(this, 'Review this programme document for quality and completeness:\n\n[Paste document or section]\n\nCheck against UN programme management standards:\n- Results-Based Management alignment\n- SMART indicators present?\n- Theory of change logic holds?\n- Risk management adequate?\n- Gender and human rights integration?\n- Sustainability considerations?\n\nTable: | Standard | Met? | Gap | Fix |')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> How do you balance accountability (reporting upward) with learning (improving your programme)? Can AI help bridge that gap?
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- ============================================ -->
+        <!-- SECTION 13: M365 COPILOT QUICK REFERENCE -->
+        <!-- ============================================ -->
+        <section class="category" id="s13">
             <div class="cat-header m365">
-                <h2>📱 12. M365 Copilot Quick Reference</h2>
+                <h2>📱 13. M365 Copilot Quick Reference</h2>
                 <p class="for">All participants — works across Teams, Outlook, Word, Excel, PowerPoint</p>
             </div>
             <div class="cat-body">
@@ -3400,7 +4043,17 @@ Length: 2 pages max. Decision-ready.</div>
                     <p>Start simple. Follow up to refine. A 5-word prompt + a follow-up beats a 50-word prompt every time.</p>
                 </div>
 
-                <div class="section-title m365">📱 Universal Catch-Up Prompts <span class="badge green">Works everywhere</span></div>
+                <div class="m365-subnav">
+                    <button class="m365-subnav-btn" onclick="document.getElementById('s13-catchup').scrollIntoView({behavior:'smooth'})">📱 Catch-Up</button>
+                    <button class="m365-subnav-btn" onclick="document.getElementById('s13-power').scrollIntoView({behavior:'smooth'})">🚀 Power</button>
+                    <button class="m365-subnav-btn" onclick="document.getElementById('s13-meetings').scrollIntoView({behavior:'smooth'})">🎯 Meetings</button>
+                    <button class="m365-subnav-btn" onclick="document.getElementById('s13-email').scrollIntoView({behavior:'smooth'})">📧 Email</button>
+                    <button class="m365-subnav-btn" onclick="document.getElementById('s13-docs').scrollIntoView({behavior:'smooth'})">📄 Documents</button>
+                    <button class="m365-subnav-btn" onclick="document.getElementById('s13-screenshots').scrollIntoView({behavior:'smooth'})">📸 Screenshots</button>
+                    <button class="m365-subnav-btn" onclick="document.getElementById('s13-pattern').scrollIntoView({behavior:'smooth'})">🎯 The Pattern</button>
+                </div>
+
+                <div class="section-title m365 m365-subsection" id="s13-catchup">📱 Universal Catch-Up Prompts <span class="badge green">Works everywhere</span></div>
                 
                 <div class="tip">💡 <strong>Memorize these 5:</strong> They work in almost any situation.</div>
 
@@ -3441,7 +4094,7 @@ Length: 2 pages max. Decision-ready.</div>
                     </tbody>
                 </table>
 
-                <div class="section-title m365">🚀 Power Prompts <span class="badge purple">Executive-level</span></div>
+                <div class="section-title m365 m365-subsection" id="s13-power">🚀 Power Prompts <span class="badge purple">Executive-level</span></div>
                 
                 <div class="tip">💡 <strong>These are longer but powerful:</strong> Copy the whole prompt for comprehensive results.</div>
 
@@ -3491,7 +4144,7 @@ Rank in order of potential impact and only include reputable sources. Be sure to
                     </div>
                 </div>
 
-                <div class="section-title m365">🎯 Meeting Intelligence <span class="badge blue">Teams & BizChat</span></div>
+                <div class="section-title m365 m365-subsection" id="s13-meetings">🎯 Meeting Intelligence <span class="badge blue">Teams & BizChat</span></div>
 
                 <table class="quick-ref-table">
                     <thead>
@@ -3542,7 +4195,7 @@ Rank in order of potential impact and only include reputable sources. Be sure to
                     </div>
                 </div>
 
-                <div class="section-title m365">📧 Email & Outlook <span class="badge green">Quick responses</span></div>
+                <div class="section-title m365 m365-subsection" id="s13-email">📧 Email & Outlook <span class="badge green">Quick responses</span></div>
 
                 <table class="quick-ref-table">
                     <thead>
@@ -3576,7 +4229,7 @@ Rank in order of potential impact and only include reputable sources. Be sure to
                     </tbody>
                 </table>
 
-                <div class="section-title m365">📄 Documents & Analysis <span class="badge teal">Word & Excel</span></div>
+                <div class="section-title m365 m365-subsection" id="s13-docs">📄 Documents & Analysis <span class="badge teal">Word & Excel</span></div>
 
                 <table class="quick-ref-table">
                     <thead>
@@ -3615,7 +4268,7 @@ Rank in order of potential impact and only include reputable sources. Be sure to
                     </tbody>
                 </table>
 
-                <div class="section-title m365">📸 Screenshot & Image Prompts <span class="badge image">🖼️ Visual</span></div>
+                <div class="section-title m365 m365-subsection" id="s13-screenshots">📸 Screenshot & Image Prompts <span class="badge image">🖼️ Visual</span></div>
                 
                 <div class="tip">💡 <strong>Paste screenshots directly into Copilot</strong> — it can read and analyze images.</div>
 
@@ -3731,7 +4384,7 @@ Explain this process simply. Where are the bottlenecks or risks?</div>
                     </div>
                 </div>
 
-                <div class="section-title m365">🎯 The 3-Step Pattern <span class="badge purple">Teaching technique</span></div>
+                <div class="section-title m365 m365-subsection" id="s13-pattern">🎯 The 3-Step Pattern <span class="badge purple">Teaching technique</span></div>
 
                 <div class="scenario">
                     <strong>For building confidence fast:</strong> This progression works for any topic.
@@ -3776,8 +4429,11 @@ Explain this process simply. Where are the bottlenecks or risks?</div>
         <div class="action">
             <strong>Your Action:</strong> Pick ONE prompt to use in your real work this week.
         </div>
-        <p class="credits">AI Leadership Clinics | Microsoft Garage | January 2026</p>
+        <p class="credits">AI Leadership Clinics &bull; Microsoft Garage &bull; 2026</p>
+        <a href="https://jivtesh.github.io/ai/" class="hub-link">&larr; Explore More AI Resources</a>
     </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&uarr;</button>
 
     <script>
     function copyText(button, text) {
@@ -3841,7 +4497,8 @@ Explain this process simply. Where are the bottlenecks or risks?</div>
         {id: 's9', icon: '📢', name: 'Communications'},
         {id: 's10', icon: '🔒', name: 'Security'},
         {id: 's11', icon: '📋', name: 'Policy'},
-        {id: 's12', icon: '📱', name: 'M365 Quick'}
+        {id: 's12', icon: '�', name: 'Program Mgmt'},
+        {id: 's13', icon: '📱', name: 'M365 Reference'}
     ];
     
     function updateSectionIndicator() {
@@ -3871,6 +4528,12 @@ Explain this process simply. Where are the bottlenecks or risks?</div>
                 link.classList.add('active');
             }
         });
+
+        // Update sticky nav current section label
+        var stickyNavCurrent = document.getElementById('stickyNavCurrent');
+        if (stickyNavCurrent) {
+            stickyNavCurrent.textContent = currentSection.name;
+        }
     }
     
     // Throttle scroll events
@@ -3887,6 +4550,31 @@ Explain this process simply. Where are the bottlenecks or risks?</div>
     // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
         updateSectionIndicator();
+
+        var stickyNav = document.getElementById('stickyNav');
+        var backBtn = document.getElementById('backToTop');
+        var navSection = document.getElementById('navSection');
+
+        window.addEventListener('scroll', function() {
+            // Show sticky nav after scrolling past the top nav grid
+            if (navSection && stickyNav) {
+                var navBottom = navSection.offsetTop + navSection.offsetHeight;
+                if (window.scrollY > navBottom) {
+                    stickyNav.classList.add('visible');
+                } else {
+                    stickyNav.classList.remove('visible');
+                }
+            }
+
+            // Show back-to-top button
+            if (backBtn) {
+                if (window.scrollY > 600) {
+                    backBtn.classList.add('visible');
+                } else {
+                    backBtn.classList.remove('visible');
+                }
+            }
+        });
     });
     </script>
 </body>

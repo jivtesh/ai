@@ -1,368 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Prompt Resources Hub | Find Your Workspace</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #0078d4;
-            --primary-dark: #005a9e;
-            --un-blue: #009EDB;
-            --success: #16a34a;
-            --purple: #6366f1;
-            --orange: #ea580c;
-            --teal: #0d9488;
-        }
-        
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #1e293b;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        
-        .hero .tagline {
-            font-size: 1.5rem;
-            opacity: 0.95;
-            margin-bottom: 0.5rem;
-        }
-        
-        .hero .description {
-            font-size: 1.125rem;
-            opacity: 0.9;
-            max-width: 50rem;
-            margin: 0 auto 2rem;
-        }
-        
-        .copilot-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.75rem 1.5rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.3);
-            backdrop-filter: blur(10px);
-        }
-        
-        .container {
-            max-width: 75rem;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: white;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.125rem;
-            margin-bottom: 3rem;
-            color: rgba(255,255,255,0.9);
-        }
-        
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        
-        .card-header {
-            padding: 2rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
-            pointer-events: none;
-        }
-        
-        .card-header.un {
-            background: linear-gradient(135deg, var(--un-blue) 0%, #005a87 100%);
-        }
-        
-        .card-header.nonprofit {
-            background: linear-gradient(135deg, var(--purple) 0%, #4338ca 100%);
-        }
-        
-        .card-header.health {
-            background: linear-gradient(135deg, var(--teal) 0%, #0a6960 100%);
-        }
-        
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .card-audience {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .card-body {
-            padding: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .card-description {
-            color: #475569;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-        
-        .card-features {
-            list-style: none;
-            margin-bottom: 1.5rem;
-        }
-        
-        .card-features li {
-            padding: 0.5rem 0;
-            color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .card-features li::before {
-            content: '✓';
-            color: var(--success);
-            font-weight: bold;
-            font-size: 1.125rem;
-        }
-        
-        .card-cta {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 0.875rem 1.5rem;
-            border-radius: 0.5rem;
-            text-align: center;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        
-        .card:hover .card-cta {
-            transform: scale(1.05);
-        }
-        
-        .info-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            color: white;
-        }
-        
-        .info-section h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .info-section ol {
-            margin-left: 1.5rem;
-        }
-        
-        .info-section li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.875rem;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .hero .tagline { font-size: 1.25rem; }
-            .cards-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Resources, An Index for Leaders. Edition 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:          #141414;
+    --ink-soft:     #5a5552;
+    --ink-faint:    #8b8680;
+    --paper:        #f2ece0;
+    --paper-soft:   #f7f2e7;
+    --paper-deep:   #e8dfcd;
+    --un-blue:      #418fde;
+    --un-blue-deep: #0a2540;
+    --terracotta:   #c65d3c;
+    --rule:         rgba(20, 20, 20, 0.14);
+
+    --serif: 'Fraunces', 'Times New Roman', Georgia, serif;
+    --sans:  'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Paper wash */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(ellipse at 50% 0%, var(--paper-soft) 0%, var(--paper) 45%, var(--paper-deep) 100%);
+  }
+
+  /* Subtle film grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 200;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+  }
+
+  ::selection { background: var(--un-blue); color: var(--paper-soft); }
+
+  h1, h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2.75rem;
+  }
+
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 1.25rem 0;
+  }
+  .masthead-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .wordmark {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    font-weight: 500;
+  }
+  .wordmark::before {
+    content: '';
+    width: 10px; height: 10px;
+    background: var(--un-blue);
+    border-radius: 50%;
+  }
+  .wordmark span {
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 2.5rem;
+  }
+  .masthead-meta span {
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* MAIN */
+  main {
+    flex: 1;
+    padding: 5rem 0 4rem;
+  }
+
+  .hero-eyebrow {
+    grid-column: 1 / span 12;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+  .hero-eyebrow .bar {
+    width: 56px; height: 1px;
+    background: var(--ink);
+  }
+
+  .hero-title {
+    grid-column: 1 / span 11;
+    font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+    font-weight: 300;
+    font-variation-settings: "opsz" 144;
+    margin-bottom: 1.75rem;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--un-blue-deep);
+  }
+  .hero-title .accent {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero-sub {
+    grid-column: 1 / span 11;
+    font-family: var(--serif);
+    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 46rem;
+    margin-bottom: 4rem;
+    font-weight: 400;
+  }
+  .hero-sub em {
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  /* THE LIST */
+  .index-list {
+    grid-column: 1 / span 12;
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+  .index-list li { border-bottom: 1px solid var(--rule); }
+
+  .index-list a {
+    display: grid;
+    grid-template-columns: 4rem 1fr auto;
+    gap: 2rem;
+    padding: 2rem 0;
+    align-items: baseline;
+    transition: padding-left 700ms var(--ease), color 500ms var(--ease);
+  }
+  .index-list a:hover { padding-left: 1rem; color: var(--terracotta); }
+  .index-list a:hover .cta { color: var(--terracotta); }
+  .index-list a:hover .cta .arrow { transform: translateX(8px); color: var(--terracotta); }
+  .index-list a:hover .title small { color: var(--terracotta); opacity: 0.75; }
+  .index-list a:hover .topics { color: var(--terracotta); opacity: 0.75; }
+
+  .index-list .num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .index-list .title {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+  .index-list .title small {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    transition: color 500ms var(--ease), opacity 500ms var(--ease);
+  }
+  .index-list .topics {
+    display: block;
+    margin-top: 0.75rem;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--ink-faint);
+    max-width: 44rem;
+    transition: color 500ms var(--ease), opacity 500ms var(--ease);
+  }
+  .index-list .cta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.875rem;
+    font-family: var(--sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    white-space: nowrap;
+    transition: color 500ms var(--ease);
+  }
+  .index-list .cta .arrow {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--ink);
+    transition: transform 700ms var(--ease), color 500ms var(--ease);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 1.5rem 0;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-inner .eyebrow { color: var(--ink-faint); }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 1300ms var(--ease), transform 1300ms var(--ease);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 120ms; }
+  .reveal-d2 { transition-delay: 240ms; }
+  .reveal-d3 { transition-delay: 360ms; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 1.5rem; }
+    .hero-title { grid-column: 1 / span 12; }
+    main { padding: 3rem 0 2.5rem; }
+    .index-list a { grid-template-columns: 2.5rem 1fr auto; gap: 1.25rem; padding: 1.5rem 0; }
+  }
+  @media (max-width: 560px) {
+    .masthead-meta { display: none; }
+    .index-list .cta .cta-label { display: none; }
+    .index-list a { grid-template-columns: 2rem 1fr auto; gap: 1rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
 </head>
 <body>
-    <div class="hero">
-        <h1>🚀 AI Prompt Resources Hub</h1>
-        <p class="tagline">Find Your Customized AI Workshop & Prompts</p>
-        <p class="description">
-            Explore curated AI prompt collections designed for different professional communities. 
-            Each workspace includes practical prompts, scenarios, and guidance for using AI tools like GitHub Copilot and Microsoft 365 Copilot.
-        </p>
-        <div class="copilot-badge">
-            ✨ Powered by GitHub Copilot & Microsoft 365 Copilot
-        </div>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <div class="wordmark">AI Resources <span>an index for leaders</span></div>
+    <div class="masthead-meta">
+      <span>Edition N&ordm; 01</span>
+      <span>April 2026</span>
+      <span>EN</span>
     </div>
+  </div>
+</header>
 
-    <div class="container">
-        <h2 class="section-title">Choose Your Workspace</h2>
-        <p class="section-subtitle">Select the resource collection that matches your role and organization</p>
-        
-        <div class="cards-grid">
-            <!-- UN Leadership Card -->
-            <a href="UN_AI_Leadership_Clinics_Expanded_v2.html" class="card">
-                <div class="card-header un">
-                    <span class="card-icon">🇺🇳</span>
-                    <h3 class="card-title">UN Senior Leaders</h3>
-                    <p class="card-audience">AI Leadership Clinics</p>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        Comprehensive AI prompts and scenarios designed for United Nations senior leadership. 
-                        Explore strategic applications across humanitarian, development, and peacekeeping operations.
-                    </p>
-                    <ul class="card-features">
-                        <li>Multi-agency coordination scenarios</li>
-                        <li>Strategic planning & decision-making</li>
-                        <li>Data analysis & reporting tools</li>
-                        <li>Crisis management prompts</li>
-                    </ul>
-                    <div class="card-cta">Explore UN Leadership Clinics →</div>
-                </div>
-            </a>
+<main>
+  <div class="wrap">
+    <div class="grid-12">
 
-            <!-- Nonprofit Leaders Card -->
-            <a href="nonprofit_ai_workshop.html" class="card">
-                <div class="card-header nonprofit">
-                    <span class="card-icon">💜</span>
-                    <h3 class="card-title">Nonprofit Leaders</h3>
-                    <p class="card-audience">Microsoft Elevate Days London</p>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        AI workshop materials tailored for nonprofit organizations and social impact leaders. 
-                        Learn to leverage AI for fundraising, program management, and mission delivery.
-                    </p>
-                    <ul class="card-features">
-                        <li>Fundraising & donor engagement</li>
-                        <li>Program impact measurement</li>
-                        <li>Volunteer management</li>
-                        <li>Grant writing assistance</li>
-                    </ul>
-                    <div class="card-cta">Explore Nonprofit Workshop →</div>
-                </div>
-            </a>
+      <div class="hero-eyebrow reveal">
+        <span class="bar"></span>
+        <span class="eyebrow">Practical Workspaces for Microsoft 365 Copilot</span>
+      </div>
 
-            <!-- PAHO Healthcare Card -->
-            <a href="paho_ai_workshop.html" class="card">
-                <div class="card-header health">
-                    <span class="card-icon">🏥</span>
-                    <h3 class="card-title">Healthcare Leaders</h3>
-                    <p class="card-audience">PAHO Strategic AI Executive Session</p>
-                </div>
-                <div class="card-body">
-                    <p class="card-description">
-                        Specialized AI resources for Pan American Health Organization (PAHO) leaders and healthcare executives. 
-                        Focus on public health, epidemiology, and health system strengthening.
-                    </p>
-                    <ul class="card-features">
-                        <li>Public health emergency response</li>
-                        <li>Epidemiological data analysis</li>
-                        <li>Health policy development</li>
-                        <li>Regional health coordination</li>
-                    </ul>
-                    <div class="card-cta">Explore Healthcare Workshop →</div>
-                </div>
-            </a>
-        </div>
+      <h1 class="hero-title reveal reveal-d1">
+        Get <em>hands on</em><br>
+        with <span class="accent">AI.</span>
+      </h1>
 
-        <div class="info-section">
-            <h3>📚 How to Use These Resources</h3>
-            <ol>
-                <li><strong>Choose your workspace</strong> based on your role and organization type</li>
-                <li><strong>Browse the prompts</strong> organized by categories and use cases</li>
-                <li><strong>Copy any prompt</strong> by clicking on the prompt cards within each workspace</li>
-                <li><strong>Paste into your AI tool</strong> such as GitHub Copilot, Microsoft 365 Copilot, or ChatGPT</li>
-                <li><strong>Customize and iterate</strong> based on your specific needs and context</li>
-                <li><strong>Share learnings</strong> with your team and colleagues</li>
-            </ol>
-        </div>
+      <p class="hero-sub reveal reveal-d2">
+        Made for UN senior leaders, managers, and HR practitioners. <em>Additional workspaces for nonprofit and healthcare leaders are included.</em>
+      </p>
 
-        <div class="info-section">
-            <h3>💡 About These Workspaces</h3>
-            <p style="margin-bottom: 1rem;">
-                Each workspace contains carefully curated AI prompts developed in collaboration with domain experts 
-                from their respective fields. The prompts are designed to be practical, actionable, and immediately useful 
-                for real-world challenges faced by leaders in these sectors.
-            </p>
-            <p>
-                <strong>New to AI tools?</strong> Each workspace includes guidance on how to get started with GitHub Copilot 
-                and other AI assistants, along with best practices for prompt engineering.
-            </p>
-        </div>
+      <ol class="index-list reveal reveal-d3">
+        <li>
+          <a href="UN_AI_Leadership_Clinics_Expanded_v2.html">
+            <span class="num">01</span>
+            <span class="title">
+              UN Senior Leaders
+              <small>AI Leadership Clinics</small>
+              <span class="topics">Crisis management &middot; Strategic planning &middot; Multi-agency coordination &middot; Data analysis &amp; reporting</span>
+            </span>
+            <span class="cta">
+              <span class="cta-label">Enter the Clinic</span>
+              <span class="arrow">&rarr;</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="UN_HR_AI_Clinics_v1.html">
+            <span class="num">02</span>
+            <span class="title">
+              HR Practitioners
+              <small>AI Clinics for HR</small>
+              <span class="topics">Recruitment &amp; onboarding &middot; Performance management &middot; Learning &amp; development &middot; Workforce planning</span>
+            </span>
+            <span class="cta">
+              <span class="cta-label">Enter the Clinic</span>
+              <span class="arrow">&rarr;</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="nonprofit_ai_workshop.html">
+            <span class="num">03</span>
+            <span class="title">
+              Nonprofit Leaders
+              <small>Microsoft Elevate Days, London</small>
+              <span class="topics">Fundraising &amp; donor engagement &middot; Programme impact &middot; Volunteer management &middot; Grant writing</span>
+            </span>
+            <span class="cta">
+              <span class="cta-label">Enter the Workshop</span>
+              <span class="arrow">&rarr;</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a href="paho_ai_workshop.html">
+            <span class="num">04</span>
+            <span class="title">
+              Healthcare Leaders
+              <small>PAHO Strategic AI Executive Session</small>
+              <span class="topics">Emergency response &middot; Epidemiological analysis &middot; Health policy &middot; Regional coordination</span>
+            </span>
+            <span class="cta">
+              <span class="cta-label">Enter the Session</span>
+              <span class="arrow">&rarr;</span>
+            </span>
+          </a>
+        </li>
+      </ol>
+
     </div>
+  </div>
+</main>
 
-    <div class="footer">
-        <p>🤖 AI Prompt Resources Hub | Empowering Leaders with AI Tools</p>
-        <p style="margin-top: 0.5rem; opacity: 0.7;">
-            Built for global organizations making a difference
-        </p>
-    </div>
+<footer>
+  <div class="wrap footer-inner">
+    <span class="eyebrow">Built with GitHub Copilot &amp; Microsoft 365 Copilot</span>
+    <span class="eyebrow">Edition N&ordm; 01 &middot; 2026</span>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
 </body>
 </html>

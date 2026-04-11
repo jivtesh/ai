@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Clinics for HR Practitioners | UN International Organizations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --un-blue: #009EDB;
+            --un-dark: #005a87;
+            --warm-accent: #c4704a;
+            --warm-accent-light: #e8b5a0;
+            --warm-gold: #b8860b;
+            --success: #16a34a;
+            --warning: #ea580c;
+            --danger: #dc2626;
+            --purple: #7c3aed;
+            --teal: #0d9488;
+            --gray: #64748b;
+            --bg-primary: #f5f3f0;
+            --bg-secondary: #fffaf6;
+            --text-dark: #2c2c2c;
+            --text-muted: #666;
+            --border-warm: #e8ddd5;
+            --border-subtle: #f0ebe5;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-dark);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .header { background: #1a2a3a; color: white; padding: 2.5rem 1.5rem 3rem; text-align: center; border-bottom: 4px solid var(--warm-accent); }
+        .header h1 { font-family: 'Lora', Georgia, serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+        .header .subtitle { font-size: 1.125rem; opacity: 0.85; font-weight: 300; }
+        .header .meta { margin-top: 1rem; font-size: 0.875rem; opacity: 0.6; }
+        .header .breadcrumb { margin-bottom: 1.5rem; font-size: 0.85rem; opacity: 0.7; }
+        .header .breadcrumb a { color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.3); transition: border-color 0.4s; }
+        .header .breadcrumb a:hover { border-bottom-color: white; }
+        
+        .copilot-bar { background: #1a2a3a; color: white; padding: 0.875rem 1.5rem; text-align: center; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-warm); }
+        .copilot-bar p { margin-bottom: 0.5rem; font-size: 0.85rem; opacity: 0.9; }
+        .copilot-link { display: inline-block; background: var(--un-blue); color: white; text-decoration: none; padding: 0.5rem 1.25rem; border-radius: 0.25rem; font-weight: 600; border: none; transition: all 0.4s; }
+        .copilot-link:hover { background: var(--un-dark); }
+        
+        .container { max-width: 60rem; margin: 0 auto; padding: 2rem 1.5rem; }
+        @media (min-width: 901px) { .container { margin-left: 10.5rem; } }
+        
+        .instructions { background: var(--bg-secondary); border-radius: 0.25rem; padding: 2rem 2.5rem; margin-bottom: 2rem; border-left: 4px solid var(--warm-accent); }
+        .instructions h3 { font-family: 'Lora', Georgia, serif; color: var(--un-dark); margin-bottom: 1rem; }
+        .instructions ol { margin-left: 1.25rem; }
+        .instructions li { margin-bottom: 0.5rem; }
+        
+        .legend { background: var(--bg-secondary); border-radius: 0.25rem; padding: 1.25rem 1.5rem; margin-bottom: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.75rem; border: 1px solid var(--border-warm); }
+        .legend-item { display: flex; align-items: center; gap: 0.375rem; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+        
+        .nav-section { margin-bottom: 2rem; }
+        .nav-section h4 { font-family: 'Lora', Georgia, serif; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+        .nav-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; margin-bottom: 0.75rem; }
+        .nav-grid-secondary { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.5rem; }
+        .nav-btn { background: var(--bg-secondary); border: 1px solid var(--border-warm); border-top: 3px solid var(--border-warm); border-radius: 0.25rem; padding: 0.75rem 0.5rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; text-align: center; transition: all 0.4s; }
+        .nav-btn:hover { border-top-color: var(--un-blue); }
+        .nav-btn.primary { background: var(--un-blue); color: white; border-color: var(--un-blue); border-top-color: var(--warm-accent); }
+        .nav-btn.primary:hover { background: var(--un-dark); }
+        .nav-btn span { display: block; font-size: 1.25rem; margin-bottom: 0.25rem; }
+        .nav-btn-secondary { background: var(--bg-secondary); border: 1px solid var(--border-warm); border-radius: 0.25rem; padding: 0.5rem; font-size: 0.7rem; font-weight: 500; cursor: pointer; text-align: center; transition: all 0.4s; }
+        .nav-btn-secondary:hover { background: var(--border-subtle); border-color: var(--un-blue); }
+        .nav-btn.m365 { background: #0078d4; color: white; border-color: #0078d4; border-top-color: var(--warm-accent); }
+        
+        .category { background: white; border-radius: 0.25rem; margin-bottom: 3rem; overflow: hidden; border-top: 4px solid var(--warm-accent); scroll-margin-top: 4rem; }
+        .cat-header { background: #1a2a3a; color: white; padding: 2rem 2.5rem; }
+        .cat-header h2 { font-family: 'Lora', Georgia, serif; font-size: 1.375rem; margin-bottom: 0.25rem; letter-spacing: -0.3px; }
+        .cat-header .for { font-size: 0.875rem; opacity: 0.7; font-weight: 300; }
+        .cat-header.m365 { background: #0a3d5f; }
+        .cat-body { padding: 2.5rem; }
+        
+        .scenario { background: #fef9f3; border-left: 4px solid var(--warm-gold); padding: 1.25rem 1.5rem; border-radius: 0.25rem; margin-bottom: 2rem; }
+        .scenario strong { color: #92400e; }
+        
+        .section-title { display: flex; align-items: center; gap: 0.5rem; font-family: 'Lora', Georgia, serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin: 2.5rem 0 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-warm); }
+        .section-title.green { color: var(--success); }
+        .section-title.orange { color: var(--warning); }
+        .section-title.purple { color: var(--purple); }
+        .section-title.blue { color: #2563eb; }
+        .section-title.teal { color: var(--teal); }
+        .section-title.red { color: var(--danger); }
+        .section-title.gray { color: var(--gray); }
+        .section-title.m365 { color: #0078d4; }
+        
+        .badge { font-size: 0.6rem; padding: 0.2rem 0.5rem; border-radius: 1rem; font-weight: 600; }
+        .badge.green { background: #dcfce7; color: var(--success); }
+        .badge.orange { background: #ffedd5; color: var(--warning); }
+        .badge.purple { background: #f3e8ff; color: var(--purple); }
+        .badge.blue { background: #dbeafe; color: #2563eb; }
+        .badge.teal { background: #ccfbf1; color: var(--teal); }
+        .badge.red { background: #fee2e2; color: var(--danger); }
+        .badge.gray { background: #f1f5f9; color: var(--gray); }
+        
+        .tip { background: #f0f4f8; border-radius: 0.25rem; padding: 0.875rem 1.25rem; font-size: 0.8rem; color: #1d4ed8; margin-bottom: 1.25rem; border-left: 3px solid var(--un-blue); }
+        .tip strong { color: #1e40af; }
+        
+        .prompt { background: var(--bg-secondary); border: 1px solid var(--border-warm); border-radius: 0.25rem; padding: 1.75rem; margin-bottom: 1.25rem; position: relative; }
+        .prompt.green { border-left: 4px solid var(--success); }
+        .prompt.orange { border-left: 4px solid var(--warning); }
+        .prompt.purple { border-left: 4px solid var(--purple); background: #faf5ff; }
+        .prompt.blue { border-left: 4px solid #2563eb; background: #eff6ff; }
+        .prompt.teal { border-left: 4px solid var(--teal); background: #f0fdfa; }
+        .prompt.red { border-left: 4px solid var(--danger); background: #fef2f2; }
+        .prompt.gray { border-left: 4px solid var(--gray); }
+        .prompt.m365 { border-left: 4px solid #0078d4; background: #f5f9fc; }
+        
+        .prompt-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+        .prompt-label { font-size: 0.85rem; font-weight: 700; color: #1e293b; }
+        .prompt-tags { display: flex; gap: 0.375rem; flex-wrap: wrap; }
+        .tag { font-size: 0.6rem; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-weight: 600; text-transform: uppercase; }
+        .tag.chart { background: #dbeafe; color: #1d4ed8; }
+        .tag.iterate { background: #f3e8ff; color: #7c3aed; }
+        .tag.create { background: #dcfce7; color: #166534; }
+        .tag.reason { background: #ffedd5; color: #c2410c; }
+        .tag.extract { background: #e0e7ff; color: #4338ca; }
+        .tag.verify { background: #fee2e2; color: #991b1b; }
+        .tag.meta { background: #fce7f3; color: #be185d; }
+        .tag.optional { background: #f1f5f9; color: #475569; }
+        .tag.mobile { background: #d1fae5; color: #065f46; }
+        .tag.m365 { background: #dbeafe; color: #1e40af; }
+        
+        .prompt-text { background: white; border: 1px solid var(--border-warm); border-radius: 0.25rem; padding: 1.25rem; font-size: 0.9rem; line-height: 1.75; white-space: pre-wrap; margin-bottom: 1rem; }
+        .prompt-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .follow-on { font-size: 0.75rem; color: var(--purple); font-style: italic; flex: 1; }
+        
+        .copy-btn { background: var(--un-blue); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.25rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.4s; white-space: nowrap; }
+        .copy-btn:hover { background: var(--un-dark); }
+        .copy-btn.copied { background: var(--success); }
+        
+        .scaffold-container { background: #fef9f3; border: 2px dashed var(--warm-gold); border-radius: 0.25rem; padding: 1.5rem; margin-bottom: 2rem; }
+        .scaffold-header { font-size: 0.85rem; font-weight: 700; color: #92400e; margin-bottom: 1rem; }
+        .scaffold-steps { display: flex; flex-direction: column; gap: 1rem; }
+        .scaffold-step { background: white; border-radius: 0.25rem; padding: 1.25rem; border-left: 3px solid var(--warm-gold); }
+        .scaffold-step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .scaffold-step-num { font-size: 0.7rem; font-weight: 700; color: #d97706; text-transform: uppercase; }
+        .scaffold-step-text { font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap; }
+        .scaffold-step .copy-btn { padding: 0.375rem 0.75rem; font-size: 0.7rem; }
+        
+        .agent-instructions { background: #fef5f3; border: 1px solid #f5cdc7; border-radius: 0.25rem; padding: 1.25rem; margin-bottom: 1.25rem; font-size: 0.85rem; }
+        .agent-instructions h4 { color: var(--danger); margin-bottom: 0.5rem; font-size: 0.85rem; }
+        .agent-instructions ol { margin-left: 1.25rem; }
+        .agent-instructions li { margin-bottom: 0.25rem; }
+        .agent-instructions a { color: var(--danger); }
+        
+        .discussion { background: #f0f4f8; border-left: 4px solid var(--un-blue); padding: 1.25rem 1.5rem; border-radius: 0.25rem; margin-top: 2.5rem; }
+        .discussion strong { color: #1d4ed8; }
+        
+        .golden-rule { background: #fef9f3; border: 2px solid var(--warm-gold); border-radius: 0.25rem; padding: 1.5rem; margin-bottom: 2rem; text-align: center; }
+        .golden-rule strong { color: #92400e; font-size: 1rem; }
+        .golden-rule p { color: #78350f; margin-top: 0.5rem; }
+        
+        .quick-ref-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.85rem; }
+        .quick-ref-table th { background: var(--bg-primary); padding: 0.875rem; text-align: left; font-weight: 600; font-family: 'Lora', Georgia, serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 2px solid var(--border-warm); }
+        .quick-ref-table td { padding: 0.875rem; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+        .quick-ref-table code { background: #e8f1f8; padding: 0.25rem 0.5rem; border-radius: 0.15rem; font-family: 'Courier New', monospace; font-size: 0.8rem; color: #0369a1; }
+        .quick-ref-table tr:hover { background: var(--border-subtle); }
+        
+        /* Sidebar with text labels */
+        .section-sidebar { position: fixed; left: 0; top: 50%; transform: translateY(-50%); background: white; border-radius: 0 0.25rem 0.25rem 0; padding: 0.5rem 0.25rem; border: 1px solid var(--border-warm); border-left: none; z-index: 90; display: flex; flex-direction: column; gap: 0.125rem; }
+        .section-sidebar a { display: flex; align-items: center; gap: 0.375rem; width: 100%; padding: 0.35rem 0.5rem; border-radius: 0.25rem; text-decoration: none; font-size: 0.65rem; font-weight: 600; color: var(--text-dark); transition: all 0.4s; opacity: 0.7; white-space: nowrap; }
+        .section-sidebar a .si { font-size: 0.85rem; flex-shrink: 0; }
+        .section-sidebar a:hover { background: var(--border-subtle); opacity: 1; }
+        .section-sidebar a.active { background: var(--un-blue); color: white; opacity: 1; }
+        .section-sidebar .sep { height: 1px; background: var(--border-warm); margin: 0.25rem 0; }
+        
+        .section-indicator-mobile { display: none; position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%); background: white; padding: 0.5rem 1rem; border-radius: 0.25rem; border: 1px solid var(--border-warm); z-index: 90; font-size: 0.8rem; font-weight: 600; color: var(--un-dark); }
+        .section-indicator-mobile span { margin-right: 0.5rem; }
+        
+        .footer { background: #1a2a3a; color: white; text-align: center; padding: 4rem 1.5rem; margin-top: 3rem; border-top: 4px solid var(--warm-accent); }
+        .footer .action { background: rgba(255,255,255,0.05); display: inline-block; padding: 1.25rem 2rem; border-radius: 0.25rem; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.1); }
+        .footer .credits { opacity: 0.6; font-size: 0.875rem; }
+        .footer a { color: rgba(255,255,255,0.8); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); transition: all 0.4s; }
+        .footer a:hover { color: white; border-bottom-color: white; }
+        .footer .hub-link { display: inline-block; margin-top: 1.5rem; padding: 0.75rem 2rem; background: var(--un-blue); color: white; border-radius: 0.25rem; border: none; font-weight: 600; transition: background 0.4s; }
+        .footer .hub-link:hover { background: var(--un-dark); border-bottom: none; }
+        
+        .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--success); color: white; padding: 0.875rem 1.5rem; border-radius: 0.25rem; font-weight: 500; z-index: 10000; opacity: 0; transition: all 0.4s ease; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        
+        .back-to-top { position: fixed; bottom: 2rem; right: 2rem; width: 2.5rem; height: 2.5rem; background: white; border: 1px solid var(--border-warm); border-radius: 0.25rem; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.4s; z-index: 90; opacity: 0; pointer-events: none; }
+        .back-to-top.visible { opacity: 1; pointer-events: auto; }
+        .back-to-top:hover { background: var(--un-blue); color: white; border-color: var(--un-blue); }
+        
+        @media (max-width: 900px) { .section-sidebar { display: none; } .section-indicator-mobile { display: block; } }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.5rem; }
+            .nav-grid, .nav-grid-secondary { grid-template-columns: repeat(3, 1fr); }
+            .cat-header { padding: 1.5rem; }
+            .cat-header h2 { font-size: 1.1rem; }
+            .cat-body { padding: 1.5rem; }
+            .prompt { padding: 1.25rem; }
+            .prompt-header { flex-direction: column; }
+            .prompt-footer { flex-direction: column; align-items: flex-start; }
+            .follow-on { margin-bottom: 0.5rem; }
+            .quick-ref-table { font-size: 0.75rem; display: block; overflow-x: auto; }
+        }
+        @media print {
+            .copilot-bar, .toast, .copy-btn, .section-sidebar, .section-indicator-mobile, .back-to-top { display: none; }
+            .category { break-inside: avoid; }
+            body::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="toast" id="toast">✓ Copied! Paste in Copilot</div>
+
+    <nav class="section-sidebar" id="sectionSidebar">
+        <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;"><span class="si">↑</span> Top</a>
+        <div class="sep"></div>
+        <a href="#s1" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">🎯</span> Recruitment</a>
+        <a href="#s2" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">📋</span> Onboarding</a>
+        <a href="#s3" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">⭐</span> Performance</a>
+        <a href="#s4" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">⚖️</span> Relations</a>
+        <a href="#s5" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">💰</span> Comp</a>
+        <a href="#s6" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">📚</span> L&amp;D</a>
+        <a href="#s7" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">💬</span> Engagement</a>
+        <a href="#s8" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">📊</span> Planning</a>
+        <a href="#s9" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">📢</span> Change</a>
+        <a href="#s10" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">🔒</span> Compliance</a>
+        <a href="#s11" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">🌍</span> DEI</a>
+        <a href="#s12" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'}); return false;"><span class="si">📱</span> M365</a>
+    </nav>
+
+    <div class="section-indicator-mobile" id="mobileIndicator">
+        <span id="currentSectionIcon">🎯</span>
+        <span id="currentSectionName">Recruitment</span>
+    </div>
+
+    <header class="header">
+        <p class="breadcrumb"><a href="https://jivtesh.github.io/ai/">&larr; AI Resources</a></p>
+        <h1>AI Clinics for HR Practitioners</h1>
+        <p class="subtitle">Microsoft 365 Copilot &amp; Simple Agent Builder Workshop</p>
+        <p class="meta">45 minutes &bull; Groups of 2&ndash;4 &bull; Microsoft 365 Copilot</p>
+    </header>
+
+    <div class="copilot-bar">
+        <p>Copy any prompt, then paste into Microsoft 365 Copilot:</p>
+        <a href="https://m365copilot.com/" target="_blank" rel="noopener" class="copilot-link">🚀 Open M365 Copilot</a>
+    </div>
+
+    <div class="container">
+        <div class="instructions">
+            <h3>📋 How to Use This Guide</h3>
+            <ol>
+                <li><strong>Pick a category</strong> relevant to your HR work</li>
+                <li><strong>Start with scaffolded prompts</strong> (yellow boxes) &mdash; they build skills step by step</li>
+                <li><strong>Try the visualization prompt</strong> early for an &ldquo;aha&rdquo; moment</li>
+                <li><strong>Start new chats</strong> when switching topics for better results</li>
+                <li><strong>Use follow-up prompts</strong> to iterate and go deeper</li>
+            </ol>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background: var(--success);"></div> Simple (2 min)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--warning);"></div> Structured (5 min)</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--purple);"></div> Reasoning</div>
+            <div class="legend-item"><div class="legend-dot" style="background: #2563eb;"></div> Visualization</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--teal);"></div> Document Creation</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--danger);"></div> Agent Mode</div>
+            <div class="legend-item"><div class="legend-dot" style="background: var(--gray);"></div> Verification/Meta</div>
+        </div>
+
+        <nav class="nav-section">
+            <h4>Priority Sections</h4>
+            <div class="nav-grid">
+                <button class="nav-btn primary" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"><span>🎯</span>Recruitment</button>
+                <button class="nav-btn primary" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"><span>📋</span>Onboarding</button>
+                <button class="nav-btn primary" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"><span>⭐</span>Performance</button>
+                <button class="nav-btn primary" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"><span>⚖️</span>Relations</button>
+                <button class="nav-btn primary" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"><span>💰</span>Comp</button>
+                <button class="nav-btn m365" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'})"><span>📱</span>M365 Quick</button>
+            </div>
+            <h4>Additional Sections</h4>
+            <div class="nav-grid-secondary">
+                <button class="nav-btn-secondary" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})">📚 Learning &amp; Dev</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">💬 Engagement</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})">📊 Workforce Planning</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">📢 Change Mgmt</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})">🔒 Compliance</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})">🌍 DEI</button>
+            </div>
+        </nav>
+    <section class="category" id="s1">
+        <div class="cat-header">
+            <h2>🎯 1. Recruitment &amp; Talent Acquisition</h2>
+            <p class="for">Talent Acquisition, HR Generalists, Hiring Panels</p>
+        </div>
+        <div class="cat-body">
+            <div class="scenario"><strong>Your challenge:</strong> You're filling a P-4 position with 200+ applicants across 15 nationalities. The hiring manager wants speed; geographic representation requirements add complexity. How does AI help you move faster without cutting corners?</div>
+
+            <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+            <div class="scaffold-container">
+                <div class="scaffold-header">📶 Three-Step Scaffold: Job Description Drafting</div>
+                <div class="scaffold-steps">
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                            <button class="copy-btn" onclick="copyText(this, 'List the key components of an effective job description for an international organization. Bullet list.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">List the key components of an effective job description for an international organization. Bullet list.</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 2: Add Structure</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Key components of a UN job description. Table format:\n| Component | Purpose | Common Mistakes in IO Recruitment |')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Key components of a UN job description. Table format:
+| Component | Purpose | Common Mistakes in IO Recruitment |</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 3: Full Context</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Search the web for best practices in writing inclusive, competency-based job descriptions for international organizations.\n\nCreate a JD template for a [P-4 Programme Officer] that includes: competencies (core + functional), experience requirements, language needs, geographic diversity note.\n\nTable:\n| Section | Content | Why It Matters for IO Hiring |\n\nFlag any language that could unintentionally narrow the candidate pool.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Search the web for best practices in writing inclusive, competency-based job descriptions for international organizations.
+
+Create a JD template for a [P-4 Programme Officer] that includes: competencies (core + functional), experience requirements, language needs, geographic diversity note.
+
+Table:
+| Section | Content | Why It Matters for IO Hiring |
+
+Flag any language that could unintentionally narrow the candidate pool.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title blue">📊 Visualization <span class="badge blue">See the data</span></div>
+            <div class="prompt blue">
+                <div class="prompt-header">
+                    <span class="prompt-label">Blue Prompt: Visualize JD Pitfalls</span>
+                    <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                </div>
+                <div class="prompt-text">Based on the JD analysis above, visualize common JD pitfalls and their impact on candidate diversity. Show me where our postings might be filtering out strong candidates.
+
+Follow-up: Create a 2x2 matrix: X-axis = Severity of impact, Y-axis = Ease of fix. Plot each pitfall.</div>
+                <div class="prompt-footer">
+                    <span class="follow-on"></span>
+                    <button class="copy-btn" onclick="copyText(this, 'Based on the JD analysis above, visualize common JD pitfalls and their impact on candidate diversity. Show me where our postings might be filtering out strong candidates.\n\nFollow-up: Create a 2x2 matrix: X-axis = Severity of impact, Y-axis = Ease of fix. Plot each pitfall.')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+            <div class="tip">💡 <strong>Tip:</strong> Start a new chat for each standalone prompt for better results.</div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">1. Interview Question Generator</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Generate 8 competency-based interview questions for a [P-4 Programme Officer] role.
+
+Mix: 3 technical, 3 behavioral, 2 situational.
+
+For each question:
+| Question | What Good Looks Like | Red Flag to Watch For |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Generate 8 competency-based interview questions for a [P-4 Programme Officer] role.\n\nMix: 3 technical, 3 behavioral, 2 situational.\n\nFor each question:\n| Question | What Good Looks Like | Red Flag to Watch For |')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">2. Candidate Comparison Matrix</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">I have shortlisted candidates for [role]. Create a comparison framework.
+
+Table:
+| Criteria | Weight | Candidate A | Candidate B | Candidate C |
+
+Include: Technical skills, language proficiency, geographic representation, organizational fit.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'I have shortlisted candidates for [role]. Create a comparison framework.\n\nTable:\n| Criteria | Weight | Candidate A | Candidate B | Candidate C |\n\nInclude: Technical skills, language proficiency, geographic representation, organizational fit.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">3. Offer & Regret Communications</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Draft two professional emails for a UN recruitment:
+1) Offer letter for selected candidate (warm, clear on next steps)
+2) Regret letter for unsuccessful candidates (respectful, encouraging future applications)
+
+Keep UN tone — formal but human.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Draft two professional emails for a UN recruitment:\n1) Offer letter for selected candidate (warm, clear on next steps)\n2) Regret letter for unsuccessful candidates (respectful, encouraging future applications)\n\nKeep UN tone — formal but human.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">4. Screening Criteria Checklist</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Create a screening checklist for [role] that separates:
+- Must-have vs Nice-to-have
+- Measurable criteria vs Subjective criteria
+
+Format as a table HR assistants can use consistently.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a screening checklist for [role] that separates:\n- Must-have vs Nice-to-have\n- Measurable criteria vs Subjective criteria\n\nFormat as a table HR assistants can use consistently.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">5. Recruitment Pipeline Design</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">Design a recruitment timeline for a [P-4 position]:
+
+| Phase | Duration | Key Actions | Owner | Risk |
+
+Include: Posting, screening, written test, interview, reference checks, offer, onboarding handoff.
+
+Flag where IO-specific steps (geographic requirements, internal candidates) add complexity.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Design a recruitment timeline for a [P-4 position]:\n\n| Phase | Duration | Key Actions | Owner | Risk |\n\nInclude: Posting, screening, written test, interview, reference checks, offer, onboarding handoff.\n\nFlag where IO-specific steps (geographic requirements, internal candidates) add complexity.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">6. Bias Audit on Job Posting</span>
+                <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+            </div>
+            <div class="prompt-text">Review this job posting text: [paste text]
+
+Audit for:
+| Issue | Where Found | Suggested Fix | Category |
+
+Categories: Gendered language, cultural bias, unnecessary barriers, jargon.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Review this job posting text: [paste text]\n\nAudit for:\n| Issue | Where Found | Suggested Fix | Category |\n\nCategories: Gendered language, cultural bias, unnecessary barriers, jargon.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">7. Hiring Manager Intake</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a structured intake questionnaire for hiring managers requesting a new position.
+
+Cover: Business justification, role vs. existing capacity, must-haves vs nice-to-haves, timeline, geographic/diversity goals.
+
+Format: Fillable checklist.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a structured intake questionnaire for hiring managers requesting a new position.\n\nCover: Business justification, role vs. existing capacity, must-haves vs nice-to-haves, timeline, geographic/diversity goals.\n\nFormat: Fillable checklist.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title purple">🟣 Reasoning &amp; Deep Analysis <span class="badge purple">Strategic thinking</span></div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">8. Headcount vs Process Problem</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">A department is requesting 3 new positions. Before approving:
+
+Help me build a diagnostic:
+| Question to Ask | What 'Yes' Means | What 'No' Means |
+
+Is this a genuine capacity gap or a process/tool/skill gap?
+What data should HR request before approving headcount?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'A department is requesting 3 new positions. Before approving:\n\nHelp me build a diagnostic:\n| Question to Ask | What \'Yes\' Means | What \'No\' Means |\n\nIs this a genuine capacity gap or a process/tool/skill gap?\nWhat data should HR request before approving headcount?')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">9. Geographic Representation</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">Search the web for current UN geographic representation standards and challenges.
+
+Framework: How do we balance merit-based hiring with equitable geographic representation?
+
+Table:
+| Approach | Pros | Cons | Risk |
+
+What's the principled position HR should take?</div>
+            <div class="prompt-footer">
+                <span class="follow-on">💡 Start a new chat for this prompt.</span>
+                <button class="copy-btn" onclick="copyText(this, 'Search the web for current UN geographic representation standards and challenges.\n\nFramework: How do we balance merit-based hiring with equitable geographic representation?\n\nTable:\n| Approach | Pros | Cons | Risk |\n\nWhat\'s the principled position HR should take?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">10. Written Assessment Design</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a written assessment for [role] that:
+- Tests actual job competencies (not test-taking ability)
+- Can be completed in 90 minutes
+- Is fair across cultural/language backgrounds
+
+Include: Instructions, 2-3 questions, evaluation rubric.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a written assessment for [role] that:\n- Tests actual job competencies (not test-taking ability)\n- Can be completed in 90 minutes\n- Is fair across cultural/language backgrounds\n\nInclude: Instructions, 2-3 questions, evaluation rubric.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">11. Recruitment Analytics Dashboard</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Design a monthly recruitment metrics brief.
+
+| Metric | What It Measures | Target | Current | Action Needed |
+
+Metrics: Time-to-fill, candidate diversity, offer acceptance rate, hiring manager satisfaction, cost per hire.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Design a monthly recruitment metrics brief.\n\n| Metric | What It Measures | Target | Current | Action Needed |\n\nMetrics: Time-to-fill, candidate diversity, offer acceptance rate, hiring manager satisfaction, cost per hire.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title gray">🔒 Verification &amp; Meta <span class="badge gray">Quality check</span></div>
+        <div class="prompt gray">
+            <div class="prompt-header">
+                <span class="prompt-label">Bias Best Practice Check</span>
+                <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+            </div>
+            <div class="prompt-text">IMPORTANT: Only reference recognized frameworks (SHRM, CIPD, UN HR Handbook).
+
+Review my recruitment approach for:
+| Potential Bias | Where It Appears | Mitigation |
+
+Be clear: What's best practice vs. UN-specific requirement?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'IMPORTANT: Only reference recognized frameworks (SHRM, CIPD, UN HR Handbook).\n\nReview my recruitment approach for:\n| Potential Bias | Where It Appears | Mitigation |\n\nBe clear: What\'s best practice vs. UN-specific requirement?')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt gray">
+            <div class="prompt-header">
+                <span class="prompt-label">AI Limits in Recruitment</span>
+                <div class="prompt-tags"><span class="tag meta">Meta</span></div>
+            </div>
+            <div class="prompt-text">Where should AI NEVER replace human judgment in recruitment?
+What screening decisions need a human in the loop?
+
+Table format.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Where should AI NEVER replace human judgment in recruitment?\nWhat screening decisions need a human in the loop?\n\nTable format.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title red">🤖 Agent Mode <span class="badge red">Optional</span></div>
+            <div class="agent-instructions">
+                <h4>How to Create an Agent</h4>
+                <ol>
+                    <li>Open the Microsoft 365 Copilot app or go to <a href="https://m365copilot.com/" target="_blank">m365copilot.com</a></li>
+                    <li>Under <strong>Agents</strong>, select <strong>New Agent</strong></li>
+                    <li>Paste the prompt below, click Send, follow prompts</li>
+                </ol>
+            </div>
+        <div class="prompt red">
+            <div class="prompt-header">
+                <span class="prompt-label">Recruitment Advisor Agent</span>
+                <div class="prompt-tags"><span class="tag optional">Optional</span></div>
+            </div>
+            <div class="prompt-text">You are my Recruitment Process Advisor for an international organization.
+
+When I describe a hiring need:
+1. ROLE ANALYSIS: Is this genuinely a new role or a redesign of existing capacity?
+2. JD REVIEW: Draft/improve the job description with competency-based language
+3. PIPELINE DESIGN: Suggest screening → assessment → interview stages
+4. DIVERSITY CHECK: Flag any elements that could narrow the candidate pool
+5. TIMELINE: Realistic timeline given IO bureaucracy
+
+Always flag geographic representation considerations.
+
+What role are you hiring for?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'You are my Recruitment Process Advisor for an international organization.\n\nWhen I describe a hiring need:\n1. ROLE ANALYSIS: Is this genuinely a new role or a redesign of existing capacity?\n2. JD REVIEW: Draft/improve the job description with competency-based language\n3. PIPELINE DESIGN: Suggest screening → assessment → interview stages\n4. DIVERSITY CHECK: Flag any elements that could narrow the candidate pool\n5. TIMELINE: Realistic timeline given IO bureaucracy\n\nAlways flag geographic representation considerations.\n\nWhat role are you hiring for?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="discussion"><strong>💬 Discussion:</strong> How do we balance speed with fairness in IO recruitment? Where does AI help vs. where does it risk automating bias?</div>
+        </div>
+    </section>
+    <section class="category" id="s2">
+        <div class="cat-header">
+            <h2>📋 2. Onboarding &amp; Employee Experience</h2>
+            <p class="for">HR Generalists, L&amp;D, Hiring Managers, Admin Officers</p>
+        </div>
+        <div class="cat-body">
+            <div class="scenario"><strong>Your challenge:</strong> A new P-3 staff member is joining from an external organization, relocating from Nairobi to Geneva. Onboarding in an IO means navigating visas, benefits enrollment, mandatory training, cultural adjustment, AND getting productive — all in the first 90 days.</div>
+
+            <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+            <div class="scaffold-container">
+                <div class="scaffold-header">📶 Three-Step Scaffold: Onboarding Plan</div>
+                <div class="scaffold-steps">
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                            <button class="copy-btn" onclick="copyText(this, 'What are the essential elements of a good onboarding programme? Bullet list.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">What are the essential elements of a good onboarding programme? Bullet list.</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 2: Add Structure</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Onboarding elements for international organizations. Table format:\n| Element | Timeline | Owner (HR/Manager/IT/Admin) | Common Failure Point |')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Onboarding elements for international organizations. Table format:
+| Element | Timeline | Owner (HR/Manager/IT/Admin) | Common Failure Point |</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 3: Full Context</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Search the web for onboarding best practices in international organizations and public sector.\n\nCreate a 90-day onboarding framework for a [P-3 joining from external].\n\nTable:\n| Week | HR Actions | Manager Actions | Employee Milestones | Success Indicator |\n\nInclude: Pre-arrival logistics, Day 1 experience, cultural integration, mandatory compliance training, role-specific ramp-up.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Search the web for onboarding best practices in international organizations and public sector.
+
+Create a 90-day onboarding framework for a [P-3 joining from external].
+
+Table:
+| Week | HR Actions | Manager Actions | Employee Milestones | Success Indicator |
+
+Include: Pre-arrival logistics, Day 1 experience, cultural integration, mandatory compliance training, role-specific ramp-up.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title blue">📊 Visualization <span class="badge blue">See the data</span></div>
+            <div class="prompt blue">
+                <div class="prompt-header">
+                    <span class="prompt-label">Blue Prompt: Visualize Onboarding Critical Path</span>
+                    <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                </div>
+                <div class="prompt-text">Based on the onboarding framework above, visualize the critical path. Show me where delays most commonly happen and their impact on new-hire productivity.
+
+Follow-up: Create a Gantt-style timeline showing parallel tracks: Admin/logistics, Learning, Social integration, Role ramp-up.</div>
+                <div class="prompt-footer">
+                    <span class="follow-on"></span>
+                    <button class="copy-btn" onclick="copyText(this, 'Based on the onboarding framework above, visualize the critical path. Show me where delays most commonly happen and their impact on new-hire productivity.\n\nFollow-up: Create a Gantt-style timeline showing parallel tracks: Admin/logistics, Learning, Social integration, Role ramp-up.')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+            <div class="tip">💡 <strong>Tip:</strong> Start a new chat for each standalone prompt for better results.</div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">1. Welcome Email Draft</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Draft a warm, professional welcome email from HR to a new staff member joining [department] in [duty station].
+
+Include: What to expect Day 1, key contacts, essential documents to bring, link to pre-arrival checklist.
+
+Tone: Warm but not overwhelming.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Draft a warm, professional welcome email from HR to a new staff member joining [department] in [duty station].\n\nInclude: What to expect Day 1, key contacts, essential documents to bring, link to pre-arrival checklist.\n\nTone: Warm but not overwhelming.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">2. First-Week Agenda</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a structured first-week agenda for a new [role] in [department].
+
+Table:
+| Day | Morning | Afternoon | Key Contact | Purpose |
+
+Balance: Administrative (badge, IT, benefits) + Social (team intro, buddy lunch) + Substantive (role context).</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a structured first-week agenda for a new [role] in [department].\n\nTable:\n| Day | Morning | Afternoon | Key Contact | Purpose |\n\nBalance: Administrative (badge, IT, benefits) + Social (team intro, buddy lunch) + Substantive (role context).')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">3. Onboarding Feedback Survey</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Design a 30-day onboarding check-in survey. 8 questions that surface:
+- What's going well
+- What's confusing
+- Do they feel welcomed
+- Do they have what they need
+
+Mix: Rating scale + open-ended.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Design a 30-day onboarding check-in survey. 8 questions that surface:\n- What\'s going well\n- What\'s confusing\n- Do they feel welcomed\n- Do they have what they need\n\nMix: Rating scale + open-ended.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">4. Buddy Programme Brief</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a one-page brief for onboarding buddies.
+
+Include: Role expectations, conversation starters for first meeting, topics to cover in first month, what NOT to do.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a one-page brief for onboarding buddies.\n\nInclude: Role expectations, conversation starters for first meeting, topics to cover in first month, what NOT to do.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">5. Onboarding Gap Analysis</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Assess our current onboarding process.
+
+Table:
+| Phase | What We Do Well | What's Missing | Impact of Gap | Priority to Fix |
+
+Phases: Pre-arrival, Day 1, Week 1, Month 1, Month 3.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Assess our current onboarding process.\n\nTable:\n| Phase | What We Do Well | What\'s Missing | Impact of Gap | Priority to Fix |\n\nPhases: Pre-arrival, Day 1, Week 1, Month 1, Month 3.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">6. Remote/Hybrid Onboarding</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">Adapt a standard in-person onboarding plan for remote/hybrid staff.
+
+Table:
+| In-Person Element | Virtual Equivalent | Tool Needed | Risk of Losing | How to Mitigate |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Adapt a standard in-person onboarding plan for remote/hybrid staff.\n\nTable:\n| In-Person Element | Virtual Equivalent | Tool Needed | Risk of Losing | How to Mitigate |')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">7. Onboarding by Staff Category</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Create differentiated onboarding checklists for: International professional, National officer, General Service, Consultant/contractor.
+
+Table:
+| Element | Intl Prof | NO | GS | Consultant |
+
+Highlight where requirements differ.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create differentiated onboarding checklists for: International professional, National officer, General Service, Consultant/contractor.\n\nTable:\n| Element | Intl Prof | NO | GS | Consultant |\n\nHighlight where requirements differ.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title purple">🟣 Reasoning &amp; Deep Analysis <span class="badge purple">Strategic thinking</span></div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">8. Onboarding ROI</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">What's the real cost of bad onboarding in an international organization?
+
+Framework:
+| Cost Category | Estimated Impact | How to Measure |
+
+Include: Productivity loss, early attrition, institutional knowledge gaps, team disruption.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'What\'s the real cost of bad onboarding in an international organization?\n\nFramework:\n| Cost Category | Estimated Impact | How to Measure |\n\nInclude: Productivity loss, early attrition, institutional knowledge gaps, team disruption.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">9. Cultural Integration</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">Search the web for research on cultural adjustment challenges for internationally mobile staff.
+
+How should HR support cultural integration beyond logistics? What role should HR play vs. the manager vs. the team?</div>
+            <div class="prompt-footer">
+                <span class="follow-on">💡 Start a new chat for this prompt.</span>
+                <button class="copy-btn" onclick="copyText(this, 'Search the web for research on cultural adjustment challenges for internationally mobile staff.\n\nHow should HR support cultural integration beyond logistics? What role should HR play vs. the manager vs. the team?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">10. Pre-Arrival Checklist</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a comprehensive pre-arrival checklist for a new international staff member relocating to [duty station].
+
+Sections: Visa/immigration, housing, banking, health insurance, family/dependents, mandatory training, IT setup.
+
+Checkbox format.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a comprehensive pre-arrival checklist for a new international staff member relocating to [duty station].\n\nSections: Visa/immigration, housing, banking, health insurance, family/dependents, mandatory training, IT setup.\n\nCheckbox format.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">11. Manager's Onboarding Guide</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">One-page guide for managers: 'How to onboard your new team member effectively.'
+
+Include: Before they arrive, Day 1, First week, First month.
+
+Focus on what MANAGERS should do (not HR admin).</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'One-page guide for managers: \'How to onboard your new team member effectively.\'\n\nInclude: Before they arrive, Day 1, First week, First month.\n\nFocus on what MANAGERS should do (not HR admin).')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title gray">🔒 Verification &amp; Meta <span class="badge gray">Quality check</span></div>
+        <div class="prompt gray">
+            <div class="prompt-header">
+                <span class="prompt-label">Best Practice Check</span>
+                <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+            </div>
+            <div class="prompt-text">IMPORTANT: Only cite recognized onboarding research and frameworks.
+
+Question: What are evidence-based practices for onboarding in international organizations?
+
+Table with source/framework cited.
+
+Be clear: What's general guidance vs. IO-specific?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'IMPORTANT: Only cite recognized onboarding research and frameworks.\n\nQuestion: What are evidence-based practices for onboarding in international organizations?\n\nTable with source/framework cited.\n\nBe clear: What\'s general guidance vs. IO-specific?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title red">🤖 Agent Mode <span class="badge red">Optional</span></div>
+            <div class="agent-instructions">
+                <h4>How to Create an Agent</h4>
+                <ol>
+                    <li>Open the Microsoft 365 Copilot app or go to <a href="https://m365copilot.com/" target="_blank">m365copilot.com</a></li>
+                    <li>Under <strong>Agents</strong>, select <strong>New Agent</strong></li>
+                    <li>Paste the prompt below, click Send, follow prompts</li>
+                </ol>
+            </div>
+        <div class="prompt red">
+            <div class="prompt-header">
+                <span class="prompt-label">Onboarding Navigator Agent</span>
+                <div class="prompt-tags"><span class="tag optional">Optional</span></div>
+            </div>
+            <div class="prompt-text">You are an Onboarding Navigator for a UN agency.
+
+When a new staff member or their HR focal point asks a question:
+1. IDENTIFY their staff category and duty station
+2. PROVIDE relevant onboarding information step by step
+3. DISTINGUISH between mandatory requirements and helpful extras
+4. FLAG time-sensitive items (visa deadlines, benefits enrollment windows)
+5. SUGGEST who to contact for issues outside HR
+
+Be friendly, practical, and specific.
+
+What do you need help with for your onboarding?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'You are an Onboarding Navigator for a UN agency.\n\nWhen a new staff member or their HR focal point asks a question:\n1. IDENTIFY their staff category and duty station\n2. PROVIDE relevant onboarding information step by step\n3. DISTINGUISH between mandatory requirements and helpful extras\n4. FLAG time-sensitive items (visa deadlines, benefits enrollment windows)\n5. SUGGEST who to contact for issues outside HR\n\nBe friendly, practical, and specific.\n\nWhat do you need help with for your onboarding?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="discussion"><strong>💬 Discussion:</strong> What makes the difference between onboarding that 'processes' someone and onboarding that genuinely integrates them? How can AI help bridge that gap?</div>
+        </div>
+    </section>
+    <section class="category" id="s3">
+        <div class="cat-header">
+            <h2>⭐ 3. Performance Management &amp; Development</h2>
+            <p class="for">HRBPs, Managers, L&amp;D, Senior HR</p>
+        </div>
+        <div class="cat-body">
+            <div class="scenario"><strong>Your challenge:</strong> It's performance review season. You're supporting 15 departments with 800+ staff. Some managers write brilliant evaluations; others submit three-word summaries. How do you drive quality and consistency at scale?</div>
+
+            <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+            <div class="scaffold-container">
+                <div class="scaffold-header">📶 Three-Step Scaffold: Feedback Quality</div>
+                <div class="scaffold-steps">
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                            <button class="copy-btn" onclick="copyText(this, 'What makes effective performance feedback? Bullet list of principles.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">What makes effective performance feedback? Bullet list of principles.</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 2: Add Structure</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Effective feedback principles. Table format:\n| Principle | Good Example | Bad Example | Why It Matters |')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Effective feedback principles. Table format:
+| Principle | Good Example | Bad Example | Why It Matters |</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 3: Full Context</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Search the web for research on performance management in public sector/international organizations.\n\nCreate a performance feedback quality framework.\n\nTable:\n| Dimension | What Excellent Looks Like | Common Pitfall in IOs | How to Coach Managers |\n\nInclude: Objectivity, specificity, development focus, calibration across cultures.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Search the web for research on performance management in public sector/international organizations.
+
+Create a performance feedback quality framework.
+
+Table:
+| Dimension | What Excellent Looks Like | Common Pitfall in IOs | How to Coach Managers |
+
+Include: Objectivity, specificity, development focus, calibration across cultures.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title blue">📊 Visualization <span class="badge blue">See the data</span></div>
+            <div class="prompt blue">
+                <div class="prompt-header">
+                    <span class="prompt-label">Blue Prompt: Visualize Feedback Quality Gaps</span>
+                    <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                </div>
+                <div class="prompt-text">Based on the feedback quality framework above, visualize where most managers fall short. Show me the gap between current practice and best practice.
+
+Follow-up: Create a radar chart showing manager capability across the feedback dimensions.</div>
+                <div class="prompt-footer">
+                    <span class="follow-on"></span>
+                    <button class="copy-btn" onclick="copyText(this, 'Based on the feedback quality framework above, visualize where most managers fall short. Show me the gap between current practice and best practice.\n\nFollow-up: Create a radar chart showing manager capability across the feedback dimensions.')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+            <div class="tip">💡 <strong>Tip:</strong> Start a new chat for each standalone prompt for better results.</div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">1. Vague-to-Actionable Converter</span>
+                <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+            </div>
+            <div class="prompt-text">Convert these vague manager comments into specific, actionable feedback:
+[paste examples like 'good work this year' or 'needs improvement']
+
+Table:
+| Original | Improved Version | Why It's Better |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Convert these vague manager comments into specific, actionable feedback:\n[paste examples like \'good work this year\' or \'needs improvement\']\n\nTable:\n| Original | Improved Version | Why It\'s Better |')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">2. Self-Assessment Coach</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Help a staff member write their self-assessment.
+
+Create a framework:
+| Achievement | Impact/Result | Competency Demonstrated | Evidence |
+
+For each of these areas: [list 3-4 key responsibilities].</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Help a staff member write their self-assessment.\n\nCreate a framework:\n| Achievement | Impact/Result | Competency Demonstrated | Evidence |\n\nFor each of these areas: [list 3-4 key responsibilities].')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">3. Development Goal Generator</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Based on this performance gap: [describe gap]
+
+Suggest 3 SMART development goals.
+
+Table:
+| Goal | Specific Actions | Timeline | Success Measure | Support Needed |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Based on this performance gap: [describe gap]\n\nSuggest 3 SMART development goals.\n\nTable:\n| Goal | Specific Actions | Timeline | Success Measure | Support Needed |')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">4. Difficult Conversation Prep</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">I need to deliver difficult performance feedback about [issue].
+
+Help me prepare:
+- Opening statement (direct but respectful)
+- Key points with specific examples
+- Expected reactions and responses
+- Agreed next steps framework</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'I need to deliver difficult performance feedback about [issue].\n\nHelp me prepare:\n- Opening statement (direct but respectful)\n- Key points with specific examples\n- Expected reactions and responses\n- Agreed next steps framework')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">5. Performance Calibration Guide</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a calibration session guide for managers.
+
+Include: Rating distribution expectations, how to identify rating inflation/deflation, discussion framework for borderline cases, documentation requirements.
+
+Table format.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a calibration session guide for managers.\n\nInclude: Rating distribution expectations, how to identify rating inflation/deflation, discussion framework for borderline cases, documentation requirements.\n\nTable format.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">6. PIP Design Framework</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Design a Performance Improvement Plan template for [situation].
+
+| Phase | Duration | Expectations | Support Provided | Check-in Schedule | Success Criteria | Consequence of Non-Improvement |
+
+Ensure it's fair, documented, and defensible.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Design a Performance Improvement Plan template for [situation].\n\n| Phase | Duration | Expectations | Support Provided | Check-in Schedule | Success Criteria | Consequence of Non-Improvement |\n\nEnsure it\'s fair, documented, and defensible.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">7. 360-Feedback Synthesis</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Template for synthesizing 360-feedback:
+| Feedback Source | Strengths Identified | Development Areas | Patterns Across Sources | Recommended Actions |
+
+Guide: How to identify signal vs. noise in multi-source feedback.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Template for synthesizing 360-feedback:\n| Feedback Source | Strengths Identified | Development Areas | Patterns Across Sources | Recommended Actions |\n\nGuide: How to identify signal vs. noise in multi-source feedback.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title purple">🟣 Reasoning &amp; Deep Analysis <span class="badge purple">Strategic thinking</span></div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">8. Performance vs System</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">An employee is underperforming. Before assuming it's individual performance:
+
+Diagnostic framework:
+| Possible Cause | Questions to Ask | If Yes, It's Not a Performance Issue |
+
+Categories: Skill gap, motivation, systemic barrier, unclear expectations, personal circumstances.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'An employee is underperforming. Before assuming it\'s individual performance:\n\nDiagnostic framework:\n| Possible Cause | Questions to Ask | If Yes, It\'s Not a Performance Issue |\n\nCategories: Skill gap, motivation, systemic barrier, unclear expectations, personal circumstances.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">9. Cultural Dimensions</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">Search the web for research on cross-cultural challenges in performance evaluation.
+
+How do cultural communication styles affect performance reviews in international organizations? What should HR train managers on?</div>
+            <div class="prompt-footer">
+                <span class="follow-on">💡 Start a new chat for this prompt.</span>
+                <button class="copy-btn" onclick="copyText(this, 'Search the web for research on cross-cultural challenges in performance evaluation.\n\nHow do cultural communication styles affect performance reviews in international organizations? What should HR train managers on?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">10. Manager Performance Guide</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a 2-page guide: 'Writing Effective Performance Evaluations in [Organization].'
+
+Include: Competency framework reference, rating scale guidance, example phrases by competency level, common errors to avoid.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a 2-page guide: \'Writing Effective Performance Evaluations in [Organization].\'\n\nInclude: Competency framework reference, rating scale guidance, example phrases by competency level, common errors to avoid.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">11. Performance Analytics Brief</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Design a performance management analytics dashboard.
+
+| Metric | What It Tells Us | Action Trigger |
+
+Include: Completion rates, rating distribution, development plan compliance, appeal rates.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Design a performance management analytics dashboard.\n\n| Metric | What It Tells Us | Action Trigger |\n\nInclude: Completion rates, rating distribution, development plan compliance, appeal rates.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title gray">🔒 Verification &amp; Meta <span class="badge gray">Quality check</span></div>
+        <div class="prompt gray">
+            <div class="prompt-header">
+                <span class="prompt-label">Cross-Cultural Check</span>
+                <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+            </div>
+            <div class="prompt-text">IMPORTANT: Only reference recognized performance management frameworks.
+
+Review this feedback for cultural bias or assumptions:
+[paste feedback]
+
+Table: | Issue | Why It's Problematic | Suggested Revision |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'IMPORTANT: Only reference recognized performance management frameworks.\n\nReview this feedback for cultural bias or assumptions:\n[paste feedback]\n\nTable: | Issue | Why It\'s Problematic | Suggested Revision |')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title red">🤖 Agent Mode <span class="badge red">Optional</span></div>
+            <div class="agent-instructions">
+                <h4>How to Create an Agent</h4>
+                <ol>
+                    <li>Open the Microsoft 365 Copilot app or go to <a href="https://m365copilot.com/" target="_blank">m365copilot.com</a></li>
+                    <li>Under <strong>Agents</strong>, select <strong>New Agent</strong></li>
+                    <li>Paste the prompt below, click Send, follow prompts</li>
+                </ol>
+            </div>
+        <div class="prompt red">
+            <div class="prompt-header">
+                <span class="prompt-label">Performance Coach Agent</span>
+                <div class="prompt-tags"><span class="tag optional">Optional</span></div>
+            </div>
+            <div class="prompt-text">You are a Performance Management Coach for HR practitioners in an international organization.
+
+When I describe a performance situation:
+1. DIAGNOSE: Is this a performance issue, system issue, or expectation gap?
+2. FEEDBACK DRAFT: Help me craft specific, fair feedback language
+3. DEVELOPMENT PLAN: Suggest concrete development actions
+4. DOCUMENTATION: Ensure proper documentation for the file
+5. CULTURAL LENS: Flag cross-cultural considerations
+
+Be direct but humane.
+
+What performance situation are you navigating?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'You are a Performance Management Coach for HR practitioners in an international organization.\n\nWhen I describe a performance situation:\n1. DIAGNOSE: Is this a performance issue, system issue, or expectation gap?\n2. FEEDBACK DRAFT: Help me craft specific, fair feedback language\n3. DEVELOPMENT PLAN: Suggest concrete development actions\n4. DOCUMENTATION: Ensure proper documentation for the file\n5. CULTURAL LENS: Flag cross-cultural considerations\n\nBe direct but humane.\n\nWhat performance situation are you navigating?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="discussion"><strong>💬 Discussion:</strong> How do you maintain fairness in performance evaluation across cultures, languages, and management styles? Where does AI help and where does it risk oversimplifying?</div>
+        </div>
+    </section>
+    <section class="category" id="s4">
+        <div class="cat-header">
+            <h2>⚖️ 4. Employee Relations &amp; Policy</h2>
+            <p class="for">Employee Relations Specialists, HR Generalists, Legal/Ethics Liaisons</p>
+        </div>
+        <div class="cat-body">
+            <div class="scenario"><strong>Your challenge:</strong> You've received three grievances this month, a harassment allegation, and a request for reasonable accommodation. Meanwhile, a new policy on flexible work needs rolling out. You need to be fair, fast, and fully documented.</div>
+
+            <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+            <div class="scaffold-container">
+                <div class="scaffold-header">📶 Three-Step Scaffold: Policy Communication</div>
+                <div class="scaffold-steps">
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                            <button class="copy-btn" onclick="copyText(this, 'What makes an effective HR policy communication? Bullet list.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">What makes an effective HR policy communication? Bullet list.</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 2: Add Structure</span>
+                            <button class="copy-btn" onclick="copyText(this, 'HR policy communication elements. Table format:\n| Element | Purpose | What Goes Wrong Without It |')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">HR policy communication elements. Table format:
+| Element | Purpose | What Goes Wrong Without It |</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 3: Full Context</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Search the web for best practices in HR policy communication in large international organizations.\n\nCreate a policy rollout framework for [new flexible work policy].\n\nTable:\n| Phase | Audience | Channel | Key Message | FAQ Needed | Timeline |\n\nInclude: How to handle resistance, manager enablement, edge cases.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Search the web for best practices in HR policy communication in large international organizations.
+
+Create a policy rollout framework for [new flexible work policy].
+
+Table:
+| Phase | Audience | Channel | Key Message | FAQ Needed | Timeline |
+
+Include: How to handle resistance, manager enablement, edge cases.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title blue">📊 Visualization <span class="badge blue">See the data</span></div>
+            <div class="prompt blue">
+                <div class="prompt-header">
+                    <span class="prompt-label">Blue Prompt: Visualize Policy Rollout Sequence</span>
+                    <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                </div>
+                <div class="prompt-text">Based on the policy rollout framework above, visualize the communication sequence. Show me the critical path and dependencies.</div>
+                <div class="prompt-footer">
+                    <span class="follow-on"></span>
+                    <button class="copy-btn" onclick="copyText(this, 'Based on the policy rollout framework above, visualize the communication sequence. Show me the critical path and dependencies.')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+            <div class="tip">💡 <strong>Tip:</strong> Start a new chat for each standalone prompt for better results.</div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">1. Grievance Response Draft</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Draft a professional acknowledgment response to an employee grievance about [topic].
+
+Tone: Empathetic, procedurally correct, clear on next steps and timeline.
+
+Include: What we will do, expected timeline, who they can contact, confidentiality note.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Draft a professional acknowledgment response to an employee grievance about [topic].\n\nTone: Empathetic, procedurally correct, clear on next steps and timeline.\n\nInclude: What we will do, expected timeline, who they can contact, confidentiality note.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">2. Policy Plain-Language Rewrite</span>
+                <div class="prompt-tags"><span class="tag iterate">Iterate</span></div>
+            </div>
+            <div class="prompt-text">Rewrite this policy excerpt in plain language that any staff member can understand:
+[paste policy text]
+
+Table:
+| Original Clause | Plain Language Version | Key Point for Staff |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Rewrite this policy excerpt in plain language that any staff member can understand:\n[paste policy text]\n\nTable:\n| Original Clause | Plain Language Version | Key Point for Staff |')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">3. Accommodation Evaluation</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Create a structured evaluation framework for a reasonable accommodation request.
+
+Table:
+| Factor | Questions to Consider | Documentation Needed | Decision Criteria |
+
+Include: Medical documentation, operational feasibility, precedent, alternatives.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a structured evaluation framework for a reasonable accommodation request.\n\nTable:\n| Factor | Questions to Consider | Documentation Needed | Decision Criteria |\n\nInclude: Medical documentation, operational feasibility, precedent, alternatives.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">4. Conflict De-Escalation Script</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">An employee is upset about [situation].
+
+Help me prepare:
+- Opening statement
+- Active listening cues
+- Reframing language
+- Commitment to next steps
+- Boundaries to set</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'An employee is upset about [situation].\n\nHelp me prepare:\n- Opening statement\n- Active listening cues\n- Reframing language\n- Commitment to next steps\n- Boundaries to set')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">5. Investigation Plan Template</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a structured investigation plan for [type of complaint].
+
+Table:
+| Step | Actions | Timeline | Documentation | Responsible |
+
+Include: Intake, evidence gathering, witness interviews, findings, recommendation, communication.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a structured investigation plan for [type of complaint].\n\nTable:\n| Step | Actions | Timeline | Documentation | Responsible |\n\nInclude: Intake, evidence gathering, witness interviews, findings, recommendation, communication.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">6. Policy Gap Analysis</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Compare our [policy area] against:
+| Requirement Source | Our Policy | Gap | Risk Level | Recommended Action |
+
+Sources: Local labor law, UN Staff Rules, sector best practice.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Compare our [policy area] against:\n| Requirement Source | Our Policy | Gap | Risk Level | Recommended Action |\n\nSources: Local labor law, UN Staff Rules, sector best practice.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">7. Case Pattern Analysis</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Template for analyzing employee relations case patterns.
+
+| Category | # Cases (6 months) | Trend | Root Cause Hypothesis | Systemic Action Needed |
+
+Help me identify whether we have individual issues or systemic problems.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Template for analyzing employee relations case patterns.\n\n| Category | # Cases (6 months) | Trend | Root Cause Hypothesis | Systemic Action Needed |\n\nHelp me identify whether we have individual issues or systemic problems.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title purple">🟣 Reasoning &amp; Deep Analysis <span class="badge purple">Strategic thinking</span></div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">8. Policy vs Humanity</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">When strict policy application would cause disproportionate harm to an employee:
+
+Framework for navigating discretion:
+| Factor | Weighs Toward Strict Application | Weighs Toward Flexibility |
+
+How to decide when rules don't account for human complexity — without setting precedent we can't sustain?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'When strict policy application would cause disproportionate harm to an employee:\n\nFramework for navigating discretion:\n| Factor | Weighs Toward Strict Application | Weighs Toward Flexibility |\n\nHow to decide when rules don\'t account for human complexity — without setting precedent we can\'t sustain?')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">9. Whistleblower Protection</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">Search the web for best practices in whistleblower protection in international organizations.
+
+How do we ensure staff trust the system?
+
+Honest assessment:
+| Protection Element | What We Should Have | Common Failure Point |</div>
+            <div class="prompt-footer">
+                <span class="follow-on">💡 Start a new chat for this prompt.</span>
+                <button class="copy-btn" onclick="copyText(this, 'Search the web for best practices in whistleblower protection in international organizations.\n\nHow do we ensure staff trust the system?\n\nHonest assessment:\n| Protection Element | What We Should Have | Common Failure Point |')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">10. Manager FAQ for New Policy</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a manager FAQ for [new policy].
+
+10 questions managers will ask, with clear answers.
+
+Include: 'What if my team member asks...', 'What if I disagree...', 'What's my authority vs. what needs HR approval.'</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a manager FAQ for [new policy].\n\n10 questions managers will ask, with clear answers.\n\nInclude: \'What if my team member asks...\', \'What if I disagree...\', \'What\'s my authority vs. what needs HR approval.\'')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">11. Annual ER Report Template</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Design a quarterly employee relations report template.
+
+| Section | What to Include | How to Present |
+
+Include: Case volumes, types, resolution times, trends, systemic recommendations.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Design a quarterly employee relations report template.\n\n| Section | What to Include | How to Present |\n\nInclude: Case volumes, types, resolution times, trends, systemic recommendations.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title gray">🔒 Verification &amp; Meta <span class="badge gray">Quality check</span></div>
+        <div class="prompt gray">
+            <div class="prompt-header">
+                <span class="prompt-label">Policy Compliance Check</span>
+                <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+            </div>
+            <div class="prompt-text">IMPORTANT: Only reference recognized employment law and HR frameworks.
+
+Review this policy decision for:
+| Risk | Legal Basis | Precedent Concern | Recommendation |
+
+Be clear: What's legal requirement vs. best practice vs. organizational choice?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'IMPORTANT: Only reference recognized employment law and HR frameworks.\n\nReview this policy decision for:\n| Risk | Legal Basis | Precedent Concern | Recommendation |\n\nBe clear: What\'s legal requirement vs. best practice vs. organizational choice?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title red">🤖 Agent Mode <span class="badge red">Optional</span></div>
+            <div class="agent-instructions">
+                <h4>How to Create an Agent</h4>
+                <ol>
+                    <li>Open the Microsoft 365 Copilot app or go to <a href="https://m365copilot.com/" target="_blank">m365copilot.com</a></li>
+                    <li>Under <strong>Agents</strong>, select <strong>New Agent</strong></li>
+                    <li>Paste the prompt below, click Send, follow prompts</li>
+                </ol>
+            </div>
+        <div class="prompt red">
+            <div class="prompt-header">
+                <span class="prompt-label">HR Policy Advisor Agent</span>
+                <div class="prompt-tags"><span class="tag optional">Optional</span></div>
+            </div>
+            <div class="prompt-text">You are an HR Policy Advisor for an international organization.
+
+When I describe a staff situation:
+1. IDENTIFY applicable policies, rules, and legal frameworks
+2. PRESENT options available under current policy
+3. FLAG risks of each option (legal, precedent, morale)
+4. DRAFT communication for the employee/manager
+5. DOCUMENT: What needs to go in the file?
+
+Always remind me of confidentiality requirements.
+
+What situation do you need guidance on?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'You are an HR Policy Advisor for an international organization.\n\nWhen I describe a staff situation:\n1. IDENTIFY applicable policies, rules, and legal frameworks\n2. PRESENT options available under current policy\n3. FLAG risks of each option (legal, precedent, morale)\n4. DRAFT communication for the employee/manager\n5. DOCUMENT: What needs to go in the file?\n\nAlways remind me of confidentiality requirements.\n\nWhat situation do you need guidance on?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="discussion"><strong>💬 Discussion:</strong> When policy and humanity conflict, how do you navigate? What does ethical HR look like when the rules don't have a good answer?</div>
+        </div>
+    </section>
+    <section class="category" id="s5">
+        <div class="cat-header">
+            <h2>💰 5. Compensation &amp; Benefits</h2>
+            <p class="for">Total Rewards, HR Analysts, Benefits Administrators</p>
+        </div>
+        <div class="cat-body">
+            <div class="scenario"><strong>Your challenge:</strong> Staff are confused about their entitlements, benefits utilization is low, and you've been asked to benchmark your compensation against comparator organizations. Meanwhile, a new allowance policy needs communicating to 5,000+ staff across 30 duty stations.</div>
+
+            <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+            <div class="scaffold-container">
+                <div class="scaffold-header">📶 Three-Step Scaffold: Benefits Communication</div>
+                <div class="scaffold-steps">
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                            <button class="copy-btn" onclick="copyText(this, 'What benefits do international organization staff typically receive? Bullet list.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">What benefits do international organization staff typically receive? Bullet list.</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 2: Add Structure</span>
+                            <button class="copy-btn" onclick="copyText(this, 'IO staff benefits. Table format:\n| Benefit | Purpose | Common Staff Confusion |')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">IO staff benefits. Table format:
+| Benefit | Purpose | Common Staff Confusion |</div>
+                    </div>
+                    <div class="scaffold-step">
+                        <div class="scaffold-step-header">
+                            <span class="scaffold-step-num">Step 3: Full Context</span>
+                            <button class="copy-btn" onclick="copyText(this, 'Search the web for current UN common system compensation and benefits structure.\n\nCreate a benefits communication toolkit.\n\nTable:\n| Benefit | What It Is (Plain Language) | Who\'s Eligible | How to Enroll | Deadline | Common Mistakes |\n\nTarget: New staff orientation.')">📋 Copy</button>
+                        </div>
+                        <div class="scaffold-step-text">Search the web for current UN common system compensation and benefits structure.
+
+Create a benefits communication toolkit.
+
+Table:
+| Benefit | What It Is (Plain Language) | Who's Eligible | How to Enroll | Deadline | Common Mistakes |
+
+Target: New staff orientation.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title blue">📊 Visualization <span class="badge blue">See the data</span></div>
+            <div class="prompt blue">
+                <div class="prompt-header">
+                    <span class="prompt-label">Blue Prompt: Visualize Benefits Awareness Gaps</span>
+                    <div class="prompt-tags"><span class="tag chart">Chart</span></div>
+                </div>
+                <div class="prompt-text">Based on the benefits analysis above, visualize staff understanding gaps. Show me where the biggest disconnect is between what we offer and what staff know about.
+
+Follow-up: Create a funnel chart: Benefits available → Staff aware → Staff enrolled → Staff utilizing.</div>
+                <div class="prompt-footer">
+                    <span class="follow-on"></span>
+                    <button class="copy-btn" onclick="copyText(this, 'Based on the benefits analysis above, visualize staff understanding gaps. Show me where the biggest disconnect is between what we offer and what staff know about.\n\nFollow-up: Create a funnel chart: Benefits available → Staff aware → Staff enrolled → Staff utilizing.')">📋 Copy</button>
+                </div>
+            </div>
+
+            <div class="section-title green">🟢 Simple Prompts <span class="badge green">2 min each</span></div>
+            <div class="tip">💡 <strong>Tip:</strong> Start a new chat for each standalone prompt for better results.</div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">1. Benefits FAQ Generator</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Generate 10 frequently asked questions about [education grant / rental subsidy / health insurance] with clear, jargon-free answers.
+
+Include: Eligibility, process, timeline, common pitfalls.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Generate 10 frequently asked questions about [education grant / rental subsidy / health insurance] with clear, jargon-free answers.\n\nInclude: Eligibility, process, timeline, common pitfalls.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">2. Total Rewards Statement</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a template for a Total Rewards Statement that shows staff their full compensation package.
+
+Sections: Base salary, post adjustment, allowances, pension contribution, health insurance value, leave entitlements.
+
+Make the value visible.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a template for a Total Rewards Statement that shows staff their full compensation package.\n\nSections: Base salary, post adjustment, allowances, pension contribution, health insurance value, leave entitlements.\n\nMake the value visible.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">3. Allowance Change Communication</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Draft a staff-wide communication about changes to [allowance/benefit].
+
+Structure: What's changing, why, who's affected, what to do, timeline, who to contact.
+
+Tone: Clear, not bureaucratic.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Draft a staff-wide communication about changes to [allowance/benefit].\n\nStructure: What\'s changing, why, who\'s affected, what to do, timeline, who to contact.\n\nTone: Clear, not bureaucratic.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt green">
+            <div class="prompt-header">
+                <span class="prompt-label">4. Benefits Enrollment Reminder</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Draft a 3-email sequence for benefits enrollment:
+| Email | Timing | Subject | Key Message | CTA |
+
+1) Awareness, 2) Deadline approaching, 3) Final reminder.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Draft a 3-email sequence for benefits enrollment:\n| Email | Timing | Subject | Key Message | CTA |\n\n1) Awareness, 2) Deadline approaching, 3) Final reminder.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title orange">🟡 Structured Analysis <span class="badge orange">5 min each</span></div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">5. Compensation Benchmarking</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Create a framework for benchmarking our compensation against comparator organizations.
+
+Table:
+| Element | Our Organization | Comparator 1 | Comparator 2 | Market Position | Action |
+
+Include: Base pay, allowances, pension, insurance, leave.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a framework for benchmarking our compensation against comparator organizations.\n\nTable:\n| Element | Our Organization | Comparator 1 | Comparator 2 | Market Position | Action |\n\nInclude: Base pay, allowances, pension, insurance, leave.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">6. Benefits Utilization Analysis</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Framework for analyzing benefits utilization.
+
+Table:
+| Benefit | Uptake Rate | Target | Gap | Likely Reason for Low Uptake | Recommended Action |
+
+Help me find where staff are leaving value on the table.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Framework for analyzing benefits utilization.\n\nTable:\n| Benefit | Uptake Rate | Target | Gap | Likely Reason for Low Uptake | Recommended Action |\n\nHelp me find where staff are leaving value on the table.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt orange">
+            <div class="prompt-header">
+                <span class="prompt-label">7. Pay Equity Audit</span>
+                <div class="prompt-tags"><span class="tag extract">Extract</span></div>
+            </div>
+            <div class="prompt-text">Design a pay equity audit methodology.
+
+| Step | Analysis | Data Needed | Tool | Red Flag Threshold |
+
+Include: Gender, grade level, years of service, duty station, function.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Design a pay equity audit methodology.\n\n| Step | Analysis | Data Needed | Tool | Red Flag Threshold |\n\nInclude: Gender, grade level, years of service, duty station, function.')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title purple">🟣 Reasoning &amp; Deep Analysis <span class="badge purple">Strategic thinking</span></div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">8. Budget Prioritization</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">We have [X] additional budget for staff benefits.
+
+Framework:
+| Option | Cost | # Staff Impacted | Retention Impact | Equity Impact | Recommendation |
+
+Where does each dollar have the highest impact on morale and retention?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'We have [X] additional budget for staff benefits.\n\nFramework:\n| Option | Cost | # Staff Impacted | Retention Impact | Equity Impact | Recommendation |\n\nWhere does each dollar have the highest impact on morale and retention?')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt purple">
+            <div class="prompt-header">
+                <span class="prompt-label">9. Compensation Philosophy</span>
+                <div class="prompt-tags"><span class="tag reason">Reason</span></div>
+            </div>
+            <div class="prompt-text">Search the web for current debates on international civil service compensation.
+
+Help me articulate our compensation philosophy. What tensions exist between:
+- Attracting global talent
+- Cost control
+- Internal equity
+- Duty station competitiveness</div>
+            <div class="prompt-footer">
+                <span class="follow-on">💡 Start a new chat for this prompt.</span>
+                <button class="copy-btn" onclick="copyText(this, 'Search the web for current debates on international civil service compensation.\n\nHelp me articulate our compensation philosophy. What tensions exist between:\n- Attracting global talent\n- Cost control\n- Internal equity\n- Duty station competitiveness')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title teal">🔵 Document Creation <span class="badge teal">Outputs</span></div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">10. Benefits Quick-Start Guide</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Create a plain-language benefits quick-start guide for new staff. 2 pages max.
+
+Organized by: First week, first month, first year.
+
+What to do, when, and where.</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Create a plain-language benefits quick-start guide for new staff. 2 pages max.\n\nOrganized by: First week, first month, first year.\n\nWhat to do, when, and where.')">📋 Copy</button>
+            </div>
+        </div>
+        <div class="prompt teal">
+            <div class="prompt-header">
+                <span class="prompt-label">11. Compensation Committee Brief</span>
+                <div class="prompt-tags"><span class="tag create">Create</span></div>
+            </div>
+            <div class="prompt-text">Template for briefing leadership on compensation matters.
+
+| Topic | Current State | Benchmark Data | Recommendation | Financial Impact | Risk of Inaction |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'Template for briefing leadership on compensation matters.\n\n| Topic | Current State | Benchmark Data | Recommendation | Financial Impact | Risk of Inaction |')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title gray">🔒 Verification &amp; Meta <span class="badge gray">Quality check</span></div>
+        <div class="prompt gray">
+            <div class="prompt-header">
+                <span class="prompt-label">Entitlement Accuracy</span>
+                <div class="prompt-tags"><span class="tag verify">Verify</span></div>
+            </div>
+            <div class="prompt-text">IMPORTANT: Always verify against actual Staff Rules and Administrative Instructions.
+
+AI-generated benefits information must be checked before sharing with staff.
+
+Table: | Common AI Error | Why It Happens | How to Verify |</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'IMPORTANT: Always verify against actual Staff Rules and Administrative Instructions.\n\nAI-generated benefits information must be checked before sharing with staff.\n\nTable: | Common AI Error | Why It Happens | How to Verify |')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="section-title red">🤖 Agent Mode <span class="badge red">Optional</span></div>
+            <div class="agent-instructions">
+                <h4>How to Create an Agent</h4>
+                <ol>
+                    <li>Open the Microsoft 365 Copilot app or go to <a href="https://m365copilot.com/" target="_blank">m365copilot.com</a></li>
+                    <li>Under <strong>Agents</strong>, select <strong>New Agent</strong></li>
+                    <li>Paste the prompt below, click Send, follow prompts</li>
+                </ol>
+            </div>
+        <div class="prompt red">
+            <div class="prompt-header">
+                <span class="prompt-label">Benefits Navigator Agent</span>
+                <div class="prompt-tags"><span class="tag optional">Optional</span></div>
+            </div>
+            <div class="prompt-text">You are a Benefits Navigator for UN staff.
+
+When an employee asks about their benefits:
+1. IDENTIFY their staff category and duty station
+2. EXPLAIN the relevant benefit in plain language
+3. OUTLINE the enrollment/claim process step by step
+4. FLAG deadlines and common mistakes
+5. DIRECT them to the right office for complex cases
+
+Be helpful, patient, and specific.
+
+What benefit do you have questions about?</div>
+            <div class="prompt-footer">
+                <span class="follow-on"></span>
+                <button class="copy-btn" onclick="copyText(this, 'You are a Benefits Navigator for UN staff.\n\nWhen an employee asks about their benefits:\n1. IDENTIFY their staff category and duty station\n2. EXPLAIN the relevant benefit in plain language\n3. OUTLINE the enrollment/claim process step by step\n4. FLAG deadlines and common mistakes\n5. DIRECT them to the right office for complex cases\n\nBe helpful, patient, and specific.\n\nWhat benefit do you have questions about?')">📋 Copy</button>
+            </div>
+        </div>
+
+
+            <div class="discussion"><strong>💬 Discussion:</strong> How do we make benefits truly accessible — not just available? Where is the gap between what HR offers and what staff experience?</div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Learning & Development -->
+    <section id="s6" class="section">
+        <div class="cat-header">
+            <h2>📚 6. Learning &amp; Development</h2>
+            <p class="for">L&amp;D Specialists, Training Managers, HRBPs</p>
+            <p class="for" style="opacity:0.6; font-size:0.75rem; margin-top:0.25rem;">Focused prompts — see Sections 1–5 for the full scaffolded experience</p>
+        </div>
+        <p class="scenario"><strong>Scenario:</strong> Your organization has committed to building AI literacy, leadership capabilities, and technical skills — but budget is tight, staff are time-poor, and 'training fatigue' is real.</p>
+        
+        <div class="prompts-grid">
+            <div class="prompt-card green">
+                <div class="tag">create</div>
+                <h3>Training Content Converter</h3>
+                <p>Convert this document/policy into 5 quiz questions for a staff training module.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Mix: Multiple choice, scenario-based, true/false.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Include answer key with explanations.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Convert this document/policy into 5 quiz questions for a staff training module.\n\nMix: Multiple choice, scenario-based, true/false.\n\nInclude answer key with explanations.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card green">
+                <div class="tag">create</div>
+                <h3>Learning Path Generator</h3>
+                <p>Design a 6-month learning path for a [new HRBP / junior programme officer].</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Month | Topic | Format | Resource | Outcome</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Mix: Self-paced, mentoring, shadowing, formal training.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Design a 6-month learning path for a [new HRBP / junior programme officer].\n\nTable:\n| Month | Topic | Format | Resource | Outcome |\n\nMix: Self-paced, mentoring, shadowing, formal training.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card orange">
+                <div class="tag">extract</div>
+                <h3>Skills Matrix</h3>
+                <p>Create a skills matrix template.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Skill | Definition | Level 1 (Basic) | Level 2 (Proficient) | Level 3 (Expert) | Assessment Method</p>
+                <p style="font-size:0.875rem; opacity:0.7;">For: [list 8-10 key skills for the function].</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create a skills matrix template.\n\nTable:\n| Skill | Definition | Level 1 (Basic) | Level 2 (Proficient) | Level 3 (Expert) | Assessment Method |\n\nFor: [list 8-10 key skills for the function].')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card purple">
+                <div class="tag">reason</div>
+                <h3>Future Skills</h3>
+                <p>What skills will [this department/function] need in 2-3 years that nobody is asking for yet?</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Framework: Trend | Skill Implication | Current Readiness | Lead Time to Build</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Consider: AI/digital, geopolitical shifts, reform agendas.</p>
+                <button class="copy-btn" onclick="copyText(this, 'What skills will [this department/function] need in 2-3 years that nobody is asking for yet?\n\nFramework:\n| Trend | Skill Implication | Current Readiness | Lead Time to Build |\n\nConsider: AI/digital, geopolitical shifts, reform agendas.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card teal">
+                <div class="tag">create</div>
+                <h3>Annual L&amp;D Plan</h3>
+                <p>Create an annual L&amp;D plan template.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Sections: Strategic alignment, needs analysis summary, priority programmes, budget allocation, delivery calendar, success metrics, governance.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create an annual L&D plan template.\n\nSections: Strategic alignment, needs analysis summary, priority programmes, budget allocation, delivery calendar, success metrics, governance.')">📋 Copy</button>
+            </div>
+        </div>
+        
+        <div class="agent-box">
+            <h4>🤖 Learning Advisor</h4>
+            <p><em>"You are a Learning &amp; Development Advisor for an international organization.</em></p>
+            <p><em>When someone describes a learning need:<br>
+            1. CLARIFY: Is this a knowledge gap, skill gap, or behavioral change?<br>
+            2. RECOMMEND: Best intervention type (formal training, coaching, OJL, rotation, mentoring)<br>
+            3. DESIGN: Outline a learning pathway with timeline<br>
+            4. MEASURE: How to evaluate if it worked<br>
+            5. RESOURCE: Suggest where to find/build content</em></p>
+            <p><em>What learning need are you trying to address?"</em></p>
+        </div>
+        
+        <div class="discussion-box">
+            <p><strong>💬 Discussion:</strong> When is training NOT the answer? How do we help leaders see that some 'training requests' are really process or leadership problems?</p>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Employee Engagement & Wellbeing -->
+    <section id="s7" class="section">
+        <div class="cat-header">
+            <h2>💬 7. Employee Engagement &amp; Wellbeing</h2>
+            <p class="for">HR Leaders, People Analytics, Staff Welfare, Managers</p>
+            <p class="for" style="opacity:0.6; font-size:0.75rem; margin-top:0.25rem;">Focused prompts — see Sections 1–5 for the full scaffolded experience</p>
+        </div>
+        <p class="scenario"><strong>Scenario:</strong> Your last staff survey showed declining engagement in field offices, rising stress levels, and mixed feelings about organizational direction. Leadership wants an action plan by Friday.</p>
+        
+        <div class="prompts-grid">
+            <div class="prompt-card green">
+                <div class="tag">create</div>
+                <h3>Pulse Survey Designer</h3>
+                <p>Design a 6-question monthly pulse survey.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Mix: 4 rating scale, 2 open-ended.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Cover: Workload, recognition, manager support, clarity of direction, wellbeing, one open 'what would you improve.'</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Keep it under 3 minutes to complete.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Design a 6-question monthly pulse survey.\n\nMix: 4 rating scale, 2 open-ended.\n\nCover: Workload, recognition, manager support, clarity of direction, wellbeing, one open \'what would you improve.\'\n\nKeep it under 3 minutes to complete.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card green">
+                <div class="tag">extract</div>
+                <h3>Recognition Programme Ideas</h3>
+                <p>Generate 8 recognition ideas for an international organization.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Idea | Cost | Effort | Impact | Best For</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Include both formal and informal options. Consider cross-cultural appropriateness.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Generate 8 recognition ideas for an international organization.\n\nTable:\n| Idea | Cost | Effort | Impact | Best For |\n\nInclude both formal and informal options. Consider cross-cultural appropriateness.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card orange">
+                <div class="tag">extract</div>
+                <h3>Exit Interview Analysis</h3>
+                <p>Template for analyzing exit interview data.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Reason Category | Frequency | Trend | Department Pattern | Systemic vs Individual | Action</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Help me see if we have a retention problem or a leadership problem.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Template for analyzing exit interview data.\n\nTable:\n| Reason Category | Frequency | Trend | Department Pattern | Systemic vs Individual | Action |\n\nHelp me see if we have a retention problem or a leadership problem.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card purple">
+                <div class="tag">reason</div>
+                <h3>Engagement Paradox</h3>
+                <p>Our engagement scores are stable but turnover is rising. Help me diagnose.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Framework: Hypothesis | Data to Check | If True, Means | Action</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Consider: Survey fatigue, social desirability bias, engagement ≠ commitment.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Our engagement scores are stable but turnover is rising. Help me diagnose.\n\nFramework:\n| Hypothesis | Data to Check | If True, Means | Action |\n\nConsider: Survey fatigue, social desirability bias, engagement ≠ commitment.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card teal">
+                <div class="tag">create</div>
+                <h3>Manager Engagement Toolkit</h3>
+                <p>Create a practical one-page guide: 'What Managers Can Do This Week to Improve Engagement.'</p>
+                <p style="font-size:0.875rem; opacity:0.7;">5-7 concrete actions, not corporate platitudes. Each with: Action, why it works, how to do it.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create a practical one-page guide: \'What Managers Can Do This Week to Improve Engagement.\'\n\n5-7 concrete actions, not corporate platitudes.\n\nEach with: Action, why it works, how to do it.')">📋 Copy</button>
+            </div>
+        </div>
+        
+        <div class="agent-box">
+            <h4>🤖 Engagement Insights</h4>
+            <p><em>"You are an Employee Engagement Advisor for an international organization.</em></p>
+            <p><em>When I share survey data or concerns:<br>
+            1. PATTERN RECOGNITION: What themes emerge?<br>
+            2. ROOT CAUSE: Surface vs underlying issues<br>
+            3. BENCHMARKING: How does this compare to IO norms?<br>
+            4. ACTION PLAN: Specific, prioritized recommendations<br>
+            5. MEASUREMENT: How will we know if it's working?</em></p>
+            <p><em>Be data-driven but remember these are people, not metrics.</em></p>
+            <p><em>What engagement challenge are you working on?"</em></p>
+        </div>
+        
+        <div class="discussion-box">
+            <p><strong>💬 Discussion:</strong> How do you maintain engagement in mission-driven organizations where staff stay despite poor conditions — is that engagement or exploitation?</p>
+        </div>
+    </section>
+
+    <!-- SECTION 8: Workforce Planning & Analytics -->
+    <section id="s8" class="section">
+        <div class="cat-header">
+            <h2>📊 8. Workforce Planning &amp; Analytics</h2>
+            <p class="for">HR Analytics, Strategic HR, HRBPs, Senior Management</p>
+            <p class="for" style="opacity:0.6; font-size:0.75rem; margin-top:0.25rem;">Focused prompts — see Sections 1–5 for the full scaffolded experience</p>
+        </div>
+        <p class="scenario"><strong>Scenario:</strong> Leadership wants a 3-year workforce plan. You have headcount data, retirement projections, and a reform mandate to 'do more with less.' You need to translate people data into strategic recommendations.</p>
+        
+        <div class="prompts-grid">
+            <div class="prompt-card green">
+                <div class="tag">extract</div>
+                <h3>Attrition Risk Summary</h3>
+                <p>Create an attrition risk assessment template.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Risk Factor | Data Point | Threshold | Current Status | Action if High</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Factors: Retirement eligibility, tenure, engagement scores, market competitiveness, contract end dates.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create an attrition risk assessment template.\n\nTable:\n| Risk Factor | Data Point | Threshold | Current Status | Action if High |\n\nFactors: Retirement eligibility, tenure, engagement scores, market competitiveness, contract end dates.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card green">
+                <div class="tag">extract</div>
+                <h3>Diversity Metrics Snapshot</h3>
+                <p>Design a workforce diversity snapshot template.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Dimension | Metric | Current | Target | Gap | Trend</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Include: Gender at each level, geographic representation, age distribution, contract type.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Design a workforce diversity snapshot template.\n\nTable:\n| Dimension | Metric | Current | Target | Gap | Trend |\n\nInclude: Gender at each level, geographic representation, age distribution, contract type.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card orange">
+                <div class="tag">create</div>
+                <h3>3-Year Workforce Plan</h3>
+                <p>Create a workforce planning template.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Function | Current FTE | Projected Need (Yr 1/2/3) | Gap | Strategy | Budget Implication</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Include supply-side factors: retirements, attrition, reform targets.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create a workforce planning template.\n\nTable:\n| Function | Current FTE | Projected Need (Yr 1/2/3) | Gap | Strategy | Budget Implication |\n\nInclude supply-side factors: retirements, attrition, reform targets.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card purple">
+                <div class="tag">reason</div>
+                <h3>Automation vs Human</h3>
+                <p>We're growing 20% but HR budget is flat.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Framework: HR Activity | Automate? | Why/Why Not | Tool Needed | Human Touch Required</p>
+                <p style="font-size:0.875rem; opacity:0.7;">What should we automate vs. what absolutely needs human judgment?</p>
+                <button class="copy-btn" onclick="copyText(this, 'We\'re growing 20% but HR budget is flat.\n\nFramework:\n| HR Activity | Automate? | Why/Why Not | Tool Needed | Human Touch Required |\n\nWhat should we automate vs. what absolutely needs human judgment?')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card teal">
+                <div class="tag">create</div>
+                <h3>Workforce Brief for Leadership</h3>
+                <p>Create a leadership brief template: 'State of Our Workforce.'</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Section | Content | Visualization</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Sections: Demographics, pipeline health, risk areas, strategic recommendations, investment needed.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create a leadership brief template: \'State of Our Workforce.\'\n\nTable:\n| Section | Content | Visualization |\n\nSections: Demographics, pipeline health, risk areas, strategic recommendations, investment needed.')">📋 Copy</button>
+            </div>
+        </div>
+        
+        <div class="agent-box">
+            <h4>🤖 Workforce Strategist</h4>
+            <p><em>"You are a Workforce Planning Strategist for an international organization.</em></p>
+            <p><em>When I share workforce data or challenges:<br>
+            1. DATA ASSESSMENT: What does the data tell us? What's missing?<br>
+            2. TREND ANALYSIS: What patterns should leadership worry about?<br>
+            3. SCENARIO MODELING: Best case, likely case, worst case<br>
+            4. RECOMMENDATIONS: Specific, prioritized actions with timelines<br>
+            5. STORYTELLING: Help me present this so leadership acts on it</em></p>
+            <p><em>Always consider geographic balance, gender parity, institutional knowledge.</em></p>
+            <p><em>What workforce planning challenge are you facing?"</em></p>
+        </div>
+        
+        <div class="discussion-box">
+            <p><strong>💬 Discussion:</strong> How do we use workforce data to earn a seat at the leadership table? What data stories do leaders actually act on?</p>
+        </div>
+    </section>
+
+    <!-- SECTION 9: Change Management & Internal Communications -->
+    <section id="s9" class="section">
+        <div class="cat-header">
+            <h2>📢 9. Change Management &amp; Internal Communications</h2>
+            <p class="for">HR Communications, Change Management, HR Leaders</p>
+            <p class="for" style="opacity:0.6; font-size:0.75rem; margin-top:0.25rem;">Focused prompts — see Sections 1–5 for the full scaffolded experience</p>
+        </div>
+        <p class="scenario"><strong>Scenario:</strong> A major restructuring is being announced next month. 300 staff affected, 5 departments merging into 3, and the rumor mill is already running.</p>
+        
+        <div class="prompts-grid">
+            <div class="prompt-card green">
+                <div class="tag">create</div>
+                <h3>Town Hall Talking Points</h3>
+                <p>Create talking points for a 15-minute town hall on [organizational change].</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Structure: Section | Time | Key Points | Tone Note</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Include: Opening, Context, What's Changing, Support Available, Q&amp;A Transition, Close. Add: What NOT to say.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create talking points for a 15-minute town hall on [organizational change].\n\nStructure:\n| Section | Time | Key Points | Tone Note |\n\nInclude: Opening, Context, What\'s Changing, Support Available, Q&A Transition, Close.\n\nAdd: What NOT to say.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card green">
+                <div class="tag">create</div>
+                <h3>Manager Briefing FAQ</h3>
+                <p>10 questions managers will get from their teams about [change].</p>
+                <p style="font-size:0.875rem; opacity:0.7;">For each: Question | Honest Answer | If You Don't Know Yet | Escalate To</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Help managers be credible frontline communicators.</p>
+                <button class="copy-btn" onclick="copyText(this, '10 questions managers will get from their teams about [change].\n\nFor each:\n| Question | Honest Answer | If You Don\'t Know Yet | Escalate To |\n\nHelp managers be credible frontline communicators.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card orange">
+                <div class="tag">extract</div>
+                <h3>Stakeholder Impact Assessment</h3>
+                <p>Map all stakeholders affected by [change].</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Stakeholder Group | Impact Level | Key Concern | Communication Need | Engagement Approach | Priority</p>
+                <button class="copy-btn" onclick="copyText(this, 'Map all stakeholders affected by [change].\n\nTable:\n| Stakeholder Group | Impact Level | Key Concern | Communication Need | Engagement Approach | Priority |')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card purple">
+                <div class="tag">reason</div>
+                <h3>Trust During Uncertainty</h3>
+                <p>How do I maintain HR credibility when I can't promise certainty?</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Brief me:<br>
+                - What can I promise? (List)<br>
+                - What should I explicitly NOT promise?<br>
+                - How do I acknowledge uncertainty without creating panic?<br>
+                - What actions (not words) build trust?</p>
+                <button class="copy-btn" onclick="copyText(this, 'How do I maintain HR credibility when I can\'t promise certainty?\n\nBrief me:\n- What can I promise? (List)\n- What should I explicitly NOT promise?\n- How do I acknowledge uncertainty without creating panic?\n- What actions (not words) build trust?')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card teal">
+                <div class="tag">create</div>
+                <h3>Change Management Toolkit</h3>
+                <p>Create an HR change management toolkit overview.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Include: Communication timeline template, stakeholder map template, FAQ template, manager briefing template, feedback collection mechanism. One-page overview connecting all pieces.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create an HR change management toolkit overview.\n\nInclude: Communication timeline template, stakeholder map template, FAQ template, manager briefing template, feedback collection mechanism.\n\nOne-page overview connecting all pieces.')">📋 Copy</button>
+            </div>
+        </div>
+        
+        <div class="agent-box">
+            <h4>🤖 Change Communication Advisor</h4>
+            <p><em>"You are a Change Communication Advisor for HR in an international organization.</em></p>
+            <p><em>When I describe an upcoming change:<br>
+            1. STAKEHOLDER MAP: Who's affected and how?<br>
+            2. MESSAGE FRAMEWORK: Key messages by audience<br>
+            3. TIMING: Communication sequence and channels<br>
+            4. RISK: What could go wrong with the communication?<br>
+            5. SUPPORT: What should HR put in place for affected staff?</em></p>
+            <p><em>Be realistic about what HR can and can't control.</em></p>
+            <p><em>What change are you communicating?"</em></p>
+        </div>
+        
+        <div class="discussion-box">
+            <p><strong>💬 Discussion:</strong> How do you communicate change when you don't control the decisions or the timeline? Where does HR's role as employee advocate conflict with being management's messenger?</p>
+        </div>
+    </section>
+
+    <!-- SECTION 10: Compliance, HR Operations & Digital HR -->
+    <section id="s10" class="section">
+        <div class="cat-header">
+            <h2>🔒 10. Compliance, HR Operations &amp; Digital HR</h2>
+            <p class="for">HR Operations, HRIS, Compliance, Payroll</p>
+            <p class="for" style="opacity:0.6; font-size:0.75rem; margin-top:0.25rem;">Focused prompts — see Sections 1–5 for the full scaffolded experience</p>
+        </div>
+        <p class="scenario"><strong>Scenario:</strong> An audit is coming in 6 weeks. Leave records need verifying, contractor conversions need documenting, and leadership wants to know why HR 'still uses spreadsheets.'</p>
+        
+        <div class="prompts-grid">
+            <div class="prompt-card green">
+                <div class="tag">create</div>
+                <h3>Audit Preparation Checklist</h3>
+                <p>Create an HR audit preparation checklist for [audit area].</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Item | Status | Documentation Needed | Where to Find | Risk if Missing | Owner | Deadline</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create an HR audit preparation checklist for [audit area].\n\nTable:\n| Item | Status | Documentation Needed | Where to Find | Risk if Missing | Owner | Deadline |')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card green">
+                <div class="tag">extract</div>
+                <h3>Data Cleanup Priorities</h3>
+                <p>We need to improve HR data quality. Prioritization framework:</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Data Element | Current Quality | Impact of Bad Data | Effort to Fix | Priority | Quick Win?</p>
+                <button class="copy-btn" onclick="copyText(this, 'We need to improve HR data quality. Prioritization framework:\n\nTable:\n| Data Element | Current Quality | Impact of Bad Data | Effort to Fix | Priority | Quick Win? |')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card orange">
+                <div class="tag">extract</div>
+                <h3>HRIS Gap Analysis</h3>
+                <p>Evaluate our HR systems against needs.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: HR Function | System Used | Works Well | Gaps | Workaround Used | Ideal Solution</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Identify where we're using spreadsheets for things a system should handle.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Evaluate our HR systems against needs.\n\nTable:\n| HR Function | System Used | Works Well | Gaps | Workaround Used | Ideal Solution |\n\nIdentify where we\'re using spreadsheets for things a system should handle.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card purple">
+                <div class="tag">reason</div>
+                <h3>Automation Ethics</h3>
+                <p>When automating HR processes, what should NEVER be fully automated?</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Decision framework: Process | Automate Fully | Automate with Human Review | Keep Manual | Why</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Consider: Fairness, transparency, accountability, staff trust.</p>
+                <button class="copy-btn" onclick="copyText(this, 'When automating HR processes, what should NEVER be fully automated?\n\nDecision framework:\n| Process | Automate Fully | Automate with Human Review | Keep Manual | Why |\n\nConsider: Fairness, transparency, accountability, staff trust.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card teal">
+                <div class="tag">create</div>
+                <h3>Business Case for HR Tech</h3>
+                <p>Template for building a business case for HR technology investment.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Sections: Current pain, proposed solution, cost-benefit analysis, implementation timeline, risk mitigation, success metrics.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Template for building a business case for HR technology investment.\n\nSections: Current pain, proposed solution, cost-benefit analysis, implementation timeline, risk mitigation, success metrics.')">📋 Copy</button>
+            </div>
+        </div>
+        
+        <div class="agent-box">
+            <h4>🤖 HR Ops Advisor</h4>
+            <p><em>"You are an HR Operations Advisor for an international organization.</em></p>
+            <p><em>When I describe a process or compliance question:<br>
+            1. ASSESS: Is this a process issue, system issue, or policy issue?<br>
+            2. BENCHMARK: What does good look like?<br>
+            3. SOLVE: Practical steps to fix, considering IO constraints<br>
+            4. DOCUMENT: How to properly document for audit readiness<br>
+            5. PREVENT: How to stop this from recurring</em></p>
+            <p><em>Be practical about resource constraints.</em></p>
+            <p><em>What HR operations challenge are you facing?"</em></p>
+        </div>
+        
+        <div class="discussion-box">
+            <p><strong>💬 Discussion:</strong> Where is the line between efficiency and dehumanization in HR operations? What should never be 'optimized'?</p>
+        </div>
+    </section>
+
+    <!-- SECTION 11: DEI & Belonging -->
+    <section id="s11" class="section">
+        <div class="cat-header">
+            <h2>🌍 11. Diversity, Equity, Inclusion &amp; Belonging</h2>
+            <p class="for">DEI Leads, HR Leaders, All Managers</p>
+            <p class="for" style="opacity:0.6; font-size:0.75rem; margin-top:0.25rem;">Focused prompts — see Sections 1–5 for the full scaffolded experience</p>
+        </div>
+        <p class="scenario"><strong>Scenario:</strong> Your organization has committed to gender parity at P-5 and above by 2028, improved geographic representation, and an inclusive culture. Progress is slow. Leadership wants numbers — but numbers alone don't tell the story.</p>
+        
+        <div class="prompts-grid">
+            <div class="prompt-card green">
+                <div class="tag">iterate</div>
+                <h3>Inclusive Language Review</h3>
+                <p>Review this [job posting / policy / communication] for inclusive language.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Issue | Where Found | Why It Matters | Suggested Alternative</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Categories: Gendered language, cultural assumptions, ability bias, jargon barriers.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Review this [job posting / policy / communication] for inclusive language.\n\nTable:\n| Issue | Where Found | Why It Matters | Suggested Alternative |\n\nCategories: Gendered language, cultural assumptions, ability bias, jargon barriers.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card green">
+                <div class="tag">extract</div>
+                <h3>Representation Dashboard</h3>
+                <p>Design a diversity data snapshot.</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Metric | Current | Target | Trend | Action</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Sliced by: Grade level, department, contract type. Highlight where representation drops off at senior levels.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Design a diversity data snapshot.\n\nTable:\n| Metric | Current | Target | Trend | Action |\n\nSliced by: Grade level, department, contract type. Highlight where representation drops off at senior levels.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card orange">
+                <div class="tag">extract</div>
+                <h3>Pay Equity Analysis</h3>
+                <p>Design a pay equity analysis for [organization].</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Table: Analysis Step | Data Needed | Method | Red Flag | Action if Disparity Found</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Dimensions: Gender, grade, function, duty station.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Design a pay equity analysis for [organization].\n\nTable:\n| Analysis Step | Data Needed | Method | Red Flag | Action if Disparity Found |\n\nDimensions: Gender, grade, function, duty station.')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card purple">
+                <div class="tag">reason</div>
+                <h3>DEI Optics vs Systems</h3>
+                <p>Honest assessment: Are our DEI initiatives changing systems or just optics?</p>
+                <p style="font-size:0.875rem; opacity:0.7;">Framework: Initiative | System Change | Optics Change | Evidence of Impact</p>
+                <p style="font-size:0.875rem; opacity:0.7;">What would it take to move from performative to structural?</p>
+                <button class="copy-btn" onclick="copyText(this, 'Honest assessment: Are our DEI initiatives changing systems or just optics?\n\nFramework:\n| Initiative | System Change | Optics Change | Evidence of Impact |\n\nWhat would it take to move from performative to structural?')">📋 Copy</button>
+            </div>
+            
+            <div class="prompt-card teal">
+                <div class="tag">create</div>
+                <h3>Inclusive Leadership Toolkit</h3>
+                <p>Create a practical guide for managers: 'Leading Inclusively.'</p>
+                <p style="font-size:0.875rem; opacity:0.7;">2 pages. Include: Self-assessment questions, daily practices, meeting facilitation tips, feedback across cultures, bias interruption techniques.</p>
+                <button class="copy-btn" onclick="copyText(this, 'Create a practical guide for managers: \'Leading Inclusively.\'\n\n2 pages. Include: Self-assessment questions, daily practices, meeting facilitation tips, feedback across cultures, bias interruption techniques.')">📋 Copy</button>
+            </div>
+        </div>
+        
+        <div class="agent-box">
+            <h4>🤖 DEI Advisor</h4>
+            <p><em>"You are a Diversity, Equity, Inclusion &amp; Belonging advisor for an international organization.</em></p>
+            <p><em>When I describe a DEI question or initiative:<br>
+            1. DATA: What does the data show? What data are we missing?<br>
+            2. CONTEXT: How does this compare to IO benchmarks?<br>
+            3. SYSTEMIC VIEW: Is this individual behavior or structural?<br>
+            4. INTERVENTION: Evidence-based recommendations (not just training)<br>
+            5. ACCOUNTABILITY: How to track progress meaningfully</em></p>
+            <p><em>Be honest about what works and what's performative.</em></p>
+            <p><em>What DEI challenge are you working on?"</em></p>
+        </div>
+        
+        <div class="discussion-box">
+            <p><strong>💬 Discussion:</strong> How do we balance geographic representation targets with merit-based selection? Is there a principled position, or is it always a trade-off?</p>
+        </div>
+    </section>
+
+    <!-- SECTION 12: M365 Copilot Quick Reference -->
+    <section id="s12" class="section">
+        <div class="cat-header m365">
+            <h2>📱 12. M365 Copilot Quick Reference for HR</h2>
+            <p class="for">All HR practitioners using Microsoft 365</p>
+        </div>
+        
+        <div class="golden-rule">
+            <strong>🌟 The Golden Rule of HR Prompting</strong>
+            <p>Be specific about context: "For a P-4 in a field mission" beats "for a job." Start simple. Follow up to refine.</p>
+        </div>
+        
+        <div class="quick-ref-section">
+            <h3>📱 Universal HR Catch-Up Prompts <span class="badge">Works everywhere</span></h3>
+            <p style="font-size:0.875rem; margin-bottom:1rem; opacity:0.8;">💡 Memorize these 5: They work in almost any HR situation.</p>
+            <table class="quick-ref-table">
+                <thead>
+                    <tr>
+                        <th>Prompt</th>
+                        <th>When to Use</th>
+                        <th style="width:50px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"What did I miss this week?"</td>
+                        <td>Monday morning / returning from leave</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'What did I miss this week?')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Summarize this"</td>
+                        <td>Works on policies, emails, meeting notes</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Summarize this')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"What's being asked of me?"</td>
+                        <td>Unclear requests, long email threads</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'What\'s being asked of me?')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Draft a professional response"</td>
+                        <td>Grievances, candidate emails, policy queries</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Draft a professional response')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Make this shorter and clearer"</td>
+                        <td>Any HR communication before sending</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Make this shorter and clearer')">📋</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="quick-ref-section">
+            <h3>🎯 Recruitment Prompts <span class="badge">Word &amp; BizChat</span></h3>
+            <table class="quick-ref-table">
+                <thead>
+                    <tr>
+                        <th>Prompt</th>
+                        <th>When to Use</th>
+                        <th style="width:50px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"Draft a job description for [role] based on these notes"</td>
+                        <td>Starting a new vacancy</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Draft a job description for [role] based on these notes')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Compare these candidates in a table"</td>
+                        <td>Shortlisting decisions</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Compare these candidates in a table')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Generate interview questions for [role]"</td>
+                        <td>Interview preparation</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Generate interview questions for [role]')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Write an offer letter for [candidate] for [role]"</td>
+                        <td>Post-selection</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Write an offer letter for [candidate] for [role]')">📋</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="quick-ref-section">
+            <h3>⭐ Performance &amp; Development Prompts <span class="badge">Word &amp; Excel</span></h3>
+            <table class="quick-ref-table">
+                <thead>
+                    <tr>
+                        <th>Prompt</th>
+                        <th>When to Use</th>
+                        <th style="width:50px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"Help me write constructive feedback about [topic]"</td>
+                        <td>Review season</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Help me write constructive feedback about [topic]')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Convert this vague feedback into specific, actionable language"</td>
+                        <td>Improving manager submissions</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Convert this vague feedback into specific, actionable language')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Create a development plan for [skill gap]"</td>
+                        <td>Post-review follow-up</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Create a development plan for [skill gap]')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Analyze these performance ratings by department"</td>
+                        <td>Calibration</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Analyze these performance ratings by department')">📋</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="quick-ref-section">
+            <h3>⚖️ Policy &amp; Employee Relations Prompts <span class="badge">Word &amp; BizChat</span></h3>
+            <table class="quick-ref-table">
+                <thead>
+                    <tr>
+                        <th>Prompt</th>
+                        <th>When to Use</th>
+                        <th style="width:50px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"Rewrite this policy in plain language"</td>
+                        <td>Policy communication</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Rewrite this policy in plain language')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Draft a response to this employee grievance"</td>
+                        <td>ER cases</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Draft a response to this employee grievance')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Create a FAQ for [new policy]"</td>
+                        <td>Policy rollout</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Create a FAQ for [new policy]')">📋</button></td>
+                    </tr>
+                    <tr>
+                        <td>"Summarize this meeting and list action items"</td>
+                        <td>ER consultations</td>
+                        <td><button class="copy-btn" onclick="copyText(this, 'Summarize this meeting and list action items')">📋</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="tip">
+            💡 <strong>HR Confidentiality Reminder:</strong> Never paste actual employee data, names, or case details into Copilot Chat. Use anonymized or sample data. Always verify AI-generated policy references against your actual Staff Rules. Review outputs for cultural bias before sending to global staff.
+        </div>
+    </section>
+
+    </div><!-- end container -->
+
+    <footer class="footer">
+        <div class="action">
+            <strong>🚀 Ready to explore?</strong><br>
+            Pick a section above. Start with the scaffolded prompts. Build from there.
+        </div>
+        <p class="credits">AI Clinics for HR Practitioners — Microsoft 365 Copilot &amp; Agent Builder Workshop</p>
+        <a href="https://jivtesh.github.io/ai/" class="hub-link">&larr; Back to AI Resources</a>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <script>
+    function copyText(button, text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                showCopySuccess(button);
+            }).catch(function() {
+                fallbackCopy(text, button);
+            });
+        } else {
+            fallbackCopy(text, button);
+        }
+    }
+    
+    function fallbackCopy(text, button) {
+        var textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        textarea.style.top = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try { document.execCommand('copy'); showCopySuccess(button); }
+        catch (e) { alert('Please select and copy manually'); }
+        document.body.removeChild(textarea);
+    }
+    
+    function showCopySuccess(button) {
+        var originalText = button.innerText;
+        button.innerText = '✓ Copied!';
+        button.classList.add('copied');
+        var toast = document.getElementById('toast');
+        if (toast) {
+            toast.classList.add('show');
+            setTimeout(function() {
+                button.innerText = originalText;
+                button.classList.remove('copied');
+                toast.classList.remove('show');
+            }, 2000);
+        } else {
+            setTimeout(function() {
+                button.innerText = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        }
+    }
+    
+    var sections = [
+        {id: 's1', icon: '🎯', name: 'Recruitment'},
+        {id: 's2', icon: '📋', name: 'Onboarding'},
+        {id: 's3', icon: '⭐', name: 'Performance'},
+        {id: 's4', icon: '⚖️', name: 'Relations'},
+        {id: 's5', icon: '💰', name: 'Comp & Benefits'},
+        {id: 's6', icon: '📚', name: 'L&D'},
+        {id: 's7', icon: '💬', name: 'Engagement'},
+        {id: 's8', icon: '📊', name: 'Planning'},
+        {id: 's9', icon: '📢', name: 'Change Mgmt'},
+        {id: 's10', icon: '🔒', name: 'Compliance'},
+        {id: 's11', icon: '🌍', name: 'DEI'},
+        {id: 's12', icon: '📱', name: 'M365 Quick'}
+    ];
+    
+    function updateSectionIndicator() {
+        var scrollPos = window.scrollY + 150;
+        var currentSection = sections[0];
+        for (var i = 0; i < sections.length; i++) {
+            var section = document.getElementById(sections[i].id);
+            if (section && section.offsetTop <= scrollPos) {
+                currentSection = sections[i];
+            }
+        }
+        var mobileIcon = document.getElementById('currentSectionIcon');
+        var mobileName = document.getElementById('currentSectionName');
+        if (mobileIcon && mobileName) {
+            mobileIcon.textContent = currentSection.icon;
+            mobileName.textContent = currentSection.name;
+        }
+        var sidebarLinks = document.querySelectorAll('.section-sidebar a');
+        sidebarLinks.forEach(function(link) {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + currentSection.id) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    var scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) { window.cancelAnimationFrame(scrollTimeout); }
+        scrollTimeout = window.requestAnimationFrame(function() {
+            updateSectionIndicator();
+            var backBtn = document.getElementById('backToTop');
+            if (backBtn) { backBtn.classList.toggle('visible', window.scrollY > 500); }
+        });
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        updateSectionIndicator();
+    });
+    </script>
+</body>
+</html>
