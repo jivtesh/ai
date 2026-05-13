@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI for Disaster Response Teams</title>
+<style>
+:root{
+--primary:#6366f1;
+--primary-dark:#4338ca;
+--success:#16a34a;
+--warning:#ea580c;
+--danger:#dc2626;
+--purple:#7c3aed;
+--teal:#0d9488;
+--gray:#64748b;
+--chat:#2563eb;
+--paid:#7c3aed}
+*{
+box-sizing:border-box;
+margin:0;
+padding:0}
+body{
+font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:linear-gradient(180deg,#f8fafc 0%,#e2e8f0 100%);
+color:#1e293b;
+line-height:1.6}
+.header{
+background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+color:white;
+padding:3rem 1.5rem;
+text-align:center}
+.header h1{
+font-size:2.25rem;
+font-weight:700;
+margin-bottom:.5rem}
+.subtitle{
+font-size:1.125rem;
+opacity:.9;
+max-width:48rem;
+margin:0 auto}
+.meta{
+margin-top:1rem;
+font-size:.875rem;
+opacity:.8}
+.copilot-bar{
+background:linear-gradient(135deg,#0078d4 0%,#106ebe 100%);
+color:white;
+padding:1rem 1.5rem;
+text-align:center;
+position:sticky;
+top:0;
+z-index:100;
+box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.copilot-bar p{
+margin-bottom:.75rem;
+font-size:.9rem}
+.copilot-link{
+display:inline-block;
+background:rgba(255,255,255,.2);
+color:white;
+text-decoration:none;
+padding:.625rem 1.5rem;
+border-radius:2rem;
+font-weight:600;
+border:2px solid rgba(255,255,255,.3);
+transition:all .2s}
+.copilot-link:hover{
+background:rgba(255,255,255,.3);
+transform:translateY(-2px)}
+.container{
+max-width:60rem;
+margin:0 auto;
+padding:1.5rem}
+.instructions,.tier-panel,.poll-card{
+background:white;
+border-radius:1rem;
+padding:1.5rem 2rem;
+margin-bottom:1.5rem;
+border-left:4px solid var(--primary);
+box-shadow:0 1px 3px rgba(0,0,0,.1)}
+h3{
+color:var(--primary-dark);
+margin-bottom:1rem}
+.instructions ol,.tier-card ul{
+margin-left:1.25rem}
+.instructions li,.tier-card li{
+margin-bottom:.5rem}
+.poll-grid,.tier-grid{
+display:grid;
+gap:.75rem}
+.poll-grid{
+grid-template-columns:repeat(3,1fr)}
+.tier-grid{
+grid-template-columns:repeat(2,1fr);
+margin-top:1rem}
+.poll-question{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:.75rem;
+padding:1rem;
+font-weight:600}
+.tier-card{
+border-radius:.75rem;
+padding:1.25rem;
+border:1px solid #e2e8f0}
+.tier-card.chat{
+background:#eff6ff;
+border-left:4px solid var(--chat)}
+.tier-card.paid{
+background:#faf5ff;
+border-left:4px solid var(--paid)}
+.tier-note{
+background:#fffbeb;
+border-left:4px solid #f59e0b;
+padding:.875rem 1rem;
+border-radius:.5rem;
+margin-top:1rem;
+font-size:.9rem}
+.tier-badge{
+display:inline-flex;
+align-items:center;
+gap:.25rem;
+font-size:.72rem;
+padding:.25rem .55rem;
+border-radius:1rem;
+font-weight:700;
+white-space:nowrap}
+.tier-badge.chat{
+background:#dbeafe;
+color:#1d4ed8}
+.tier-badge.paid{
+background:#f3e8ff;
+color:#6d28d9}
+.legend{
+background:white;
+border-radius:.75rem;
+padding:1rem 1.5rem;
+margin-bottom:1.5rem;
+display:flex;
+flex-wrap:wrap;
+gap:.75rem;
+font-size:.75rem;
+box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.legend-item{
+display:flex;
+align-items:center;
+gap:.375rem}
+.legend-dot{
+width:12px;
+height:12px;
+border-radius:3px}
+.nav-section{
+background:rgba(248,250,252,.95);
+backdrop-filter:blur(8px);
+position:sticky;
+top:5.75rem;
+z-index:90;
+padding:.75rem 0;
+margin-bottom:1.5rem}
+.nav-section h4{
+font-size:.75rem;
+color:var(--gray);
+margin-bottom:.5rem;
+text-transform:uppercase;
+letter-spacing:.05em}
+.nav-grid,.nav-grid-secondary{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:.5rem;
+margin-bottom:.75rem}
+.nav-btn,.nav-btn-secondary{
+border-radius:.75rem;
+padding:.75rem .5rem;
+font-size:.8rem;
+font-weight:600;
+cursor:pointer;
+text-align:center;
+transition:all .2s}
+.nav-btn{
+background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+color:white;
+border:2px solid transparent;
+box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.nav-btn:hover{
+transform:translateY(-2px);
+box-shadow:0 4px 12px rgba(99,102,241,.3)}
+.nav-btn span{
+display:block;
+font-size:1.25rem;
+margin-bottom:.25rem}
+.nav-btn-secondary{
+background:white;
+border:1px solid #e2e8f0}
+.nav-btn-secondary:hover{
+background:#e2e8f0}
+.category{
+background:white;
+border-radius:1rem;
+margin-bottom:2rem;
+overflow:hidden;
+box-shadow:0 4px 6px rgba(0,0,0,.07);
+scroll-margin-top:10rem}
+.cat-header{
+background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+color:white;
+padding:1.5rem}
+.cat-header h2{
+font-size:1.25rem;
+margin-bottom:.25rem}
+.for{
+font-size:.875rem;
+opacity:.9}
+.cat-body{
+padding:1.5rem}
+.scenario{
+background:#fef3c7;
+border-left:4px solid #f59e0b;
+padding:1rem 1.25rem;
+border-radius:.5rem;
+margin-bottom:1.5rem}
+.scenario strong{
+color:#b45309}
+.section-title{
+display:flex;
+align-items:center;
+gap:.5rem;
+font-size:.85rem;
+font-weight:700;
+text-transform:uppercase;
+letter-spacing:.05em;
+margin:2rem 0 1rem;
+padding-bottom:.5rem;
+border-bottom:2px solid #e2e8f0;
+flex-wrap:wrap}
+.section-title.green{
+color:var(--success)}
+.section-title.orange{
+color:var(--warning)}
+.section-title.purple{
+color:var(--purple)}
+.section-title.blue{
+color:#2563eb}
+.section-title.teal{
+color:var(--teal)}
+.section-title.red{
+color:var(--danger)}
+.section-title.gray{
+color:var(--gray)}
+.badge{
+font-size:.6rem;
+padding:.2rem .5rem;
+border-radius:1rem;
+font-weight:600}
+.badge.green{
+background:#dcfce7;
+color:var(--success)}
+.badge.orange{
+background:#ffedd5;
+color:var(--warning)}
+.badge.purple{
+background:#f3e8ff;
+color:var(--purple)}
+.badge.blue{
+background:#dbeafe;
+color:#2563eb}
+.badge.teal{
+background:#ccfbf1;
+color:var(--teal)}
+.badge.red{
+background:#fee2e2;
+color:var(--danger)}
+.badge.gray{
+background:#f1f5f9;
+color:var(--gray)}
+.tip{
+background:#eff6ff;
+border-radius:.5rem;
+padding:.75rem 1rem;
+font-size:.8rem;
+color:#1d4ed8;
+margin-bottom:1rem}
+.prompt{
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:.75rem;
+padding:1.25rem;
+margin-bottom:1rem}
+.prompt.green{
+border-left:4px solid var(--success)}
+.prompt.orange{
+border-left:4px solid var(--warning)}
+.prompt.purple{
+border-left:4px solid var(--purple);
+background:#faf5ff}
+.prompt.blue{
+border-left:4px solid #2563eb;
+background:#eff6ff}
+.prompt.teal{
+border-left:4px solid var(--teal);
+background:#f0fdfa}
+.prompt.red{
+border-left:4px solid var(--danger);
+background:#fef2f2}
+.prompt.gray{
+border-left:4px solid var(--gray)}
+.prompt-header{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+margin-bottom:.75rem;
+flex-wrap:wrap;
+gap:.5rem}
+.prompt-label{
+font-size:.85rem;
+font-weight:700;
+color:#1e293b}
+.prompt-tags{
+display:flex;
+gap:.375rem;
+flex-wrap:wrap}
+.tag{
+font-size:.6rem;
+padding:.15rem .4rem;
+border-radius:.25rem;
+font-weight:600;
+text-transform:uppercase}
+.tag.chart{
+background:#dbeafe;
+color:#1d4ed8}
+.tag.iterate{
+background:#f3e8ff;
+color:#7c3aed}
+.tag.create{
+background:#dcfce7;
+color:#166534}
+.tag.reason{
+background:#ffedd5;
+color:#c2410c}
+.tag.extract{
+background:#e0e7ff;
+color:#4338ca}
+.tag.verify{
+background:#fee2e2;
+color:#991b1b}
+.tag.meta{
+background:#fce7f3;
+color:#be185d}
+.prompt-text{
+background:white;
+border:1px solid #e2e8f0;
+border-radius:.5rem;
+padding:1rem;
+font-size:.875rem;
+line-height:1.7;
+white-space:pre-wrap;
+margin-bottom:.75rem}
+.why{
+font-size:.82rem;
+color:#475569;
+margin-bottom:.5rem}
+.prompt-footer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:.5rem}
+.follow-on{
+font-size:.75rem;
+color:var(--purple);
+font-style:italic;
+flex:1}
+.copy-btn{
+background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
+color:white;
+border:none;
+padding:.5rem 1rem;
+border-radius:.5rem;
+font-size:.8rem;
+font-weight:600;
+cursor:pointer;
+transition:all .2s;
+white-space:nowrap}
+.copy-btn:hover{
+transform:translateY(-1px);
+box-shadow:0 4px 12px rgba(99,102,241,.3)}
+.copy-btn.copied{
+background:linear-gradient(135deg,var(--success) 0%,#15803d 100%)}
+.scaffold-container{
+background:#fffbeb;
+border:2px dashed #f59e0b;
+border-radius:.75rem;
+padding:1.25rem;
+margin-bottom:1.5rem}
+.scaffold-header{
+font-size:.85rem;
+font-weight:700;
+color:#92400e;
+margin-bottom:1rem}
+.scaffold-steps{
+display:flex;
+flex-direction:column;
+gap:1rem}
+.scaffold-step{
+background:white;
+border-radius:.5rem;
+padding:1rem;
+border-left:3px solid #f59e0b}
+.scaffold-step-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:.5rem;
+gap:.5rem;
+flex-wrap:wrap}
+.scaffold-step-num{
+font-size:.7rem;
+font-weight:700;
+color:#d97706;
+text-transform:uppercase}
+.scaffold-step-text{
+font-size:.85rem;
+line-height:1.6;
+white-space:pre-wrap}
+.footer{
+background:#1e293b;
+color:white;
+text-align:center;
+padding:3rem 1.5rem;
+margin-top:2rem}
+.footer .action{
+background:rgba(255,255,255,.1);
+display:inline-block;
+padding:1.25rem 2rem;
+border-radius:.75rem;
+margin-bottom:1rem}
+.credits{
+opacity:.7;
+font-size:.875rem}
+.toast{
+position:fixed;
+bottom:1.5rem;
+left:50%;
+transform:translateX(-50%) translateY(100px);
+background:var(--success);
+color:white;
+padding:.875rem 1.5rem;
+border-radius:.5rem;
+font-weight:500;
+z-index:1000;
+opacity:0;
+transition:all .3s ease;
+box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.toast.show{
+transform:translateX(-50%) translateY(0);
+opacity:1}
+@media(max-width:768px){
+.header h1{
+font-size:1.5rem}
+.container{
+padding:1rem}
+.instructions,.tier-panel,.poll-card{
+padding:1.25rem}
+.poll-grid,.tier-grid{
+grid-template-columns:1fr}
+.nav-section{
+top:5.5rem}
+.nav-grid,.nav-grid-secondary{
+grid-template-columns:repeat(2,1fr)}
+.cat-header h2{
+font-size:1.1rem}
+.prompt-header,.prompt-footer{
+flex-direction:column;
+align-items:flex-start}
+.follow-on{
+margin-bottom:.5rem}
+}
+@media print{
+.copilot-bar,.toast,.copy-btn,.nav-section{
+display:none}
+.category{
+break-inside:avoid}
+}
+
+</style>
+</head>
+<body>
+<div class="toast" id="toast" role="status" aria-live="polite">✓ Copied! Paste in Copilot</div>
+<header class="header"><h1>🤖 AI for Disaster Response Teams</h1><p class="subtitle">A Copilot workshop for staff at a regional disaster relief organisation with varied AI experience.</p><p class="meta">Workshop materials — disaster response edition</p></header>
+<div class="copilot-bar"><p>Copy any prompt, then paste into the right Copilot experience for the badge shown.</p><a href="https://m365copilot.com/" target="_blank" rel="noopener" class="copilot-link">🚀 Open Microsoft 365 Copilot</a></div>
+<div class="container">
+<div class="poll-card"><h3>👋 Quick audience poll</h3><div class="poll-grid"><div class="poll-question">How often do you use AI?</div><div class="poll-question">What do you hate doing in your job?</div><div class="poll-question">Have you ever opened Copilot?</div></div></div>
+<div class="tier-panel"><h3>🧭 The capability split: which Copilot do you need?</h3><p>There are two useful tiers. <span class="tier-badge chat">💬 Chat (free)</span> is web-grounded and works when you paste or upload content into chat. <span class="tier-badge paid">🟣 M365 Copilot (paid)</span> adds embedded help inside Outlook, Teams, Excel, Word, PowerPoint, and work-grounded chat across your Microsoft 365 content.</p><div class="tier-grid"><div class="tier-card chat"><h4><span class="tier-badge chat">💬 Chat (free)</span></h4><ul><li>Web search and general reasoning</li><li>Draft, rewrite, and summarise text you paste in</li><li>Compare two uploaded documents</li><li>Analyse an uploaded spreadsheet</li><li>Generate images, talking points, and social posts</li><li>Answer policy questions from documents you paste in</li><li>Enterprise Data Protection when signed in with a work account</li></ul><div class="tier-note"><strong>Cannot:</strong> automatically read your inbox, calendar, Teams chats, or SharePoint files; summarise meetings without a transcript; or work as an embedded assistant inside Office apps.</div></div><div class="tier-card paid"><h4><span class="tier-badge paid">🟣 M365 Copilot (paid)</span></h4><ul><li>Outlook inbox triage, thread summaries, and grounded replies</li><li>Teams real-time recap, action items, decisions, and intelligent recap</li><li>Excel workbook analysis, formulas, PivotTables, and data cleanup in place</li><li>Word drafting and rewriting grounded in files</li><li>PowerPoint decks from a document or prompt</li><li>Work-grounded chat across email, files, chats, and meetings</li><li>Create Agents for recurring workflows</li></ul></div></div></div>
+<div class="instructions"><h3>📋 How to Use This Guide</h3><ol><li><strong>Pick a category</strong> relevant to your role today.</li><li><strong>Check the tier badge</strong>: free Chat works when you paste or upload; paid M365 Copilot works inside Microsoft 365 apps.</li><li><strong>Start with scaffolded prompts</strong> in yellow boxes if you are new to Copilot.</li><li><strong>Start a new chat</strong> when switching topics for better results.</li><li><strong>Use follow-up prompts</strong> to iterate, verify, and go deeper.</li></ol><div class="tip"><strong>Copy-friendly format:</strong> replace anything in [square brackets], paste the prompt into Copilot, attach or paste only the documents needed, then ask for a table, bullets, or a draft you can review.</div></div>
+<div class="legend"><div class="legend-item"><div class="legend-dot" style="background:var(--success)"></div>Simple</div><div class="legend-item"><div class="legend-dot" style="background:var(--warning)"></div>Structured</div><div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div>Reasoning</div><div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>Visualisation</div><div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Document Creation</div><div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div>Agent Mode</div><div class="legend-item"><div class="legend-dot" style="background:var(--gray)"></div>Verification/Meta</div><div class="legend-item"><span class="tier-badge chat">💬 Chat (free)</span></div><div class="legend-item"><span class="tier-badge paid">🟣 M365 Copilot (paid)</span></div></div>
+<nav class="nav-section"><h4>Core Sections</h4><div class="nav-grid"><button class="nav-btn" onclick="scrollToSection('s1')"><span>🚀</span>Getting Started</button><button class="nav-btn" onclick="scrollToSection('s2')"><span>📧</span>Email &amp; Inbox</button><button class="nav-btn" onclick="scrollToSection('s3')"><span>💬</span>Meetings</button><button class="nav-btn" onclick="scrollToSection('s4')"><span>📊</span>Spreadsheets</button></div><h4>More Workflows</h4><div class="nav-grid-secondary"><button class="nav-btn-secondary" onclick="scrollToSection('s5')">📄 Documents</button><button class="nav-btn-secondary" onclick="scrollToSection('s6')">📢 Communications</button><button class="nav-btn-secondary" onclick="scrollToSection('s7')">📋 Planning</button><button class="nav-btn-secondary" onclick="scrollToSection('s8')">🔒 Verification</button></div></nav>
+<div id="sections"></div>
+</div>
+<footer class="footer"><div class="action"><strong>Your Action:</strong> Pick one real workflow, choose the right tier, and try one prompt safely this week.</div><p class="credits">Workshop materials — disaster response edition</p></footer>
+<script>
+const tierBadge=t=>`<span class="tier-badge ${t}">${t==='chat'?'💬 Chat (free)':'🟣 M365 Copilot (paid)'}</span>`;
+const scaffold=[['Step 1: Ultra-Simple','Tighten this email and make it more professional. Keep it warm, direct, and under 150 words:\n\n[Paste your draft email here]'],['Step 2: Add Structure','Rewrite this update for three audiences: regional leadership, volunteer coordinators, and field supervisors.\n\nFormat:\n| Audience | 3-bullet version | Tone to use | What to avoid |\n\n[Paste update]'],['Step 3: Full Prompt','Act as a practical AI coach for disaster response staff. I am new to Copilot.\n\nGive me:\n1. Three safe things I can try today\n2. Three things I should not paste into AI tools\n3. A checklist for verifying an AI answer before using it operationally\n4. One beginner prompt for each: email, meeting notes, spreadsheet, and policy Q&A']];
+const categories=[
+{id:'s1',title:'🚀 1. Getting Started',for:'For people who have never opened Copilot.',scenario:'You want quick wins without risking sensitive volunteer, client, or operational data.',section:'🟢 Simple Prompts <span class="badge green">First wins</span>',prompts:[
+['green','Find Copilot and explain the difference','chat','meta',`I am opening Copilot for the first time. Explain, in plain English, the difference between Copilot Chat and paid Microsoft 365 Copilot.
+
+Use a table with:
+| Task | Free Chat works if... | Paid M365 Copilot helps when... |`,'New users can choose the right tool before sharing content.','Give me five safe prompts for my role as disaster response staff.'],
+['orange','Create a personal AI safety checklist','chat','verify',`Create a one-page AI safety checklist for disaster response staff.
+
+Include:
+- What is safe to paste
+- What not to paste
+- How to remove identifying details
+- When to verify against an authoritative source
+- When to ask a supervisor instead of relying on AI`,'Safety habits should come before advanced prompting.',''],
+['purple','Turn a vague request into a better prompt','chat','reason',`Improve this vague prompt so it will get a useful answer from Copilot:
+
+"Help with volunteer training."
+
+Return:
+1. A better prompt
+2. What context I should add
+3. What output format I should ask for
+4. A verification step`,'Better context produces more useful and safer outputs.','Now adapt it for shelter coverage planning.']]},
+{id:'s2',title:'📧 2. Email & Inbox',for:'Mostly paid tier; free Chat works when you paste rough notes.',scenario:'Inbox volume spikes during operations, and important asks can get buried.',section:'🟢 Simple Prompts <span class="badge green">Daily triage</span>',prompts:[
+['green','What needs my reply today?','paid','extract',`In Outlook, review my recent email and identify what I need to reply to today.
+
+Return a table:
+| Sender/Thread | What they need | Deadline or urgency | Suggested reply action |
+
+Prioritise operational deadlines, partner requests, finance approvals, and volunteer coordinator questions.`,'It turns inbox overwhelm into a short action list.','Draft a brief reply for the top three items, but do not send.'],
+['orange','Find missed deadlines and unanswered asks','paid','extract',`Review my email from the last two weeks and find unanswered asks, missed deadlines, or requests I may have acknowledged but not completed.
+
+Return:
+| Thread | Ask | Original deadline | Current risk | Next best action | Draft response? |`,'Small missed asks become operational friction during response work.',''],
+['purple','Summarise a long thread and extract decisions','paid','reason',`Summarise this long email thread.
+
+Include:
+- Decisions already made
+- Open questions
+- Who owns each next step
+- Any disagreement or ambiguity
+- A recommended reply that moves the work forward`,'Long threads often hide decisions and unclear ownership.','Make the reply warmer and more partner-facing.'],
+['teal','Polish rough notes into a partner-facing reply','chat','create',`Turn these rough notes into a polished partner-facing email.
+
+Audience: [partner contact role]
+Tone: calm, professional, appreciative
+Goal: confirm next steps for [shelter staffing / training / supply handoff]
+
+Rough notes:
+[Paste non-sensitive notes]
+
+Keep under 200 words and include a clear next step.`,'Free Chat is useful when you provide the text yourself.','Create a shorter version for mobile.']]},
+{id:'s3',title:'💬 3. Teams Meetings',for:'Paid tier for live recap; free tier if you paste a transcript.',scenario:'Meetings produce decisions, but follow-through can be scattered across chats, notes, and memories.',section:'🟢 Simple Prompts <span class="badge green">Meeting basics</span>',prompts:[
+['green','Turn on transcription checklist','chat','meta',`Create a simple checklist for running a Teams meeting where Copilot recap will be useful.
+
+Include:
+- When to turn on transcription
+- What to say to participants
+- How to name the meeting
+- What to capture in chat
+- What to verify before sharing notes`,'Good recap starts with good meeting hygiene.',''],
+['blue','What did I miss?','paid','extract',`In this Teams meeting, tell me what I missed so far.
+
+Focus on:
+- Decisions made
+- Action items assigned
+- Any operational risks raised
+- Questions I should ask before the meeting ends`,'Late joiners can contribute without derailing the meeting.','What should I clarify before we close?'],
+['orange','Post-meeting accountable follow-up','paid','extract',`Summarise this Teams meeting for operational follow-up.
+
+Return:
+| Decision | Owner role | Due date | Dependency | Risk if missed |
+
+Then draft a follow-up email to attendees with the table and a concise opening paragraph.`,'Recap becomes execution when owners and due dates are explicit.',''],
+['purple','Transcript to decisions and actions','chat','reason',`I will paste a meeting transcript. Extract only what is supported by the transcript.
+
+Return:
+1. Decisions made
+2. Action items with owner roles and due dates
+3. Open questions
+4. Risks or blockers
+5. Follow-up email draft
+
+Transcript:
+[Paste transcript]`,'Free Chat can help if you provide the transcript directly.','Flag any action item that lacks a clear owner.']]},
+{id:'s4',title:'📊 4. Spreadsheets & Rosters',for:'Free tier works with uploads; paid tier works directly inside Excel.',scenario:'Rosters, budgets, and inventory exports arrive messy and need to become operationally useful fast.',section:'📊 Visualisation and Analysis <span class="badge blue">Rosters and budgets</span>',prompts:[
+['green','Clean this roster export','paid','extract',`In this Excel workbook, help me clean the roster export.
+
+Please:
+- Standardise date formats
+- Trim extra spaces
+- Identify duplicate rows
+- Flag blank required fields
+- Suggest a clean table structure for operational use
+
+Do not delete data without showing me what will change.`,'Clean rosters reduce scheduling mistakes.','Create formulas to flag missing availability and expired training.'],
+['blue','Visualise shelter coverage gaps','chat','chart',`I uploaded a spreadsheet with shelter staffing by territory, shift, and capability.
+
+Create a coverage-gap summary:
+| Territory | Shift | Required roles | Confirmed roles | Gap | Highest-risk gap |
+
+Then suggest the best visualisation to show leadership where support is needed.`,'Visual gaps are easier to act on than long exports.',''],
+['orange','Budget remaining by team','chat','extract',`I uploaded a budget tracking spreadsheet.
+
+Summarise who has how much left to spend:
+| Team or cost centre | Original budget | Spent | Committed | Remaining | Burn-rate concern? |
+
+Flag any category likely to run out before the end of the quarter.`,'Finance leads need plain-English budget risks, not just totals.','Draft a short note to budget owners explaining what you found.'],
+['purple','Big workflow: roster to operational plan','paid','reason',`In this workbook, turn the long volunteer roster export into an operational roster.
+
+Create or propose:
+1. A clean roster split by territory and capability
+2. Quarter-over-quarter changes in active volunteers, training status, and availability
+3. Coverage gaps by territory and shift
+4. A leadership summary with the top three staffing risks
+5. A list of records that need manual review before use`,'This converts raw data into a deployment-ready view.',''],
+['teal','Inventory supply list redesign','chat','create',`I uploaded an inventory list. Recommend a simpler structure to maintain supplies across regional teams.
+
+Include columns for item, category, location, minimum stock, current stock, reorder trigger, owner role, last checked date, and notes.
+
+Also suggest three formulas or conditional formatting rules that would make this easier to maintain.`,'Inventory lists should prompt action before supplies run short.','']]},
+{id:'s5',title:'📄 5. Documents & Knowledge',for:'Handbooks, doctrine, ConOps, operations orders, and file organisation.',scenario:'Operational guidance lives in many documents, and staff need answers with sources they can verify.',section:'🟣 Reasoning & Document Creation <span class="badge purple">Compare and align</span>',prompts:[
+['purple','Compare regional and national handbooks','chat','reason',`I uploaded two documents: a regional handbook and a national handbook.
+
+Compare them and return:
+| Topic | Regional guidance | National guidance | Conflict? | Alignment action |
+
+Then list:
+- What is unique to the regional handbook
+- What conflicts with national guidance
+- What should be aligned first
+
+Use citations or page references where possible.`,'Conflicting guidance can create inconsistent field decisions.','Draft an alignment memo for regional leadership.'],
+['green','Doctrine Q&A with source citations','chat','verify',`Using only the document I paste or upload, answer this operational policy question:
+
+Question: [Ask question]
+
+Requirements:
+- Cite the section, page, or heading for each answer
+- Quote the relevant sentence if the answer matters operationally
+- Say "not found in the provided document" if the document does not answer it
+- Add a reminder to verify before acting`,'Doctrine answers should never be treated as guesses.',''],
+['teal','Suggested filing structure','chat','create',`Suggest a simple filing structure and naming convention for disaster response files piling up on a desktop.
+
+File types include: meeting notes, rosters, supply lists, operations orders, public communications drafts, finance trackers, training materials.
+
+Return:
+1. Folder structure
+2. File naming convention
+3. Examples
+4. What should be archived monthly`,'Good naming makes critical files findable during surge periods.',''],
+['red','Knowledge Agent for recurring doctrine questions','paid','meta',`Create an Agent for recurring disaster response knowledge questions.
+
+Agent purpose: Help staff find answers in approved doctrine, ConOps, handbooks, and operations orders.
+
+Instructions:
+- Answer only from approved knowledge sources
+- Cite source document, section, and date
+- If sources conflict, flag the conflict and do not choose silently
+- If the answer has operational consequences, include "verify against the authoritative document before acting"
+- Do not answer from memory when a source is required
+
+Ask me what approved files or SharePoint locations to connect.`,'Agents are useful for repeat workflows when grounded in controlled sources.','']]},
+{id:'s6',title:'📢 6. Communications',for:'Communications leads, volunteer coordinators, and partner-facing staff.',scenario:'Messages need to be timely, accurate, calm, and appropriate for each audience.',section:'🟢 Simple Prompts <span class="badge green">Writing support</span>',prompts:[
+['green','Refresh a recurring press release','chat','iterate',`Refresh this recurring press release with a new angle.
+
+Campaign type: [blood drive / home safety campaign / volunteer recruitment]
+New angle: [seasonal need / volunteer milestone / preparedness reminder]
+Audience: local media and community members
+
+Keep the facts generic unless I provide verified details. Make the opening stronger and suggest three headline options.
+
+Draft:
+[Paste draft]`,'Reusing old copy is faster when the angle feels fresh.',''],
+['teal','One source document to many outputs','chat','create',`Using the source document I paste or upload, create communications outputs.
+
+Return:
+1. Talking points for staff
+2. Three social posts
+3. A reporter pitch email
+4. A short partner update
+5. A "do not say" list for claims that need verification
+
+Source:
+[Paste or upload source content]`,'One approved source can drive consistent messages across channels.','Make the social posts warmer and less formal.'],
+['orange','Draft overthinking review','chat','iterate',`Review this draft for tone, clarity, length, and professionalism.
+
+Audience: [volunteers / partners / regional teams / media]
+Purpose: [inform / request action / reassure / clarify]
+
+Return:
+| Dimension | Assessment | Specific edit |
+
+Then rewrite it in a calm, confident style.
+
+Draft:
+[Paste draft]`,'Copilot can help people stop overthinking and ship clearer drafts.',''],
+['blue','Visual campaign content ideas','chat','chart',`Generate five simple visual concepts for a disaster preparedness communication campaign.
+
+For each concept include:
+| Concept | Message | Suggested image style | Caption | Accessibility note |
+
+Keep it generic, inclusive, and suitable for regional teams.`,'Visual ideas help teams move from words to campaign assets.','']]},
+{id:'s7',title:'📋 7. Planning & Tasks',for:'Operations leads, volunteer coordinators, finance leads, and project owners.',scenario:'Plans need owners, dependencies, deadlines, and task follow-through across teams.',section:'🟡 Structured Analysis <span class="badge orange">From notes to execution</span>',prompts:[
+['orange','Meeting notes to accountable follow-up table','chat','extract',`Turn these meeting notes into an accountable follow-up table.
+
+Return:
+| Action | Owner role | Due date | Dependency | Status wording for update |
+
+If an owner or date is missing, write "needs assignment" or "needs due date" rather than guessing.
+
+Notes:
+[Paste notes]`,'Ambiguous notes become clear commitments.','Draft the follow-up email with this table.'],
+['purple','Build an inventory transition workplan','chat','reason',`Build a workplan for transitioning inventory management across regional teams.
+
+Include:
+| Workstream | Owner role | Deadline | Dependencies | Risks | First next step |
+
+Workstreams should include data cleanup, supply count, training, communications, finance checks, reporting, and go-live support.`,'Complex transitions fail when dependencies are invisible.',''],
+['teal','Create tasks in Planner or Outlook','paid','create',`Based on this plan, help me create tasks in Planner or Outlook.
+
+For each task include:
+- Task title
+- Owner role
+- Due date
+- Checklist items
+- Priority
+- Dependency
+
+Ask me to confirm before creating or assigning anything.`,'Paid Copilot can connect planning conversations to Microsoft 365 task workflows.',''],
+['red','Recurring planning assistant Agent','paid','meta',`Create an Agent that helps regional teams turn notes into accountable operational plans.
+
+Agent instructions:
+- Always identify owners, dates, dependencies, risks, and unanswered questions
+- Never invent assignments; mark missing information clearly
+- Offer outputs as a table, email draft, or task list
+- Ask whether the user wants tasks prepared for Planner or Outlook
+- Include a verification reminder for operationally significant actions`,'Repeated planning workflows are good candidates for Agent mode.','']]},
+{id:'s8',title:'🔒 8. Verification & What NOT to do',for:'Everyone using AI in operational, policy, or volunteer-facing work.',scenario:'AI can speed up work, but operational decisions require source-checking, privacy discipline, and human accountability.',section:'🔒 Verification & Meta <span class="badge gray">Quality check</span>',prompts:[
+['gray','Verify an operational answer','chat','verify',`Review this AI answer before I use it operationally.
+
+Check:
+- What claims require a source?
+- Which claims are unsupported?
+- What authoritative document should I verify against?
+- What could go wrong if this answer is wrong?
+- Rewrite the answer with verification caveats.
+
+AI answer:
+[Paste answer]`,'Operationally important answers need verification before action.',''],
+['orange','Privacy red-team a prompt','chat','verify',`Red-team this prompt for privacy and safety before I paste it into any AI tool.
+
+Return:
+| Risk | Why it matters | Safer rewrite |
+
+Check for personally identifying volunteer data, client details, sensitive operational information, and unnecessary location specificity.
+
+Prompt:
+[Paste draft prompt]`,'Staff should remove identifying details before using AI.','Create a generic version I can safely use in Copilot Chat.'],
+['red','What not to paste into consumer AI','chat','verify',`Create a short training handout for disaster response staff: "What NOT to paste into consumer AI tools."
+
+Include:
+- Volunteer personally identifying information
+- Client or case details
+- Private partner information
+- Non-public operational details
+- Finance or HR information
+- Any document we are not authorised to share
+
+Also explain: free Copilot Chat with a work account has Enterprise Data Protection; consumer ChatGPT or other consumer tools do not provide the same work-account protection.`,'The tool choice changes the data protection posture.',''],
+['purple','Decision boundary check','chat','reason',`For this task, tell me what AI can help with and what must remain a human decision.
+
+Task: [policy interpretation / shelter staffing decision / public statement / finance approval / volunteer assignment]
+
+Return:
+| AI can help by... | Human must decide... | Source to verify | Escalation trigger |
+
+Be conservative where safety, policy, privacy, or operations are involved.`,'AI should support judgement, not replace accountability.','']]}
+];
+const sectionClass=s=>s.includes('Verification')?'gray':s.includes('Structured')?'orange':s.includes('Visualisation')?'blue':s.includes('Reasoning')?'purple':'green';
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function promptHtml(p){const [color,title,tier,tag,text,why,follow]=p;return `<div class="prompt ${color}"><div class="prompt-header"><span class="prompt-label">${esc(title)}</span><div class="prompt-tags">${tierBadge(tier)}<span class="tag ${tag}">${esc(tag)}</span></div></div><div class="prompt-text">${esc(text)}</div><div class="why"><strong>Why this matters:</strong> ${esc(why)}</div><div class="prompt-footer">${follow?`<span class="follow-on">Follow-up: &quot;${esc(follow)}&quot;</span>`:''}<button class="copy-btn" onclick="copyPrompt(this)">📋 Copy</button></div></div>`}
+function render(){document.getElementById('sections').innerHTML=categories.map(c=>{let scaf='';if(c.id==='s1'){scaf=`<div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div><div class="scaffold-container"><div class="scaffold-header">📶 Three-Step Scaffold: First Safe Copilot Use</div><div class="scaffold-steps">${scaffold.map(s=>`<div class="scaffold-step"><div class="scaffold-step-header"><span class="scaffold-step-num">${esc(s[0])}</span>${tierBadge('chat')}<button class="copy-btn" onclick="copyPrompt(this)">📋 Copy</button></div><div class="scaffold-step-text">${esc(s[1])}</div></div>`).join('')}</div></div>`}return `<section class="category" id="${c.id}"><div class="cat-header"><h2>${c.title}</h2><p class="for">${esc(c.for)}</p></div><div class="cat-body"><div class="scenario"><strong>Your challenge:</strong> ${esc(c.scenario)}</div>${scaf}<div class="section-title ${sectionClass(c.section)}">${c.section}</div>${c.prompts.map(promptHtml).join('')}</div></section>`}).join('')}
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'})}
+function copyPrompt(button){const block=button.closest('.prompt')||button.closest('.scaffold-step');const textNode=block.querySelector('.prompt-text')||block.querySelector('.scaffold-step-text');copyText(button,textNode.innerText)}
+async function copyText(button,text){
+const toast=document.getElementById('toast');
+const showToast=message=>{toast.innerText=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2500)};
+const copied=()=>{button.innerText='✓ Copied!';button.classList.add('copied');showToast('✓ Copied! Paste in Copilot');setTimeout(()=>{button.innerText='📋 Copy';button.classList.remove('copied')},2000)};
+try{
+if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);copied();return}
+const textarea=document.createElement('textarea');textarea.value=text;textarea.style.position='fixed';textarea.style.left='-9999px';document.body.appendChild(textarea);textarea.select();const ok=document.execCommand('copy');document.body.removeChild(textarea);if(!ok)throw new Error('Copy command failed');copied()
+}catch(e){showToast('Copy failed. Select the prompt text and copy manually.')}
+}
+render();
+</script>
+</body>
+</html>
