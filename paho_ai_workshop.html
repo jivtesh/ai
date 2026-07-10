@@ -501,6 +501,12 @@
                 <button class="nav-btn-secondary" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})">🌡️ Climate & Equity</button>
                 <button class="nav-btn-secondary" onclick="document.getElementById('s9').scrollIntoView({behavior:'smooth'})">💻 Digital Health</button>
             </div>
+            <h4>Healthcare Leadership Sections</h4>
+            <div class="nav-grid-secondary">
+                <button class="nav-btn-secondary" onclick="document.getElementById('s10').scrollIntoView({behavior:'smooth'})">🦠 Disease Programs</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s11').scrollIntoView({behavior:'smooth'})">💉 Immunization</button>
+                <button class="nav-btn-secondary" onclick="document.getElementById('s12').scrollIntoView({behavior:'smooth'})">👶 MNCH</button>
+            </div>
             <h4>Copilot Capabilities</h4>
             <div class="nav-grid-capability">
                 <button class="nav-btn-capability" onclick="document.getElementById('c1').scrollIntoView({behavior:'smooth'})">💼 M365 Apps</button>
@@ -1726,6 +1732,506 @@ What guardrails are needed? What are the red lines?</div>
 
                 <div class="discussion">
                     <strong>💬 Discussion:</strong> Should PAHO be using AI tools internally? What would responsible adoption look like for a health organization?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10: DISEASE PREVENTION & CONTROL -->
+        <section class="category" id="s10">
+            <div class="cat-header">
+                <h2>🦠 10. Disease Prevention & Control Programs</h2>
+                <p class="for">Disease Program Managers, Epidemiologists, NCD Directors, Communicable Disease Leads</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> PAHO coordinates prevention and control efforts for dozens of diseases — from NCDs (cardiovascular, diabetes, cancer) to communicable diseases (dengue, TB, HIV/AIDS, measles). The Americas faced 13M dengue cases in 2024. Antimicrobial resistance is rising. Resources are finite. How do you prioritize across competing disease programs while maintaining an integrated approach to health?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Disease Prioritization Framework</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the major disease categories that PAHO addresses? Bullet list with one example of each.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the major disease categories that PAHO addresses? Bullet list with one example of each.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Disease prioritization matrix for resource allocation:\n\n| Disease/Condition | Disease Burden (DALYs) | Preventability | Cost-Effectiveness | Equity Impact | Political Priority | Regional Coordination Value |\n\nInclude: Dengue, NCDs (cardiovascular), TB, HIV/AIDS, AMR, Childhood diseases')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Disease prioritization matrix for resource allocation:
+
+| Disease/Condition | Disease Burden (DALYs) | Preventability | Cost-Effectiveness | Equity Impact | Political Priority | Regional Coordination Value |
+
+Include: Dengue, NCDs (cardiovascular), TB, HIV/AIDS, AMR, Childhood diseases</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'The Americas experienced 13 million dengue cases in 2024 — the worst outbreak in history. NCDs cause 80% of deaths. TB and HIV persist. Antimicrobial resistance is a slow-moving pandemic.\n\nHelp me develop a disease prioritization strategy:\n1. How do we balance epidemic response vs. chronic disease prevention?\n2. What criteria should drive resource allocation across disease programs?\n3. How do we identify synergies across programs (integrated service delivery)?\n4. When does vertical disease programming make sense vs. horizontal systems strengthening?\n5. How do we maintain progress on near-elimination diseases (measles, polio)?\n6. What role does regional surveillance and cross-border coordination play?\n\nConsider political economy, implementation capacity, and equity implications.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">The Americas experienced 13 million dengue cases in 2024 — the worst outbreak in history. NCDs cause 80% of deaths. TB and HIV persist. Antimicrobial resistance is a slow-moving pandemic.
+
+Help me develop a disease prioritization strategy:
+1. How do we balance epidemic response vs. chronic disease prevention?
+2. What criteria should drive resource allocation across disease programs?
+3. How do we identify synergies across programs (integrated service delivery)?
+4. When does vertical disease programming make sense vs. horizontal systems strengthening?
+5. How do we maintain progress on near-elimination diseases (measles, polio)?
+6. What role does regional surveillance and cross-border coordination play?
+
+Consider political economy, implementation capacity, and equity implications.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Integrated Disease Surveillance Network</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual map of PAHO's regional disease surveillance and response network across the Americas:
+
+Show:
+- National epidemiological surveillance systems
+- Regional reference laboratories and diagnostic networks
+- Cross-border disease monitoring (migration corridors, vector habitats)
+- Early warning systems (syndromic surveillance, event-based surveillance)
+- Data flows from facility → national → PAHO → global (WHO)
+- Epidemic Intelligence from the Americas (EIA) platform
+
+Highlight:
+- Where gaps exist in surveillance coverage
+- Which diseases have robust vs. weak detection systems
+- Time delays from detection to response
+- How climate change is shifting disease patterns</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add antimicrobial resistance surveillance networks to this map."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual map of PAHO\'s regional disease surveillance and response network across the Americas:\n\nShow:\n- National epidemiological surveillance systems\n- Regional reference laboratories and diagnostic networks\n- Cross-border disease monitoring (migration corridors, vector habitats)\n- Early warning systems (syndromic surveillance, event-based surveillance)\n- Data flows from facility → national → PAHO → global (WHO)\n- Epidemic Intelligence from the Americas (EIA) platform\n\nHighlight:\n- Where gaps exist in surveillance coverage\n- Which diseases have robust vs. weak detection systems\n- Time delays from detection to response\n- How climate change is shifting disease patterns')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Antimicrobial Resistance Strategy</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Antimicrobial resistance (AMR) is a "slow-moving pandemic" that threatens modern medicine — surgeries, chemotherapy, transplants all depend on effective antibiotics.
+
+Develop a regional AMR action plan for the Americas:
+
+| Priority Area | Current Status in Americas | Key Barriers | PAHO's Role | Metrics of Success | 5-Year Targets |
+|--------------|---------------------------|--------------|-------------|-------------------|----------------|
+| Surveillance & data | | | | | |
+| Stewardship programs | | | | | |
+| Infection prevention | | | | | |
+| Access to quality antimicrobials | | | | | |
+| Agricultural use reduction | | | | | |
+| Research & innovation | | | | | |
+
+How do we engage sectors beyond health (agriculture, environment, trade)?
+What incentives drive behavior change in prescribing and use?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Which 3 interventions would have the greatest impact if we could only do 3?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Antimicrobial resistance (AMR) is a \"slow-moving pandemic\" that threatens modern medicine — surgeries, chemotherapy, transplants all depend on effective antibiotics.\n\nDevelop a regional AMR action plan for the Americas:\n\n| Priority Area | Current Status in Americas | Key Barriers | PAHO\'s Role | Metrics of Success | 5-Year Targets |\n|--------------|---------------------------|--------------|-------------|-------------------|----------------|\n| Surveillance & data | | | | | |\n| Stewardship programs | | | | | |\n| Infection prevention | | | | | |\n| Access to quality antimicrobials | | | | | |\n| Agricultural use reduction | | | | | |\n| Research & innovation | | | | | |\n\nHow do we engage sectors beyond health (agriculture, environment, trade)?\nWhat incentives drive behavior change in prescribing and use?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">NCD Prevention Investment Case</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Non-communicable diseases (cardiovascular disease, diabetes, cancer, respiratory disease) cause 80% of deaths in the Americas. Most are preventable.
+
+Build an economic case for NCD prevention investment:
+
+| Intervention | Population Reach | Health Impact (DALYs averted) | Cost | Cost per DALY averted | Implementation Feasibility | Political Acceptability |
+|-------------|-----------------|------------------------------|------|---------------------|---------------------------|------------------------|
+| Tobacco taxation | | | | | | |
+| Salt reduction | | | | | | |
+| Sugar-sweetened beverage tax | | | | | | |
+| Physical activity promotion | | | | | | |
+| Cervical cancer screening | | | | | | |
+| Hypertension treatment | | | | | | |
+
+What role does PAHO play beyond technical guidance?
+How do we counter industry opposition to effective policies?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Draft talking points for a Minister facing tobacco industry lobbying."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Non-communicable diseases (cardiovascular disease, diabetes, cancer, respiratory disease) cause 80% of deaths in the Americas. Most are preventable.\n\nBuild an economic case for NCD prevention investment:\n\n| Intervention | Population Reach | Health Impact (DALYs averted) | Cost | Cost per DALY averted | Implementation Feasibility | Political Acceptability |\n|-------------|-----------------|------------------------------|------|---------------------|---------------------------|------------------------|\n| Tobacco taxation | | | | | | |\n| Salt reduction | | | | | | |\n| Sugar-sweetened beverage tax | | | | | | |\n| Physical activity promotion | | | | | | |\n| Cervical cancer screening | | | | | | |\n| Hypertension treatment | | | | | | |\n\nWhat role does PAHO play beyond technical guidance?\nHow do we counter industry opposition to effective policies?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Vector-Borne Disease in Climate Crisis</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">Climate change is expanding the geographic range and transmission season for dengue, Zika, and other vector-borne diseases. Traditional vector control (insecticides, larvicides) is losing effectiveness due to resistance.
+
+Help me think through long-term strategy:
+1. How do we adapt disease control strategies to changing climate patterns?
+2. What's the role of new tools (Wolbachia-infected mosquitoes, genetic modification)?
+3. How do we balance environmental concerns with disease control needs?
+4. When does adaptation shift to accepting higher endemic levels?
+5. What would "living with dengue" mean for health systems?
+6. How do we maintain political will for prevention when it becomes routine?
+
+Consider scientific uncertainty, ethical dimensions, and cross-border coordination needs.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What would a 20-year dengue roadmap look like under different climate scenarios?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Climate change is expanding the geographic range and transmission season for dengue, Zika, and other vector-borne diseases. Traditional vector control (insecticides, larvicides) is losing effectiveness due to resistance.\n\nHelp me think through long-term strategy:\n1. How do we adapt disease control strategies to changing climate patterns?\n2. What\'s the role of new tools (Wolbachia-infected mosquitoes, genetic modification)?\n3. How do we balance environmental concerns with disease control needs?\n4. When does adaptation shift to accepting higher endemic levels?\n5. What would \"living with dengue\" mean for health systems?\n6. How do we maintain political will for prevention when it becomes routine?\n\nConsider scientific uncertainty, ethical dimensions, and cross-border coordination needs.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Disease elimination requires sustained effort over decades (measles, polio). How do we maintain momentum on near-elimination diseases while responding to emerging threats?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: IMMUNIZATION & VACCINE EQUITY -->
+        <section class="category" id="s11">
+            <div class="cat-header">
+                <h2>💉 11. Immunization Programs & Vaccine Equity</h2>
+                <p class="for">Immunization Program Managers, EPI Directors, Vaccine Policy Advisors, Cold Chain Specialists</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> PAHO's Revolving Fund is the world's largest vaccine procurement mechanism, enabling equitable access across 45 countries. The Americas achieved measles elimination and near-polio eradication. But vaccine hesitancy is rising, equity gaps persist in reaching marginalized populations, and COVID-19 exposed vulnerabilities in pandemic vaccine deployment. How do you maintain high coverage while building trust and preparing for the next pandemic?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: Vaccine Program Strengthening</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the core components of a strong national immunization program? Bullet list.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the core components of a strong national immunization program? Bullet list.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Immunization coverage equity analysis framework:\n\n| Population Segment | Current Coverage Rate | Barriers to Access | Drivers of Hesitancy | Tailored Strategies | Resource Needs |\n\nSegments: Urban poor, Rural remote, Indigenous communities, Migrants, Adolescents, Elderly')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Immunization coverage equity analysis framework:
+
+| Population Segment | Current Coverage Rate | Barriers to Access | Drivers of Hesitancy | Tailored Strategies | Resource Needs |
+
+Segments: Urban poor, Rural remote, Indigenous communities, Migrants, Adolescents, Elderly</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'A Member State has achieved 90% national vaccine coverage for childhood vaccines, but there are municipalities with <50% coverage — mostly Indigenous communities and urban informal settlements.\n\nHelp me design an equity-focused strategy:\n1. How do we diagnose the root causes of low coverage (access, demand, quality)?\n2. What micro-planning approaches work in hard-to-reach areas?\n3. How do we build trust with communities that have historical reasons to distrust health systems?\n4. What role do community health workers and traditional authorities play?\n5. How do we adapt delivery strategies (fixed posts, mobile teams, campaigns)?\n6. What monitoring systems detect equity gaps in real-time?\n\nConsider cultural safety, resource constraints, and sustainability.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">A Member State has achieved 90% national vaccine coverage for childhood vaccines, but there are municipalities with <50% coverage — mostly Indigenous communities and urban informal settlements.
+
+Help me design an equity-focused strategy:
+1. How do we diagnose the root causes of low coverage (access, demand, quality)?
+2. What micro-planning approaches work in hard-to-reach areas?
+3. How do we build trust with communities that have historical reasons to distrust health systems?
+4. What role do community health workers and traditional authorities play?
+5. How do we adapt delivery strategies (fixed posts, mobile teams, campaigns)?
+6. What monitoring systems detect equity gaps in real-time?
+
+Consider cultural safety, resource constraints, and sustainability.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Regional Vaccine Supply Chain Map</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual map of PAHO's Revolving Fund vaccine supply chain across the Americas:
+
+Show:
+- Procurement through PAHO Revolving Fund (45 participating countries)
+- Manufacturing sources and vaccine suppliers
+- Regional and national cold chain infrastructure
+- Distribution pathways from central stores → regions → facilities
+- Last-mile delivery challenges (geography, infrastructure, climate)
+- Vaccine wastage points in the supply chain
+- Temperature monitoring and quality assurance systems
+
+Highlight:
+- Where supply chain breaks down most frequently
+- Countries at risk during supply disruptions
+- Opportunities for regional collaboration and shared resources
+- Impact of climate change on cold chain reliability</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add pandemic surge capacity and emergency stockpile locations."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual map of PAHO\'s Revolving Fund vaccine supply chain across the Americas:\n\nShow:\n- Procurement through PAHO Revolving Fund (45 participating countries)\n- Manufacturing sources and vaccine suppliers\n- Regional and national cold chain infrastructure\n- Distribution pathways from central stores → regions → facilities\n- Last-mile delivery challenges (geography, infrastructure, climate)\n- Vaccine wastage points in the supply chain\n- Temperature monitoring and quality assurance systems\n\nHighlight:\n- Where supply chain breaks down most frequently\n- Countries at risk during supply disruptions\n- Opportunities for regional collaboration and shared resources\n- Impact of climate change on cold chain reliability')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Vaccine Hesitancy Response Strategy</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Vaccine hesitancy is growing in the Americas, fueled by misinformation on social media, distrust of institutions, and politicization of public health.
+
+Develop a comprehensive vaccine confidence strategy:
+
+| Hesitancy Driver | Prevalence in Americas | Evidence-Based Interventions | Who Delivers Message | Success Metrics | Risks/Unintended Consequences |
+|-----------------|------------------------|------------------------------|---------------------|----------------|------------------------------|
+| Safety concerns | | | | | |
+| Religious/cultural beliefs | | | | | |
+| Distrust of government | | | | | |
+| Misinformation campaigns | | | | | |
+| Access barriers mistaken for hesitancy | | | | | |
+| Political polarization | | | | | |
+
+What doesn't work? (Shaming, mandates without engagement, top-down messaging)
+How do we build long-term trust, not just increase uptake?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Design a social listening strategy to detect vaccine misinformation early."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Vaccine hesitancy is growing in the Americas, fueled by misinformation on social media, distrust of institutions, and politicization of public health.\n\nDevelop a comprehensive vaccine confidence strategy:\n\n| Hesitancy Driver | Prevalence in Americas | Evidence-Based Interventions | Who Delivers Message | Success Metrics | Risks/Unintended Consequences |\n|-----------------|------------------------|------------------------------|---------------------|----------------|------------------------------|\n| Safety concerns | | | | | |\n| Religious/cultural beliefs | | | | | |\n| Distrust of government | | | | | |\n| Misinformation campaigns | | | | | |\n| Access barriers mistaken for hesitancy | | | | | |\n| Political polarization | | | | | |\n\nWhat doesn\'t work? (Shaming, mandates without engagement, top-down messaging)\nHow do we build long-term trust, not just increase uptake?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Pandemic Vaccine Preparedness</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">COVID-19 exposed gaps in pandemic vaccine deployment — inequitable access, fragile supply chains, slow regulatory processes, insufficient infrastructure.
+
+Help me develop a pandemic preparedness framework for the Americas:
+
+| Preparedness Pillar | Current Capacity | Critical Gaps | Investments Needed | Regional Coordination Role | Timeline to Readiness |
+|--------------------|------------------|---------------|-------------------|---------------------------|---------------------|
+| Regulatory agility (EUA pathways) | | | | | |
+| Manufacturing capacity (regional) | | | | | |
+| Clinical trial networks | | | | | |
+| Cold chain surge capacity | | | | | |
+| Delivery workforce | | | | | |
+| Digital systems (COVAX, registries) | | | | | |
+| Financing mechanisms | | | | | |
+
+What did we learn from COVID-19 that must not be forgotten?
+How do we sustain preparedness when the threat feels distant?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "What would a regional vaccine manufacturing hub require and where should it be?"</span>
+                        <button class="copy-btn" onclick="copyText(this, 'COVID-19 exposed gaps in pandemic vaccine deployment — inequitable access, fragile supply chains, slow regulatory processes, insufficient infrastructure.\n\nHelp me develop a pandemic preparedness framework for the Americas:\n\n| Preparedness Pillar | Current Capacity | Critical Gaps | Investments Needed | Regional Coordination Role | Timeline to Readiness |\n|--------------------|------------------|---------------|-------------------|---------------------------|---------------------|\n| Regulatory agility (EUA pathways) | | | | | |\n| Manufacturing capacity (regional) | | | | | |\n| Clinical trial networks | | | | | |\n| Cold chain surge capacity | | | | | |\n| Delivery workforce | | | | | |\n| Digital systems (COVAX, registries) | | | | | |\n| Financing mechanisms | | | | | |\n\nWhat did we learn from COVID-19 that must not be forgotten?\nHow do we sustain preparedness when the threat feels distant?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">New Vaccine Introduction Decisions</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">A new vaccine becomes available (e.g., dengue, RSV, malaria, improved TB vaccine). It's effective but expensive. The manufacturer wants rapid uptake. Countries have limited vaccine budgets.
+
+Help me think through the introduction decision:
+1. What's the evidentiary threshold for recommending regional introduction?
+2. How do we assess cost-effectiveness in diverse economic contexts?
+3. Should PAHO recommend differential strategies by country (high-burden vs. universal)?
+4. What happens to existing vaccines when we add new ones? (Crowding out)
+5. How do we negotiate fair prices while maintaining manufacturer incentives?
+6. What role does domestic vs. donor financing play?
+7. When should we wait for more data vs. act on imperfect evidence?
+
+Consider equity, sustainability, and political economy of vaccine introduction.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Apply this framework to the dengue vaccine decision in high-transmission settings."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'A new vaccine becomes available (e.g., dengue, RSV, malaria, improved TB vaccine). It\'s effective but expensive. The manufacturer wants rapid uptake. Countries have limited vaccine budgets.\n\nHelp me think through the introduction decision:\n1. What\'s the evidentiary threshold for recommending regional introduction?\n2. How do we assess cost-effectiveness in diverse economic contexts?\n3. Should PAHO recommend differential strategies by country (high-burden vs. universal)?\n4. What happens to existing vaccines when we add new ones? (Crowding out)\n5. How do we negotiate fair prices while maintaining manufacturer incentives?\n6. What role does domestic vs. donor financing play?\n7. When should we wait for more data vs. act on imperfect evidence?\n\nConsider equity, sustainability, and political economy of vaccine introduction.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> PAHO achieved measles elimination through decades of sustained effort. What would it take to eliminate other vaccine-preventable diseases (rubella, congenital syphilis)?
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 12: MATERNAL, NEONATAL & CHILD HEALTH -->
+        <section class="category" id="s12">
+            <div class="cat-header">
+                <h2>👶 12. Maternal, Neonatal & Child Health (MNCH)</h2>
+                <p class="for">MNCH Program Managers, Reproductive Health Advisors, Adolescent Health Specialists, Gender Officers</p>
+            </div>
+            <div class="cat-body">
+                <div class="scenario">
+                    <strong>Your challenge:</strong> The Americas have made progress on maternal and child mortality, but deep inequities persist. Indigenous and Afro-descendant women face 3-5x higher maternal mortality. Adolescent pregnancy rates remain high in some countries. Access to quality reproductive health services is politicized. How do you advance MNCH outcomes while addressing the social, political, and structural barriers that sustain inequity?
+                </div>
+
+                <div class="section-title green">🟢 Start Here: Scaffolded Learning <span class="badge green">Build skills step-by-step</span></div>
+                
+                <div class="scaffold-container">
+                    <div class="scaffold-header">📶 Three-Step Scaffold: MNCH Equity Strategy</div>
+                    <div class="scaffold-steps">
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 1: Ultra-Simple</span>
+                                <button class="copy-btn" onclick="copyText(this, 'What are the main causes of maternal mortality in the Americas? Bullet list with preventability of each.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">What are the main causes of maternal mortality in the Americas? Bullet list with preventability of each.</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 2: Add Structure</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Maternal mortality equity gap analysis:\n\n| Population Group | MMR (per 100,000) | Access Barriers | Quality of Care Issues | Social Determinants | Proven Interventions |\n\nGroups: National average, Indigenous women, Afro-descendant women, Rural poor, Adolescents, Migrants')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Maternal mortality equity gap analysis:
+
+| Population Group | MMR (per 100,000) | Access Barriers | Quality of Care Issues | Social Determinants | Proven Interventions |
+
+Groups: National average, Indigenous women, Afro-descendant women, Rural poor, Adolescents, Migrants</div>
+                        </div>
+                        <div class="scaffold-step">
+                            <div class="scaffold-step-header">
+                                <span class="scaffold-step-num">Step 3: Full Analysis</span>
+                                <button class="copy-btn" onclick="copyText(this, 'Indigenous women in a Member State have maternal mortality rates 5x the national average. Most deaths are from preventable causes (hemorrhage, hypertensive disorders). But the barriers aren\'t just medical.\n\nHelp me design a culturally responsive MNCH strategy:\n1. What are the structural determinants of these inequities (beyond health system)?\n2. How do we engage Indigenous communities as partners, not just beneficiaries?\n3. What role do traditional birth attendants and Indigenous healers play?\n4. How do we balance cultural safety with evidence-based obstetric care?\n5. What does respectful maternity care look like in diverse cultural contexts?\n6. How do we address racism and discrimination in health facilities?\n\nConsider self-determination, historical trauma, and power dynamics.')">📋 Copy</button>
+                            </div>
+                            <div class="scaffold-step-text">Indigenous women in a Member State have maternal mortality rates 5x the national average. Most deaths are from preventable causes (hemorrhage, hypertensive disorders). But the barriers aren't just medical.
+
+Help me design a culturally responsive MNCH strategy:
+1. What are the structural determinants of these inequities (beyond health system)?
+2. How do we engage Indigenous communities as partners, not just beneficiaries?
+3. What role do traditional birth attendants and Indigenous healers play?
+4. How do we balance cultural safety with evidence-based obstetric care?
+5. What does respectful maternity care look like in diverse cultural contexts?
+6. How do we address racism and discrimination in health facilities?
+
+Consider self-determination, historical trauma, and power dynamics.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title blue">📊 Visualization <span class="badge blue">See the big picture</span></div>
+
+                <div class="prompt blue">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Continuum of Care Pathway</span>
+                        <div class="prompt-tags"><span class="tag chart">Visualize</span></div>
+                    </div>
+                    <div class="prompt-text">Create a visual journey map showing the continuum of MNCH care from adolescence through pregnancy, childbirth, and early childhood:
+
+Life stages:
+- Adolescent health (10-19 years): Education, prevention, SRH services
+- Preconception: Family planning, nutrition, risk screening
+- Pregnancy: Antenatal care (4+ visits, quality content), risk detection
+- Childbirth: Skilled birth attendance, emergency obstetric care
+- Postpartum: Postnatal care (mother and newborn), family planning
+- Child health: Immunizations, nutrition, development monitoring
+
+Show:
+- Where women/children drop out of care
+- Critical decision points and referral pathways
+- Integration points across services
+- Role of community, primary care, and hospitals
+- Where equity gaps are largest</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Add mental health screening and support throughout the continuum."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Create a visual journey map showing the continuum of MNCH care from adolescence through pregnancy, childbirth, and early childhood:\n\nLife stages:\n- Adolescent health (10-19 years): Education, prevention, SRH services\n- Preconception: Family planning, nutrition, risk screening\n- Pregnancy: Antenatal care (4+ visits, quality content), risk detection\n- Childbirth: Skilled birth attendance, emergency obstetric care\n- Postpartum: Postnatal care (mother and newborn), family planning\n- Child health: Immunizations, nutrition, development monitoring\n\nShow:\n- Where women/children drop out of care\n- Critical decision points and referral pathways\n- Integration points across services\n- Role of community, primary care, and hospitals\n- Where equity gaps are largest')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title orange">🟠 Structured Prompts <span class="badge orange">More depth</span></div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Adolescent Pregnancy Prevention Strategy</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Adolescent pregnancy rates (15-19 years) remain high in parts of Latin America and the Caribbean, with significant health and social consequences.
+
+Develop a multi-sectoral adolescent pregnancy prevention strategy:
+
+| Intervention Level | Specific Actions | Sectors Involved | Evidence Strength | Political Barriers | Implementation Examples |
+|-------------------|-----------------|------------------|------------------|-------------------|------------------------|
+| Individual: Education & skills | | | | | |
+| Health services: SRH access | | | | | |
+| Family: Parent engagement | | | | | |
+| School: Comprehensive sexuality ed | | | | | |
+| Community: Norms change | | | | | |
+| Policy: Child marriage, legal protections | | | | | |
+
+What doesn't work? (Abstinence-only, fear-based messaging, restricting access)
+How do we navigate political opposition to comprehensive approaches?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Compare adolescent pregnancy strategies in countries with declining vs. stagnant rates."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Adolescent pregnancy rates (15-19 years) remain high in parts of Latin America and the Caribbean, with significant health and social consequences.\n\nDevelop a multi-sectoral adolescent pregnancy prevention strategy:\n\n| Intervention Level | Specific Actions | Sectors Involved | Evidence Strength | Political Barriers | Implementation Examples |\n|-------------------|-----------------|------------------|------------------|-------------------|------------------------|\n| Individual: Education & skills | | | | | |\n| Health services: SRH access | | | | | |\n| Family: Parent engagement | | | | | |\n| School: Comprehensive sexuality ed | | | | | |\n| Community: Norms change | | | | | |\n| Policy: Child marriage, legal protections | | | | | |\n\nWhat doesn\'t work? (Abstinence-only, fear-based messaging, restricting access)\nHow do we navigate political opposition to comprehensive approaches?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="prompt orange">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Neonatal Mortality Reduction</span>
+                        <div class="prompt-tags"><span class="tag structured">Structured</span></div>
+                    </div>
+                    <div class="prompt-text">Neonatal mortality (first 28 days of life) accounts for a large share of under-5 mortality. Most deaths are preventable with quality care at birth and immediate postnatal period.
+
+Analyze barriers and solutions for reducing neonatal mortality:
+
+| Cause of Death | % of Neonatal Deaths | Key Risk Factors | Evidence-Based Interventions | Service Delivery Level | Coverage Gaps | Cost-Effectiveness |
+|---------------|---------------------|------------------|------------------------------|----------------------|--------------|-------------------|
+| Preterm birth complications | | | | | | |
+| Intrapartum complications (asphyxia) | | | | | | |
+| Infections (sepsis, pneumonia) | | | | | | |
+| Congenital anomalies | | | | | | |
+
+What's the role of newborn resuscitation training, kangaroo mother care, and early detection?
+How do we strengthen quality of care in first 24-48 hours?</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Design a quality improvement package for small rural maternity units."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'Neonatal mortality (first 28 days of life) accounts for a large share of under-5 mortality. Most deaths are preventable with quality care at birth and immediate postnatal period.\n\nAnalyze barriers and solutions for reducing neonatal mortality:\n\n| Cause of Death | % of Neonatal Deaths | Key Risk Factors | Evidence-Based Interventions | Service Delivery Level | Coverage Gaps | Cost-Effectiveness |\n|---------------|---------------------|------------------|------------------------------|----------------------|--------------|-------------------|\n| Preterm birth complications | | | | | | |\n| Intrapartum complications (asphyxia) | | | | | | |\n| Infections (sepsis, pneumonia) | | | | | | |\n| Congenital anomalies | | | | | | |\n\nWhat\'s the role of newborn resuscitation training, kangaroo mother care, and early detection?\nHow do we strengthen quality of care in first 24-48 hours?')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="section-title purple">🟣 Reasoning Prompts <span class="badge purple">Deep thinking</span></div>
+
+                <div class="prompt purple">
+                    <div class="prompt-header">
+                        <span class="prompt-label">Gender-Responsive Health Systems</span>
+                        <div class="prompt-tags"><span class="tag reason">Reasoning</span></div>
+                    </div>
+                    <div class="prompt-text">MNCH outcomes are shaped by gender norms, power dynamics, and women's autonomy — not just health services. Medicalization of childbirth can improve safety but also disempower women.
+
+Help me think through what gender-responsive MNCH programming means:
+1. How do we address gender-based violence as a health issue affecting MNCH?
+2. What does respectful maternity care look like? How do we measure and enforce it?
+3. How do we balance woman-centered care with clinical protocols?
+4. What role do male partners play? How do we engage men without centering them?
+5. How do we address the gendered nature of the health workforce (mostly female, underpaid)?
+6. When does focusing on MNCH reinforce gender stereotypes vs. advance health equity?
+
+Consider intersectionality (gender + race + class + geography) and structural change vs. service delivery.</div>
+                    <div class="prompt-footer">
+                        <span class="follow-on">Follow-up: "Develop indicators of gender-responsive health systems beyond MNCH."</span>
+                        <button class="copy-btn" onclick="copyText(this, 'MNCH outcomes are shaped by gender norms, power dynamics, and women\'s autonomy — not just health services. Medicalization of childbirth can improve safety but also disempower women.\n\nHelp me think through what gender-responsive MNCH programming means:\n1. How do we address gender-based violence as a health issue affecting MNCH?\n2. What does respectful maternity care look like? How do we measure and enforce it?\n3. How do we balance woman-centered care with clinical protocols?\n4. What role do male partners play? How do we engage men without centering them?\n5. How do we address the gendered nature of the health workforce (mostly female, underpaid)?\n6. When does focusing on MNCH reinforce gender stereotypes vs. advance health equity?\n\nConsider intersectionality (gender + race + class + geography) and structural change vs. service delivery.')">📋 Copy</button>
+                    </div>
+                </div>
+
+                <div class="discussion">
+                    <strong>💬 Discussion:</strong> Every maternal death is preventable. Yet we've accepted mortality rates that we would never tolerate for other causes. What explains this — and how do we change it?
                 </div>
             </div>
         </section>
