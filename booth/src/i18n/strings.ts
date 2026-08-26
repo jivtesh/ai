@@ -132,6 +132,7 @@ export const strings = {
   "facilitator.export": e("Export wall CSV"),
   "facilitator.clear": e("Clear wall"),
   "facilitator.clear.confirm": e("Touch again to clear the wall"),
+  "facilitator.remove": e("Remove plaques"),
   "facilitator.stats": e("Session stats"),
 } as const;
 

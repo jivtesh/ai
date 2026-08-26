@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { EASE } from "../lib/motion";
 
-const ROWS = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
+const ROWS = ["1234567890", "qwertyuiop", "asdfghjkl'", "zxcvbnm,."];
+const LAST = ROWS.length - 1;
 
 export default function OnScreenKeyboard({
   onKey,
@@ -59,7 +60,7 @@ export default function OnScreenKeyboard({
     >
       {ROWS.map((row, ri) => (
         <div key={ri} style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-          {ri === 2 && (
+          {ri === LAST && (
             <button
               style={{ ...keyStyle, minWidth: 96, fontSize: 22 }}
               onPointerDown={(e) => {
@@ -82,7 +83,7 @@ export default function OnScreenKeyboard({
               {ch}
             </button>
           ))}
-          {ri === 2 && (
+          {ri === LAST && (
             <button
               style={{
                 ...keyStyle,

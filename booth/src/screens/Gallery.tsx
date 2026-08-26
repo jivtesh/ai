@@ -253,6 +253,33 @@ export default function Gallery() {
           {t(audience === "guest" ? "gallery.sub.guest" : "gallery.sub.staffer")}
         </motion.div>
 
+        {/* screen-space hit pads: far doors foreshorten well below the
+            64px touch minimum, so each doorway gets a generous invisible
+            target at its projected position */}
+        {DOORS.map((d) => {
+          const p = projectDoor(d, CAMERA);
+          const w = Math.max(72, 300 * p.scale);
+          const h = Math.max(72, 640 * p.scale);
+          return (
+            <div
+              key={`hit-${d.slug}`}
+              style={{
+                position: "absolute",
+                left: p.x - (d.side === "left" ? w * 0.7 : w * 0.3),
+                top: p.y - h / 2,
+                width: w,
+                height: h,
+                cursor: "pointer",
+                zIndex: 12,
+              }}
+              onPointerDown={(e) => {
+                e.stopPropagation();
+                enterRoom(d.slug, e);
+              }}
+            />
+          );
+        })}
+
         <Leaders />
         {DOORS.map((d, i) => (
           <Placard key={d.slug} slug={d.slug} delay={0.35 + i * 0.09} />

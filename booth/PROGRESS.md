@@ -56,3 +56,8 @@ Working log per milestone: done, decisions, open items.
 - Fixed: keyboard centering fought framer transforms; caret got a real blink.
 - Reviewed shots: wall with notes and keyboard-open state verified.
 - Next: M8 operations wrap-up.
+
+## M9 Polish and QA
+- Done: full 46-shot review at 1080p and 4K, frame-time probes (software-rendered container, so numbers are relative: the flip window doubled after the pass), bundle at 140KB gz JS against the 3MB budget, copy audit clean for banned words and em dashes, README with run-of-show.
+- Review workflow (4 dimensions, adversarial verify) confirmed 11 findings; all fixed: keyboard now dismisses on outside tap, plaque DOM capped at 40 with memoized plaques, idle listeners moved to capture phase and the drawer closes on idle, dust field no longer rebuilds on parent re-renders, plaque removal is facilitator-armed with multi-touch-safe timers, gallery doors got 64px+ projected hit pads, the on-screen keyboard gained digits and punctuation, QA-only invented seed strings removed.
+- The wall persists across refresh, the app runs fully offline from dist, and every screen carries three layers, light, and a hero motion.

@@ -11,11 +11,14 @@ function arm() {
   timer = window.setTimeout(() => {
     const s = useBooth.getState();
     if (s.screen !== "attract") s.goto("attract");
+    else if (s.facilitatorOpen) s.setFacilitatorOpen(false);
   }, IDLE_MS);
 }
 
 export function startIdleWatch() {
   const events: (keyof WindowEventMap)[] = ["pointerdown", "pointermove", "keydown", "wheel"];
-  events.forEach((ev) => window.addEventListener(ev, arm, { passive: true }));
+  // capture phase, so a screen stopping propagation (the wall's keyboard
+  // handler) still counts as activity
+  events.forEach((ev) => window.addEventListener(ev, arm, { passive: true, capture: true }));
   arm();
 }

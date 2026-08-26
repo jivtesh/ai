@@ -77,6 +77,8 @@ export interface BoothState {
   soundOn: boolean;
   reducedMotion: boolean;
   facilitatorOpen: boolean;
+  // facilitator-armed plaque removal; never persisted
+  removeArmed: boolean;
   notes: WallNote[];
   spill: Spill | null;
 
@@ -91,6 +93,7 @@ export interface BoothState {
   setSound: (on: boolean) => void;
   setReducedMotion: (on: boolean) => void;
   setFacilitatorOpen: (open: boolean) => void;
+  setRemoveArmed: (armed: boolean) => void;
   addNote: (text: string, seed?: boolean) => void;
   removeNote: (id: string) => void;
   clearWall: () => void;
@@ -111,6 +114,7 @@ export const useBooth = create<BoothState>((set, get) => ({
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   facilitatorOpen: false,
+  removeArmed: false,
   notes: loadNotes(),
   spill: null,
 
@@ -137,6 +141,7 @@ export const useBooth = create<BoothState>((set, get) => ({
         visited: [],
         pillars: [],
         facilitatorOpen: false,
+        removeArmed: false,
       });
       return;
     }
@@ -240,6 +245,7 @@ export const useBooth = create<BoothState>((set, get) => ({
   setSound: (on) => set({ soundOn: on }),
   setReducedMotion: (on) => set({ reducedMotion: on }),
   setFacilitatorOpen: (open) => set({ facilitatorOpen: open }),
+  setRemoveArmed: (armed) => set({ removeArmed: armed }),
 
   addNote: (text, seed = false) => {
     const trimmed = text.trim().slice(0, 80);
@@ -276,6 +282,7 @@ export const useBooth = create<BoothState>((set, get) => ({
       visited: [],
       pillars: [],
       facilitatorOpen: false,
+      removeArmed: false,
       spill: null,
     });
   },

@@ -40,8 +40,14 @@ export default function DustCanvas({
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const reduced = useBooth((s) => s.reducedMotion);
+  // callers pass inline beam arrays; diff by value so parent re-renders
+  // do not tear the particle field down
+  const beamsKey = JSON.stringify(beams);
+  const beamsRef = useRef(beams);
+  beamsRef.current = beams;
 
   useEffect(() => {
+    const beams = beamsRef.current;
     const canvas = ref.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -129,7 +135,8 @@ export default function DustCanvas({
       ro.disconnect();
       offQuality();
     };
-  }, [beams, density, reduced]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [beamsKey, density, reduced]);
 
   return (
     <canvas

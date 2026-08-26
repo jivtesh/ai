@@ -45,9 +45,11 @@ automatically under load, frame rate does not.
 ## Facilitator controls
 
 - Five taps in the top left corner within 3 seconds opens the drawer:
-  jump grid, language, sound, reset session, export wall CSV, clear wall
-  (double confirm), session stats.
-- Long-press a plaque for about a second to remove it.
+  jump grid, language, sound, plaque removal arming, reset session, export
+  wall CSV, clear wall (double confirm), session stats.
+- To remove a single plaque: switch Remove plaques on in the drawer, then
+  long-press the plaque for about a second. The switch disarms itself when
+  the session resets, so visitors cannot delete notes.
 - Keyboard and clicker: 1 to 5 open rooms, Space flips, arrow keys are
   Back and Continue, m gallery, c choice, w wall, Escape returns to
   attract.

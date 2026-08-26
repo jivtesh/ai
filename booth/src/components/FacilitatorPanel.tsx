@@ -37,6 +37,8 @@ export default function FacilitatorPanel() {
   const setLang = useBooth((s) => s.setLang);
   const soundOn = useBooth((s) => s.soundOn);
   const setSound = useBooth((s) => s.setSound);
+  const removeArmed = useBooth((s) => s.removeArmed);
+  const setRemoveArmed = useBooth((s) => s.setRemoveArmed);
   const notes = useBooth((s) => s.notes);
   const t = useT();
   const [confirmClear, setConfirmClear] = useState(false);
@@ -181,6 +183,17 @@ export default function FacilitatorPanel() {
                 {t("facilitator.reset")}
               </button>
             </div>
+
+            <button
+              style={{
+                ...btn,
+                borderColor: removeArmed ? "var(--gold)" : "var(--hairline)",
+                color: removeArmed ? "var(--gold)" : "var(--paper)",
+              }}
+              onClick={() => setRemoveArmed(!removeArmed)}
+            >
+              {t("facilitator.remove")}: {removeArmed ? "on" : "off"}
+            </button>
 
             <div style={{ display: "flex", gap: 8 }}>
               <button style={{ ...btn, flex: 1 }} onClick={exportCsv}>

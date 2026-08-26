@@ -39,9 +39,6 @@ export function attachQaHooks() {
         strings["wall.seed1"].en,
         strings["wall.seed2"].en,
         strings["wall.seed3"].en,
-        "Run one country brief through the new flow",
-        "Bring two colleagues to the next clinic",
-        "Draft our first agent guardrail note",
       ];
       for (let i = 0; i < count; i++) {
         s.addNote(seeds[i % seeds.length], true);

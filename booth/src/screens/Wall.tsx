@@ -2,7 +2,7 @@
 // persists all week. A ticker counts intentions; a shimmer crosses the
 // plaques; three next-step cards wait beneath.
 
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import FixedStage from "../components/FixedStage";
 import LightCone from "../components/LightCone";
@@ -18,11 +18,28 @@ import { DUR, EASE } from "../lib/motion";
 import { playCue } from "../lib/sound";
 
 const MAX_LEN = 80;
+// only the newest plaques stay mounted; persistence and the ticker use all
+const MAX_PLAQUES = 40;
 
-function Plaque({ note, index, fresh }: { note: WallNote; index: number; fresh: boolean }) {
+const Plaque = memo(function Plaque({
+  note,
+  index,
+  fresh,
+}: {
+  note: WallNote;
+  index: number;
+  fresh: boolean;
+}) {
   const removeNote = useBooth((s) => s.removeNote);
+  const removeArmed = useBooth((s) => s.removeArmed);
   const holdTimer = useRef<number>(0);
   const [holding, setHolding] = useState(false);
+
+  const clearHold = () => {
+    setHolding(false);
+    window.clearTimeout(holdTimer.current);
+  };
+  useEffect(() => () => window.clearTimeout(holdTimer.current), []);
 
   return (
     <motion.div
@@ -45,19 +62,17 @@ function Plaque({ note, index, fresh }: { note: WallNote; index: number; fresh: 
         transition: "box-shadow 0.3s",
       }}
       onPointerDown={() => {
+        // removal is a facilitator action, armed from the drawer
+        if (!removeArmed) return;
+        window.clearTimeout(holdTimer.current);
         setHolding(true);
         holdTimer.current = window.setTimeout(() => {
           removeNote(note.id);
         }, 800);
       }}
-      onPointerUp={() => {
-        setHolding(false);
-        window.clearTimeout(holdTimer.current);
-      }}
-      onPointerLeave={() => {
-        setHolding(false);
-        window.clearTimeout(holdTimer.current);
-      }}
+      onPointerUp={clearHold}
+      onPointerLeave={clearHold}
+      onPointerCancel={clearHold}
     >
       {/* shimmer that crosses every 20s, offset per plaque */}
       <div
@@ -85,7 +100,7 @@ function Plaque({ note, index, fresh }: { note: WallNote; index: number; fresh: 
       </div>
     </motion.div>
   );
-}
+});
 
 export default function Wall() {
   const t = useT();
@@ -150,6 +165,7 @@ export default function Wall() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: DUR.base, ease: EASE }}
+      onPointerDown={() => setKbOpen(false)}
     >
       <FixedStage>
         <ParallaxScene>
@@ -206,7 +222,10 @@ export default function Wall() {
                   cursor: "text",
                   transition: "border 0.4s, box-shadow 0.4s",
                 }}
-                onPointerDown={() => setKbOpen(true)}
+                onPointerDown={(e) => {
+                  e.stopPropagation();
+                  setKbOpen(true);
+                }}
               >
                 <span
                   style={{
@@ -282,7 +301,7 @@ export default function Wall() {
               }}
             >
               <AnimatePresence>
-                {notes.map((n, i) => (
+                {(notes.length > MAX_PLAQUES ? notes.slice(-MAX_PLAQUES) : notes).map((n, i) => (
                   <Plaque key={n.id} note={n} index={i} fresh={freshIds.current.has(n.id)} />
                 ))}
               </AnimatePresence>
