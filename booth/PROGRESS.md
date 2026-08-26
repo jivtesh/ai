@@ -29,3 +29,10 @@ Working log per milestone: done, decisions, open items.
 - Reviewed shots: first placard pass collided in the center, fixed by depth-ordered column slots; spill gradient recentered on the touch point.
 - Open: miniature intensity gets a boost when the full beats land in M5.
 - Next: M4 Procurement reference room.
+
+## M4 Procurement reference room
+- Done: shared room template (plate, temperature crossfade, cone swap, beat stage, story column, day-strip, flip toggle), full flip choreography (sweep, 12 percent dim, strip reflow at 450ms, beat, story crossfade with type-on final line, counter settles last), procurement beat: 346 tickets drain through the cleared-against-policy channel in about 1.4s leaving six floating gold exceptions.
+- Decision: background plates are generated procedural webp files committed to the repo; IMAGE-PROMPTS.md will let real plates drop in unchanged.
+- Fixed: counter collided with the flip toggle; quality degradation was culling gold exceptions (hero elements are now never skipped).
+- Reviewed shots: NOW, mid-flip and settled NEXT all verified at 1080p.
+- Next: M5 remaining four beats on the same template.
