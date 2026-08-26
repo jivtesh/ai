@@ -1,0 +1,35 @@
+{
+  "name": "booth",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "qa": "node scripts/qa.mjs",
+    "qa:fps": "node scripts/qa-fps.mjs",
+    "plates": "node scripts/gen-plates.mjs"
+  },
+  "dependencies": {
+    "@fontsource/archivo": "^5.2.5",
+    "@fontsource/ibm-plex-mono": "^5.2.5",
+    "@fontsource/public-sans": "^5.2.5",
+    "framer-motion": "^12.23.0",
+    "howler": "^2.2.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.10",
+    "@types/howler": "^2.2.12",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "playwright-core": "^1.56.0",
+    "tailwindcss": "^4.1.10",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.0"
+  }
+}
