@@ -43,3 +43,10 @@ Working log per milestone: done, decisions, open items.
 - Decision: quality tiers thin background density only; hero elements always draw.
 - IMAGE-PROMPTS.md written so real plates can replace the procedural ones.
 - Next: M6 choice and why (already drafted, committing after review).
+
+## M6 Choice and why
+- Done: five pedestal light columns with touch reveal, SVG threads to room chips, all-lit corridor payoff with light swell, near-black quote screen under one cone with dust.
+- Decision: headlines now flow through the i18n table and a two-line balancer, so translations keep the mask-reveal choreography.
+- Reviewed shots: untouched and all-lit states verified; footer moved clear of pillar copy.
+- Open: quote glow banding gets one more look in the M9 pass.
+- Next: M7 wall (already drafted).

@@ -15,6 +15,7 @@ import { useT } from "../i18n/useT";
 import { ROOM_ORDER } from "../content/rooms";
 import { translate, type StringId } from "../i18n/strings";
 import { DUR, EASE } from "../lib/motion";
+import { balanceLines } from "../lib/text";
 import { playCue } from "../lib/sound";
 
 function TeaserRotator() {
@@ -104,7 +105,7 @@ export default function Attract() {
           </motion.div>
 
           <MaskReveal
-            lines={["We can't have a 10x ambition", "if we can't imagine it."]}
+            lines={balanceLines(t("attract.headline"), 2)}
             className="text-center"
             lineClassName="type-display"
             lineStyle={{

@@ -14,6 +14,7 @@ import { spillNav } from "../components/SpillOverlay";
 import { useBooth, type Audience } from "../state/store";
 import { useT } from "../i18n/useT";
 import { DUR, EASE } from "../lib/motion";
+import { balanceLines } from "../lib/text";
 import { playCue } from "../lib/sound";
 
 function ChoiceDoor({
@@ -141,7 +142,7 @@ export default function Greeter() {
 
         <div style={{ position: "absolute", left: 0, right: 0, top: 150, textAlign: "center" }}>
           <MaskReveal
-            lines={["Do you work inside the UN system,", "or alongside it?"]}
+            lines={balanceLines(t("greeter.question"), 2)}
             className="text-center"
             lineClassName="type-display"
             lineStyle={{ fontSize: 62, fontWeight: 800 }}
