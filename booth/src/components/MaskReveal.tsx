@@ -8,12 +8,14 @@ export default function MaskReveal({
   lines,
   className = "",
   lineClassName = "",
+  lineStyle,
   delay = 0,
   stagger = 0.14,
 }: {
   lines: string[];
   className?: string;
   lineClassName?: string;
+  lineStyle?: React.CSSProperties;
   delay?: number;
   stagger?: number;
 }) {
@@ -24,6 +26,7 @@ export default function MaskReveal({
         <div key={i} style={{ overflow: "hidden", paddingBottom: "0.08em", marginBottom: "-0.08em" }}>
           <motion.div
             className={lineClassName}
+            style={lineStyle}
             initial={reduced ? { y: 0, opacity: 0 } : { y: "112%" }}
             animate={reduced ? { opacity: 1 } : { y: "0%" }}
             transition={{

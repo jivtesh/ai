@@ -15,3 +15,10 @@ Working log per milestone: done, decisions, open items.
 - Fixed: gold human blocks could overlap on the strip; ends now clamp to the next anchor.
 - Fixed: QA scripts kill the vite preview process group; orphaned children were hanging the harness.
 - Next: M2 attract corridor.
+
+## M2 Attract
+- Done: CSS 3D corridor (walls, floor, ceiling, end wall, depth fog, baseboards), five glowing doorways with floor spill, two light cones with dust, headline mask reveal, 12s teaser rotation, breathing chip.
+- Decision: parallax on the corridor rides perspective-origin, which reads as a head move rather than a layer slide.
+- Reviewed shots: seams around the end wall and hard cone edges found and fixed (depth fog plane, cone mask and wider blur).
+- Open: dust density and cone tilt get a second look in the M9 timing pass.
+- Next: M3 greeter and gallery on the same corridor.

@@ -36,14 +36,18 @@ export default function LightCone({
       <div
         style={{
           position: "absolute",
-          top: "-12%",
-          bottom: "-4%",
+          top: "-22%",
+          bottom: "-6%",
           left: `${cx - half}%`,
           width: `${half * 2}%`,
-          background: `linear-gradient(to bottom, rgba(${colors}, ${0.30 * intensity}) 0%, rgba(${colors}, ${0.12 * intensity}) 45%, rgba(${colors}, 0) 92%)`,
-          clipPath: "polygon(38% 0%, 62% 0%, 100% 100%, 0% 100%)",
-          filter: "blur(18px)",
+          background: `linear-gradient(to bottom, rgba(${colors}, ${0.28 * intensity}) 0%, rgba(${colors}, ${0.11 * intensity}) 45%, rgba(${colors}, 0) 92%)`,
+          clipPath: "polygon(40% 0%, 60% 0%, 108% 100%, -8% 100%)",
+          filter: "blur(30px)",
           mixBlendMode: "screen",
+          maskImage:
+            "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%)",
         }}
       />
       {/* hot core near the source */}
