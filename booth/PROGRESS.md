@@ -50,3 +50,9 @@ Working log per milestone: done, decisions, open items.
 - Reviewed shots: untouched and all-lit states verified; footer moved clear of pillar copy.
 - Open: quote glow banding gets one more look in the M9 pass.
 - Next: M7 wall (already drafted).
+
+## M7 Wall
+- Done: gold-era wall with on-screen keyboard (physical keys feed it too), plaque landing with 1.04 overshoot and rotation settle, localStorage persistence, intention ticker, 20s shimmer, three next-step cards with QR slots, long-press remove, seed notes on first empty visit.
+- Fixed: keyboard centering fought framer transforms; caret got a real blink.
+- Reviewed shots: wall with notes and keyboard-open state verified.
+- Next: M8 operations wrap-up.
