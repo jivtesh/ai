@@ -22,3 +22,10 @@ Working log per milestone: done, decisions, open items.
 - Reviewed shots: seams around the end wall and hard cone edges found and fixed (depth fog plane, cone mask and wider blur).
 - Open: dust density and cone tilt get a second look in the M9 timing pass.
 - Next: M3 greeter and gallery on the same corridor.
+
+## M3 Greeter and gallery
+- Done: greeter camera ease to 40 percent with two glowing choice doors (blue staffer, gold guest), light-spill transition anchored to the touched point, gallery with five live miniatures in the doorways, brass placards in two columns with leader lines, dashed thresholds for The Choice and The Wall on the end wall.
+- Decision: placards are screen-space cards with projected leader lines; placards on the wall planes were unreadable and far doors were too small to touch.
+- Reviewed shots: first placard pass collided in the center, fixed by depth-ordered column slots; spill gradient recentered on the touch point.
+- Open: miniature intensity gets a boost when the full beats land in M5.
+- Next: M4 Procurement reference room.

@@ -32,6 +32,35 @@ export const DOORS: CorridorDoor[] = [
 const DOOR_W = 340; // along the wall
 const DOOR_H = 640;
 
+const PERSPECTIVE = 1150;
+const ORIGIN_X = 960;
+const ORIGIN_Y = 486; // 45% of 1080
+
+// Project a door's corridor-side edge to stage coordinates for a given
+// camera dolly, so screen-space labels can sit beside their doorways.
+export function projectDoor(door: CorridorDoor, camera: number) {
+  const z = -(door.depth * DEPTH + DOOR_W / 2) + camera;
+  const scale = PERSPECTIVE / (PERSPECTIVE - z);
+  const wx = door.side === "left" ? INNER_LEFT : INNER_RIGHT;
+  const wy = H - 22 - DOOR_H / 2;
+  return {
+    x: ORIGIN_X + (wx - ORIGIN_X) * scale,
+    y: ORIGIN_Y + (wy - ORIGIN_Y) * scale,
+    scale,
+  };
+}
+
+export function projectEndWall(camera: number) {
+  const z = -DEPTH + camera;
+  const scale = PERSPECTIVE / (PERSPECTIVE - z);
+  return {
+    x: ORIGIN_X,
+    y: ORIGIN_Y + (540 - ORIGIN_Y) * scale,
+    floorY: ORIGIN_Y + (H - 22 - ORIGIN_Y) * scale,
+    scale,
+  };
+}
+
 const wallShade =
   "linear-gradient(to bottom, rgba(13, 17, 25, 0.55) 0%, rgba(26, 33, 46, 0.32) 34%, rgba(13, 17, 25, 0.6) 100%), linear-gradient(to right, rgba(30, 38, 52, 0.95) 0%, rgba(20, 26, 36, 0.9) 30%, rgba(11, 15, 22, 0.92) 70%, rgba(6, 8, 13, 0.96) 100%)";
 

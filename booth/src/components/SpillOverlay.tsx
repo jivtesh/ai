@@ -31,9 +31,10 @@ export default function SpillOverlay() {
             pointerEvents: "none",
             background:
               spill.hue === "gold"
-                ? "radial-gradient(circle at center, rgba(255, 235, 200, 0.98) 0%, rgba(217, 164, 65, 0.95) 42%, rgba(120, 90, 40, 0.92) 100%)"
-                : "radial-gradient(circle at center, rgba(225, 242, 252, 0.98) 0%, rgba(46, 155, 214, 0.95) 42%, rgba(18, 60, 88, 0.92) 100%)",
+                ? `radial-gradient(circle at ${spill.x * 100}% ${spill.y * 100}%, rgba(255, 238, 208, 0.99) 0%, rgba(226, 178, 88, 0.97) 26%, rgba(150, 110, 48, 0.95) 58%, rgba(52, 39, 20, 0.96) 100%)`
+                : `radial-gradient(circle at ${spill.x * 100}% ${spill.y * 100}%, rgba(232, 246, 254, 0.99) 0%, rgba(90, 178, 226, 0.97) 26%, rgba(28, 96, 138, 0.95) 58%, rgba(10, 30, 46, 0.96) 100%)`,
             clipPath: `circle(0% at ${spill.x * 100}% ${spill.y * 100}%)`,
+            willChange: "clip-path, opacity",
           }}
           initial={{ clipPath: `circle(1.5% at ${spill.x * 100}% ${spill.y * 100}%)`, opacity: 1 }}
           animate={{
