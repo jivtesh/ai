@@ -21,6 +21,8 @@ export function onQualityChange(fn: Listener): () => void {
 function setTier(next: number) {
   if (next === tier) return;
   tier = next;
+  document.documentElement.classList.toggle("q-medium", tier < 0.9);
+  document.documentElement.classList.toggle("q-low", tier < 0.5);
   listeners.forEach((fn) => fn(tier));
 }
 
