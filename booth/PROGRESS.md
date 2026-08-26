@@ -36,3 +36,10 @@ Working log per milestone: done, decisions, open items.
 - Fixed: counter collided with the flip toggle; quality degradation was culling gold exceptions (hero elements are now never skipped).
 - Reviewed shots: NOW, mid-flip and settled NEXT all verified at 1080p.
 - Next: M5 remaining four beats on the same template.
+
+## M5 Remaining rooms
+- Done: four bespoke beats via a parallel agent workflow, verified and tuned by screenshot: legal constellation with converging threads and the 12 to 4,800 counter, resident eight-layer Kestrel registration with sync pulse, humanitarian flood bloom with T+3 weeks to T+6 hours and self-drawing routes, chief of staff self-assembling pack with tabs and weighted option cards.
+- Fixed: legal NOW nodes were nearly invisible at 1080p; alpha and radius raised.
+- Decision: quality tiers thin background density only; hero elements always draw.
+- IMAGE-PROMPTS.md written so real plates can replace the procedural ones.
+- Next: M6 choice and why (already drafted, committing after review).
