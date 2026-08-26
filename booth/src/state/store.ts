@@ -116,6 +116,10 @@ export const useBooth = create<BoothState>((set, get) => ({
 
   goto: (screen, roomSlug) => {
     const prev = get();
+    if (prev.screen === "attract" && screen === "greeter") {
+      // a visitor path begins when someone steps past the attract loop
+      bumpCounter("sessions");
+    }
     if (screen === "room" && roomSlug) {
       if (!prev.visited.includes(roomSlug)) {
         bumpCounter("roomVisits");

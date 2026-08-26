@@ -15,14 +15,12 @@ import { attachQaHooks } from "./lib/qaHooks";
 import { startIdleWatch } from "./lib/idle";
 import { startKiosk } from "./lib/kiosk";
 import { startQualityWatch } from "./lib/quality";
-import { bumpCounter } from "./lib/analytics";
 
 startRouter();
 attachQaHooks();
 startIdleWatch();
 startKiosk();
 startQualityWatch();
-bumpCounter("sessions");
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
