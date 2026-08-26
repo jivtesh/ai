@@ -8,3 +8,10 @@ Working log per milestone: done, decisions, open items.
 - Decision: QA drives states through window.__booth hooks plus hash deep links; chromium launched with --no-sandbox for the container.
 - Open: all screens are stubs; facilitator panel wired early since the store needed it.
 - Next: M1 primitives demo page.
+
+## M1 Design system
+- Done: motion primitives (LightSweep, MaskReveal, Counter with deceleration, day-strip stagger reflow), LightCone, DustCanvas, palette and type demo at #/demo, verified by screenshot.
+- Decision: primitives live as small standalone components; the day-strip owns its own reflow choreography so every room shares one grammar.
+- Fixed: gold human blocks could overlap on the strip; ends now clamp to the next anchor.
+- Fixed: QA scripts kill the vite preview process group; orphaned children were hanging the harness.
+- Next: M2 attract corridor.

@@ -60,10 +60,12 @@ function denseDay(seed: number): DayBlock[] {
 
 function humanDay(seed: number): DayBlock[] {
   const rnd = mulberry32(seed);
-  const anchors = [8.4, 11.2, 14.4, 16.6];
-  return anchors.map((a) => {
+  const anchors = [8.4, 11.2, 14.4, 16.9];
+  return anchors.map((a, i) => {
     const start = a + (rnd() - 0.5) * 0.7;
-    return { start, end: start + 1.5 + rnd() * 1.1, kind: "human" as const };
+    const cap = i < anchors.length - 1 ? anchors[i + 1] - 0.55 : 19;
+    const end = Math.min(start + 1.5 + rnd() * 1.1, cap);
+    return { start, end, kind: "human" as const };
   });
 }
 

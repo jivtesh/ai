@@ -29,7 +29,8 @@ for (const f of readdirSync(qaDir)) {
 
 const preview = spawn("npx", ["vite", "preview", "--port", "4173", "--strictPort"], {
   cwd: root,
-  stdio: "pipe",
+  stdio: "ignore",
+  detached: true,
 });
 
 const waitForServer = async () => {
@@ -134,5 +135,10 @@ try {
   await browser.close();
   console.log(`done: ${shot} screenshots in qa/`);
 } finally {
-  preview.kill();
+  try {
+    process.kill(-preview.pid, "SIGTERM");
+  } catch {
+    preview.kill();
+  }
+  setTimeout(() => process.exit(0), 300).unref();
 }

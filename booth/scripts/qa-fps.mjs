@@ -18,7 +18,8 @@ if (!existsSync(path.join(root, "dist"))) {
 
 const preview = spawn("npx", ["vite", "preview", "--port", "4173", "--strictPort"], {
   cwd: root,
-  stdio: "pipe",
+  stdio: "ignore",
+  detached: true,
 });
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -83,5 +84,10 @@ try {
 
   await browser.close();
 } finally {
-  preview.kill();
+  try {
+    process.kill(-preview.pid, "SIGTERM");
+  } catch {
+    preview.kill();
+  }
+  setTimeout(() => process.exit(0), 300).unref();
 }
